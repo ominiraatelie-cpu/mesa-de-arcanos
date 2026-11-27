@@ -202,10 +202,9 @@ nav button.on{color:var(--acc);font-weight:700}
 }
 
 #bk-box{width:100%;max-width:1240px;margin:0 auto;padding:18px 22px 60px}
-.pub-head{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px;margin-bottom:18px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.pub-head .logo{justify-content:center;font-size:20px;margin-bottom:2px}
-.pub-head h2{font-size:clamp(23px,3vw,32px);margin:2px 0;text-align:center}
-.pub-head .pub-sub{text-align:center;margin-top:2px}
+.pub-head{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:18px}
+.pub-head .logo{justify-content:center;font-size:20px;margin-bottom:4px}
+.pub-head h2{font-size:clamp(23px,3vw,32px);margin:2px 0}
 .pub-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch}
 @media(min-width:960px){
   #bk-box{padding:22px 24px 60px}
@@ -494,9 +493,7 @@ function applySiteCfg(c){
   if(s.brand){
     BRAND=s.brand;
     document.title=BRAND+' · Gestão para cartomantes';
-    document.querySelectorAll('[data-brand]').forEach(function(el){
-      el.innerHTML=el.hasAttribute('data-brand-both')?('<b>✦</b> '+esc(BRAND)+' <b>✦</b>'):('<b>✦</b> '+esc(BRAND));
-    });
+    document.querySelectorAll('[data-brand]').forEach(function(el){el.innerHTML='<b>✦</b> '+esc(BRAND)});
     var fb=$('foot-brand');if(fb)fb.textContent='© '+BRAND;
   }
   if(s.sup){SUPORTE=String(s.sup).replace(/\D/g,'');applySup()}
@@ -554,9 +551,9 @@ function mobTop(){return'<div class="mob-hd">'+(ADMIN?'<a class="mute" href="#ad
 function head(t,btn){return mobTop()+'<div class="row" style="margin:6px 0 14px"><h2 style="margin:0">'+t+'</h2>'+(btn||'')+'</div>'}
 function mv(d){var a=cur.split('-'),t=(+a[0])*12+(+a[1]-1)+d;cur=Math.floor(t/12)+'-'+pad(t%12+1);render()}
 function pick(d){sel=d;render()}
-function cal(){var a=cur.split('-'),y=+a[0],m=+a[1]-1,f=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),h='<div class="row"><button type="button" class="btn sm ghost" onclick="mv(-1)">‹</button><b style="font-size:15px">'+MES[m]+' '+y+'</b><button type="button" class="btn sm ghost" onclick="mv(1)">›</button></div><div class="cal">'+['D','S','T','Q','Q','S','S'].map(function(d){return'<i>'+d+'</i>'}).join('');
+function cal(){var a=cur.split('-'),y=+a[0],m=+a[1]-1,f=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),h='<div class="row"><button class="btn sm ghost" onclick="mv(-1)">‹</button><b style="font-size:15px">'+MES[m]+' '+y+'</b><button class="btn sm ghost" onclick="mv(1)">›</button></div><div class="cal">'+['D','S','T','Q','Q','S','S'].map(function(d){return'<i>'+d+'</i>'}).join('');
  for(var k=0;k<f;k++)h+='<span></span>';
- for(var d=1;d<=n;d++){var ds=cur+'-'+pad(d),has=S.items.some(function(i){return i.date===ds&&ativo(i)});h+='<button type="button" class="'+(has?'has ':'')+(ds===sel?'sel':'')+'" onclick="pick(\''+ds+'\')">'+d+'</button>'}
+ for(var d=1;d<=n;d++){var ds=cur+'-'+pad(d),has=S.items.some(function(i){return i.date===ds&&ativo(i)});h+='<button class="'+(has?'has ':'')+(ds===sel?'sel':'')+'" onclick="pick(\''+ds+'\')">'+d+'</button>'}
  return h+'</div>'}
 function clist(){var l=S.clients.filter(function(c){var s=q.toLowerCase();return c.name.toLowerCase().indexOf(s)>-1||(c.phone||'').replace(/\D/g,'').indexOf(s.replace(/\D/g,'')||'§')>-1}).sort(function(a,b){return a.name.localeCompare(b.name)});
  return l.length?l.map(function(c){var n=S.items.filter(function(i){return i.cid===c.id}).length;return'<div class="card" onclick="profile(\''+c.id+'\')" style="cursor:pointer"><div class="row"><b style="font-size:16px">'+esc(c.name)+'</b><span class="tag num">'+n+' '+(n===1?'consulta':'consultas')+'</span></div><div class="mute num" style="margin-top:4px">'+esc(fmtPhone(c.phone)||'sem telefone')+'</div></div>'}).join(''):'<div class="empty">Nenhuma consulente encontrada.</div>'}
@@ -740,7 +737,7 @@ function render(){
   '<div class="ag"><div class="calbox">'+cal()+'</div><div class="dia"><div class="row" style="margin-bottom:12px"><h3 style="margin:0;font-size:18px" class="num">'+dt(sel)+'</h3><span class="tag num">'+l2.length+' '+(l2.length===1?'atendimento':'atendimentos')+'</span></div>'+(l2.length?l2.map(itemCard).join(''):'<div class="empty">Sem atendimentos marcados neste dia.</div>')+'</div></div>';
 
  }else if(tab==='clientes'){
-  h=head('Consulentes','<button class="btn sm" onclick="formClient()">+ Consulente</button>')+'<input data-no-enter placeholder="Buscar por nome ou telefone…" value="'+esc(q)+'" oninput="buscar(this.value)"><div id="cl">'+clist()+'</div>';
+  h=head('Consulentes','<button class="btn sm" onclick="formClient()">+ Consulente</button>')+'<input placeholder="Buscar por nome ou telefone…" value="'+esc(q)+'" oninput="buscar(this.value)"><div id="cl">'+clist()+'</div>';
 
  }else if(tab==='metodos'){
   h=head('Métodos de jogo','<button class="btn sm" onclick="formMetodo()">+ Novo método</button>')+
@@ -790,7 +787,7 @@ function render(){
     '<div class="card" style="border-color:var(--gold)"><h3 style="margin-bottom:4px">🔗 Link de agendamento online</h3><p class="mute" style="margin:0 0 12px">Permita que consulentes reservem horários livres sozinhas</p>'+
     '<label style="display:flex;align-items:center;font-weight:600;color:var(--ink);margin:4px 0 12px;cursor:pointer"><input id="lk1" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.linkAtivo?' checked':'')+'>Ativar agendamento pelo meu link</label>'+
     '<label>Regra de confirmação pelo link</label><select id="lk2"><option value="direto"'+(c.modoLink==='direto'?' selected':'')+'>Confirmar automaticamente (sem exigir Pix na hora)</option><option value="pix_auto"'+(c.modoLink==='pix_auto'?' selected':'')+'>Confirmar automaticamente após pagamento Pix (reserva por 15 min)</option><option value="pendente"'+(c.modoLink==='pendente'?' selected':'')+'>Pré-reserva manual (aguarda minha aprovação)</option></select>'+
-    '<label>Seu link exclusivo</label><div style="display:flex;gap:8px"><input id="link-url" data-no-enter value="'+esc(pubUrl)+'" readonly style="margin:0"><button type="button" class="btn sm ghost" onclick="copyLink()">Copiar</button></div></div>'+
+    '<label>Seu link exclusivo</label><div style="display:flex;gap:8px"><input id="link-url" value="'+esc(pubUrl)+'" readonly style="margin:0"><button type="button" class="btn sm ghost" onclick="copyLink()">Copiar</button></div></div>'+
 
     '<div class="card"><h3 style="margin-bottom:10px">Meus dados e backup</h3><div style="display:flex;gap:8px;flex-wrap:wrap">'+(ADMIN?'<a class="btn sm" href="#admin">✦ Painel admin</a>':'')+'<button class="btn ghost sm" onclick="exportCsv()">Baixar planilha (CSV)</button><button class="btn ghost sm" onclick="exportJson()">Backup completo</button></div><p class="mute" style="margin:12px 0 0"><a href="#termos" style="color:var(--acc)">Termos de uso</a> · <a href="#privacidade" style="color:var(--acc)">Privacidade</a></p><button class="btn" style="width:100%;margin-top:16px" onclick="saveCfg()">Salvar alterações</button></div>'+
   '</div></div>';
@@ -822,7 +819,7 @@ function render(){
   var monthBarHtml='<div class="cx-bar-wrap">'+
    '<div class="cx-month-ctrl">'+
      '<button type="button" class="btn sm ghost" onclick="mvCx(-1)" title="Mês anterior">‹</button>'+
-     '<input type="month" data-no-enter class="cx-month-sel num" value="'+esc(cym)+'" onchange="setCxMes(this.value)">'+
+     '<input type="month" class="cx-month-sel num" value="'+esc(cym)+'" onchange="setCxMes(this.value)">'+
      '<button type="button" class="btn sm ghost" onclick="mvCx(1)" title="Próximo mês">›</button>'+
      (cym!==ym?'<button type="button" class="btn sm ghost" onclick="setCxMes(\''+ym+'\')">Mês atual</button>':'')+
    '</div>'+
@@ -963,7 +960,7 @@ function renderTempDeck(){
  var box=$('temp-deck-box');if(!box)return;
  if(!TEMP_DECK.length){box.innerHTML='<div class="empty" style="padding:14px">Nenhuma carta cadastrada neste método de jogo ainda. Suba fotos acima para montar o baralho.</div>';return}
  box.innerHTML='<div class="deck-grid">'+TEMP_DECK.map(function(c,idx){
-  return'<div class="deck-card" style="cursor:default"><button type="button" class="del-c" onclick="removeTempCard('+idx+')" title="Remover carta">×</button>'+(c.img?'<img src="'+c.img+'" alt="">':'<div style="aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--card);border-radius:8px;margin-bottom:5px">🃏</div>')+'<input data-no-enter value="'+esc(c.name)+'" oninput="renameTempCard('+idx+',this.value)" style="margin:0;padding:4px 6px;font-size:11.5px;text-align:center"></div>';
+  return'<div class="deck-card" style="cursor:default"><button type="button" class="del-c" onclick="removeTempCard('+idx+')" title="Remover carta">×</button>'+(c.img?'<img src="'+c.img+'" alt="">':'<div style="aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--card);border-radius:8px;margin-bottom:5px">🃏</div>')+'<input value="'+esc(c.name)+'" oninput="renameTempCard('+idx+',this.value)" style="margin:0;padding:4px 6px;font-size:11.5px;text-align:center"></div>';
  }).join('')+'</div>';
 }
 function formMetodo(id){
@@ -1091,11 +1088,11 @@ var PUB=null,PUB_UID='',PUB_CUR=iso(new Date()).slice(0,7),PUB_SEL={mid:'',date:
 async function loadPublic(uidParam){
  if(PIX_TMR){clearInterval(PIX_TMR);PIX_TMR=null}
  var box=$('bk-box');
- box.innerHTML='<div class="logo" data-brand data-brand-both style="justify-content:center;margin-bottom:24px"><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><div class="card" style="text-align:center;padding:32px;max-width:480px;margin:0 auto"><p class="mute">Abrindo a agenda…</p></div>';
+ box.innerHTML='<div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> '+esc(BRAND)+'</div><div class="card" style="text-align:center;padding:32px;max-width:480px;margin:0 auto"><p class="mute">Abrindo a agenda…</p></div>';
  if(!sb||!uidParam){box.innerHTML='<div class="card" style="max-width:480px;margin:40px auto"><h2>Link inválido</h2><p class="mute">Verifique o endereço enviado pela taróloga.</p></div>';return}
  PUB_UID=uidParam;
  var r=await sb.rpc('get_agenda_publica',{p_user_id:uidParam});
- if(r.error||!r.data||!r.data.ok){box.innerHTML='<div class="logo" data-brand data-brand-both style="justify-content:center;margin-bottom:24px"><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><div class="card" style="text-align:center;padding:28px;max-width:480px;margin:0 auto"><h2>Agenda indisponível</h2><p class="mute">'+(r.data&&r.data.erro?esc(r.data.erro):'Não foi possível carregar os horários no momento.')+'</p></div>';return}
+ if(r.error||!r.data||!r.data.ok){box.innerHTML='<div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> '+esc(BRAND)+'</div><div class="card" style="text-align:center;padding:28px;max-width:480px;margin:0 auto"><h2>Agenda indisponível</h2><p class="mute">'+(r.data&&r.data.erro?esc(r.data.erro):'Não foi possível carregar os horários no momento.')+'</p></div>';return}
  PUB=r.data;
  if(PUB.corAcc||PUB.corGold)applyThemeColors(PUB.corAcc,PUB.corGold);
  if(!PUB.methods.length){box.innerHTML='<div class="card" style="max-width:480px;margin:40px auto"><h2>Nenhum método de jogo cadastrado</h2><p class="mute">Esta taróloga ainda está configurando os tipos de atendimento.</p></div>';return}
@@ -1149,16 +1146,16 @@ function renderPublic(){
  var slots=PUB_SEL.date?pubSlots(PUB_SEL.date):[];
  var col1='<div class="card"><div class="eb">1 · Escolha o método de jogo</div>'+
   PUB.methods.map(function(m){return'<button type="button" class="pub-opt '+(PUB_SEL.mid===m.id?'sel':'')+'" onclick="pubPickMid(\''+m.id+'\')"><div><b>'+esc(m.name)+'</b><div class="mute num" style="margin-top:3px">'+(m.dur||30)+' min · '+modLabel(m.mod)+'</div></div><b class="num" style="color:var(--gold);font-size:16px">'+money(m.price)+'</b></button>'}).join('')+
-  '<div class="pub-sum"><div class="eb" style="margin-bottom:4px">✦ Resumo da escolha</div><b>'+esc(mSel.name)+'</b><div class="mute num" style="margin-top:2px">'+(mSel.dur||30)+' min · '+money(mSel.price)+' · '+modLabel(modAtual)+'</div>'+(PUB_SEL.date?'<div class="mute num" style="margin-top:6px;color:var(--acc);font-weight:600">📅 '+dt(PUB_SEL.date)+(PUB_SEL.time?' às '+PUB_SEL.time:'')+'</div>':'')+'</div></div>';
+  '<div class="pub-sum"><div class="eb" style="margin-bottom:4px">✦ Resumo da escolha</div><b>'+esc(mSel.name)+'</b><div class="mute num" style="margin-top:2px">'+(mSel.dur||30)+' min · '+money(m.price)+' · '+modLabel(modAtual)+'</div>'+(PUB_SEL.date?'<div class="mute num" style="margin-top:6px;color:var(--acc);font-weight:600">📅 '+dt(PUB_SEL.date)+(PUB_SEL.time?' às '+PUB_SEL.time:'')+'</div>':'')+'</div></div>';
  var col2='<div class="card"><div class="eb">2 · Escolha o dia e o horário</div>'+pubCal()+
   (PUB_SEL.date?'<label style="margin-top:10px">Horários livres em <b class="num">'+dt(PUB_SEL.date)+'</b></label>'+(slots.length?'<div class="slots">'+slots.map(function(s){return'<button type="button" class="slot '+(PUB_SEL.time===s?'sel':'')+'" onclick="pubPickTime(\''+s+'\')">'+s+'</button>'}).join('')+'</div>':'<div class="empty" style="margin-top:8px">Sem horários livres neste dia. Escolha outra data.</div>'):'<p class="mute" style="margin:10px 0 0">Selecione um dia disponível acima para ver os horários.</p>')+'</div>';
  var col3='<div class="card"><div class="eb">3 · Seus dados</div>'+
   (PUB_SEL.time?'<label>Seu nome completo *</label><input id="bn" placeholder="Como gosta de ser chamada"><label>WhatsApp com DDD *</label><input id="bt" type="tel" placeholder="(11) 99999-9999" oninput="maskPhoneInput(this)"><label>Data de nascimento (opcional)</label><input id="bb" type="date">'+
   (modAtual==='ambos'?'<label>Modalidade</label><select id="bo"><option value="1">Online (chamada / áudio)</option><option value="0">Presencial</option></select>':'<div class="mute" style="margin:4px 0 12px">Atendimento: <b>'+modLabel(modAtual)+'</b></div>')+
-  '<button id="bsub" class="btn" data-enter-btn style="width:100%;margin-top:auto" onclick="submitPublic()">Confirmar · '+dt(PUB_SEL.date).slice(0,5)+' às '+esc(PUB_SEL.time)+'</button>':
+  '<button id="bsub" class="btn" style="width:100%;margin-top:auto" onclick="submitPublic()">Confirmar · '+dt(PUB_SEL.date).slice(0,5)+' às '+esc(PUB_SEL.time)+'</button>':
   '<div class="empty" style="margin:auto 0;padding:32px 16px"><div style="font-size:26px;margin-bottom:8px">🔮</div>Escolha o método de jogo, o dia e um horário livre para preencher seus dados e concluir a reserva.</div>')+'</div>';
 
- box.innerHTML='<div class="pub-head"><div class="logo" data-brand data-brand-both><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><h2>'+esc(tituloPrincipal)+'</h2><div class="mute pub-sub">'+subLinha+'</div></div>'+
+ box.innerHTML='<div class="pub-head"><div class="logo" data-brand><b>✦</b> '+esc(BRAND)+'</div><h2>'+esc(tituloPrincipal)+'</h2><div class="mute" style="margin-top:2px">'+subLinha+'</div></div>'+
  '<div class="pub-grid">'+col1+col2+col3+'</div>';
 }
 function copyPixPub(){navigator.clipboard.writeText(PUB.pix||'');toast('Chave Pix copiada!','✓')}
@@ -1192,7 +1189,7 @@ async function submitPublic(){
   '</div><button type="button" class="btn sm ghost" onclick="copyPixPub()">Copiar Pix</button></div>';
  }
 
- $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" data-brand data-brand-both style="justify-content:center;margin-bottom:20px"><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><div class="card" style="text-align:center;padding:26px 20px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
+ $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" data-brand style="justify-content:center;margin-bottom:20px"><b>✦</b> '+esc(BRAND)+'</div><div class="card" style="text-align:center;padding:26px 20px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
  '<div class="card" style="background:var(--bg);text-align:left"><div class="row"><b>'+esc(res.jogo)+'</b><b class="num" style="color:var(--gold)">'+money(res.valor)+'</b></div><div class="mute num" style="margin-top:4px">'+dt(PUB_SEL.date)+' às '+esc(PUB_SEL.time)+' · '+(res.online?'Online':'Presencial')+'</div>'+pixInfoHtml+'</div>'+
  (waNum?'<a class="btn" style="width:100%;margin-top:8px" href="https://wa.me/'+waNum+'?text='+encodeURIComponent(waTxt)+'" target="_blank">'+(pixAuto?'Enviar comprovante do Pix no WhatsApp':'Enviar confirmação no WhatsApp')+'</a>':'')+
  '<p style="margin:16px 0 0"><a class="mute" href="#" onclick="loadPublic(\''+PUB_UID+'\');return false">Fazer outro agendamento</a></p></div></div>';
@@ -1235,39 +1232,6 @@ function exportCsv(){var q=function(x){return'"'+String(x==null?'':x).replace(/"
  S.items.slice().sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)}).forEach(function(i){var c=cl(i.cid)||{};L.push([dt(i.date),i.time,c.name,fmtPhone(c.phone),mt(i.mid),i.dur,String(i.price||0).replace('.',','),i.st||'marcado',i.paid?'sim':'não',i.pay,i.cards,i.notes])});
  dl('atendimentos.csv',L.map(function(r){return r.map(q).join(';')}).join('\r\n'),'text/csv');toast('Planilha baixada!','📊')}
 function exportJson(){dl('backup-mesa-de-arcanos.json',JSON.stringify(S,null,1),'application/json');toast('Backup baixado!','💾')}
-
-/* === SUPORTE À TECLA ENTER NOS CAMPOS DE ENTRADA === */
-document.addEventListener('keydown',function(e){
- if(e.key!=='Enter'||e.shiftKey||e.ctrlKey||e.altKey||e.metaKey)return;
- var el=e.target;
- if(!el||!el.tagName)return;
- var tag=el.tagName.toUpperCase();
- if(tag==='TEXTAREA'||tag==='BUTTON'||tag==='A')return;
- if(el.dataset&&el.dataset.noEnter==='true')return;
-
- var dlg=document.querySelector('.dlg-ov');
- if(dlg){
-  var okBtn=dlg.querySelector('#dlg-yes, #dlg-ok');
-  if(okBtn&&!okBtn.disabled){e.preventDefault();okBtn.click()}
-  return;
- }
-
- var container=el.closest('.sheet, .modal, .card, #au, #adm, #ap, #bk-box, #land')||document;
- var candidates=Array.prototype.slice.call(container.querySelectorAll('button:not([disabled]), .btn:not([disabled])')).filter(function(b){
-  if(b.offsetParent===null)return false;
-  var cls=b.className||'';
-  if(cls.indexOf('del')>-1||cls.indexOf('sheet-x')>-1||cls.indexOf('mx')>-1||cls.indexOf('slot')>-1||cls.indexOf('pub-opt')>-1)return false;
-  if(b.hasAttribute('data-enter-btn'))return true;
-  var txt=(b.textContent||'').trim().toLowerCase();
-  if(/salvar|entrar|confirmar|criar|enviar|buscar|aplicar|liberar/.test(txt))return true;
-  return false;
- });
-
- if(candidates.length){
-  e.preventDefault();
-  candidates[0].click();
- }
-});
 
 function defaultTermos(emp,eml,dtAt,dias){
  return'Última atualização: '+dtAt+'\n\n'+
@@ -1452,7 +1416,7 @@ function admRender(){
  $('adm').innerHTML='<div class="w"><div class="top"><div class="logo"><b>✦</b> PAINEL</div><div><button class="btn sm ghost" onclick="admConfig()">⚙ Editar site, preços e termos</button> &nbsp; <a class="mute" href="#app">← Voltar ao app</a> &nbsp;·&nbsp; <a class="mute" href="#" onclick="logout();return false">Sair</a></div></div>'+
  '<div class="admg"><div class="card"><div class="mute">Recebido no mês</div><div class="big num">'+brl(rec)+'</div><div class="mute" style="font-size:12px">confirmado pelo Mercado Pago</div></div><div class="card"><div class="mute">Receita mensal esperada</div><div class="big num">'+brl(at*preco)+'</div><div class="mute" style="font-size:12px">'+at+' ativas × '+brl(preco)+'</div></div><div class="card"><div class="mute">Em teste</div><div class="big num">'+n(['teste','breve'])+'</div></div><div class="card"><div class="mute">Pendentes</div><div class="big num" style="color:var(--bad)">'+n(['pendente'])+'</div></div></div>'+
  '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">'+chips.map(function(c){return'<button class="admchip'+(ADF===c[0]?' on':'')+'" onclick="admFiltro(\''+c[0]+'\')">'+c[1]+' ('+c[2]+')</button>'}).join('')+'</div>'+
- (ADF==='avisos'?'':'<input data-no-enter placeholder="Buscar por nome ou e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)" style="max-width:420px">')+
+ (ADF==='avisos'?'':'<input placeholder="Buscar por nome ou e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)" style="max-width:420px">')+
  '<div id="admL" style="margin-top:14px"></div></div>';
  admLista();
 }
@@ -1521,6 +1485,7 @@ async function admSalvarCliente(id){
  var novoNome=v('ad-nm').trim(),novoTel=fmtPhone(v('ad-tl').trim()),novoEsp=v('ad-sp').trim();
  var r=await sb.rpc('admin_salvar_cliente',{p_user:id,p_nome:novoNome,p_tel:novoTel,p_espaco:novoEsp});
  if(r.error){
+  // Se a função RPC ainda não foi criada no Supabase, atualiza localmente e avisa
   x.nome=novoNome;x.tel=novoTel;x.espaco=novoEsp;
   toast('Atualizado na sessão (rode admin_salvar_cliente no SQL para salvar no banco)','!');
   admLista();closeS();admDet(id);
