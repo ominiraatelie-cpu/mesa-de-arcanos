@@ -11,7 +11,7 @@
 :root{
   --bg:#F7F1E5;--card:#FFFDF9;--ink:#251929;--mute:#6E5F73;--gold:#A67422;--acc:#56245B;--acc-hover:#431947;--line:#E5D9C3;--ok:#247548;--bad:#B33F2B;--warn:#B87A14;--on:#FFFFFF;--soft:#EFE0EC;
   --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Plus Jakarta+Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17101C;--card:#221829;--ink:#F3E9D4;--mute:#A796AD;--gold:#DDA84B;--acc:#C689CC;--acc-hover:#D59EDB;--line:#372940;--ok:#66C78E;--bad:#EB8671;--warn:#E5B14C;--on:#17101C;--soft:#2E2036;color-scheme:dark}}
@@ -912,7 +912,9 @@ function profile(id){
    '<div><b>Cadastro:</b> '+esc(dt(c.created))+'</div>'+
  '</div>'+
  (c.notes?'<p style="margin:10px 0">'+esc(c.notes)+'</p>':'')+
- '<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div><div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div><div class="row" style="margin:14px 0;flex-wrap:wrap"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><button class="btn sm del" onclick="delClient(\''+id+'\')">Excluir</button></div><h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))
+ '<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div><div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div>'+
+ '<div class="row" style="margin:14px 0;flex-wrap:wrap"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><button class="btn sm del" onclick="delClient(\''+id+'\')">Excluir</button></div>'+
+ '<h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))
 }
 
 var SUB=null,VER=null;
@@ -1313,4 +1315,51 @@ function admConfig(){
  '<div id="atp-2" style="display:none">'+
    '<div class="grid" style="grid-template-columns:1.2fr 1.2fr .8fr"><div><label>Empresa / Responsável legal</label><input id="cf-lemp" placeholder="Nome ou Razão Social" value="'+esc(empAtual)+'"></div><div><label>E-mail oficial de contato</label><input id="cf-lmail" placeholder="contato@seudominio.com" value="'+esc(mailAtual)+'"></div><div><label>Data de atualização</label><input id="cf-ldt" value="'+esc(dtAtual)+'"></div></div>'+
    '<label>Texto completo dos Termos de Uso (1ª linha de cada bloco vira subtítulo)</label><textarea id="cf-termos" rows="8">'+esc(termosAtual)+'</textarea>'+
-   '<label>Texto completo da Política de Privacidade (1ª linha de cada bloco vira subtítulo)</
+   '<label>Texto completo da Política de Privacidade (1ª linha de cada bloco vira subtítulo)</label><textarea id="cf-priv" rows="8">'+esc(privAtual)+'</textarea>'+
+ '</div>'+
+
+ '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><button class="btn ghost" onclick="closeS()">Cancelar</button><button class="btn" onclick="admSalvarConfig()">Salvar tudo</button></div>',true);
+}
+
+async function admSalvarConfig(){
+ var siteObj={
+  brand:v('cf-brand').trim()||BRAND,
+  sup:v('cf-sup').replace(/\D/g,''),
+  eb:v('cf-eb').trim(),
+  h1:v('cf-h1').trim(),
+  sub:v('cf-sub').trim(),
+  bandT:v('cf-bt').trim(),
+  bandS:v('cf-bs').trim(),
+  recH2:v('cf-rech2').trim(),
+  recCardsText:v('cf-reccards').trim(),
+  recCards:parseRecCardsText(v('cf-reccards')),
+  planTag:v('cf-ptag').trim(),
+  planItens:v('cf-plitens').trim(),
+  faqItens:v('cf-faq').trim(),
+  legalEmp:v('cf-lemp').trim(),
+  legalMail:v('cf-lmail').trim(),
+  legalDate:v('cf-ldt').trim(),
+  termosTxt:v('cf-termos').trim(),
+  privTxt:v('cf-priv').trim()
+ };
+ var payload={
+  p_trial:parseInt(v('cf-trial'))||0,
+  p_tolerancia:parseInt(v('cf-tol'))||0,
+  p_preco:parseFloat(v('cf-preco'))||0,
+  p_link:v('cf-link').trim(),
+  p_dias:parseInt(v('cf-dias'))||35,
+  p_site:siteObj
+ };
+ var r=await sb.rpc('admin_salvar_config',payload);
+ if(r.error){toast('Erro: '+r.error.message,'!');return}
+ CONF={trial_dias:payload.p_trial,tolerancia_dias:payload.p_tolerancia,preco:payload.p_preco,link_pagamento:payload.p_link,dias_liberar:payload.p_dias,site_cfg:siteObj};
+ applySiteCfg(CONF);
+ closeS();
+ toast('Tudo salvo e atualizado no site!','✓');
+ adminRoute();
+}
+
+route();
+</script>
+</body>
+</html>
