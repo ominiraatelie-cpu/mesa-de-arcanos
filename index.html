@@ -11,7 +11,7 @@
 :root{
   --bg:#F7F1E5;--card:#FFFDF9;--ink:#251929;--mute:#6E5F73;--gold:#A67422;--acc:#56245B;--acc-hover:#431947;--line:#E5D9C3;--ok:#247548;--bad:#B33F2B;--warn:#B87A14;--on:#FFFFFF;--soft:#EFE0EC;
   --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --sans:'Plus Jakarta+Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17101C;--card:#221829;--ink:#F3E9D4;--mute:#A796AD;--gold:#DDA84B;--acc:#C689CC;--acc-hover:#D59EDB;--line:#372940;--ok:#66C78E;--bad:#EB8671;--warn:#E5B14C;--on:#17101C;--soft:#2E2036;color-scheme:dark}}
@@ -582,7 +582,12 @@ function delClient(id){dlgConfirm('Excluir esta consulente? As consultas dela co
 function delMethod(id){dlgConfirm('Excluir este método de jogo da sua tabela?',function(){S.methods=S.methods.filter(function(x){return x.id!==id});save();closeS();render();toast('Método de jogo excluído')},{title:'Excluir método de jogo',yes:'Excluir',danger:true,ic:'🗑️'})}
 function delItem(id){dlgConfirm('Tem certeza que deseja excluir esta consulta?',function(){S.items=S.items.filter(function(x){return x.id!==id});save();closeS();render();toast('Consulta excluída')},{title:'Excluir consulta',yes:'Excluir',danger:true,ic:'🗑️'})}
 
-var PAUSA=15,INICIO='09:00',EID='',CATS=['Velas','Aluguel','Material','Outros'];
+var PAUSA=15,INICIO='09:00',EID='',DEF_EXP_CATS=['Velas','Aluguel','Material','Outros'];
+function getExpCats(extraCat){
+ var base=(S.cfg&&Array.isArray(S.cfg.expCats)&&S.cfg.expCats.length)?S.cfg.expCats.slice():DEF_EXP_CATS.slice();
+ if(extraCat&&base.indexOf(extraCat)===-1)base.push(extraCat);
+ return base;
+}
 function toMin(t){if(!t)return null;var a=t.split(':');return(+a[0])*60+(+a[1])}
 function hm(m){return pad(Math.floor(m/60)%24)+':'+pad(m%60)}
 function endMin(i){var s=toMin(i.time);return s==null?null:s+(+i.dur||0)}
@@ -843,7 +848,9 @@ function render(){
    '<div class="row mute num" style="font-size:12.5px"><span>Entradas: <b style="color:var(--ok)">'+money(en)+'</b></span><span>Saídas: <b style="color:var(--bad)">'+money(sa)+'</b></span></div>'+
   '</div>';
 
-  h=head('Caixa · '+MES[cm]+' '+cy,'<button class="btn sm" onclick="formExp()">+ Nova saída</button>')+
+  var cxHeadBtns='<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn sm ghost" onclick="openExpCatsModal(\'\')">Tipos de saída</button><button class="btn sm" onclick="formExp()">+ Nova saída</button></div>';
+
+  h=head('Caixa · '+MES[cm]+' '+cy,cxHeadBtns)+
   monthBarHtml+
   payFilterHtml+
   '<div class="grid g6"><div class="card"><div class="mute">Entrou na semana</div><div class="big">'+sm(function(i){return i.date>=ws&&i.date<=we})+'</div></div><div class="card"><div class="mute">Entrou no mês</div><div class="big">'+money(en)+'</div></div><div class="card"><div class="mute">Entrou no ano ('+cy+')</div><div class="big">'+sm(function(i){return i.date.slice(0,4)===yr})+'</div></div><div class="card"><div class="mute">A receber (geral)</div><div class="big" style="color:var(--bad)">'+money(tot(S.items.filter(function(i){return!i.paid&&ativo(i)})))+'</div></div><div class="card"><div class="mute">Saídas no mês</div><div class="big" style="color:var(--mute)">'+money(sa)+'</div></div><div class="card" style="border-color:var(--gold)"><div class="mute">Saldo líquido do mês</div><div class="big" style="color:'+(saldo>=0?'var(--ok)':'var(--bad)')+'">'+money(saldo)+'</div></div></div>'+
@@ -857,10 +864,77 @@ function render(){
  }
  document.getElementById('app').innerHTML=h}
 
-function formExp(id){var e=id?S.exps.find(function(x){return x.id===id}):{date:(cxMes&&cxMes.length===7?cxMes+'-'+pad(Math.min(28,new Date().getDate())):iso(new Date())),cat:'Velas'};
- sheet('<div class="sheet-hd"><h2 style="margin:0">'+(id?'Editar':'Nova')+' saída</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div><label>Tipo</label><select id="x1">'+CATS.map(function(c){return'<option'+(c===e.cat?' selected':'')+'>'+c+'</option>'}).join('')+'</select><label>Descrição</label><input id="x2" value="'+esc(e.desc)+'"><div class="grid"><div><label>Data</label><input id="x3" type="date" value="'+esc(e.date)+'"></div><div><label>Valor (R$)</label><input id="x4" type="number" step="0.01" value="'+esc(e.value)+'"></div></div><div class="row" style="margin-top:6px"><button class="btn" onclick="saveExp(\''+(id||'')+'\')">Salvar</button>'+(id?'<button class="btn del" onclick="delExp(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>')}
-function saveExp(id){var val=parseFloat(v('x4'));if(!val){dlgAlert('Informe o valor da saída.','Campo obrigatório');return}var dDate=v('x3')||iso(new Date());var d={cat:v('x1'),desc:v('x2'),date:dDate,value:val};if(id)Object.assign(S.exps.find(function(x){return x.id===id}),d);else{d.id=uid();S.exps.push(d)}cxMes=dDate.slice(0,7);save();closeS();render();toast(id?'Saída atualizada!':'Saída lançada!')}
-function delExp(id){dlgConfirm('Excluir esta saída do caixa?',function(){S.exps=S.exps.filter(function(x){return x.id!==id});save();closeS();render();toast('Saída excluída')},{title:'Excluir saída',yes:'Excluir',danger:true,ic:'🗑️'})}
+function formExp(id){
+ var e=id?S.exps.find(function(x){return x.id===id}):{date:(cxMes&&cxMes.length===7?cxMes+'-'+pad(Math.min(28,new Date().getDate())):iso(new Date())),cat:getExpCats()[0]||'Outros'};
+ var cats=getExpCats(e.cat);
+ sheet('<div class="sheet-hd"><h2 style="margin:0">'+(id?'Editar':'Nova')+' saída</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
+ '<div class="row" style="align-items:flex-end;gap:8px"><div style="flex:1"><label>Tipo / Categoria</label><select id="x1" style="margin-bottom:0">'+cats.map(function(c){return'<option'+(c===e.cat?' selected':'')+'>'+esc(c)+'</option>'}).join('')+'</select></div><button type="button" class="btn sm ghost" onclick="openExpCatsModal(\''+(id||'')+'\')">Gerenciar tipos</button></div>'+
+ '<label style="margin-top:12px">Descrição</label><input id="x2" value="'+esc(e.desc)+'" placeholder="Ex: Compra no atacado, luz do espaço…">'+
+ '<div class="grid"><div><label>Data</label><input id="x3" type="date" value="'+esc(e.date)+'"></div><div><label>Valor (R$)</label><input id="x4" type="number" step="0.01" value="'+esc(e.value)+'"></div></div>'+
+ '<div class="row" style="margin-top:6px"><button class="btn" onclick="saveExp(\''+(id||'')+'\')">Salvar</button>'+(id?'<button class="btn del" onclick="delExp(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>');
+}
+function saveExp(id){
+ var val=parseFloat(v('x4'));
+ if(!val){dlgAlert('Informe o valor da saída.','Campo obrigatório');return}
+ var dDate=v('x3')||iso(new Date());
+ var d={cat:v('x1'),desc:v('x2'),date:dDate,value:val};
+ if(id)Object.assign(S.exps.find(function(x){return x.id===id}),d);
+ else{d.id=uid();S.exps.push(d)}
+ cxMes=dDate.slice(0,7);save();closeS();render();toast(id?'Saída atualizada!':'Saída lançada!');
+}
+function delExp(id){
+ dlgConfirm('Excluir esta saída do caixa?',function(){
+  S.exps=S.exps.filter(function(x){return x.id!==id});
+  save();closeS();render();toast('Saída excluída');
+ },{title:'Excluir saída',yes:'Excluir',danger:true,ic:'🗑️'});
+}
+
+function openExpCatsModal(returnExpId){
+ var cats=getExpCats();
+ sheet('<div class="sheet-hd"><h2 style="margin:0">Tipos de saída</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
+ '<p class="mute" style="margin:-6px 0 12px">Crie, renomeie ou remova categorias para organizar suas despesas.</p>'+
+ '<div style="display:flex;gap:8px;margin-bottom:14px"><input id="new-exp-cat" placeholder="Nova categoria (ex: Oferendas, Internet, Incensos…)" style="margin:0"><button type="button" class="btn sm" onclick="addExpCat(\''+(returnExpId||'')+'\')">+ Incluir</button></div>'+
+ '<div>'+cats.map(function(c,idx){
+  return'<div class="card row" style="padding:10px 14px;margin-bottom:8px"><b>'+esc(c)+'</b><div style="display:flex;gap:6px"><button type="button" class="btn sm ghost" onclick="editExpCat('+idx+',\''+(returnExpId||'')+'\')">Renomear</button><button type="button" class="btn sm del" onclick="delExpCat('+idx+',\''+(returnExpId||'')+'\')">Excluir</button></div></div>';
+ }).join('')+'</div>'+
+ '<div class="row" style="margin-top:14px"><button type="button" class="btn ghost" onclick="'+(returnExpId?'formExp(\''+returnExpId+'\')':'closeS()')+'">'+(returnExpId?'Voltar para saída':'Fechar')+'</button></div>');
+}
+function saveExpCatsList(arr,returnExpId){
+ S.cfg=Object.assign({},CF(),{expCats:arr});
+ save();
+ openExpCatsModal(returnExpId);
+}
+function addExpCat(returnExpId){
+ var name=v('new-exp-cat').trim();
+ if(!name){dlgAlert('Digite o nome da nova categoria.','Campo obrigatório');return}
+ var cats=getExpCats();
+ if(cats.some(function(x){return x.toLowerCase()===name.toLowerCase()})){dlgAlert('Essa categoria já existe.','Categoria duplicada');return}
+ cats.push(name);
+ toast('Categoria incluída!','✓');
+ saveExpCatsList(cats,returnExpId);
+}
+function editExpCat(idx,returnExpId){
+ var cats=getExpCats(),oldName=cats[idx];
+ if(!oldName)return;
+ var nextName=prompt('Novo nome para "'+oldName+'":',oldName);
+ if(nextName===null)return;
+ nextName=nextName.trim();
+ if(!nextName||nextName===oldName)return;
+ cats[idx]=nextName;
+ S.exps.forEach(function(e){if(e.cat===oldName)e.cat=nextName});
+ toast('Categoria renomeada!','✓');
+ saveExpCatsList(cats,returnExpId);
+}
+function delExpCat(idx,returnExpId){
+ var cats=getExpCats(),target=cats[idx];
+ if(!target)return;
+ if(cats.length<=1){dlgAlert('Mantenha pelo menos uma categoria de saída.','Ação não permitida');return}
+ dlgConfirm('Remover a categoria "'+target+'" da lista? Lançamentos já feitos continuam no histórico.',function(){
+  cats.splice(idx,1);
+  toast('Categoria removida','🗑️');
+  saveExpCatsList(cats,returnExpId);
+ },{title:'Excluir categoria',yes:'Excluir',danger:true,ic:'🗑️'});
+}
 
 /* === CATÁLOGO DE CARTAS POR MÉTODO DE JOGO === */
 var TEMP_DECK=[];
@@ -1255,7 +1329,8 @@ function CF(){
   linkMsg:c.linkMsg||DEFLINKMSG,
   birthMsg:c.birthMsg||DEFBIRTH,
   linkAtivo:!!c.linkAtivo,
-  modoLink:c.modoLink||'direto'
+  modoLink:c.modoLink||'direto',
+  expCats:(Array.isArray(c.expCats)&&c.expCats.length)?c.expCats:DEF_EXP_CATS.slice()
  };
 }
 function fora(d,t,du){var c=CF(),m=[];if(c.dias.indexOf(new Date(d+'T12:00:00').getDay())<0)m.push('cai em um dia em que você não atende');var s=toMin(t);if(s!=null&&(s<toMin(c.ini)||s+(+du||0)>toMin(c.fim)))m.push('fica fora do seu horário ('+c.ini+' às '+c.fim+')');return m.join(' e ')}
