@@ -628,7 +628,7 @@ function delItem(id){dlgConfirm('Tem certeza que deseja excluir esta consulta?',
 
 var PAUSA=15,INICIO='09:00',EID='',DEF_CATS=['Velas','Aluguel','Material','Outros'];
 var cxMes=iso(new Date()).slice(0,7),cxPay='';
-function getCats(){var c=(S.cfg&&Array.isArray(S.cfg.expCats)&&S.cfg.expCats.length)?S.cfg.expCats:DEF_CATS;return c}
+function getCats(){var c=(S.cfg&&Array.isArray(S.cfg.expCats)&&S.cfg.expCats.length)?S.cfg.expCats:(Array.isArray(S.cats)&&S.cats.length)?S.cats:DEF_CATS;return c}
 function mvCx(d){var a=cxMes.split('-'),t=(+a[0])*12+(+a[1]-1)+d;cxMes=Math.floor(t/12)+'-'+pad(t%12+1);render()}
 function setCxMes(v){if(v){cxMes=v.slice(0,7);render()}}
 function setCxPay(p){cxPay=p;render()}
@@ -839,6 +839,7 @@ function render(){
 
     '<div class="card" style="border-color:var(--gold)"><h3 style="margin-bottom:4px">🔗 Administração da página de agendamento</h3><p class="mute" style="margin:0 0 12px">Personalize e controle como suas consulentes agendam pelo seu link.</p>'+
     '<label style="display:flex;align-items:center;font-weight:600;color:var(--ink);margin:4px 0 12px;cursor:pointer"><input id="lk1" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.linkAtivo?' checked':'')+'>Ativar agendamento pelo meu link</label>'+
+    '<label style="display:flex;align-items:center;font-weight:500;color:var(--ink);margin:0 0 12px;cursor:pointer"><input id="lk-dur" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.showDur!==false?' checked':'')+'>Mostrar duração (ex.: 30 min) para a consulente no link</label>'+
     '<label>Regra de confirmação pelo link</label><select id="lk2"><option value="direto"'+(c.modoLink==='direto'?' selected':'')+'>Confirmar automaticamente (sem exigir Pix na hora)</option><option value="pix_auto"'+(c.modoLink==='pix_auto'?' selected':'')+'>Confirmar automaticamente após pagamento Pix (reserva por 15 min)</option><option value="pendente"'+(c.modoLink==='pendente'?' selected':'')+'>Pré-reserva manual (aguarda minha aprovação)</option></select>'+
     '<label>Título personalizado da página (opcional)</label><input id="lk3" value="'+esc(c.bkTitulo)+'" placeholder="Padrão: Nome do seu espaço ou seu nome">'+
     '<label>Aviso ou boas-vindas no topo do agendamento (opcional)</label><textarea id="lk4" rows="2" placeholder="Ex: Atendimento com hora marcada. Escolha seu método abaixo ✨">'+esc(c.bkAviso)+'</textarea>'+
@@ -990,8 +991,14 @@ function renderTempDeck(){
 function formMetodo(id){
  var m=id?S.methods.find(function(x){return x.id===id}):{mod:'ambos',showDur:true,deck:[]};
  TEMP_DECK=JSON.parse(JSON.stringify(m.deck||[]));
+ TEMP_METHOD_IMG=m.img||'';
  sheet('<div class="sheet-hd"><h2 style="margin:0">'+(id?'Editar':'Novo')+' método de jogo</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
  '<div class="modal-2col"><div>'+
+ '<label>Foto do método de jogo (opcional)</label>'+
+ '<div style="display:flex;align-items:center;gap:12px;margin:4px 0 12px">'+
+   '<div id="m-cover-prev" style="width:68px;height:68px;border-radius:12px;border:1px dashed var(--line);background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0">'+(TEMP_METHOD_IMG?'<img src="'+TEMP_METHOD_IMG+'" alt="" style="width:100%;height:100%;object-fit:cover">':'<span style="font-size:24px">🔮</span>')+'</div>'+
+   '<div style="flex:1"><input type="file" accept="image/*" onchange="handleMethodCover(this)" style="padding:6px;margin:0 0 6px"><button type="button" class="btn sm ghost" onclick="removeMethodCover()">Remover foto</button></div>'+
+ '</div>'+
  '<label>Nome do método de jogo</label><input id="m1" value="'+esc(m.name)+'" placeholder="Baralho de Padilha, Tarot, Búzios…">'+
  '<div class="grid"><div><label>Duração (minutos)</label><input id="m3" type="number" value="'+esc(m.dur)+'" placeholder="30"></div><div><label>Valor (R$)</label><input id="m2" type="number" step="0.01" value="'+esc(m.price)+'"></div></div>'+
  '<label style="display:flex;align-items:center;font-weight:500;color:var(--ink);margin:2px 0 12px;cursor:pointer"><input id="m-show-dur" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(m.showDur!==false?' checked':'')+'>Mostrar tempo de duração na página de agendamento</label>'+
@@ -1010,7 +1017,7 @@ function saveMethod(id){
  var n=v('m1').trim(),du=parseInt(v('m3'));
  if(!n){dlgAlert('Informe o nome do método de jogo.','Campo obrigatório');return}
  if(!du||du<1){dlgAlert('Informe a duração em minutos.','Campo obrigatório');return}
- var d={name:n,dur:du,showDur:ck('m-show-dur'),price:parseFloat(v('m2'))||0,mod:v('m4')||'ambos',deck:TEMP_DECK};
+ var d={name:n,dur:du,showDur:ck('m-show-dur'),price:parseFloat(v('m2'))||0,mod:v('m4')||'ambos',img:TEMP_METHOD_IMG||'',deck:TEMP_DECK};
  if(id)Object.assign(S.methods.find(function(x){return x.id===id}),d);else{d.id=uid();S.methods.push(d)}
  save();closeS();render();toast(id?'Método de jogo atualizado!':'Método de jogo cadastrado!');
 }
@@ -1331,9 +1338,9 @@ function renderDocText(txt){
 }
 function legal(h){
  var c=CONF||{},s=c.site_cfg||{};
- var emp=s.legalEmp||'[SEU NOME OU EMPRESA]';
- var eml=s.legalMail||'[SEU E-MAIL]';
- var dtAt=s.legalDate||'[DATA]';
+ var emp=s.legalEmp||'Suellen · Ateliê Òmìnira';
+ var eml=s.legalMail||'ominira.atelie@gmail.com';
+ var dtAt=s.legalDate||'27/11/2026';
  var dias=c.trial_dias!=null?c.trial_dias:7;
  var b='<main style="max-width:720px;margin:0 auto;padding:24px 22px"><p><a href="#">← Voltar</a></p>';
  if(h==='#termos'){
@@ -1366,6 +1373,7 @@ function CF(){
   linkMsg:c.linkMsg||DEFLINKMSG,
   birthMsg:c.birthMsg||DEFBIRTH,
   linkAtivo:!!c.linkAtivo,
+  showDur:c.showDur===false?false:true,
   modoLink:c.modoLink||'direto',
   bkTitulo:c.bkTitulo||'',
   bkAviso:c.bkAviso||'',
@@ -1404,6 +1412,7 @@ function saveCfg(){
   dias:d,
   pausa:isNaN(p)||p<0?15:p,
   linkAtivo:ck('lk1'),
+  showDur:ck('lk-dur'),
   modoLink:v('lk2'),
   bkTitulo:v('lk3').trim(),
   bkAviso:v('lk4').trim(),
@@ -1538,9 +1547,9 @@ function admConfig(){
  var planTagAtual=$('plan-tag')?$('plan-tag').textContent:'';
  var planItensAtual=$('plan-list')?Array.from($('plan-list').querySelectorAll('li')).map(function(li){return li.textContent}).join('\n'):'';
  var faqAtual=$('faq-list')?Array.from($('faq-list').querySelectorAll('details')).map(function(dt){return dt.querySelector('summary').textContent+'\n'+dt.querySelector('p').textContent}).join('\n\n'):'';
- var empAtual=s.legalEmp||'';
- var mailAtual=s.legalMail||'';
- var dtAtual=s.legalDate||dt(iso(new Date()));
+ var empAtual=s.legalEmp||'Suellen · Ateliê Òmìnira';
+ var mailAtual=s.legalMail||'ominira.atelie@gmail.com';
+ var dtAtual=s.legalDate||'27/11/2026';
  var termosAtual=s.termosTxt||defaultTermos(empAtual||'[NOME DA EMPRESA]',mailAtual||'[E-MAIL]',dtAtual,n(c.trial_dias,7));
  var privAtual=s.privTxt||defaultPriv(empAtual||'[NOME DA EMPRESA]',mailAtual||'[E-MAIL]',dtAtual);
 
