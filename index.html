@@ -1107,7 +1107,7 @@ function pubPickTime(t){PUB_SEL.time=t;renderPublic()}
 function renderPublic(){
  var box=$('bk-box');
  var tituloPrincipal=PUB.bkTitulo||PUB.espaco||PUB.nome||'Atendimento de Cartas';
- var subLinha=PUB.nome?'Atendimento com <b>'+esc(PUB.nome)+'</b>':'Agendamento online';
+ var subLinha=(PUB.nome&&(PUB.bkTitulo||PUB.espaco))?'Atendimento com <b>'+esc(PUB.nome)+'</b>':(PUB.nome?'Agendamento online':'Atendimento de Cartas');
  var logoHtml=(PUB.logo&&PUB.bkShowLogo!==false)?'<img src="'+PUB.logo+'" class="pub-logo-img" alt="'+esc(tituloPrincipal)+'">':'';
  var avisoHtml=PUB.bkAviso?'<div class="mute" style="margin-top:6px;max-width:560px;font-size:13.5px">'+esc(PUB.bkAviso)+'</div>':'';
  var mSel=PUB.methods.find(function(x){return x.id===PUB_SEL.mid})||PUB.methods[0];
@@ -1476,6 +1476,33 @@ async function admSalvarConfig(){
  toast('Tudo salvo e atualizado no site!','✓');
  adminRoute();
 }
+
+/* === SUPORTE À TECLA ENTER NOS CAMPOS DE ENTRADA === */
+document.addEventListener('keydown',function(e){
+ if(e.key!=='Enter'||e.defaultPrevented||e.isComposing)return;
+ var t=e.target;
+ if(!t||t.tagName==='TEXTAREA'||t.tagName==='BUTTON'||t.tagName==='A'||t.hasAttribute('data-no-enter'))return;
+ if(t.tagName==='INPUT'&&(t.type==='checkbox'||t.type==='radio'||t.type==='file'||t.type==='color'))return;
+ var dlg=document.querySelector('.dlg-ov');
+ if(dlg){var y=dlg.querySelector('#dlg-yes,#dlg-ok');if(y){e.preventDefault();y.click()}return}
+ var ov=document.getElementById('ov');
+ if(ov){
+  if(t.id==='dc-new'){e.preventDefault();addDeckCardManual();return}
+  if(t.id==='cat-new'){e.preventDefault();addCat('');return}
+  if(t.id&&t.id.indexOf('cat-ed-')===0){var rb=t.parentNode&&t.parentNode.querySelector('.btn.ghost');if(rb){e.preventDefault();rb.click()}return}
+  var b=ov.querySelector('.btn:not(.ghost):not(.del):not(.sheet-x):not(.mx)');
+  if(b){e.preventDefault();b.click()}
+  return;
+ }
+ var box=t.closest('#au,#bk-box,#app,#adm');
+ if(!box)return;
+ if(box.id==='app'){
+  var card=t.closest('.card');
+  if(card){var cb=card.querySelector('.btn:not(.ghost):not(.del)');if(cb){e.preventDefault();cb.click();return}}
+ }
+ var btn=box.querySelector('.btn:not(.ghost):not(.del)');
+ if(btn&&!btn.disabled){e.preventDefault();btn.click()}
+});
 
 route();
 </script>
