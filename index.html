@@ -4,6 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mesa de Arcanos · Gestão para cartomantes</title>
+<meta name="description" content="Agenda online, fichas das consulentes, memória das tiragens, Pix e caixa em um só lugar. Feito para cartomantes e taróloga. Teste grátis.">
+<meta name="theme-color" content="#56245B">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mesa de Arcanos">
+<meta property="og:title" content="Mesa de Arcanos · Gestão para cartomantes">
+<meta property="og:description" content="Menos bagunça na agenda, mais tempo para ler as cartas. Agenda, fichas, tiragens e caixa em um só lugar.">
+<meta property="og:image" content="https://mesa-de-arcanos.pages.dev/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Arcanos">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -89,6 +103,45 @@ footer a{color:var(--acc);text-decoration:none}
   .hero-wrap .hero h1{font-size:29px;line-height:1.14}
 }
 
+
+/* === modal da consulente (ficha) === */
+.pf-hd{display:flex;align-items:center;gap:14px;min-width:0}
+.pf-av{width:56px;height:56px;border-radius:50%;background:var(--soft);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:27px;flex-shrink:0}
+.pf-hd h2{margin:0;overflow-wrap:anywhere}
+.pf-sub{color:var(--mute);font-size:13px;margin-top:1px}
+.pf-chips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 16px}
+.pf-chip{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:6px 13px;font-size:13.5px;font-weight:500;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+a.pf-chip:hover{border-color:var(--acc);color:var(--acc)}
+.pf-chip.hl{background:var(--soft);border-color:var(--acc);color:var(--acc);font-weight:600}
+.pf-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.pf-stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.pf-stat .l{font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pf-stat .v{font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;margin-top:2px}
+.pf-next{display:flex;align-items:center;gap:10px;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:12px;font-size:14px}
+.pf-note{background:var(--bg);border-left:3px solid var(--gold);padding:9px 13px;border-radius:0 10px 10px 0;margin:0 0 12px;font-size:14px;white-space:pre-line}
+.pf-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 6px}
+.pf-actions .sp{flex:1}
+.pf-sec{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;margin:18px 0 8px}
+@media(max-width:560px){.pf-stats{grid-template-columns:1fr 1fr}}
+
+/* === pix copia e cola === */
+.qrbox{background:#fff;border-radius:14px;padding:8px;width:200px;max-width:70%;margin:10px auto;border:1px solid var(--line)}
+.qrbox svg{width:100%;height:auto;display:block}
+.pix-code{width:100%;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;word-break:break-all;resize:none;margin:4px 0 10px}
+
+/* === previa do app na landing === */
+.prev-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;margin-top:8px}
+.prev-grid .card{margin:0}
+.prev-note{font-size:12px;color:var(--mute);margin-top:12px;text-align:center}
+@media(max-width:760px){.prev-grid{grid-template-columns:1fr}}
+
+/* === lembrete e cancelamento === */
+.rem-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.rem-row:last-child{border-bottom:0}
+.consent{display:flex;align-items:flex-start;gap:8px;font-weight:400;font-size:12.5px;color:var(--mute);margin:2px 0 12px;cursor:pointer;line-height:1.4}
+.consent input{width:auto;margin:3px 0 0}
+.consent a{color:var(--acc)}
+
 /* RESPONSIVO PARA TABLET (761px a 1024px) */
 @media(max-width:1024px) and (min-width:761px){
   .w{max-width:680px;margin:0 auto;padding:0 32px}
@@ -156,8 +209,8 @@ label{font-size:13px;font-weight:600;color:var(--mute);display:block}
 
 /* BARRA INFERIOR MOBILE OTIMIZADA PARA 7 ABAS */
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));z-index:5;box-shadow:0 -4px 16px rgba(0,0,0,.05)}
-nav button{flex:1;min-width:0;background:none;border:0;padding:5px 1px;font-size:9.5px;font-weight:500;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-nav button b{display:block;font-size:17px;font-weight:400;line-height:1.1}
+nav button{flex:1;min-width:0;background:none;border:0;padding:6px 0 5px;font-size:10px;font-weight:600;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+nav button b{display:block;font-size:19px;font-weight:400;line-height:1.1}
 nav button.on{color:var(--acc);font-weight:700}
 
 /* modais e dialogos personalizados */
@@ -331,12 +384,12 @@ nav button.on{color:var(--acc);font-weight:700}
   <path d="M100 44 A18 18 0 1 0 114 68 A14 14 0 1 1 100 44 Z" fill="currentColor" opacity="0.4"/>
 </svg>
 <div class="w">
-<div class="top"><div class="logo" data-brand><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="top-btns"><a class="btn ghost sm" href="#app">Entrar</a><a class="btn sm" href="#app">Testar grátis</a></div></div>
+<div class="top"><div class="logo" data-brand><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="top-btns"><a class="btn ghost sm" href="#app" onclick="AUTH_MODE='login'">Entrar</a><a class="btn sm" href="#app" onclick="AUTH_MODE='signup'">Testar grátis</a></div></div>
 <div class="hero"><div>
 <div class="eb">✦ Organização para quem lê cartas</div>
 <h1>Menos bagunça na agenda, mais tempo para <em>ler as cartas</em></h1>
 <p>Um espaço digital acolhedor feito para o seu atendimento: a ficha de cada consulente, link próprio para agendamento online, o que saiu em cada tiragem e o financeiro em dia.</p>
-<div class="hero-cta"><a class="btn" href="#app">Começar teste grátis de 7 dias</a><a class="btn ghost" href="#recursos">Conhecer recursos</a></div></div>
+<div class="hero-cta"><a class="btn" href="#app" onclick="AUTH_MODE='signup'">Começar teste grátis de 7 dias</a><a class="btn ghost" href="#recursos">Conhecer recursos</a></div></div>
 <div class="card mock"><div class="mute" style="text-align:right;letter-spacing:2px;font-size:11px;font-weight:700">✦ PRÓXIMA CONSULTA</div>
 <div class="row" style="margin:14px 0"><div><b style="font-size:17px">Helena Prado</b><div class="mute">Jogo de Búzios · 15h30</div></div><span class="tag">Presencial</span></div>
 <div class="card" style="background:var(--bg);padding:12px">Da última vez: <b>Caminhos Abertos</b> · 03/09</div>
@@ -344,6 +397,22 @@ nav button.on{color:var(--acc);font-weight:700}
 <div class="row"><span class="mute">Recebido este mês</span><b class="num" style="color:var(--gold);font-size:18px">R$ 2.115,00</b></div></div></div></div></div>
 
 <div class="band"><div class="w"><h2>A consulente voltou e você não lembra o que saiu no método de jogo? <em>Abra a ficha.</em></h2><p class="mute" style="margin:8px auto 0;max-width:620px;font-size:15px">Em vez de procurar em cadernos e conversas antigas, você vê o histórico completo em um toque e retoma o atendimento com segurança.</p></div></div>
+
+
+<div class="w sec" id="previa"><div class="eb">✦ Veja por dentro</div><h2>A ficha da consulente e o caixa, <em>sempre à mão</em></h2>
+<div class="prev-grid">
+<div class="card"><div class="pf-hd"><div class="pf-av">🎂</div><div><h3 style="font-size:18px">Helena Prado</h3><div class="pf-sub">Consulente desde 03/02/2026</div></div></div>
+<div class="pf-chips" style="margin-top:14px"><span class="pf-chip">📱 (11) 99999-0000</span><span class="pf-chip hl">🎂 Faz aniversário em 3 dias</span></div>
+<div class="pf-stats" style="grid-template-columns:1fr 1fr 1fr"><div class="pf-stat"><div class="l">💰 Já pagou</div><div class="v" style="color:var(--ok)">R$ 450,00</div></div><div class="pf-stat"><div class="l">⏳ A receber</div><div class="v" style="color:var(--bad)">R$ 0,00</div></div><div class="pf-stat"><div class="l">🔮 Consultas</div><div class="v">6</div></div></div>
+<div class="pf-sec" style="margin-top:6px">🃏 Cartas que mais saíram para ela</div>
+<div class="mini-cards" style="margin-top:0"><span class="mini-card">A Estrela ×3</span><span class="mini-card">O Sol ×2</span><span class="mini-card">Caminhos Abertos ×2</span></div></div>
+<div class="card"><div class="mute" style="font-weight:700;letter-spacing:1.5px;font-size:11px;text-transform:uppercase">💰 Caixa do mês</div>
+<div class="grid" style="margin-top:12px"><div><div class="mute">Entrou</div><div class="big">R$ 2.115,00</div></div><div><div class="mute">Saiu</div><div class="big" style="color:var(--mute)">R$ 380,00</div></div></div>
+<div class="cx-bar-track" style="margin-top:14px"><div class="cx-bar-in" style="width:85%"></div><div class="cx-bar-out" style="width:15%"></div></div>
+<div class="row mute" style="font-size:12.5px"><span>85% entradas</span><span>15% saídas</span></div>
+<hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="row"><span class="mute">Saldo líquido</span><b class="num" style="color:var(--ok);font-size:18px">R$ 1.735,00</b></div>
+<div class="row" style="margin-top:8px"><span class="mute">💠 Pix copia e cola já com o valor</span><span class="tag ok">Pronto</span></div></div>
+</div><p class="prev-note">Exemplo ilustrativo com dados fictícios.</p></div>
 
 <div class="w sec" id="recursos"><div class="eb" id="rec-eb">✦ Dentro do app</div><h2 id="rec-h2">Feito para a rotina do seu altar e da sua mesa</h2>
 <div class="g3" id="rec-grid">
@@ -362,7 +431,7 @@ nav button.on{color:var(--acc);font-weight:700}
 
 <div class="band" style="padding:52px 0"><div class="w"><div class="eb" style="justify-content:center">✦ Assinatura</div><div class="card plan"><span class="tag" id="plan-tag">Acesso completo</span><div class="price">R$ 29<small class="mute" style="font-size:18px;font-family:var(--sans)">/mês</small></div>
 <ul id="plan-list"><li>Link público de agendamento online</li><li>Consulentes e tiragens sem limite</li><li>Catálogo visual de cartas por baralho</li><li>Agenda com controle de pausa e dias</li><li>Mensagens prontas editáveis e dados Pix</li><li>Tabela de métodos de jogo e controle de caixa</li></ul>
-<a class="btn" style="width:100%" href="#app">Testar 7 dias grátis</a></div></div></div>
+<a class="btn" style="width:100%" href="#app" onclick="AUTH_MODE='signup'">Testar 7 dias grátis</a></div></div></div>
 
 <div class="w sec faq-wrap"><div class="eb">✦ Dúvidas frequentes</div><h2>Respostas rápidas</h2>
 <div id="faq-list">
@@ -372,7 +441,7 @@ nav button.on{color:var(--acc);font-weight:700}
 <details><summary>Ele avisa as consulentes automaticamente?</summary><p>Ele não dispara mensagens sozinho, mas cada consulta tem botões que abrem o WhatsApp já com o texto personalizado por você (confirmação, dados Pix ou aniversário). Você só confere e envia.</p></details></div></div>
 <footer><span id="foot-brand">© Mesa de Arcanos</span> · <a href="#termos">Termos de uso</a> · <a href="#privacidade">Privacidade</a> · <a href="#" data-sup target="_blank">Suporte no WhatsApp</a></footer></div>
 
-<div id="au" style="display:none"><main style="max-width:420px;margin:0 auto;padding:48px 22px"><div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="card" style="padding:24px"><h2>Entrar</h2><p class="mute" style="margin:4px 0 16px">Acesse sua mesa de atendimentos</p><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Senha</label><input id="apw" type="password" autocomplete="current-password"><label style="display:flex;align-items:center;font-weight:400;margin:6px 0 14px"><input id="aok" type="checkbox" style="width:auto;margin:0 8px 0 0">Li e aceito os <a href="#termos" style="margin:0 4px">Termos</a> e a <a href="#privacidade" style="margin-left:4px">Privacidade</a></label><p id="am" class="mute" style="color:var(--bad)"></p><div class="row"><button class="btn" onclick="login()">Entrar</button><button class="btn ghost" onclick="signup()">Criar conta</button></div><p style="margin:14px 0 0"><a class="mute" href="#" onclick="forgot();return false">Esqueci minha senha</a></p></div><p style="text-align:center"><a class="mute" href="#">← Voltar ao site</a></p></main></div>
+<div id="au" style="display:none"><main style="max-width:420px;margin:0 auto;padding:48px 22px"><div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="card" style="padding:24px"><h2 id="au-h">Entrar</h2><p id="au-p" class="mute" style="margin:4px 0 16px">Acesse sua mesa de atendimentos</p><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Senha</label><input id="apw" type="password" autocomplete="current-password"><label style="display:flex;align-items:center;font-weight:400;margin:6px 0 14px"><input id="aok" type="checkbox" style="width:auto;margin:0 8px 0 0">Li e aceito os <a href="#termos" style="margin:0 4px">Termos</a> e a <a href="#privacidade" style="margin-left:4px">Privacidade</a></label><p id="am" class="mute" style="color:var(--bad)"></p><div class="row"><button id="au-b1" class="btn" onclick="login()">Entrar</button><button id="au-b2" class="btn ghost" onclick="signup()">Criar conta</button></div><p style="margin:14px 0 0"><a class="mute" href="#" onclick="forgot();return false">Esqueci minha senha</a></p></div><p style="text-align:center"><a class="mute" href="#">← Voltar ao site</a></p></main></div>
 <div id="pw" style="display:none"><main style="max-width:460px;margin:0 auto;padding:56px 22px;text-align:center"><div class="logo" data-brand style="justify-content:center"><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="card" style="margin-top:24px;padding:28px"><h2>Seu acesso terminou</h2><p class="mute" style="margin:10px 0 20px">O teste grátis ou a assinatura venceu. Assine para continuar editando. Use o <b>mesmo e-mail</b> do seu cadastro aqui — seus dados continuam salvos.</p><a id="pw-pay" class="btn" style="width:100%" href="#" data-pay>Assinar agora · R$ 29/mês</a><p style="margin:16px 0 8px"><a class="mute" href="#" data-sup target="_blank">Pagou com outro e-mail ou precisa de ajuda? Fale no WhatsApp</a></p><p><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha</button> <button class="btn ghost sm" onclick="exportJson()">Backup completo</button></p><a class="mute" href="#" onclick="logout();return false">Sair</a></div></main></div>
 <div id="lg" style="display:none"></div>
 <div id="bk" style="display:none"><div id="bk-box"></div></div>
@@ -390,11 +459,11 @@ nav button.on{color:var(--acc);font-weight:700}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script>
 var PAY='https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=f0de4a6d93f445218850cef881dbe6f5';
 var SUPORTE='5513996261166';
 var BRAND='MESA DE ARCANOS';
-var KEY='mesa-arcanos-v2',S={clients:[],methods:[],items:[],exps:[]},tab='hoje',q='';
 var SB_URL='https://dhbcnjgtwbieexermzan.supabase.co',SB_KEY='sb_publishable_l4k1Y_rzBxWpcNmDNc2jFw_eLJwCk5Z';
 var sb=(window.supabase&&SB_URL.indexOf('http')===0)?window.supabase.createClient(SB_URL,SB_KEY):null,USER=null,loaded=false;
 var KEY='mesa-arcanos-v2',S={clients:[],methods:[],items:[],exps:[],cats:[]},tab='hoje',q='';
@@ -474,6 +543,16 @@ function dlgConfirm(txt,onYes,opts){
  o.onclick=function(e){if(e.target===o)o.remove()};
 }
 
+var AUTH_MODE='login';
+function applyAuthMode(){
+ var sg=AUTH_MODE==='signup';
+ var h=$('au-h'),pp=$('au-p'),b1=$('au-b1'),b2=$('au-b2');
+ if(h)h.textContent=sg?'Criar conta':'Entrar';
+ if(pp)pp.textContent=sg?'Comece seu teste grátis e organize sua mesa':'Acesse sua mesa de atendimentos';
+ if(b1)b1.className=sg?'btn ghost':'btn';
+ if(b2)b2.className=sg?'btn':'btn ghost';
+ AUTH_MODE='login';
+}
 function msg(t){document.getElementById('am').textContent=t}
 async function login(){var e=v('ae').trim(),p=v('apw');if(!e||!p)return msg('Preencha o e-mail e a senha.');var r=await sb.auth.signInWithPassword({email:e,password:p});if(r.error)return msg('E-mail ou senha incorretos.');route()}
 async function signup(){var e=v('ae').trim(),p=v('apw');if(!e||!p)return msg('Preencha o e-mail e a senha.');if(p.length<6)return msg('A senha precisa ter pelo menos 6 caracteres.');if(!ck('aok'))return msg('Aceite os Termos e a Privacidade para criar a conta.');var r=await sb.auth.signUp({email:e,password:p});if(r.error)return msg(r.error.message);if(!r.data.session)msg('Conta criada! Confirme pelo e-mail que enviamos e depois entre.');else route()}
@@ -483,7 +562,6 @@ function pad(n){return(n<10?'0':'')+n}
 function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
 var sel=iso(new Date()),cur=sel.slice(0,7);
 var cxYm=sel.slice(0,7),cxPayFilter='todos';
-var sel=iso(new Date()),cur=sel.slice(0,7);
 var MES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function money(n){return(Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
@@ -543,7 +621,6 @@ var DEF_FEATS=[
  {ic:'🏷️',t:'Tabela de métodos de jogo',d:'Cadastre seus métodos (Tarot, Baralho Cigano, Búzios) com duração, modalidade e valor.'},
  {ic:'✨',t:'WhatsApp e Pix em 1 toque',d:'Personalize suas mensagens prontas e envie confirmação, dados Pix ou felicitações de aniversário.'}
 ];
-function applySup(){document.querySelectorAll('[data-sup]').forEach(function(a){a.href='https://wa.me/'+SUPORTE+'?text='+encodeURIComponent('Olá! Preciso de ajuda com o Mesa de Arcanos.')})}
 function applySup(){document.querySelectorAll('[data-sup]').forEach(function(a){a.href='https://wa.me/'+SUPORTE+'?text='+encodeURIComponent('Olá! Preciso de ajuda com o '+BRAND+'.')})}
 function applySiteCfg(c){
   if(!c)return;
@@ -698,7 +775,7 @@ function itemDetails(id){
    '<button class="btn sm ghost" onclick="tgl(\''+i.id+'\',\'done\')">'+(i.done?'Desmarcar realizado':'✓ Marcar realizado')+'</button>'+
    '<button class="btn sm ghost" onclick="tgl(\''+i.id+'\',\'paid\')">'+(i.paid?'Desmarcar pago':'✓ Marcar pago')+'</button>'+
    '<button class="btn sm ghost" onclick="wa(\''+i.id+'\')">💬 Enviar confirmação</button>'+
-   (!i.paid?'<button class="btn sm ghost" onclick="waPix(\''+i.id+'\')">💠 Cobrar Pix</button>':'')+
+   (!i.paid?'<button class="btn sm ghost" onclick="waPix(\''+i.id+'\')">💠 Cobrar Pix</button><button class="btn sm ghost" onclick="pixModal(\''+i.id+'\')">📋 Pix copia e cola</button>':'')+
  '</div>'+
  '<div class="row" style="padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap">'+
    '<div style="display:flex;gap:8px"><button class="btn" onclick="closeS();formItem(\''+i.id+'\')">Editar</button><button class="btn del" onclick="delItem(\''+i.id+'\')">Excluir</button></div>'+
@@ -745,7 +822,8 @@ function setColorPreset(acc,gold){
 var TEMP_LOGO='';
 function handleLogoUpload(inp){
  var f=inp.files&&inp.files[0];if(!f)return;
- compressImg(f,function(dataUrl){
+ compressImg(f,async function(dataUrl){
+  dataUrl=await stashImg(dataUrl,'logo');
   TEMP_LOGO=dataUrl;
   var prev=$('p-logo-prev');
   if(prev)prev.innerHTML='<img src="'+TEMP_LOGO+'" class="logo-prev-img" alt="Logo">';
@@ -780,7 +858,7 @@ function render(){
   '<div class="grid"><div class="card"><div class="mute">Atendimentos hoje</div><div class="big">'+l.length+'</div></div><div class="card"><div class="mute">Recebido no mês</div><div class="big">'+money(mo)+'</div></div></div>'+
   (pends.length?'<h3 style="margin:10px 0 6px;color:var(--warn)">⏳ Pedidos pelo link aguardando confirmação ('+pends.length+')</h3>'+pends.map(itemCard).join(''):'')+
   (aniv.length?'<h3 style="margin:10px 0 6px">🎂 Aniversariantes (próximos 7 dias)</h3>'+aniv.map(function(a){return'<div class="card row"><div><b>'+esc(a.c.name)+'</b><div class="mute num">'+(a.diff===0?'Faz aniversário hoje! 🎉':'Dia '+a.dd+' (em '+a.diff+' '+(a.diff===1?'dia':'dias')+')')+'</div></div><button class="btn sm ghost" onclick="waBday(\''+a.c.id+'\')">Parabenizar</button></div>'}).join(''):'')+
-  '<h3 style="margin:10px 0 6px">Atendimentos de hoje</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.</div>')+'<h3 style="margin:10px 0 6px">Consultas de amanhã</h3>'+(lt.length?lt.map(itemCard).join(''):'<div class="empty">Nada marcado para amanhã.</div>');
+  '<h3 style="margin:10px 0 6px">Atendimentos de hoje</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.</div>')+'<div class="row" style="margin:10px 0 6px"><h3 style="margin:0">Consultas de amanhã</h3>'+(lt.length?'<button class="btn sm ghost" onclick="lembrarModal()">💬 Lembrar todas</button>':'')+'</div>'+(lt.length?lt.map(itemCard).join(''):'<div class="empty">Nada marcado para amanhã.</div>');
 
  }else if(tab==='agenda'){
   var l2=S.items.filter(function(i){return i.date===sel}).sort(byT);
@@ -799,7 +877,7 @@ function render(){
   h=head('Mensagens automáticas','<button class="btn sm" onclick="saveMsgs()">Salvar</button>')+
   '<p class="mute" style="margin:-6px 0 12px">Personalize os textos enviados pelo WhatsApp e exibidos no agendamento.</p>'+
   '<div class="card"><h3 style="margin-bottom:6px">1 · Confirmação de consulta</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Enviar confirmação</b> nos detalhes do atendimento.</p><textarea id="m-conf" rows="3">'+esc(c.msg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{dia}</b>, <b>{hora}</b>, <b>{jogo}</b>, <b>{tarologa}</b>, <b>{pix}</b></div></div>'+
-  '<div class="card"><h3 style="margin-bottom:6px">2 · Cobrança via Pix</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Cobrar Pix</b> nos detalhes do atendimento.</p><textarea id="m-pix" rows="5">'+esc(c.pixMsg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{jogo}</b>, <b>{dia}</b>, <b>{valor}</b>, <b>{pix}</b>, <b>{banco}</b>, <b>{titular}</b>, <b>{tarologa}</b></div></div>'+
+  '<div class="card"><h3 style="margin-bottom:6px">2 · Cobrança via Pix</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Cobrar Pix</b> nos detalhes do atendimento.</p><textarea id="m-pix" rows="5">'+esc(c.pixMsg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{jogo}</b>, <b>{dia}</b>, <b>{valor}</b>, <b>{pix}</b>, <b>{banco}</b>, <b>{titular}</b>, <b>{copiaecola}</b>, <b>{tarologa}</b></div></div>'+
   '<div class="card"><h3 style="margin-bottom:6px">3 · Mensagem após agendamento pelo link</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Texto que a consulente envia para o seu WhatsApp assim que reserva pelo link público.</p><textarea id="m-link" rows="4">'+esc(c.linkMsg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{tarologa}</b>, <b>{jogo}</b>, <b>{modalidade}</b>, <b>{dia}</b>, <b>{hora}</b>, <b>{valor}</b>, <b>{nome}</b></div></div>'+
   '<div class="card"><h3 style="margin-bottom:6px">4 · Feliz aniversário</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Parabenizar</b> na lista de aniversariantes da semana.</p><textarea id="m-bday" rows="3">'+esc(c.birthMsg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b> e <b>{tarologa}</b></div></div>'+
   '<div><button class="btn" style="width:100%" onclick="saveMsgs()">Salvar todas as mensagens</button></div>';
@@ -817,8 +895,8 @@ function render(){
     '<label>E-mail de acesso</label><input value="'+esc(EMAIL)+'" disabled style="margin-bottom:0"></div>'+
 
     '<div class="card"><h3 style="margin-bottom:10px">💠 Dados para recebimento Pix</h3><p class="mute" style="margin:0 0 12px;font-size:13px">Essas informações aparecem nas cobranças e na tela final do agendamento online.</p>'+
-    '<label>Chave Pix</label><input id="p5" value="'+esc(c.pix)+'" placeholder="CPF, e-mail, celular ou chave aleatória">'+
-    '<div class="grid"><div><label>Banco / Instituição</label><input id="p6" value="'+esc(c.banco)+'" placeholder="Ex: Nubank, Itaú, Inter…"></div><div><label>Nome completo do titular</label><input id="p7" value="'+esc(c.titular)+'" placeholder="Quem recebe o Pix"></div></div></div>'+
+    '<label>Chave Pix</label><input id="p5" value="'+esc(c.pix)+'" placeholder="CPF, e-mail, celular com DDD ou chave aleatória">'+
+    '<div class="grid"><div><label>Banco / Instituição</label><input id="p6" value="'+esc(c.banco)+'" placeholder="Ex: Nubank, Itaú, Inter…"></div><div><label>Nome completo do titular</label><input id="p7" value="'+esc(c.titular)+'" placeholder="Quem recebe o Pix"></div></div><label>Cidade do recebedor (vai no Pix copia e cola)</label><input id="p8" value="'+esc(c.cidade)+'" placeholder="Ex: São Vicente" style="margin-bottom:0"></div>'+
 
     '<div class="card"><h3 style="margin-bottom:8px">🎨 Cores da minha mesa e agendamento</h3><p class="mute" style="margin:0 0 12px;font-size:13px">Deixe o app e sua página de agendamento com as cores da sua energia.</p>'+
     '<div class="chips" style="margin-bottom:12px">'+
@@ -844,9 +922,10 @@ function render(){
     '<label>Título personalizado da página (opcional)</label><input id="lk3" value="'+esc(c.bkTitulo)+'" placeholder="Padrão: Nome do seu espaço ou seu nome">'+
     '<label>Aviso ou boas-vindas no topo do agendamento (opcional)</label><textarea id="lk4" rows="2" placeholder="Ex: Atendimento com hora marcada. Escolha seu método abaixo ✨">'+esc(c.bkAviso)+'</textarea>'+
     '<label style="display:flex;align-items:center;font-weight:500;color:var(--ink);margin:2px 0 12px;cursor:pointer"><input id="lk5" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.bkShowLogo!==false?' checked':'')+'>Exibir logo/foto do espaço na página de agendamento</label>'+
+    '<label>Consulente pode cancelar/remarcar pelo link até quantas horas antes? (0 = desativado)</label><input id="lk6" type="number" min="0" value="'+c.cancelHoras+'">'+
     '<label>Seu link exclusivo</label><div style="display:flex;gap:8px"><input id="link-url" value="'+esc(pubUrl)+'" readonly style="margin:0"><button type="button" class="btn sm ghost" onclick="copyLink()">Copiar</button><a class="btn sm ghost" href="#agendar?t='+USER+'" target="_blank">Abrir</a></div></div>'+
 
-    '<div class="card"><h3 style="margin-bottom:10px">Meus dados e backup</h3><div style="display:flex;gap:8px;flex-wrap:wrap">'+(ADMIN?'<a class="btn sm" href="#admin">✦ Painel admin</a>':'')+'<button class="btn ghost sm" onclick="exportCsv()">Baixar planilha (CSV)</button><button class="btn ghost sm" onclick="exportJson()">Backup completo</button></div><p class="mute" style="margin:12px 0 0"><a href="#termos" style="color:var(--acc)">Termos de uso</a> · <a href="#privacidade" style="color:var(--acc)">Privacidade</a></p><button class="btn" style="width:100%;margin-top:16px" onclick="saveCfg()">Salvar alterações</button></div>'+
+    '<div class="card"><h3 style="margin-bottom:10px">Meus dados e backup</h3><div style="display:flex;gap:8px;flex-wrap:wrap">'+(ADMIN?'<a class="btn sm" href="#admin">✦ Painel admin</a>':'')+'<button class="btn ghost sm" onclick="exportCsv()">Baixar planilha (CSV)</button><button class="btn ghost sm" onclick="exportJson()">Backup completo</button><button class="btn ghost sm" onclick="instalarApp()">📲 Instalar app</button>'+(contaFotosAntigas()?'<button class="btn ghost sm" onclick="migrarFotos()">📦 Mover fotos para o armazenamento ('+contaFotosAntigas()+')</button>':'')+'</div><p class="mute" style="margin:12px 0 0"><a href="#termos" style="color:var(--acc)">Termos de uso</a> · <a href="#privacidade" style="color:var(--acc)">Privacidade</a></p><button class="btn" style="width:100%;margin-top:16px" onclick="saveCfg()">Salvar alterações</button></div>'+
   '</div></div>';
  }else{
   if(!cxMes)cxMes=ym;
@@ -948,7 +1027,8 @@ function compressImg(file,cb,maxW){
 function handleMethodCover(inp){
  var f=inp.files&&inp.files[0];
  if(!f)return;
- compressImg(f,function(dataUrl){
+ compressImg(f,async function(dataUrl){
+  dataUrl=await stashImg(dataUrl,'metodos');
   TEMP_METHOD_IMG=dataUrl;
   var prev=$('m-cover-prev');
   if(prev)prev.innerHTML='<img src="'+dataUrl+'" alt="" style="width:100%;height:100%;object-fit:cover">';
@@ -965,7 +1045,8 @@ function handleDeckUpload(inp){
  if(!files.length)return;
  files.forEach(function(f){
   var baseName=f.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ');
-  compressImg(f,function(dataUrl){
+  compressImg(f,async function(dataUrl){
+   dataUrl=await stashImg(dataUrl,'cartas');
    TEMP_DECK.push({id:uid(),name:baseName,img:dataUrl});
    renderTempDeck();
   },220);
@@ -1072,17 +1153,44 @@ function saveItem(id){
  if(fr){dlgConfirm('Atenção: esse horário '+fr+'. Deseja salvar mesmo assim?',function(){commitItem(id,d)},{title:'Fora do expediente',yes:'Salvar mesmo assim',ic:'🌙'});return}
  commitItem(id,d);
 }
+function ageOf(b){
+ var a=String(b||'').slice(0,10).split('-');if(a.length!==3||a[0].length!==4)return null;
+ var y=+a[0],m=+a[1]-1,d=+a[2],t=new Date(),n=t.getFullYear()-y;
+ if(t.getMonth()<m||(t.getMonth()===m&&t.getDate()<d))n--;
+ return(n>=0&&n<130)?n:null;
+}
 function profile(id){
- var c=cl(id),l=S.items.filter(function(i){return i.cid===id}).sort(function(a,b){return b.date.localeCompare(a.date)}),t=iso(new Date()),nx=l.filter(function(i){return!i.done&&i.date>=t&&ativo(i)}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)})[0];
- sheet('<div id="prof" data-c="'+id+'"></div><div class="sheet-hd"><h2 style="margin:0">'+esc(c.name)+'</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
- '<div class="mute num" style="line-height:1.7;margin-top:4px">'+
-   '<div><b>WhatsApp:</b> '+esc(fmtPhone(c.phone)||'não informado')+'</div>'+
-   (c.email?'<div><b>E-mail:</b> '+esc(c.email)+'</div>':'')+
-   '<div><b>Aniversário:</b> '+esc(fmtBirth(c.birth))+'</div>'+
-   '<div><b>Cadastro:</b> '+esc(dt(c.created))+'</div>'+
- '</div>'+
- (c.notes?'<p style="margin:10px 0">'+esc(c.notes)+'</p>':'')+
- '<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div><div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div><div class="row" style="margin:14px 0;flex-wrap:wrap"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><button class="btn sm del" onclick="delClient(\''+id+'\')">Excluir</button></div><h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))
+ var c=cl(id);if(!c)return;
+ var l=S.items.filter(function(i){return i.cid===id}).sort(function(a,b){return b.date.localeCompare(a.date)}),t=iso(new Date());
+ var nx=l.filter(function(i){return!i.done&&i.date>=t&&ativo(i)}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)})[0];
+ var ult=l.filter(function(i){return ativo(i)&&(i.done||i.date<t)})[0];
+ var pago=tot(l.filter(function(i){return i.paid})),receber=tot(l.filter(function(i){return!i.paid&&ativo(i)}));
+ var bd=bdays(new Date()).filter(function(x){return x.c.id===id})[0],age=ageOf(c.birth);
+ var n=String(c.phone||'').replace(/\D/g,'');if(n&&n.length<=11)n='55'+n;
+ var cnt={};
+ l.forEach(function(i){var mm=S.methods.find(function(x){return x.id===i.mid});(i.pickedCards||[]).forEach(function(cid){var cd=mm&&mm.deck?mm.deck.find(function(k){return k.id===cid}):null;if(cd)cnt[cd.name]=(cnt[cd.name]||0)+1})});
+ var top=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a]||a.localeCompare(b)}).slice(0,6);
+ var rawNote=String(c.notes||'').trim(),cleanNote=rawNote.replace(/Cadastrada pelo link de agendamento\.?/i,'').trim(),viaLink=cleanNote!==rawNote;
+ var chips='<div class="pf-chips">'+
+  (n?'<a class="pf-chip" href="https://wa.me/'+n+'" target="_blank" title="Abrir conversa no WhatsApp">📱 '+esc(fmtPhone(c.phone))+'</a>':'<span class="pf-chip">📱 sem telefone</span>')+
+  (c.birth?'<span class="pf-chip'+(bd?' hl':'')+'">🎂 '+esc(fmtBirth(c.birth))+(age!=null?' · '+age+' anos':'')+(bd?(bd.diff===0?' · hoje! 🎉':' · em '+bd.diff+(bd.diff===1?' dia':' dias')):'')+'</span>':'<span class="pf-chip">🎂 sem data</span>')+
+  (c.email?'<span class="pf-chip">✉️ '+esc(c.email)+'</span>':'')+
+  (c.created?'<span class="pf-chip">🗓️ Desde '+esc(dt(c.created))+'</span>':'')+
+  (viaLink?'<span class="pf-chip">🔗 Veio pelo link</span>':'')+
+ '</div>';
+ var stats='<div class="pf-stats">'+
+  '<div class="pf-stat"><div class="l">💰 Já pagou</div><div class="v" style="color:var(--ok)">'+money(pago)+'</div></div>'+
+  '<div class="pf-stat"><div class="l">⏳ A receber</div><div class="v" style="color:'+(receber>0?'var(--bad)':'var(--mute)')+'">'+money(receber)+'</div></div>'+
+  '<div class="pf-stat"><div class="l">🔮 Consultas</div><div class="v">'+l.filter(function(i){return ativo(i)}).length+'</div></div>'+
+  '<div class="pf-stat"><div class="l">🕒 Última visita</div><div class="v">'+(ult?esc(dt(ult.date)):'—')+'</div></div></div>';
+ sheet('<div id="prof" data-c="'+id+'"></div>'+
+ '<div class="sheet-hd"><div class="pf-hd"><div class="pf-av">'+(bd?'🎂':'🔮')+'</div><div style="min-width:0"><h2>'+esc(c.name)+'</h2><div class="pf-sub">'+(l.length?'Ficha da consulente':'Ainda sem atendimentos')+'</div></div></div><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
+ chips+stats+
+ '<div class="pf-next">📅 <span>'+(nx?'Próximo horário: <b class="num">'+esc(dt(nx.date))+' às '+esc(nx.time)+'</b>':'Nenhum horário marcado')+'</span></div>'+
+ (cleanNote?'<div class="pf-note">📝 '+esc(cleanNote)+'</div>':'')+
+ (top.length?'<div class="pf-sec">🃏 Cartas que mais saíram para ela</div><div class="mini-cards" style="margin:0 0 4px">'+top.map(function(k){return'<span class="mini-card">'+esc(k)+' ×'+cnt[k]+'</span>'}).join('')+'</div>':'')+
+ '<div class="pf-actions"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button>'+(n?'<a class="btn sm ghost" href="https://wa.me/'+n+'" target="_blank">💬 WhatsApp</a>':'')+'<button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">✏️ Editar ficha</button><span class="sp"></span><button class="btn sm del" onclick="delClient(\''+id+'\')">🗑️ Excluir</button></div>'+
+ '<div class="pf-sec">📜 Atendimentos anteriores</div>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))
 }
 
 var SUB=null,VER=null;
@@ -1100,7 +1208,9 @@ function waPix(id){
  if(!c||!c.phone){dlgAlert('Cadastre o telefone da consulente na ficha primeiro.','Telefone ausente');return}
  if(!cfg.pix){dlgAlert('Cadastre sua chave Pix em Conta → Dados para recebimento Pix primeiro.','Chave Pix não cadastrada');go('conta');return}
  var n=c.phone.replace(/\D/g,'');if(n.length<=11)n='55'+n;
- var t=cfg.pixMsg
+ var pcode=pixCode(cfg,i.price),tpl=cfg.pixMsg.indexOf('{copiaecola}')<0?cfg.pixMsg+'\n\nPix copia e cola (já com o valor):\n{copiaecola}':cfg.pixMsg;
+ var t=tpl
+  .replace(/\{copiaecola\}/g,pcode)
   .replace(/\{nome\}/g,c.name.split(' ')[0])
   .replace(/\{jogo\}/g,mt(i.mid))
   .replace(/\{dia\}/g,dt(i.date).slice(0,5))
@@ -1212,11 +1322,12 @@ function renderPublic(){
  var col3='<div class="card"><div class="eb">3 · Seus dados</div>'+
   (PUB_SEL.time?'<label>Seu nome completo *</label><input id="bn" placeholder="Como gosta de ser chamada" onkeydown="if(event.key===\'Enter\')submitPublic()"><label>WhatsApp com DDD *</label><input id="bt" type="tel" placeholder="(11) 99999-9999" oninput="maskPhoneInput(this)" onkeydown="if(event.key===\'Enter\')submitPublic()"><label>Data de nascimento (opcional)</label><input id="bb" type="date">'+
   (modAtual==='ambos'?'<label>Modalidade</label><select id="bo"><option value="1">Online (chamada / áudio)</option><option value="0">Presencial</option></select>':'<div class="mute" style="margin:4px 0 12px">Atendimento: <b>'+modLabel(modAtual)+'</b></div>')+
-  '<button id="bsub" class="btn" style="width:100%;margin-top:auto" onclick="submitPublic()">Confirmar · '+dt(PUB_SEL.date).slice(0,5)+' às '+esc(PUB_SEL.time)+'</button>':
+  '<label class="consent"><input id="blg" type="checkbox"><span>Concordo em compartilhar meu nome, WhatsApp e data de nascimento para este agendamento, conforme a <a href="#privacidade" target="_blank">Política de Privacidade</a>.</span></label><button id="bsub" class="btn" style="width:100%;margin-top:auto" onclick="submitPublic()">Confirmar · '+dt(PUB_SEL.date).slice(0,5)+' às '+esc(PUB_SEL.time)+'</button>':
   '<div class="empty" style="margin:auto 0;padding:32px 16px"><div style="font-size:26px;margin-bottom:8px">🔮</div>Escolha o método de jogo, o dia e um horário livre para preencher seus dados e concluir a reserva.</div>')+'</div>';
 
  box.innerHTML='<div class="pub-head"><div class="logo" data-brand><b>✦</b> '+esc(BRAND)+' <b>✦</b></div>'+logoHtml+'<h2>'+esc(tituloPrincipal)+'</h2><div class="mute pub-sub">'+subLinha+'</div>'+avisoHtml+'</div>'+
- '<div class="pub-grid">'+col1+col2+col3+'</div>';
+ '<div class="pub-grid">'+col1+col2+col3+'</div>'+
+ '<p style="text-align:center;margin:20px 0 0"><a class="mute" href="#" onclick="pubManage();return false">Já tem horário marcado? Cancelar ou remarcar</a></p>';
 }
 function copyPixPub(){navigator.clipboard.writeText(PUB.pix||'');toast('Chave Pix copiada!','✓')}
 async function submitPublic(){
@@ -1225,6 +1336,7 @@ async function submitPublic(){
  var modAtual=mSel.mod||'ambos';
  var online=modAtual==='online'?true:modAtual==='presencial'?false:(v('bo')==='1');
  if(!nome||tel.replace(/\D/g,'').length<10){dlgAlert('Preencha seu nome e WhatsApp com DDD.','Dados incompletos');return}
+ if(!ck('blg')){dlgAlert('Marque a caixa de concordância para continuar com o agendamento.','Consentimento necessário');return}
  var btn=$('bsub');btn.disabled=true;btn.textContent='Reservando horário…';
  var r=await sb.rpc('criar_agendamento_publico',{p_user_id:PUB_UID,p_nome:nome,p_tel:tel,p_birth:birth,p_mid:PUB_SEL.mid,p_date:PUB_SEL.date,p_time:PUB_SEL.time,p_online:online});
  if(r.error||!r.data||!r.data.ok){dlgAlert(r.data&&r.data.erro?r.data.erro:'Não foi possível concluir. Tente outro horário.','Horário indisponível');btn.disabled=false;btn.textContent='Confirmar agendamento';loadPublic(PUB_UID);return}
@@ -1249,6 +1361,8 @@ async function submitPublic(){
   (PUB.banco?'<div class="mute" style="font-size:12.5px;margin-top:3px">Banco: <b>'+esc(PUB.banco)+'</b></div>':'')+
   (PUB.titular?'<div class="mute" style="font-size:12.5px">Titular: <b>'+esc(PUB.titular)+'</b></div>':'')+
   '</div><button type="button" class="btn sm ghost" onclick="copyPixPub()">Copiar Pix</button></div>';
+  var pcodeP=pixCode({pix:PUB.pix,titular:PUB.titular,nome:PUB.nome,cidade:PUB.cidade},res.valor);
+  if(pcodeP){PIX_LAST=pcodeP;var qrP=qrSvg(pcodeP);pixInfoHtml+='<div style="margin-top:12px;text-align:center"><div class="mute" style="font-size:12px">Pix copia e cola com o valor já preenchido</div>'+(qrP?'<div class="qrbox">'+qrP+'</div>':'')+'<button type="button" class="btn sm ghost" onclick="copyPixCode()">📋 Copiar código Pix</button></div>';}
  }
 
  $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" data-brand style="justify-content:center;margin-bottom:20px"><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><div class="card" style="text-align:center;padding:26px 20px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
@@ -1275,7 +1389,7 @@ async function route(){
  if(!a)return;
  if(!sb){U.style.display='block';msg('Falta configurar o Supabase no arquivo (SB_URL e SB_KEY).');return}
  var r=await sb.auth.getSession(),ss=r.data.session;
- if(!ss){U.style.display='block';msg('');return}
+ if(!ss){U.style.display='block';msg('');applyAuthMode();return}
  USER=ss.user.id;EMAIL=ss.user.email||'';
  if(ADMIN===null){var ra=await sb.rpc('sou_admin');ADMIN=ra.data===true}$('adl').style.display=ADMIN?'inline':'none';
  if(!CONF){var cg=await sb.rpc('get_config');CONF=(cg.data&&cg.data[0])||{};applySiteCfg(CONF)}
@@ -1362,6 +1476,8 @@ function CF(){
   pix:c.pix||'',
   banco:c.banco||'',
   titular:c.titular||'',
+  cidade:c.cidade||'',
+  cancelHoras:c.cancelHoras==null?24:Math.max(0,+c.cancelHoras||0),
   corAcc:c.corAcc||'',
   corGold:c.corGold||'',
   ini:c.ini||'09:00',
@@ -1405,6 +1521,8 @@ function saveCfg(){
   pix:v('p5').trim(),
   banco:v('p6').trim(),
   titular:v('p7').trim(),
+  cidade:v('p8').trim(),
+  cancelHoras:(isNaN(parseInt(v('lk6')))?24:Math.max(0,parseInt(v('lk6')))),
   corAcc:v('p-acc'),
   corGold:v('p-gold'),
   ini:v('c1')||'09:00',
@@ -1650,6 +1768,162 @@ document.addEventListener('keydown',function(e){
  var btn=box.querySelector('.btn:not(.ghost):not(.del)');
  if(btn&&!btn.disabled){e.preventDefault();btn.click()}
 });
+
+/* === FOTOS NO STORAGE (com fallback para o modo antigo) === */
+var STORAGE_WARNED=false;
+function dataToBlob(d){var p=String(d).split(','),mime=(p[0].match(/:(.*?);/)||[])[1]||'image/jpeg',bin=atob(p[1]),n=bin.length,u=new Uint8Array(n);while(n--)u[n]=bin.charCodeAt(n);return new Blob([u],{type:mime})}
+async function stashImg(d,folder){
+ if(!sb||!USER||String(d||'').indexOf('data:')!==0)return d;
+ try{
+  var path=USER+'/'+folder+'/'+uid()+'.jpg';
+  var r=await sb.storage.from('imagens').upload(path,dataToBlob(d),{contentType:'image/jpeg',cacheControl:'31536000'});
+  if(r.error)throw r.error;
+  return sb.storage.from('imagens').getPublicUrl(path).data.publicUrl;
+ }catch(e){
+  if(!STORAGE_WARNED){STORAGE_WARNED=true;toast('Foto salva no modo antigo. Crie o bucket "imagens" no Supabase.','⚠️')}
+  return d;
+ }
+}
+function contaFotosAntigas(){
+ var n=0,isD=function(x){return String(x||'').indexOf('data:')===0};
+ (S.methods||[]).forEach(function(m){if(isD(m.img))n++;(m.deck||[]).forEach(function(c){if(isD(c.img))n++})});
+ if(S.cfg&&isD(S.cfg.logo))n++;
+ return n;
+}
+async function migrarFotos(){
+ if(!sb||!USER)return;
+ var lista=[],isD=function(x){return String(x||'').indexOf('data:')===0};
+ (S.methods||[]).forEach(function(m){
+  if(isD(m.img))lista.push({o:m,k:'img',f:'metodos'});
+  (m.deck||[]).forEach(function(c){if(isD(c.img))lista.push({o:c,k:'img',f:'cartas'})});
+ });
+ if(S.cfg&&isD(S.cfg.logo))lista.push({o:S.cfg,k:'logo',f:'logo'});
+ if(!lista.length){toast('Nenhuma foto para mover','✓');return}
+ var ok=0;
+ for(var i=0;i<lista.length;i++){
+  toast('Movendo fotos… '+(i+1)+'/'+lista.length,'📦');
+  var u=await stashImg(lista[i].o[lista[i].k],lista[i].f);
+  if(String(u).indexOf('data:')===0)break;
+  lista[i].o[lista[i].k]=u;ok++;
+ }
+ if(!ok){dlgAlert('Não foi possível enviar as fotos. Confira se o bucket "imagens" foi criado no Supabase (veja o arquivo supabase_setup.sql).','Armazenamento indisponível');return}
+ await save();render();
+ toast(ok+(ok===1?' foto movida':' fotos movidas')+(ok<lista.length?' (restam '+(lista.length-ok)+')':'')+'!','✓');
+}
+
+/* === PIX COPIA E COLA (BR Code) === */
+function tlv(id,val){val=String(val);return id+pad(val.length)+val}
+function crc16(str){var c=0xFFFF;for(var i=0;i<str.length;i++){c^=str.charCodeAt(i)<<8;for(var j=0;j<8;j++)c=(c&0x8000)?((c<<1)^0x1021):(c<<1);c&=0xFFFF}var h=c.toString(16).toUpperCase();while(h.length<4)h='0'+h;return h}
+function pixClean(t,max){return String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9 ]/g,' ').replace(/\s+/g,' ').trim().toUpperCase().slice(0,max)}
+function pixKey(k){
+ k=String(k||'').trim();
+ if(k.indexOf('@')>-1)return k.toLowerCase();
+ if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(k))return k.toLowerCase();
+ var d=k.replace(/\D/g,'');
+ if(k.charAt(0)==='+')return'+'+d;
+ if(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(k)||/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(k))return d;
+ if(/[()\s-]/.test(k)&&(d.length===10||d.length===11))return'+55'+d;
+ if(/[()\s-]/.test(k)&&(d.length===12||d.length===13)&&d.indexOf('55')===0)return'+'+d;
+ return k;
+}
+function pixPayload(key,nome,cidade,valor){
+ if(!key)return'';
+ var v=(+valor>0)?(+valor).toFixed(2):'';
+ var p='000201'+(v?'010212':'010211')+tlv('26',tlv('00','br.gov.bcb.pix')+tlv('01',key))+'52040000'+'5303986'+(v?tlv('54',v):'')+'5802BR'+tlv('59',nome||'RECEBEDOR')+tlv('60',cidade||'BRASIL')+tlv('62',tlv('05','***'))+'6304';
+ return p+crc16(p);
+}
+function pixCode(cfg,valor){
+ if(!cfg||!cfg.pix)return'';
+ return pixPayload(pixKey(cfg.pix),pixClean(cfg.titular||cfg.nome,25)||'RECEBEDOR',pixClean(cfg.cidade,15)||'BRASIL',valor);
+}
+function qrSvg(text){
+ if(!text||typeof qrcode!=='function')return'';
+ try{var q=qrcode(0,'M');q.addData(text);q.make();return q.createSvgTag(4,0)}catch(e){return''}
+}
+var PIX_LAST='';
+function copyPixCode(){
+ var done=function(){toast('Código Pix copiado!','✓')};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(PIX_LAST).then(done,function(){dlgAlert('Não consegui copiar automaticamente. Selecione o código e copie manualmente.','Copiar')});
+ else{var t=$('pix-code');if(t){t.select();document.execCommand('copy');done()}}
+}
+function pixModal(id){
+ var i=S.items.find(function(x){return x.id===id}),cfg=CF();if(!i)return;
+ if(!cfg.pix){closeS();dlgAlert('Cadastre sua chave Pix em Conta → Dados para recebimento Pix primeiro.','Chave Pix não cadastrada');go('conta');return}
+ var code=pixCode(cfg,i.price);PIX_LAST=code;var qr=qrSvg(code);
+ closeS();
+ sheet('<div class="sheet-hd"><div><div class="eb" style="margin-bottom:2px">✦ Cobrança</div><h2 style="margin:0">💠 Pix copia e cola</h2></div><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
+ '<div style="text-align:center"><div class="mute">'+esc(nm(i.cid))+' · '+esc(mt(i.mid))+'</div><div class="big" style="font-size:30px">'+(+i.price>0?money(i.price):'Valor livre')+'</div>'+
+ (qr?'<div class="qrbox">'+qr+'</div>':'')+
+ '<textarea id="pix-code" class="pix-code" rows="4" readonly onclick="this.select()">'+esc(code)+'</textarea>'+
+ (cfg.cidade?'':'<p class="mute" style="font-size:12px;margin:0 0 10px">Dica: preencha a cidade em Conta → Dados Pix para o código ficar completo.</p>')+
+ '<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button class="btn" onclick="copyPixCode()">📋 Copiar código</button><button class="btn ghost" onclick="waPix(\''+id+'\')">💬 Enviar no WhatsApp</button><button class="btn ghost" onclick="closeS()">Fechar</button></div></div>');
+}
+
+/* === LEMBRETES DE AMANHA === */
+function waTextFor(i,c){return CF().msg.replace(/\{nome\}/g,c.name.split(' ')[0]).replace(/\{dia\}/g,dt(i.date).slice(0,5)).replace(/\{hora\}/g,i.time||'').replace(/\{jogo\}/g,mt(i.mid)).replace(/\{tarologa\}/g,CF().nome).replace(/\{pix\}/g,CF().pix)}
+function lembrarModal(){
+ var d=new Date(),am=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1));
+ var l=S.items.filter(function(i){return i.date===am&&ativo(i)}).sort(function(a,b){return(a.time||'').localeCompare(b.time||'')});
+ var falta=l.filter(function(i){return!i.lembrado}).length;
+ closeS();
+ sheet('<div class="sheet-hd"><div><div class="eb" style="margin-bottom:2px">✦ Lembretes · '+esc(dt(am).slice(0,5))+'</div><h2 style="margin:0">💬 Consultas de amanhã</h2></div><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
+ '<p class="mute" style="margin:0 0 6px">'+(l.length?(falta?falta+(falta===1?' lembrete falta':' lembretes faltam')+' enviar. Toque em cada um para abrir o WhatsApp já com a mensagem pronta.':'Todos os lembretes foram enviados. ✨'):'Nada marcado para amanhã.')+'</p>'+
+ l.map(function(i){var c=cl(i.cid)||{};return'<div class="rem-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">🕒 '+esc(i.time||'--:--')+' · '+esc(mt(i.mid))+(i.lembrado?' · <span style="color:var(--ok);font-weight:600">✓ lembrada</span>':'')+'</div></div><button class="btn sm'+(i.lembrado?' ghost':'')+'" onclick="lembrarUm(\''+i.id+'\')">'+(i.lembrado?'Enviar de novo':'💬 Lembrar')+'</button></div>'}).join('')+
+ '<div class="row" style="margin-top:16px"><span></span><button class="btn ghost" onclick="closeS()">Fechar</button></div>');
+}
+function lembrarUm(id){
+ var i=S.items.find(function(x){return x.id===id});if(!i)return;
+ var c=cl(i.cid);
+ if(!c||!c.phone){dlgAlert('Cadastre o telefone da consulente na ficha primeiro.','Telefone ausente');return}
+ var n=c.phone.replace(/\D/g,'');if(n.length<=11)n='55'+n;
+ window.open('https://wa.me/'+n+'?text='+encodeURIComponent(waTextFor(i,c)),'_blank');
+ i.lembrado=true;save();lembrarModal();
+}
+
+/* === CANCELAR / REMARCAR PELO LINK (consulente) === */
+var MG={tel:'',itens:[]};
+function pubManage(){
+ $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" data-brand style="justify-content:center;margin-bottom:20px"><b>✦</b> '+esc(BRAND)+' <b>✦</b></div>'+
+ '<div class="card" style="padding:22px 20px"><h2 style="font-size:26px">Cancelar ou remarcar</h2><p class="mute" style="margin:6px 0 14px">Informe o WhatsApp usado no agendamento para ver seus horários.</p>'+
+ '<label>WhatsApp com DDD</label><input id="mg-tel" type="tel" placeholder="(11) 99999-9999" oninput="maskPhoneInput(this)" onkeydown="if(event.key===\'Enter\')mgBuscar()">'+
+ '<button id="mg-go" class="btn" style="width:100%" onclick="mgBuscar()">Buscar meus horários</button><div id="mg-res"></div></div>'+
+ '<p style="text-align:center;margin:16px 0 0"><a class="mute" href="#" onclick="renderPublic();return false">← Voltar ao agendamento</a></p></div>';
+}
+async function mgBuscar(){
+ var tel=fmtPhone(v('mg-tel').trim());
+ if(tel.replace(/\D/g,'').length<10){dlgAlert('Informe o WhatsApp com DDD usado no agendamento.','Dados incompletos');return}
+ var b=$('mg-go');b.disabled=true;b.textContent='Buscando…';
+ var r=await sb.rpc('listar_agendamentos_cliente',{p_user_id:PUB_UID,p_tel:tel});
+ b.disabled=false;b.textContent='Buscar meus horários';
+ if(r.error){dlgAlert('Este recurso ainda não está disponível. Fale com a taróloga pelo WhatsApp.','Indisponível');return}
+ if(!r.data||!r.data.ok){dlgAlert((r.data&&r.data.erro)||'Não foi possível buscar seus horários.','Aviso');return}
+ MG.tel=tel;MG.itens=r.data.itens||[];mgLista();
+}
+function mgLista(){
+ var el=$('mg-res');if(!el)return;
+ if(!MG.itens.length){el.innerHTML='<div class="empty" style="margin-top:14px">Nenhum horário futuro encontrado para este WhatsApp.</div>';return}
+ el.innerHTML=MG.itens.map(function(x){
+  return'<div class="card" style="margin:14px 0 0;background:var(--bg)"><div class="row"><b>'+esc(x.jogo||'Atendimento')+'</b><b class="num" style="color:var(--gold)">'+money(x.valor)+'</b></div><div class="mute num" style="margin-top:4px">📅 '+esc(dt(x.date))+' às '+esc(x.time)+' · '+(x.online?'Online':'Presencial')+'</div>'+
+  (x.pode?'<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn sm" onclick="mgCancelar(\''+esc(x.id)+'\',true)">Remarcar</button><button class="btn sm del" onclick="mgCancelar(\''+esc(x.id)+'\',false)">Cancelar</button></div>':'<div class="mute" style="margin-top:10px;font-size:12.5px">⏳ O prazo para cancelar pelo link já passou. Fale com a taróloga pelo WhatsApp.</div>')+'</div>';
+ }).join('');
+}
+function mgCancelar(id,remarcar){
+ dlgConfirm(remarcar?'Seu horário atual será liberado e você escolherá um novo em seguida. Continuar?':'Deseja cancelar este horário?',async function(){
+  var r=await sb.rpc('cancelar_agendamento_cliente',{p_user_id:PUB_UID,p_item_id:id,p_tel:MG.tel});
+  if(r.error||!r.data||!r.data.ok){dlgAlert((r.data&&r.data.erro)||'Não foi possível cancelar agora. Tente novamente ou fale com a taróloga.','Não foi possível');return}
+  if(remarcar){toast('Horário liberado! Escolha o novo.','✓');loadPublic(PUB_UID)}
+  else{MG.itens=MG.itens.filter(function(x){return x.id!==id});mgLista();toast('Horário cancelado','✓')}
+ },{title:remarcar?'Remarcar horário':'Cancelar horário',yes:remarcar?'Remarcar':'Cancelar horário',no:'Voltar',danger:!remarcar,ic:remarcar?'🔄':'🗑️'});
+}
+
+/* === INSTALAR COMO APP (PWA) === */
+var DEFER_INST=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();DEFER_INST=e});
+function instalarApp(){
+ if(DEFER_INST){DEFER_INST.prompt();DEFER_INST=null;return}
+ dlgAlert('No Android (Chrome): menu ⋮ → "Instalar app". No iPhone (Safari): botão Compartilhar → "Adicionar à Tela de Início". Se já estiver instalado, é só abrir pelo ícone.','Instalar no celular','📲');
+}
+if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})});
 
 route();
 </script>
