@@ -369,8 +369,7 @@ var DEFAULT_REC_CARDS=[
   {ic:'✨',t:'WhatsApp e Pix em 1 toque',d:'Personalize suas mensagens prontas e envie confirmação, dados Pix ou felicitações de aniversário.'}
 ];
 function parseRecCardsText(txt){
-  var linhas=String(txt||'').split('
-').map(function(l){return l.trim()}).filter(Boolean);
+  var linhas=String(txt||'').split('\n').map(function(l){return l.trim()}).filter(Boolean);
   if(!linhas.length)return DEFAULT_REC_CARDS;
   return linhas.map(function(l){
     var parts=l.split('|').map(function(p){return p.trim()});
@@ -381,8 +380,7 @@ function parseRecCardsText(txt){
 }
 function formatRecCardsText(cards){
   var arr=(Array.isArray(cards)&&cards.length)?cards:DEFAULT_REC_CARDS;
-  return arr.map(function(c){return(c.ic||'✦')+' | '+(c.t||'')+' | '+(c.d||'')}).join('
-');
+  return arr.map(function(c){return(c.ic||'✦')+' | '+(c.t||'')+' | '+(c.d||'')}).join('\n');
 }
 function renderRecCards(cards){
   var grid=$('rec-grid');if(!grid)return;
