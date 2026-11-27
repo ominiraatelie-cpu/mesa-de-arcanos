@@ -953,10 +953,6 @@ function handleDeckUpload(inp){
  inp.value='';
 }
 function addDeckCardManual(){
- });
- inp.value='';
-}
-function addDeckCardManual(){
  var nmC=v('dc-new').trim();
  if(!nmC){dlgAlert('Digite o nome da carta ou selecione fotos acima.','Nome da carta');return}
  TEMP_DECK.push({id:uid(),name:nmC,img:''});
@@ -1244,10 +1240,6 @@ async function submitPublic(){
  }
 }
 
-  },1000);
- }
-}
-
 async function route(){
  var h=location.hash,isPub=h.indexOf('#agendar')===0,adm=h==='#admin',a=h==='#app',lg=h==='#termos'||h==='#privacidade',A=$('ap'),U=$('au'),P=$('pw'),G=$('lg'),B=$('bk');
  $('land').style.display=(a||lg||isPub||adm)?'none':'block';A.style.display=U.style.display=P.style.display='none';G.style.display=lg?'block':'none';B.style.display=isPub?'block':'none';$('adm').style.display=adm?'block':'none';window.scrollTo(0,0);
@@ -1403,7 +1395,16 @@ function saveCfg(){
  S.cfg=c;applyCfg();save();toast('Configurações salvas!','✓');render();
 }
 
-var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='';
+var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='',ADTAB='clientes',AV_FILTRO='todas',AV_MSG='Olá, {nome}! Passando para lembrar que seu acesso vai até {ate}. Para continuar sem interrupções, acesse: {link}';
+function brl(n){return money(n)}
+function dia(d){return d?dt(String(d).slice(0,10)):'—'}
+function admSt(x){
+ var d=Math.ceil((new Date(x.ate)-new Date())/864e5);
+ if(x.status==='cancelada')return{k:'cancelada',t:'Bloqueada',c:'bad',d:d};
+ if(d<0)return{k:'pendente',t:'Pendente',c:'bad',d:d};
+ if(x.status==='trial')return d<=3?{k:'breve',t:'Teste acabando',c:'warn',d:d}:{k:'teste',t:'Em teste',c:'',d:d};
+ return{k:'ativa',t:'Ativa',c:'ok',d:d};
+}
 
 function admFiltro(f){ADF=f;admRender()}
 function admBusca(q){ADQ=q;admLista()}
@@ -1499,6 +1500,7 @@ async function admNota(id){var r=await sb.rpc('admin_salvar_nota',{p_user:id,p_n
 function admSet(id,st,dias){var x=ADM.find(function(a){return a.user_id===id});
  dlgConfirm('Liberar '+dias+' dias de acesso para '+x.email+'?',async function(){var r=await sb.rpc('admin_definir_acesso',{p_user:id,p_status:st,p_dias:dias});if(r.error){toast('Erro: '+r.error.message,'!');return}toast('Acesso liberado.','✓');adminRoute()},{title:'Liberar acesso'})}
 
+function admConfig(){
  var c=CONF||{},n=function(val,def){return val==null?def:val},s=c.site_cfg||{};
  var h1Atual=document.querySelector('.hero h1')?document.querySelector('.hero h1').innerHTML:'';
  var subAtual=document.querySelector('.hero > div > p')?document.querySelector('.hero > div > p').textContent:'';
@@ -1614,7 +1616,6 @@ document.addEventListener('keydown',function(e){
 });
 
 route();
-</script>
 </script>
 </body>
 </html>
