@@ -354,6 +354,36 @@ var KEY='mesa-arcanos-v2',S={clients:[],methods:[],items:[],exps:[]},tab='hoje',
 var SB_URL='https://dhbcnjgtwbieexermzan.supabase.co',SB_KEY='sb_publishable_l4k1Y_rzBxWpcNmDNc2jFw_eLJwCk5Z';
 var sb=(window.supabase&&SB_URL.indexOf('http')===0)?window.supabase.createClient(SB_URL,SB_KEY):null,USER=null,loaded=false;
 
+var DEFAULT_REC_CARDS=[
+  {ic:'🔗',t:'Link de agendamento online',d:'Envie seu link exclusivo e deixe a consulente escolher o método de jogo e o horário sozinha.'},
+  {ic:'🔮',t:'Fichas das consulentes',d:'Contato, data de nascimento e observações num só lugar, com alerta automático de aniversariantes.'},
+  {ic:'🌙',t:'Agenda organizada',d:'Visualize seus atendimentos por dia, respeitando sua pausa entre consultas e seus dias de trabalho.'},
+  {ic:'🃏',t:'Memória das tiragens',d:'Cadastre as fotos das cartas de cada baralho e marque exatamente quais saíram na leitura.'},
+  {ic:'🏷️',t:'Tabela de métodos de jogo',d:'Cadastre seus métodos (Tarot, Baralho Cigano, Búzios) com duração, modalidade e valor.'},
+  {ic:'✨',t:'WhatsApp e Pix em 1 toque',d:'Personalize suas mensagens prontas e envie confirmação, dados Pix ou felicitações de aniversário.'}
+];
+function parseRecCardsText(txt){
+  var linhas=String(txt||'').split('\n').map(function(l){return l.trim()}).filter(Boolean);
+  if(!linhas.length)return DEFAULT_REC_CARDS;
+  return linhas.map(function(l){
+    var parts=l.split('|').map(function(p){return p.trim()});
+    if(parts.length>=3)return{ic:parts[0]||'✦',t:parts[1]||'',d:parts.slice(2).join(' | ')};
+    if(parts.length===2)return{ic:'✦',t:parts[0]||'',d:parts[1]||''};
+    return{ic:'✦',t:parts[0]||'',d:''};
+  });
+}
+function formatRecCardsText(cards){
+  var arr=(Array.isArray(cards)&&cards.length)?cards:DEFAULT_REC_CARDS;
+  return arr.map(function(c){return(c.ic||'✦')+' | '+(c.t||'')+' | '+(c.d||'')}).join('\n');
+}
+function renderRecCards(cards){
+  var grid=$('rec-grid');if(!grid)return;
+  var arr=(Array.isArray(cards)&&cards.length)?cards:DEFAULT_REC_CARDS;
+  grid.innerHTML=arr.map(function(c){
+    return'<div class="card f"><div class="ic">'+esc(c.ic||'✦')+'</div><h3>'+esc(c.t)+'</h3><p>'+esc(c.d)+'</p></div>';
+  }).join('');
+}
+
 /* === CORES PERSONALIZADAS === */
 function hexToRgb(hex){
  var h=String(hex||'').replace('#','');
@@ -453,6 +483,7 @@ function applySiteCfg(c){
   if(s.bandT){var e4=document.querySelector('.band h2');if(e4)e4.innerHTML=s.bandT}
   if(s.bandS){var e5=document.querySelector('.band p');if(e5)e5.textContent=s.bandS}
   if(s.recH2){var e6=$('rec-h2');if(e6)e6.innerHTML=s.recH2}
+  renderRecCards(s.recCards);
   if(s.planTag){var e7=$('plan-tag');if(e7)e7.textContent=s.planTag}
   if(s.planItens){
     var itens=s.planItens.split('\n').map(function(x){return x.trim()}).filter(Boolean);
@@ -1224,6 +1255,7 @@ function admConfig(){
    '<label>Título da faixa roxa (meio da página)</label><input id="cf-bt" value="'+esc(s.bandT||bandTAtual)+'">'+
    '<label>Texto da faixa roxa</label><textarea id="cf-bs" rows="2">'+esc(s.bandS||bandSAtual)+'</textarea>'+
    '<div class="grid"><div><label>Título da seção de recursos</label><input id="cf-rech2" value="'+esc(s.recH2||recH2Atual)+'"></div><div><label>Etiqueta do cartão do plano</label><input id="cf-ptag" value="'+esc(s.planTag||planTagAtual)+'"></div></div>'+
+   '<label>Cards de recursos (uma linha por card: ícone | título | descrição)</label><textarea id="cf-reccards" rows="6">'+esc(s.recCardsText||formatRecCardsText(s.recCards))+'</textarea>'+
    '<label>Benefícios do plano (um item por linha)</label><textarea id="cf-plitens" rows="5">'+esc(s.planItens||planItensAtual)+'</textarea>'+
    '<label>Perguntas frequentes / FAQ (1ª linha = pergunta, linha seguinte = resposta; separe cada pergunta com uma linha em branco)</label><textarea id="cf-faq" rows="7">'+esc(s.faqItens||faqAtual)+'</textarea>'+
  '</div>'+
@@ -1247,6 +1279,8 @@ async function admSalvarConfig(){
   bandT:v('cf-bt').trim(),
   bandS:v('cf-bs').trim(),
   recH2:v('cf-rech2').trim(),
+  recCardsText:v('cf-reccards').trim(),
+  recCards:parseRecCardsText(v('cf-reccards')),
   planTag:v('cf-ptag').trim(),
   planItens:v('cf-plitens').trim(),
   faqItens:v('cf-faq').trim(),
