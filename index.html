@@ -70,6 +70,17 @@ details{border-bottom:1px solid var(--line);padding:16px 6px;text-align:left}sum
 footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 24px;border-top:1px solid var(--line)}
 footer a{color:var(--acc);text-decoration:none}
 
+
+/* MARCA CENTRALIZADA EM DESTAQUE + BOTOES NO CANTO (landing) */
+.hero-wrap .top{position:relative;flex-direction:column;align-items:center;gap:10px;padding:14px 0 6px}
+.hero-wrap .top .logo{justify-content:center;font-size:clamp(22px,6.4vw,34px);letter-spacing:clamp(2px,.9vw,5px);gap:clamp(6px,1.6vw,12px)}
+.hero-wrap .top .logo b{font-size:.7em}
+.hero-wrap .top-btns{order:-1;align-self:flex-end}
+@media(min-width:761px){
+  .hero-wrap .top{padding:26px 0 8px}
+  .hero-wrap .top-btns{order:0;align-self:auto;position:absolute;right:0;top:50%;transform:translateY(-50%)}
+}
+
 /* RESPONSIVO PARA TABLET (761px a 1024px) */
 @media(max-width:1024px) and (min-width:761px){
   .w{max-width:680px;margin:0 auto;padding:0 32px}
@@ -1398,13 +1409,21 @@ function saveCfg(){
 var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='',ADTAB='clientes',AV_FILTRO='todas',AV_MSG='Olá, {nome}! Passando para lembrar que seu acesso vai até {ate}. Para continuar sem interrupções, acesse: {link}';
 function brl(n){return money(n)}
 function dia(d){return d?dt(String(d).slice(0,10)):'—'}
-function admSt(x){
- var d=Math.ceil((new Date(x.ate)-new Date())/864e5);
+async function adminRoute(){var A=$('adm'),w='<div class="w" style="padding:40px 0">';
+ if(!sb){A.innerHTML=w+'<p class="mute">Supabase não configurado.</p></div>';return}
+ var r=await sb.auth.getSession();if(!r.data.session){location.hash='#app';return}
+ var ok=await sb.rpc('sou_admin');if(ok.data!==true){toast('Você não tem acesso a esta área.','!');location.hash='#app';return}
+ A.innerHTML=w+'<p class="mute">Carregando…</p></div>';
+ var l=await sb.rpc('admin_listar'),p=await sb.rpc('admin_pagamentos',{p_user:null}),c=await sb.rpc('admin_config');
+ if(l.error){A.innerHTML=w+'<p style="color:var(--bad)">Erro: '+esc(l.error.message)+'</p></div>';return}
+ ADM=l.data||[];PAGS=p.data||[];CONF=(c.data&&c.data[0])||CONF||{};admRender()}
+function admSt(x){var now=Date.now(),ate=new Date(x.ate).getTime(),d=Math.ceil((ate-now)/864e5);
+ if(x.eh_admin)return{k:'cortesia',t:'Administradora',c:'',d:d};
+ if(x.status==='ativa'&&ate>now+400*864e5)return{k:'cortesia',t:'Cortesia (não conta na receita)',c:'',d:d};
  if(x.status==='cancelada')return{k:'cancelada',t:'Bloqueada',c:'bad',d:d};
- if(d<0)return{k:'pendente',t:'Pendente',c:'bad',d:d};
- if(x.status==='trial')return d<=3?{k:'breve',t:'Teste acabando',c:'warn',d:d}:{k:'teste',t:'Em teste',c:'',d:d};
- return{k:'ativa',t:'Ativa',c:'ok',d:d};
-}
+ if(ate<=now)return{k:'pendente',t:x.status==='ativa'?'Pagamento vencido':'Teste vencido',c:'bad',d:d};
+ if(x.status==='ativa')return{k:'ativa',t:'Ativa',c:'ok',d:d};
+ return{k:d<=3?'breve':'teste',t:d<=3?'Teste termina em breve':'Em teste',c:d<=3?'warn':'',d:d}}
 
 function admFiltro(f){ADF=f;admRender()}
 function admBusca(q){ADQ=q;admLista()}
