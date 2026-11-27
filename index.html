@@ -273,6 +273,7 @@ nav button.on{color:var(--acc);font-weight:700}
 .mx{background:none;border:0;font-size:22px;line-height:1;color:var(--mute);cursor:pointer;padding:0 4px}
 .swatch{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0;transition:.15s}
 .swatch:hover{transform:scale(1.1)}
+.adm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -286,7 +287,7 @@ nav button.on{color:var(--acc);font-weight:700}
   <path d="M100 44 A18 18 0 1 0 114 68 A14 14 0 1 1 100 44 Z" fill="currentColor" opacity="0.4"/>
 </svg>
 <div class="w">
-<div class="top"><div class="logo"><b>✦</b> MESA DE ARCANOS</div><div class="top-btns"><a class="btn ghost sm" href="#app">Entrar</a><a class="btn sm" href="#app">Testar grátis</a></div></div>
+<div class="top"><div class="logo" data-brand><b>✦</b> MESA DE ARCANOS</div><div class="top-btns"><a class="btn ghost sm" href="#app">Entrar</a><a class="btn sm" href="#app">Testar grátis</a></div></div>
 <div class="hero"><div>
 <div class="eb">✦ Organização para quem lê cartas</div>
 <h1>Menos bagunça na agenda, mais tempo para <em>ler as cartas</em></h1>
@@ -300,8 +301,8 @@ nav button.on{color:var(--acc);font-weight:700}
 
 <div class="band"><div class="w"><h2>A consulente voltou e você não lembra o que saiu no método de jogo? <em>Abra a ficha.</em></h2><p class="mute" style="margin:8px auto 0;max-width:620px;font-size:15px">Em vez de procurar em cadernos e conversas antigas, você vê o histórico completo em um toque e retoma o atendimento com segurança.</p></div></div>
 
-<div class="w sec" id="recursos"><div class="eb">✦ Dentro do app</div><h2>Feito para a rotina do seu altar e da sua mesa</h2>
-<div class="g3">
+<div class="w sec" id="recursos"><div class="eb" id="rec-eb">✦ Dentro do app</div><h2 id="rec-h2">Feito para a rotina do seu altar e da sua mesa</h2>
+<div class="g3" id="rec-grid">
 <div class="card f"><div class="ic">🔗</div><h3>Link de agendamento online</h3><p>Envie seu link exclusivo e deixe a consulente escolher o método de jogo e o horário sozinha.</p></div>
 <div class="card f"><div class="ic">🔮</div><h3>Fichas das consulentes</h3><p>Contato, data de nascimento e observações num só lugar, com alerta automático de aniversariantes.</p></div>
 <div class="card f"><div class="ic">🌙</div><h3>Agenda organizada</h3><p>Visualize seus atendimentos por dia, respeitando sua pausa entre consultas e seus dias de trabalho.</p></div>
@@ -315,26 +316,27 @@ nav button.on{color:var(--acc);font-weight:700}
 <div class="step-box"><div class="n">3</div><b>Registre as cartas</b><p class="mute">Selecione as cartas que saíram e anote os conselhos na ficha.</p></div>
 <div class="step-box"><div class="n">4</div><b>Acompanhe o caixa</b><p class="mute">Controle entradas, valores a receber e despesas do mês.</p></div></div></div>
 
-<div class="band" style="padding:52px 0"><div class="w"><div class="eb" style="justify-content:center">✦ Assinatura</div><div class="card plan"><span class="tag">Acesso completo</span><div class="price">R$ 29<small class="mute" style="font-size:18px;font-family:var(--sans)">/mês</small></div>
-<ul><li>Link público de agendamento online</li><li>Consulentes e tiragens sem limite</li><li>Catálogo visual de cartas por baralho</li><li>Agenda com controle de pausa e dias</li><li>Mensagens prontas editáveis e dados Pix</li><li>Tabela de métodos de jogo e controle de caixa</li></ul>
+<div class="band" style="padding:52px 0"><div class="w"><div class="eb" style="justify-content:center">✦ Assinatura</div><div class="card plan"><span class="tag" id="plan-tag">Acesso completo</span><div class="price">R$ 29<small class="mute" style="font-size:18px;font-family:var(--sans)">/mês</small></div>
+<ul id="plan-list"><li>Link público de agendamento online</li><li>Consulentes e tiragens sem limite</li><li>Catálogo visual de cartas por baralho</li><li>Agenda com controle de pausa e dias</li><li>Mensagens prontas editáveis e dados Pix</li><li>Tabela de métodos de jogo e controle de caixa</li></ul>
 <a class="btn" style="width:100%" href="#app">Testar 7 dias grátis</a></div></div></div>
 
 <div class="w sec faq-wrap"><div class="eb">✦ Dúvidas frequentes</div><h2>Respostas rápidas</h2>
+<div id="faq-list">
 <details><summary>A consulente precisa criar conta para agendar pelo meu link?</summary><p>Não. Ela abre o seu link exclusivo, escolhe o método de jogo, o dia e um horário livre e preenche apenas nome e WhatsApp. O agendamento cai direto na sua agenda.</p></details>
 <details><summary>Posso usar pelo celular e pelo computador?</summary><p>Sim. Como os dados ficam salvos na nuvem da sua conta, você pode acessar do celular, tablet ou computador a qualquer momento.</p></details>
 <details><summary>Onde ficam guardadas as informações?</summary><p>Na nuvem, protegidas por senha na sua conta. Somente você tem acesso às suas fichas e ao seu caixa.</p></details>
-<details><summary>Ele avisa as consulentes automaticamente?</summary><p>Ele não dispara mensagens sozinho, mas cada consulta tem botões que abrem o WhatsApp já com o texto personalizado por você (confirmação, dados Pix ou aniversário). Você só confere e envia.</p></details></div>
-<footer>© Mesa de Arcanos · <a href="#termos">Termos de uso</a> · <a href="#privacidade">Privacidade</a> · <a href="#" data-sup target="_blank">Suporte no WhatsApp</a></footer></div>
+<details><summary>Ele avisa as consulentes automaticamente?</summary><p>Ele não dispara mensagens sozinho, mas cada consulta tem botões que abrem o WhatsApp já com o texto personalizado por você (confirmação, dados Pix ou aniversário). Você só confere e envia.</p></details></div></div>
+<footer><span id="foot-brand">© Mesa de Arcanos</span> · <a href="#termos">Termos de uso</a> · <a href="#privacidade">Privacidade</a> · <a href="#" data-sup target="_blank">Suporte no WhatsApp</a></footer></div>
 
-<div id="au" style="display:none"><main style="max-width:420px;margin:0 auto;padding:48px 22px"><div class="logo" style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="padding:24px"><h2>Entrar</h2><p class="mute" style="margin:4px 0 16px">Acesse sua mesa de atendimentos</p><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Senha</label><input id="apw" type="password" autocomplete="current-password"><label style="display:flex;align-items:center;font-weight:400;margin:6px 0 14px"><input id="aok" type="checkbox" style="width:auto;margin:0 8px 0 0">Li e aceito os <a href="#termos" style="margin:0 4px">Termos</a> e a <a href="#privacidade" style="margin-left:4px">Privacidade</a></label><p id="am" class="mute" style="color:var(--bad)"></p><div class="row"><button class="btn" onclick="login()">Entrar</button><button class="btn ghost" onclick="signup()">Criar conta</button></div><p style="margin:14px 0 0"><a class="mute" href="#" onclick="forgot();return false">Esqueci minha senha</a></p></div><p style="text-align:center"><a class="mute" href="#">← Voltar ao site</a></p></main></div>
-<div id="pw" style="display:none"><main style="max-width:460px;margin:0 auto;padding:56px 22px;text-align:center"><div class="logo" style="justify-content:center"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="margin-top:24px;padding:28px"><h2>Seu acesso terminou</h2><p class="mute" style="margin:10px 0 20px">O teste grátis ou a assinatura venceu. Assine para continuar editando. Use o <b>mesmo e-mail</b> do seu cadastro aqui — seus dados continuam salvos.</p><a id="pw-pay" class="btn" style="width:100%" href="#" data-pay>Assinar agora · R$ 29/mês</a><p style="margin:16px 0 8px"><a class="mute" href="#" data-sup target="_blank">Pagou com outro e-mail ou precisa de ajuda? Fale no WhatsApp</a></p><p><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha</button> <button class="btn ghost sm" onclick="exportJson()">Backup completo</button></p><a class="mute" href="#" onclick="logout();return false">Sair</a></div></main></div>
+<div id="au" style="display:none"><main style="max-width:420px;margin:0 auto;padding:48px 22px"><div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="padding:24px"><h2>Entrar</h2><p class="mute" style="margin:4px 0 16px">Acesse sua mesa de atendimentos</p><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Senha</label><input id="apw" type="password" autocomplete="current-password"><label style="display:flex;align-items:center;font-weight:400;margin:6px 0 14px"><input id="aok" type="checkbox" style="width:auto;margin:0 8px 0 0">Li e aceito os <a href="#termos" style="margin:0 4px">Termos</a> e a <a href="#privacidade" style="margin-left:4px">Privacidade</a></label><p id="am" class="mute" style="color:var(--bad)"></p><div class="row"><button class="btn" onclick="login()">Entrar</button><button class="btn ghost" onclick="signup()">Criar conta</button></div><p style="margin:14px 0 0"><a class="mute" href="#" onclick="forgot();return false">Esqueci minha senha</a></p></div><p style="text-align:center"><a class="mute" href="#">← Voltar ao site</a></p></main></div>
+<div id="pw" style="display:none"><main style="max-width:460px;margin:0 auto;padding:56px 22px;text-align:center"><div class="logo" data-brand style="justify-content:center"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="margin-top:24px;padding:28px"><h2>Seu acesso terminou</h2><p class="mute" style="margin:10px 0 20px">O teste grátis ou a assinatura venceu. Assine para continuar editando. Use o <b>mesmo e-mail</b> do seu cadastro aqui — seus dados continuam salvos.</p><a id="pw-pay" class="btn" style="width:100%" href="#" data-pay>Assinar agora · R$ 29/mês</a><p style="margin:16px 0 8px"><a class="mute" href="#" data-sup target="_blank">Pagou com outro e-mail ou precisa de ajuda? Fale no WhatsApp</a></p><p><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha</button> <button class="btn ghost sm" onclick="exportJson()">Backup completo</button></p><a class="mute" href="#" onclick="logout();return false">Sair</a></div></main></div>
 <div id="lg" style="display:none"></div>
 <div id="bk" style="display:none"><div id="bk-box"></div></div>
 <div id="adm" style="display:none"></div>
 <div id="ap">
   <header id="tb">
     <div class="tbw">
-      <div class="logo"><b>✦</b> MESA DE ARCANOS</div>
+      <div class="logo" data-brand><b>✦</b> MESA DE ARCANOS</div>
       <div class="tb-actions"><a id="adl" class="mute" href="#admin" style="display:none;margin-right:14px">Painel admin</a><a class="mute" href="#" onclick="logout();return false">Sair</a></div>
       <div id="tn"></div>
     </div>
@@ -346,7 +348,8 @@ nav button.on{color:var(--acc);font-weight:700}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 var PAY='https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=f0de4a6d93f445218850cef881dbe6f5';
-var SUPORTE='5513996261166';
+var SUPORTE='5500000000000';
+var BRAND='MESA DE ARCANOS';
 var KEY='mesa-arcanos-v2',S={clients:[],methods:[],items:[],exps:[]},tab='hoje',q='';
 var SB_URL='https://dhbcnjgtwbieexermzan.supabase.co',SB_KEY='sb_publishable_l4k1Y_rzBxWpcNmDNc2jFw_eLJwCk5Z';
 var sb=(window.supabase&&SB_URL.indexOf('http')===0)?window.supabase.createClient(SB_URL,SB_KEY):null,USER=null,loaded=false;
@@ -416,11 +419,17 @@ function modLabel(mod){return mod==='online'?'Online':mod==='presencial'?'Presen
 function v(id){var el=document.getElementById(id);return el?el.value:''}
 function ck(id){var el=document.getElementById(id);return el?el.checked:false}
 
-/* === CMS DA PÁGINA INICIAL (CONFIGURAÇÕES DO ADMIN) === */
-function applySup(){document.querySelectorAll('[data-sup]').forEach(function(a){a.href='https://wa.me/'+SUPORTE+'?text='+encodeURIComponent('Olá! Preciso de ajuda com o Mesa de Arcanos.')})}
+/* === CMS GLOBAL (SITE, PREÇOS, TERMOS E PRIVACIDADE) === */
+function applySup(){document.querySelectorAll('[data-sup]').forEach(function(a){a.href='https://wa.me/'+SUPORTE+'?text='+encodeURIComponent('Olá! Preciso de ajuda com o '+BRAND+'.')})}
 function applySiteCfg(c){
   if(!c)return;
   var s=c.site_cfg||{};
+  if(s.brand){
+    BRAND=s.brand;
+    document.title=BRAND+' · Gestão para cartomantes';
+    document.querySelectorAll('[data-brand]').forEach(function(el){el.innerHTML='<b>✦</b> '+esc(BRAND)});
+    var fb=$('foot-brand');if(fb)fb.textContent='© '+BRAND;
+  }
   if(s.sup){SUPORTE=String(s.sup).replace(/\D/g,'');applySup()}
   if(c.link_pagamento){PAY=c.link_pagamento;document.querySelectorAll('[data-pay]').forEach(function(a){a.href=PAY})}
   if(c.preco!=null){
@@ -428,7 +437,7 @@ function applySiteCfg(c){
     var pFmt=p%1===0?String(p):p.toFixed(2).replace('.',',');
     var elP=document.querySelector('.price');
     if(elP)elP.innerHTML='R$ '+pFmt+'<small class="mute" style="font-size:18px;font-family:var(--sans)">/mês</small>';
-    var elPw=document.getElementById('pw-pay');
+    var elPw=$('pw-pay');
     if(elPw)elPw.textContent='Assinar agora · R$ '+pFmt+'/mês';
   }
   if(c.trial_dias!=null){
@@ -443,6 +452,26 @@ function applySiteCfg(c){
   if(s.sub){var e3=document.querySelector('.hero > div > p');if(e3)e3.textContent=s.sub}
   if(s.bandT){var e4=document.querySelector('.band h2');if(e4)e4.innerHTML=s.bandT}
   if(s.bandS){var e5=document.querySelector('.band p');if(e5)e5.textContent=s.bandS}
+  if(s.recH2){var e6=$('rec-h2');if(e6)e6.innerHTML=s.recH2}
+  if(s.planTag){var e7=$('plan-tag');if(e7)e7.textContent=s.planTag}
+  if(s.planItens){
+    var itens=s.planItens.split('\n').map(function(x){return x.trim()}).filter(Boolean);
+    var ul=$('plan-list');
+    if(ul&&itens.length)ul.innerHTML=itens.map(function(it){return'<li>'+esc(it)+'</li>'}).join('');
+  }
+  if(s.faqItens){
+    var blocos=s.faqItens.split(/\n\s*\n/).map(function(b){return b.trim()}).filter(Boolean);
+    var fq=$('faq-list');
+    if(fq&&blocos.length){
+      fq.innerHTML=blocos.map(function(b){
+        var lines=b.split('\n');
+        var q=lines[0]||'';
+        var ans=lines.slice(1).join(' ');
+        return'<details><summary>'+esc(q)+'</summary><p>'+esc(ans)+'</p></details>';
+      }).join('');
+    }
+  }
+  if(location.hash==='#termos'||location.hash==='#privacidade')$('lg').innerHTML=legal(location.hash);
 }
 document.querySelectorAll('[data-pay]').forEach(function(a){a.href=PAY});
 applySup();
@@ -451,7 +480,7 @@ window.addEventListener('hashchange',route);
 
 var TABS=[['hoje','🏠','Hoje'],['agenda','📅','Agenda'],['clientes','🔮','Consulentes'],['metodos','🃏','Métodos'],['mensagens','💬','Mensagens'],['ganhos','💰','Caixa'],['conta','⚙️','Conta']];
 function go(t){tab=t;q='';render()}
-function mobTop(){return'<div class="mob-hd">'+(ADMIN?'<a class="mute" href="#admin" style="position:absolute;left:0;top:5px;font-size:13px;color:var(--acc);font-weight:600">✦ Admin</a>':'')+'<div class="logo"><b>✦</b> MESA DE ARCANOS</div><a class="mute logout-lnk" href="#" onclick="logout();return false">Sair</a></div>'}
+function mobTop(){return'<div class="mob-hd">'+(ADMIN?'<a class="mute" href="#admin" style="position:absolute;left:0;top:5px;font-size:13px;color:var(--acc);font-weight:600">✦ Admin</a>':'')+'<div class="logo" data-brand><b>✦</b> '+esc(BRAND)+'</div><a class="mute logout-lnk" href="#" onclick="logout();return false">Sair</a></div>'}
 function head(t,btn){return mobTop()+'<div class="row" style="margin:6px 0 14px"><h2 style="margin:0">'+t+'</h2>'+(btn||'')+'</div>'}
 function mv(d){var a=cur.split('-'),t=(+a[0])*12+(+a[1]-1)+d;cur=Math.floor(t/12)+'-'+pad(t%12+1);render()}
 function pick(d){sel=d;render()}
@@ -840,11 +869,11 @@ var PUB=null,PUB_UID='',PUB_CUR=iso(new Date()).slice(0,7),PUB_SEL={mid:'',date:
 async function loadPublic(uidParam){
  if(PIX_TMR){clearInterval(PIX_TMR);PIX_TMR=null}
  var box=$('bk-box');
- box.innerHTML='<div class="logo" style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="text-align:center;padding:32px;max-width:480px;margin:0 auto"><p class="mute">Abrindo a agenda…</p></div>';
+ box.innerHTML='<div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> '+esc(BRAND)+'</div><div class="card" style="text-align:center;padding:32px;max-width:480px;margin:0 auto"><p class="mute">Abrindo a agenda…</p></div>';
  if(!sb||!uidParam){box.innerHTML='<div class="card" style="max-width:480px;margin:40px auto"><h2>Link inválido</h2><p class="mute">Verifique o endereço enviado pela taróloga.</p></div>';return}
  PUB_UID=uidParam;
  var r=await sb.rpc('get_agenda_publica',{p_user_id:uidParam});
- if(r.error||!r.data||!r.data.ok){box.innerHTML='<div class="logo" style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="text-align:center;padding:28px;max-width:480px;margin:0 auto"><h2>Agenda indisponível</h2><p class="mute">'+(r.data&&r.data.erro?esc(r.data.erro):'Não foi possível carregar os horários no momento.')+'</p></div>';return}
+ if(r.error||!r.data||!r.data.ok){box.innerHTML='<div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> '+esc(BRAND)+'</div><div class="card" style="text-align:center;padding:28px;max-width:480px;margin:0 auto"><h2>Agenda indisponível</h2><p class="mute">'+(r.data&&r.data.erro?esc(r.data.erro):'Não foi possível carregar os horários no momento.')+'</p></div>';return}
  PUB=r.data;
  if(PUB.corAcc||PUB.corGold)applyThemeColors(PUB.corAcc,PUB.corGold);
  if(!PUB.methods.length){box.innerHTML='<div class="card" style="max-width:480px;margin:40px auto"><h2>Nenhum método de jogo cadastrado</h2><p class="mute">Esta taróloga ainda está configurando os tipos de atendimento.</p></div>';return}
@@ -907,7 +936,7 @@ function renderPublic(){
   '<button id="bsub" class="btn" style="width:100%;margin-top:auto" onclick="submitPublic()">Confirmar · '+dt(PUB_SEL.date).slice(0,5)+' às '+esc(PUB_SEL.time)+'</button>':
   '<div class="empty" style="margin:auto 0;padding:32px 16px"><div style="font-size:26px;margin-bottom:8px">🔮</div>Escolha o método de jogo, o dia e um horário livre para preencher seus dados e concluir a reserva.</div>')+'</div>';
 
- box.innerHTML='<div class="pub-head"><div class="logo"><b>✦</b> MESA DE ARCANOS</div><h2>'+esc(tituloPrincipal)+'</h2><div class="mute" style="margin-top:2px">'+subLinha+'</div></div>'+
+ box.innerHTML='<div class="pub-head"><div class="logo" data-brand><b>✦</b> '+esc(BRAND)+'</div><h2>'+esc(tituloPrincipal)+'</h2><div class="mute" style="margin-top:2px">'+subLinha+'</div></div>'+
  '<div class="pub-grid">'+col1+col2+col3+'</div>';
 }
 function copyPixPub(){navigator.clipboard.writeText(PUB.pix||'');toast('Chave Pix copiada!','✓')}
@@ -941,7 +970,7 @@ async function submitPublic(){
   '</div><button type="button" class="btn sm ghost" onclick="copyPixPub()">Copiar Pix</button></div>';
  }
 
- $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" style="justify-content:center;margin-bottom:20px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="text-align:center;padding:26px 20px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
+ $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" data-brand style="justify-content:center;margin-bottom:20px"><b>✦</b> '+esc(BRAND)+'</div><div class="card" style="text-align:center;padding:26px 20px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
  '<div class="card" style="background:var(--bg);text-align:left"><div class="row"><b>'+esc(res.jogo)+'</b><b class="num" style="color:var(--gold)">'+money(res.valor)+'</b></div><div class="mute num" style="margin-top:4px">'+dt(PUB_SEL.date)+' às '+esc(PUB_SEL.time)+' · '+(res.online?'Online':'Presencial')+'</div>'+pixInfoHtml+'</div>'+
  (waNum?'<a class="btn" style="width:100%;margin-top:8px" href="https://wa.me/'+waNum+'?text='+encodeURIComponent(waTxt)+'" target="_blank">'+(pixAuto?'Enviar comprovante do Pix no WhatsApp':'Enviar confirmação no WhatsApp')+'</a>':'')+
  '<p style="margin:16px 0 0"><a class="mute" href="#" onclick="loadPublic(\''+PUB_UID+'\');return false">Fazer outro agendamento</a></p></div></div>';
@@ -984,22 +1013,62 @@ function exportCsv(){var q=function(x){return'"'+String(x==null?'':x).replace(/"
  S.items.slice().sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)}).forEach(function(i){var c=cl(i.cid)||{};L.push([dt(i.date),i.time,c.name,c.phone,mt(i.mid),i.dur,String(i.price||0).replace('.',','),i.st||'marcado',i.paid?'sim':'não',i.pay,i.cards,i.notes])});
  dl('atendimentos.csv',L.map(function(r){return r.map(q).join(';')}).join('\r\n'),'text/csv');toast('Planilha baixada!','📊')}
 function exportJson(){dl('backup-mesa-de-arcanos.json',JSON.stringify(S,null,1),'application/json');toast('Backup baixado!','💾')}
-function legal(h){var b='<main style="max-width:720px;margin:0 auto;padding:24px 22px"><p><a href="#">← Voltar</a></p>';
- if(h==='#termos')return b+`<h1 style="font-size:30px">Termos de uso</h1><p class="mute">Última atualização: 27/11/2026</p>
-<h3>1. O serviço</h3><p>A Mesa de Arcanos é um aplicativo para organizar atendimentos: cadastro de clientes, agenda, anotações dos jogos e controle financeiro. Ele é oferecido por Suellen · Ateliê Òmìnira, contato: ominira.atelie@gmail.com.</p>
-<h3>2. Conta</h3><p>Você é responsável pelo e-mail e pela senha da sua conta e por tudo o que acontece nela. Não compartilhe sua senha.</p>
-<h3>3. Teste e assinatura</h3><p>Novas contas têm 7 dias de teste grátis. Depois, o acesso para cadastrar e editar exige assinatura mensal. Você pode cancelar quando quiser, e o cancelamento vale a partir do fim do período já pago. Compras feitas pela internet têm o direito de arrependimento de 7 dias previsto no Código de Defesa do Consumidor.</p>
-<h3>4. Seus dados e os de suas clientes</h3><p>Você é a responsável pelas informações que cadastra, inclusive pelo direito de guardar os dados de suas clientes (nome, telefone, nascimento e anotações). Não usamos esses dados para outra finalidade além de fazer o aplicativo funcionar.</p>
-<h3>5. Disponibilidade e backup</h3><p>Trabalhamos para manter o serviço no ar, mas não garantimos funcionamento sem interrupções. Recomendamos baixar seu backup com frequência em Conta → Meus dados.</p>
-<h3>6. Uso proibido</h3><p>É proibido usar o aplicativo para fins ilegais, tentar acessar dados de outras pessoas ou prejudicar o funcionamento do serviço.</p>
-<h3>7. Mudanças</h3><p>Podemos atualizar estes termos. Avisaremos por e-mail ou no aplicativo quando houver mudança importante.</p></main>`;
- return b+`<h1 style="font-size:30px">Política de privacidade</h1><p class="mute">Última atualização: 27/11/2026</p>
-<h3>Quem somos</h3><p>Suellen · Ateliê Òmìnira, contato para assuntos de privacidade: ominira.atelie@gmail.com.</p>
-<h3>Quais dados tratamos</h3><p>Dados da sua conta (e-mail) e o conteúdo que você cadastra: fichas de clientes (nome, telefone, e-mail, nascimento, observações), atendimentos marcados, anotações e lançamentos financeiros.</p>
-<h3>Papéis</h3><p>Sobre os dados de suas clientes, você decide o que cadastrar e por quê (controladora). Nós guardamos esses dados apenas para o aplicativo funcionar (operadores).</p>
-<h3>Onde ficam e quem recebe</h3><p>Os dados ficam em serviços de hospedagem e banco de dados (Cloudflare e Supabase), com servidores que podem estar fora do Brasil. Não vendemos dados. O meio de pagamento recebe apenas os dados necessários para a cobrança.</p>
-<h3>Seus direitos</h3><p>Você pode pedir acesso, correção, exclusão e cópia dos seus dados pelo e-mail acima. Você mesma pode baixar tudo em Conta → Meus dados.</p>
-<h3>Segurança e guarda</h3><p>Cada conta só acessa os próprios dados. Mantemos as informações enquanto a conta existir e apagamos quando você pedir a exclusão, salvo obrigação legal.</p></main>`}
+
+function defaultTermos(emp,eml,dtAt,dias){
+ return'Última atualização: '+dtAt+'\n\n'+
+ '1. O serviço\n'+
+ 'A plataforma é um aplicativo para organizar atendimentos: cadastro de clientes, agenda, anotações dos jogos e controle financeiro. Ele é oferecido por '+emp+', contato: '+eml+'.\n\n'+
+ '2. Conta\n'+
+ 'Você é responsável pelo e-mail e pela senha da sua conta e por tudo o que acontece nela. Não compartilhe sua senha.\n\n'+
+ '3. Teste e assinatura\n'+
+ 'Novas contas têm '+dias+' dias de teste grátis. Depois, o acesso para cadastrar e editar exige assinatura mensal. Você pode cancelar quando quiser, e o cancelamento vale a partir do fim do período já pago. Compras feitas pela internet têm o direito de arrependimento de 7 dias previsto no Código de Defesa do Consumidor.\n\n'+
+ '4. Seus dados e os de suas clientes\n'+
+ 'Você é a responsável pelas informações que cadastra, inclusive pelo direito de guardar os dados de suas clientes (nome, telefone, nascimento e anotações). Não usamos esses dados para outra finalidade além de fazer o aplicativo funcionar.\n\n'+
+ '5. Disponibilidade e backup\n'+
+ 'Trabalhamos para manter o serviço no ar, mas não garantimos funcionamento sem interrupções. Recomendamos baixar seu backup com frequência em Conta → Meus dados.\n\n'+
+ '6. Uso proibido\n'+
+ 'É proibido usar o aplicativo para fins ilegais, tentar acessar dados de outras pessoas ou prejudicar o funcionamento do serviço.\n\n'+
+ '7. Mudanças\n'+
+ 'Podemos atualizar estes termos. Avisaremos por e-mail ou no aplicativo quando houver mudança importante.';
+}
+function defaultPriv(emp,eml,dtAt){
+ return'Última atualização: '+dtAt+'\n\n'+
+ 'Quem somos\n'+
+ emp+', contato para assuntos de privacidade: '+eml+'.\n\n'+
+ 'Quais dados tratamos\n'+
+ 'Dados da sua conta (e-mail) e o conteúdo que você cadastra: fichas de clientes (nome, telefone, e-mail, nascimento, observações), atendimentos marcados, anotações e lançamentos financeiros.\n\n'+
+ 'Papéis\n'+
+ 'Sobre os dados de suas clientes, você decide o que cadastrar e por quê (controladora). Nós guardamos esses dados apenas para o aplicativo funcionar (operadores).\n\n'+
+ 'Onde ficam e quem recebe\n'+
+ 'Os dados ficam em serviços de hospedagem e banco de dados (Cloudflare e Supabase), com servidores que podem estar fora do Brasil. Não vendemos dados. O meio de pagamento recebe apenas os dados necessários para a cobrança.\n\n'+
+ 'Seus direitos\n'+
+ 'Você pode pedir acesso, correção, exclusão e cópia dos seus dados pelo e-mail acima. Você mesma pode baixar tudo em Conta → Meus dados.\n\n'+
+ 'Segurança e guarda\n'+
+ 'Cada conta só acessa os próprios dados. Mantemos as informações enquanto a conta existir e apagamos quando você pedir a exclusão, salvo obrigação legal.';
+}
+function renderDocText(txt){
+ var blocos=String(txt||'').split(/\n\s*\n/).map(function(x){return x.trim()}).filter(Boolean);
+ return blocos.map(function(bl,idx){
+  var linhas=bl.split('\n');
+  if(idx===0&&linhas.length===1)return'<p class="mute">'+esc(linhas[0])+'</p>';
+  if(linhas.length>1)return'<h3>'+esc(linhas[0])+'</h3><p>'+esc(linhas.slice(1).join(' '))+'</p>';
+  return'<p>'+esc(linhas[0])+'</p>';
+ }).join('');
+}
+function legal(h){
+ var c=CONF||{},s=c.site_cfg||{};
+ var emp=s.legalEmp||'[SEU NOME OU EMPRESA]';
+ var eml=s.legalMail||'[SEU E-MAIL]';
+ var dtAt=s.legalDate||'[DATA]';
+ var dias=c.trial_dias!=null?c.trial_dias:7;
+ var b='<main style="max-width:720px;margin:0 auto;padding:24px 22px"><p><a href="#">← Voltar</a></p>';
+ if(h==='#termos'){
+  var txtT=s.termosTxt?s.termosTxt:defaultTermos(emp,eml,dtAt,dias);
+  return b+'<h1 style="font-size:30px">Termos de uso</h1>'+renderDocText(txtT)+'</main>';
+ }
+ var txtP=s.privTxt?s.privTxt:defaultPriv(emp,eml,dtAt);
+ return b+'<h1 style="font-size:30px">Política de privacidade</h1>'+renderDocText(txtP)+'</main>';
+}
 
 var EMAIL='';
 function CF(){
@@ -1085,7 +1154,7 @@ function admBusca(q){ADQ=q;admLista()}
 function admRender(){CONF=CONF||{};var L=ADM.map(function(x){x.s=admSt(x);return x}),n=function(k){return L.filter(function(x){return k.indexOf(x.s.k)>-1}).length},at=n(['ativa']),mes=new Date().toISOString().slice(0,7),
  rec=PAGS.filter(function(p){return p.status==='approved'&&String(p.pago_em).slice(0,7)===mes}).reduce(function(t,p){return t+(+p.valor||0)},0),preco=+CONF.preco||29;
  var chips=[['todas','Clientes',L.length],['ativa','Ativas',at],['teste','Em teste',n(['teste','breve'])],['pendente','Pendentes',n(['pendente','breve'])],['cancelada','Bloqueadas',n(['cancelada'])],['pagamentos','Pagamentos',PAGS.length]];
- $('adm').innerHTML='<div class="w"><div class="top"><div class="logo"><b>✦</b> PAINEL</div><div><button class="btn sm ghost" onclick="admConfig()">⚙ Configurações e site</button> &nbsp; <a class="mute" href="#app">← Voltar ao app</a> &nbsp;·&nbsp; <a class="mute" href="#" onclick="logout();return false">Sair</a></div></div>'+
+ $('adm').innerHTML='<div class="w"><div class="top"><div class="logo"><b>✦</b> PAINEL</div><div><button class="btn sm ghost" onclick="admConfig()">⚙ Editar site, preços e termos</button> &nbsp; <a class="mute" href="#app">← Voltar ao app</a> &nbsp;·&nbsp; <a class="mute" href="#" onclick="logout();return false">Sair</a></div></div>'+
  '<div class="admg"><div class="card"><div class="mute">Recebido no mês</div><div class="big num">'+brl(rec)+'</div><div class="mute" style="font-size:12px">confirmado pelo Mercado Pago</div></div><div class="card"><div class="mute">Receita mensal esperada</div><div class="big num">'+brl(at*preco)+'</div><div class="mute" style="font-size:12px">'+at+' ativas × '+brl(preco)+'</div></div><div class="card"><div class="mute">Em teste</div><div class="big num">'+n(['teste','breve'])+'</div></div><div class="card"><div class="mute">Pendentes</div><div class="big num" style="color:var(--bad)">'+n(['pendente'])+'</div></div></div>'+
  '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">'+chips.map(function(c){return'<button class="admchip'+(ADF===c[0]?' on':'')+'" onclick="admFiltro(\''+c[0]+'\')">'+c[1]+' ('+c[2]+')</button>'}).join('')+'</div>'+
  '<input placeholder="Buscar por nome ou e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)" style="max-width:420px"><div id="admL" style="margin-top:14px"></div></div>';admLista()}
@@ -1097,8 +1166,8 @@ function admLista(){CONF=CONF||{};var q=ADQ.toLowerCase(),f=ADF;
   return'<div class="card"><div class="row"><div><b>'+esc(x.nome||x.email)+'</b>'+(x.nome?'<div class="mute">'+esc(x.email)+'</div>':'')+'</div><span class="tag '+s.c+'">'+s.t+'</span></div>'+
   '<div class="mute" style="margin:8px 0">Acesso até '+dia(x.ate)+' ('+quando+')'+(x.ultimo_pgto?' · Último pagamento '+dia(x.ultimo_pgto)+' · '+brl(x.ultimo_valor)+' · '+esc(x.ultima_forma||''):'')+'</div>'+
   '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm" onclick="admDet(\''+x.user_id+'\')">Detalhes</button>'+(x.eh_admin?'':'<button class="btn sm ghost" onclick="admSet(\''+x.user_id+'\',\'ativa\','+(+CONF.dias_liberar||35)+')">Liberar '+(+CONF.dias_liberar||35)+' dias</button>')+'</div></div>'}).join(''):'<div class="empty">Nenhuma cliente neste filtro.</div>'}
-function admMail(x,s){var q=s.d>0?'termina '+(s.d===1?'em 1 dia':'em '+s.d+' dias'):'terminou',m='Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Seu acesso à Mesa de Arcanos '+q+'. Para continuar usando, assine aqui: '+PAY+' (use o mesmo e-mail do cadastro).';
- return'mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Seu acesso à Mesa de Arcanos')+'&body='+encodeURIComponent(m)}
+function admMail(x,s){var q=s.d>0?'termina '+(s.d===1?'em 1 dia':'em '+s.d+' dias'):'terminou',m='Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Seu acesso à '+BRAND+' '+q+'. Para continuar usando, assine aqui: '+PAY+' (use o mesmo e-mail do cadastro).';
+ return'mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Seu acesso · '+BRAND)+'&body='+encodeURIComponent(m)}
 function admDet(id){var x=ADM.find(function(a){return a.user_id===id}),s=admSt(x),ps=PAGS.filter(function(p){return p.user_id===id});
  sheet('<div class="mh"><div><h2 style="margin:0">'+esc(x.nome||x.email)+'</h2>'+(x.nome?'<div class="mute">'+esc(x.email)+'</div>':'')+'<span class="tag '+s.c+'" style="display:inline-block;margin-top:6px">'+s.t+'</span></div><button class="mx" onclick="closeS()" aria-label="Fechar">×</button></div>'+
  '<div class="mgrid"><div><span>Telefone</span>'+esc(x.tel||'—')+'</div><div><span>Espaço</span>'+esc(x.espaco||'—')+'</div><div><span>Cadastro</span>'+dia(x.criado)+'</div><div><span>Último acesso</span>'+dia(x.ultimo_acesso)+'</div><div><span>Consulentes · atendimentos</span>'+x.consulentes+' · '+x.jogos+'</div><div><span>Total pago</span>'+brl(x.total_pago)+'</div></div>'+
@@ -1111,6 +1180,13 @@ async function admNota(id){var r=await sb.rpc('admin_salvar_nota',{p_user:id,p_n
 function admSet(id,st,dias){var x=ADM.find(function(a){return a.user_id===id});
  dlgConfirm('Liberar '+dias+' dias de acesso para '+x.email+'?',async function(){var r=await sb.rpc('admin_definir_acesso',{p_user:id,p_status:st,p_dias:dias});if(r.error){toast('Erro: '+r.error.message,'!');return}toast('Acesso liberado.','✓');adminRoute()},{title:'Liberar acesso'})}
 
+function admTab(idx){
+ [0,1,2].forEach(function(k){
+  var b=$('atb-'+k),p=$('atp-'+k);
+  if(b)b.className='admchip'+(k===idx?' on':'');
+  if(p)p.style.display=k===idx?'block':'none';
+ });
+}
 function admConfig(){
  var c=CONF||{},n=function(val,def){return val==null?def:val},s=c.site_cfg||{};
  var h1Atual=document.querySelector('.hero h1')?document.querySelector('.hero h1').innerHTML:'';
@@ -1118,28 +1194,67 @@ function admConfig(){
  var ebAtual=document.querySelector('.hero .eb')?document.querySelector('.hero .eb').textContent.replace(/^✦\s*/,''):'';
  var bandTAtual=document.querySelector('.band h2')?document.querySelector('.band h2').innerHTML:'';
  var bandSAtual=document.querySelector('.band p')?document.querySelector('.band p').textContent:'';
- sheet('<div class="mh"><div><h2 style="margin:0">Configurações e página inicial</h2><div class="mute">Tudo o que você salvar aqui atualiza o site na hora.</div></div><button class="mx" onclick="closeS()" aria-label="Fechar">×</button></div>'+
- '<div class="msec" style="margin-top:0;padding-top:0;border-top:0">Assinatura, cobrança e suporte</div>'+
- '<div class="grid"><div><label>Dias de teste grátis</label><input id="cf-trial" type="number" min="0" value="'+n(c.trial_dias,7)+'"></div><div><label>Tolerância após vencer (dias)</label><input id="cf-tol" type="number" min="0" value="'+n(c.tolerancia_dias,3)+'"></div><div><label>Preço mensal (R$)</label><input id="cf-preco" type="number" step="0.01" value="'+n(c.preco,29)+'"></div><div><label>Botão “Liberar” (dias)</label><input id="cf-dias" type="number" min="1" value="'+n(c.dias_liberar,35)+'"></div></div>'+
- '<label>Link de pagamento (Mercado Pago)</label><input id="cf-link" value="'+esc(c.link_pagamento||PAY)+'">'+
- '<label>WhatsApp de suporte (DDI + DDD + número)</label><input id="cf-sup" placeholder="5513996261166" value="'+esc(s.sup||SUPORTE)+'">'+
- '<div class="msec">Textos da página de divulgação</div>'+
- '<label>Selo acima do título principal</label><input id="cf-eb" value="'+esc(s.eb||ebAtual)+'">'+
- '<label>Título principal da capa (use &lt;em&gt;texto&lt;/em&gt; para destaque em itálico)</label><input id="cf-h1" value="'+esc(s.h1||h1Atual)+'">'+
- '<label>Subtítulo da capa</label><textarea id="cf-sub" rows="3">'+esc(s.sub||subAtual)+'</textarea>'+
- '<label>Título da faixa roxa (meio da página)</label><input id="cf-bt" value="'+esc(s.bandT||bandTAtual)+'">'+
- '<label>Texto da faixa roxa</label><textarea id="cf-bs" rows="2">'+esc(s.bandS||bandSAtual)+'</textarea>'+
- '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px"><button class="btn ghost" onclick="closeS()">Cancelar</button><button class="btn" onclick="admSalvarConfig()">Salvar tudo</button></div>',true);
+ var recH2Atual=$('rec-h2')?$('rec-h2').innerHTML:'';
+ var planTagAtual=$('plan-tag')?$('plan-tag').textContent:'';
+ var planItensAtual=$('plan-list')?Array.from($('plan-list').querySelectorAll('li')).map(function(li){return li.textContent}).join('\n'):'';
+ var faqAtual=$('faq-list')?Array.from($('faq-list').querySelectorAll('details')).map(function(dt){return dt.querySelector('summary').textContent+'\n'+dt.querySelector('p').textContent}).join('\n\n'):'';
+ var empAtual=s.legalEmp||'';
+ var mailAtual=s.legalMail||'';
+ var dtAtual=s.legalDate||dt(iso(new Date()));
+ var termosAtual=s.termosTxt||defaultTermos(empAtual||'[NOME DA EMPRESA]',mailAtual||'[E-MAIL]',dtAtual,n(c.trial_dias,7));
+ var privAtual=s.privTxt||defaultPriv(empAtual||'[NOME DA EMPRESA]',mailAtual||'[E-MAIL]',dtAtual);
+
+ sheet('<div class="mh"><div><h2 style="margin:0">Editor completo do sistema</h2><div class="mute">Altere preços, textos da página inicial, Termos de Uso e Política de Privacidade.</div></div><button class="mx" onclick="closeS()" aria-label="Fechar">×</button></div>'+
+ '<div class="adm-tabs">'+
+   '<button type="button" id="atb-0" class="admchip on" onclick="admTab(0)">1 · Preços e Cobrança</button>'+
+   '<button type="button" id="atb-1" class="admchip" onclick="admTab(1)">2 · Página de Divulgação</button>'+
+   '<button type="button" id="atb-2" class="admchip" onclick="admTab(2)">3 · Termos e Privacidade</button>'+
+ '</div>'+
+
+ '<div id="atp-0">'+
+   '<div class="grid"><div><label>Nome da plataforma (marca)</label><input id="cf-brand" value="'+esc(s.brand||BRAND)+'"></div><div><label>WhatsApp de suporte (DDI+DDD+Nº)</label><input id="cf-sup" placeholder="5511999999999" value="'+esc(s.sup||SUPORTE)+'"></div></div>'+
+   '<div class="grid"><div><label>Dias de teste grátis</label><input id="cf-trial" type="number" min="0" value="'+n(c.trial_dias,7)+'"></div><div><label>Tolerância após vencer (dias)</label><input id="cf-tol" type="number" min="0" value="'+n(c.tolerancia_dias,3)+'"></div><div><label>Preço mensal (R$)</label><input id="cf-preco" type="number" step="0.01" value="'+n(c.preco,29)+'"></div><div><label>Botão “Liberar” (dias)</label><input id="cf-dias" type="number" min="1" value="'+n(c.dias_liberar,35)+'"></div></div>'+
+   '<label>Link de pagamento (Mercado Pago)</label><input id="cf-link" value="'+esc(c.link_pagamento||PAY)+'">'+
+ '</div>'+
+
+ '<div id="atp-1" style="display:none">'+
+   '<label>Selo acima do título principal</label><input id="cf-eb" value="'+esc(s.eb||ebAtual)+'">'+
+   '<label>Título principal da capa (use &lt;em&gt;texto&lt;/em&gt; para itálico)</label><input id="cf-h1" value="'+esc(s.h1||h1Atual)+'">'+
+   '<label>Subtítulo da capa</label><textarea id="cf-sub" rows="3">'+esc(s.sub||subAtual)+'</textarea>'+
+   '<label>Título da faixa roxa (meio da página)</label><input id="cf-bt" value="'+esc(s.bandT||bandTAtual)+'">'+
+   '<label>Texto da faixa roxa</label><textarea id="cf-bs" rows="2">'+esc(s.bandS||bandSAtual)+'</textarea>'+
+   '<div class="grid"><div><label>Título da seção de recursos</label><input id="cf-rech2" value="'+esc(s.recH2||recH2Atual)+'"></div><div><label>Etiqueta do cartão do plano</label><input id="cf-ptag" value="'+esc(s.planTag||planTagAtual)+'"></div></div>'+
+   '<label>Benefícios do plano (um item por linha)</label><textarea id="cf-plitens" rows="5">'+esc(s.planItens||planItensAtual)+'</textarea>'+
+   '<label>Perguntas frequentes / FAQ (1ª linha = pergunta, linha seguinte = resposta; separe cada pergunta com uma linha em branco)</label><textarea id="cf-faq" rows="7">'+esc(s.faqItens||faqAtual)+'</textarea>'+
+ '</div>'+
+
+ '<div id="atp-2" style="display:none">'+
+   '<div class="grid" style="grid-template-columns:1.2fr 1.2fr .8fr"><div><label>Empresa / Responsável legal</label><input id="cf-lemp" placeholder="Nome ou Razão Social" value="'+esc(empAtual)+'"></div><div><label>E-mail oficial de contato</label><input id="cf-lmail" placeholder="contato@seudominio.com" value="'+esc(mailAtual)+'"></div><div><label>Data de atualização</label><input id="cf-ldt" value="'+esc(dtAtual)+'"></div></div>'+
+   '<label>Texto completo dos Termos de Uso (1ª linha de cada bloco vira subtítulo)</label><textarea id="cf-termos" rows="8">'+esc(termosAtual)+'</textarea>'+
+   '<label>Texto completo da Política de Privacidade (1ª linha de cada bloco vira subtítulo)</label><textarea id="cf-priv" rows="8">'+esc(privAtual)+'</textarea>'+
+ '</div>'+
+
+ '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><button class="btn ghost" onclick="closeS()">Cancelar</button><button class="btn" onclick="admSalvarConfig()">Salvar tudo</button></div>',true);
 }
 
 async function admSalvarConfig(){
  var siteObj={
+  brand:v('cf-brand').trim()||BRAND,
   sup:v('cf-sup').replace(/\D/g,''),
   eb:v('cf-eb').trim(),
   h1:v('cf-h1').trim(),
   sub:v('cf-sub').trim(),
   bandT:v('cf-bt').trim(),
-  bandS:v('cf-bs').trim()
+  bandS:v('cf-bs').trim(),
+  recH2:v('cf-rech2').trim(),
+  planTag:v('cf-ptag').trim(),
+  planItens:v('cf-plitens').trim(),
+  faqItens:v('cf-faq').trim(),
+  legalEmp:v('cf-lemp').trim(),
+  legalMail:v('cf-lmail').trim(),
+  legalDate:v('cf-ldt').trim(),
+  termosTxt:v('cf-termos').trim(),
+  privTxt:v('cf-priv').trim()
  };
  var payload={
   p_trial:parseInt(v('cf-trial'))||0,
@@ -1154,7 +1269,7 @@ async function admSalvarConfig(){
  CONF={trial_dias:payload.p_trial,tolerancia_dias:payload.p_tolerancia,preco:payload.p_preco,link_pagamento:payload.p_link,dias_liberar:payload.p_dias,site_cfg:siteObj};
  applySiteCfg(CONF);
  closeS();
- toast('Configurações e página inicial atualizadas!','✓');
+ toast('Tudo salvo e atualizado no site!','✓');
  adminRoute();
 }
 
