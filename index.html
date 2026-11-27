@@ -16,33 +16,35 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17101C;--card:#221829;--ink:#F3E9D4;--mute:#A796AD;--gold:#DDA84B;--acc:#C689CC;--acc-hover:#D59EDB;--line:#372940;--ok:#66C78E;--bad:#EB8671;--warn:#E5B14C;--on:#17101C;--soft:#2E2036;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#17101C;--card:#221829;--ink:#F3E9D4;--mute:#A796AD;--gold:#DDA84B;--acc:#C689CC;--acc-hover:#D59EDB;--line:#372940;--ok:#66C78E;--bad:#EB8671;--warn:#E5B14C;--on:#17101C;--soft:#2E2036;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;overflow-x:hidden}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .num{font-variant-numeric:tabular-nums}
 .w{max-width:1060px;margin:0 auto;padding:0 20px}
 h1,h2,.logo{font-family:var(--serif);font-weight:600;margin:0}
 h3{font-family:var(--sans);font-weight:600;font-size:16px;margin:0}
-h1{font-size:clamp(36px,6vw,58px);line-height:1.06;letter-spacing:-.3px}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.3px}
 h1 em,h2 em{color:var(--acc);font-style:italic}
-h2{font-size:clamp(26px,4vw,36px);margin-bottom:12px}
-.eb{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
-.logo{font-size:23px;letter-spacing:2.5px;display:flex;align-items:center;gap:8px}.logo b{color:var(--gold);font-size:18px}
+h2{font-size:clamp(25px,4vw,36px);line-height:1.15;margin-bottom:12px}
+.eb{font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0}
+.top-btns{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.logo{font-size:22px;letter-spacing:2px;display:flex;align-items:center;gap:7px;white-space:nowrap}.logo b{color:var(--gold);font-size:18px}
 button,input,select,textarea{font:inherit;color:var(--ink)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--acc);color:var(--on);border:0;border-radius:99px;padding:11px 22px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:.15s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--acc);color:var(--on);border:0;border-radius:99px;padding:11px 22px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:.15s;white-space:nowrap}
 .btn:hover{background:var(--acc-hover);transform:translateY(-1px)}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--line)}
 .btn.ghost:hover{border-color:var(--acc);background:var(--soft)}
-.btn.sm{padding:6px 13px;font-size:13px;border-radius:10px}
+.btn.sm{padding:7px 13px;font-size:13px;border-radius:10px}
 .btn.ok{background:var(--ok);color:#fff}
 .btn.del{background:transparent;color:var(--bad);border:1px solid var(--bad)}
 .btn.del:hover{background:rgba(179,63,43,.08)}
 .hero-wrap{position:relative;overflow:hidden}
-.mandala-bg{position:absolute;right:-90px;top:-40px;width:540px;height:540px;opacity:.09;pointer-events:none;color:var(--gold)}
-.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center;padding:34px 0 64px;position:relative}
+.mandala-bg{position:absolute;right:-90px;top:-40px;width:540px;height:540px;opacity:.08;pointer-events:none;color:var(--gold)}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center;padding:30px 0 60px;position:relative}
 .hero p{color:var(--mute);font-size:16px;margin:16px 0 26px;max-width:500px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 16px rgba(37,25,41,.03)}
 .card.warn{background:var(--soft);border-color:var(--acc)}
 .mock{box-shadow:0 22px 48px rgba(86,36,91,.14);padding:22px;border-color:var(--gold);position:relative}
@@ -56,20 +58,49 @@ button,input,select,textarea{font:inherit;color:var(--ink)}
 .band{background:var(--soft);padding:48px 0;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.sec{padding:56px 0}
+.sec{padding:52px 0}
 .f h3{font-size:17px;margin:10px 0 6px}.f p{margin:0;color:var(--mute);font-size:14px}.f .ic{font-size:26px}
-.n{font-family:var(--serif);font-size:38px;color:var(--gold);font-style:italic;line-height:1;margin-bottom:6px}
-.plan{max-width:440px;margin:0 auto;text-align:center;border:1.5px solid var(--gold);padding:32px 28px}
+.step-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.n{font-family:var(--serif);font-size:34px;color:var(--gold);font-style:italic;line-height:1;margin-bottom:6px}
+.plan{max-width:440px;margin:0 auto;text-align:center;border:1.5px solid var(--gold);padding:32px 26px}
 .plan ul{list-style:none;padding:0;text-align:left;margin:20px 0 26px;display:grid;gap:10px}.plan li:before{content:"✦ ";color:var(--gold);font-weight:700}
-.price{font-family:var(--serif);font-size:64px;font-weight:700;color:var(--acc);line-height:1;margin:10px 0}
+.price{font-family:var(--serif);font-size:60px;font-weight:700;color:var(--acc);line-height:1;margin:10px 0}
 details{border-bottom:1px solid var(--line);padding:16px 0}summary{cursor:pointer;font-weight:600}details p{color:var(--mute);margin:8px 0 0;font-size:14.5px}
-footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 0;border-top:1px solid var(--line)}
+footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 16px;border-top:1px solid var(--line)}
 footer a{color:var(--acc);text-decoration:none}
-@media(max-width:760px){.hero,.g3,.g4{grid-template-columns:1fr}.mandala-bg{width:340px;height:340px;right:-110px}}
+
+/* RESPONSIVO LANDING PAGE (CELULAR) */
+@media(max-width:760px){
+  .w{padding:0 16px}
+  .top{padding:14px 0}
+  .logo{font-size:16.5px;letter-spacing:1.4px;gap:5px}
+  .logo b{font-size:15px}
+  .top-btns .btn.sm{padding:6px 10px;font-size:12px}
+  .mandala-bg{width:260px;height:260px;right:-85px;top:30px;opacity:.06}
+  .hero{grid-template-columns:1fr;gap:26px;padding:18px 0 42px;text-align:center}
+  .hero .eb{justify-content:center;font-size:10px;letter-spacing:1.8px}
+  .hero h1{font-size:34px;line-height:1.12}
+  .hero p{font-size:15px;margin:14px auto 22px}
+  .hero-cta{flex-direction:column;width:100%;gap:10px}
+  .hero-cta .btn{width:100%;padding:13px 20px}
+  .mock{text-align:left;padding:18px}
+  .band{padding:38px 0}
+  .sec{padding:38px 0}
+  .g3{grid-template-columns:1fr;gap:12px}
+  .g4{grid-template-columns:1fr 1fr;gap:12px}
+  .step-box{padding:14px}
+  .step-box p{font-size:13px;margin:4px 0 0}
+  .plan{padding:26px 18px}
+  .price{font-size:52px}
+}
+@media(max-width:380px){
+  .logo{font-size:15px;letter-spacing:1px}
+  .g4{grid-template-columns:1fr}
+}
 
 /* app */
-#ap{display:none;padding-bottom:84px}
-#ap main{max-width:720px;margin:0 auto;padding:18px}
+#ap{display:none;padding-bottom:82px}
+#ap main{max-width:720px;margin:0 auto;padding:14px 14px 20px}
 input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:5px 0 12px;font-size:14.5px;transition:.15s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc);background:var(--card)}
 input[type="color"]{padding:3px 6px;height:40px;cursor:pointer}
@@ -78,12 +109,15 @@ label{font-size:13px;font-weight:600;color:var(--mute);display:block}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
 .chip{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:500;cursor:pointer;color:var(--mute)}
 .chip:hover{border-color:var(--acc);color:var(--acc);background:var(--soft)}
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
-nav button{flex:1;background:none;border:0;padding:9px 1px;font-size:10.5px;font-weight:500;color:var(--mute);cursor:pointer}
-nav button b{display:block;font-size:18px;font-weight:400;margin-bottom:2px}nav button.on{color:var(--acc);font-weight:700}
+
+/* BARRA INFERIOR MOBILE OTIMIZADA PARA 7 ABAS */
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:4px 2px calc(4px + env(safe-area-inset-bottom,0px));z-index:5;box-shadow:0 -4px 16px rgba(0,0,0,.05)}
+nav button{flex:1;min-width:0;background:none;border:0;padding:5px 1px;font-size:9.5px;font-weight:500;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+nav button b{display:block;font-size:17px;font-weight:400;line-height:1.1}
+nav button.on{color:var(--acc);font-weight:700}
 
 /* modais e dialogos personalizados */
-.ov{position:fixed;inset:0;background:rgba(23,16,28,.62);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:14px;z-index:9}
+.ov{position:fixed;inset:0;background:rgba(23,16,28,.62);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:12px;z-index:9}
 .sheet{background:var(--card);width:100%;max-width:760px;max-height:92vh;overflow-y:auto;border-radius:20px;padding:24px 28px;box-shadow:0 24px 60px rgba(0,0,0,.35);position:relative;border:1px solid var(--line)}
 .sheet.wide{max-width:980px}
 .sheet-hd{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
@@ -91,46 +125,52 @@ nav button b{display:block;font-size:18px;font-weight:400;margin-bottom:2px}nav 
 .sheet-x:hover{color:var(--acc);border-color:var(--acc)}
 .modal-2col{display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:start}
 @media(max-width:780px){
-  .ov{padding:6px}
-  .sheet{max-width:100%;max-height:94vh;border-radius:16px;padding:18px 16px}
+  .ov{padding:6px;align-items:flex-end}
+  .sheet{max-width:100%;max-height:92vh;border-radius:18px 18px 14px 14px;padding:18px 15px}
   .modal-2col{grid-template-columns:1fr;gap:12px}
+  .mgrid{grid-template-columns:1fr}
+  .grid{gap:10px}
 }
 
 /* dialogo de confirmacao e toast */
 .dlg-ov{position:fixed;inset:0;background:rgba(23,16,28,.65);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
 .dlg-box{background:var(--card);border:1.5px solid var(--gold);border-radius:20px;padding:26px 24px;max-width:410px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.4)}
 .dlg-ic{font-size:32px;margin-bottom:8px}
-.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);border:1px solid var(--gold);padding:11px 22px;border-radius:99px;font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(0,0,0,.28);z-index:25;display:flex;align-items:center;gap:8px;animation:fadeIn .18s ease}
+.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);border:1px solid var(--gold);padding:10px 18px;border-radius:99px;font-weight:600;font-size:13.5px;box-shadow:0 12px 30px rgba(0,0,0,.28);z-index:25;display:flex;align-items:center;gap:8px;animation:fadeIn .18s ease;max-width:92vw;text-align:center}
 @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
 
 /* galeria de cartas por metodo de jogo */
-.deck-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px;margin:10px 0 14px}
+.deck-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin:10px 0 14px}
 .deck-card{position:relative;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);padding:6px;text-align:center;cursor:pointer;transition:.15s;user-select:none}
 .deck-card:hover{border-color:var(--acc)}
 .deck-card.picked{border-color:var(--acc);background:var(--soft);box-shadow:0 4px 12px rgba(86,36,91,.16)}
 .deck-card img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;display:block;margin-bottom:5px}
-.deck-card span{display:block;font-size:11.5px;font-weight:600;line-height:1.2;word-break:break-word}
+.deck-card span{display:block;font-size:11px;font-weight:600;line-height:1.2;word-break:break-word}
 .deck-card .del-c{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(23,16,28,.75);color:#fff;border:0;font-size:12px;cursor:pointer;line-height:1}
 .mini-cards{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .mini-card{display:inline-flex;align-items:center;gap:6px;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:3px 9px 3px 4px;font-size:12px;font-weight:600;color:var(--acc)}
 .mini-card img{width:22px;height:32px;object-fit:cover;border-radius:5px}
 
 /* cards leves da agenda */
-.item-light{padding:14px 16px}
-.item-sub{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin-top:6px;color:var(--mute);font-size:13.5px}
+.item-light{padding:14px 15px}
+.item-sub{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;margin-top:6px;color:var(--mute);font-size:13px}
 .item-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);flex-wrap:wrap}
 
 /* banner saudacao */
-.greet{background:linear-gradient(135deg,var(--card) 0%,var(--soft) 100%);border:1px solid var(--line);border-radius:18px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;position:relative;overflow:hidden}
-.greet h2{font-size:clamp(24px,3.5vw,32px);margin:2px 0 4px}
+.greet{background:linear-gradient(135deg,var(--card) 0%,var(--soft) 100%);border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;overflow:hidden;margin-bottom:14px}
+.greet h2{font-size:clamp(22px,3.5vw,32px);margin:2px 0 4px}
 .greet-moon{color:var(--gold);opacity:.35;flex-shrink:0}
+@media(max-width:480px){
+  .greet-moon{width:44px;height:44px}
+  .big{font-size:22px}
+}
 
 /* caixa e conta grids */
 .cx-cols{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
 @media(min-width:900px){
   .cx-cols{grid-template-columns:repeat(3,1fr);gap:18px}
 }
-.conta-grid{display:grid;grid-template-columns:1fr;gap:18px}
+.conta-grid{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:900px){
   .conta-grid{grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}
   .conta-col{display:flex;flex-direction:column;gap:16px}
@@ -139,20 +179,21 @@ nav button b{display:block;font-size:18px;font-weight:400;margin-bottom:2px}nav 
 }
 
 /* agendamento publico em 3 colunas no PC e 1 no celular */
-#bk-box{max-width:1240px;margin:0 auto;padding:22px 24px 60px}
-.pub-head{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:20px}
-.pub-head .logo{justify-content:center;font-size:22px;margin-bottom:4px}
-.pub-head h2{font-size:clamp(24px,3vw,32px);margin:2px 0}
-.pub-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:stretch}
+#bk-box{max-width:1240px;margin:0 auto;padding:16px 16px 60px}
+.pub-head{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:18px}
+.pub-head .logo{justify-content:center;font-size:20px;margin-bottom:4px}
+.pub-head h2{font-size:clamp(23px,3vw,32px);margin:2px 0}
+.pub-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch}
 @media(min-width:960px){
+  #bk-box{padding:22px 24px 60px}
   .pub-grid{grid-template-columns:1fr 1.05fr 1fr;gap:20px}
   .pub-grid>.card{margin-bottom:0;display:flex;flex-direction:column}
 }
-.pub-opt{border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:14px 16px;cursor:pointer;transition:.15s;text-align:left;width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.pub-opt{border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:14px 15px;cursor:pointer;transition:.15s;text-align:left;width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
 .pub-opt:hover{border-color:var(--acc)}
 .pub-opt.sel{border-color:var(--acc);background:var(--soft);box-shadow:0 4px 14px rgba(86,36,91,.08)}
 .pub-sum{margin-top:auto;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13.5px}
-.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:7px;margin:8px 0 4px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:7px;margin:8px 0 4px}
 .slot{border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:8px 4px;font-weight:600;font-size:13.5px;cursor:pointer;text-align:center;font-variant-numeric:tabular-nums;transition:.12s}
 .slot:hover{border-color:var(--acc);color:var(--acc)}
 .slot.sel{background:var(--acc);color:var(--on);border-color:var(--acc)}
@@ -161,15 +202,16 @@ nav button b{display:block;font-size:18px;font-weight:400;margin-bottom:2px}nav 
 .empty{text-align:center;color:var(--mute);padding:24px 14px;background:var(--card);border:1px dashed var(--line);border-radius:14px;font-size:14px}
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:10px 0}
 .cal i{font-style:normal;text-align:center;font-size:12px;font-weight:600;color:var(--mute);padding-bottom:3px}
-.cal button{aspect-ratio:1;border:1px solid var(--line);background:var(--card);border-radius:9px;cursor:pointer;position:relative;font-weight:500;font-variant-numeric:tabular-nums}
+.cal button{aspect-ratio:1;border:1px solid var(--line);background:var(--card);border-radius:9px;cursor:pointer;position:relative;font-weight:500;font-variant-numeric:tabular-nums;padding:0;font-size:13.5px}
 .cal button:hover:not(:disabled){border-color:var(--acc)}
 .cal button.has:after{content:"";position:absolute;bottom:4px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--gold)}
 .cal button.sel{background:var(--acc);color:var(--on);border-color:var(--acc);font-weight:700}
 
 /* cabecalho centralizado desktop e mobile */
-.mob-hd{text-align:center;padding:6px 0 12px;border-bottom:1px solid var(--line);margin-bottom:12px;position:relative}
-.mob-hd .logo{justify-content:center;font-size:18px}
-.mob-hd .logout-lnk{position:absolute;right:0;top:8px;font-size:13px}
+.mob-hd{text-align:center;padding:4px 0 12px;border-bottom:1px solid var(--line);margin-bottom:12px;position:relative}
+.mob-hd .logo{justify-content:center;font-size:17px;letter-spacing:1.6px}
+.mob-hd .logout-lnk{position:absolute;right:0;top:5px;font-size:13px}
+.calbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:16px}
 #tb{display:none}.ag{display:block}.st .card:nth-child(3){grid-column:1/-1}
 @media(min-width:900px){
 #tb{display:block;position:sticky;top:0;z-index:6;background:var(--card);border-bottom:1px solid var(--line)}
@@ -191,7 +233,7 @@ nav button b{display:block;font-size:18px;font-weight:400;margin-bottom:2px}nav 
 #cl{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
 #cl .card,.dia .card{margin:0 0 14px}
 .ag{display:grid;grid-template-columns:340px 1fr;gap:32px;align-items:start}
-.calbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;position:sticky;top:106px}
+.calbox{padding:18px;position:sticky;top:106px;margin-bottom:0}
 .st,.g6{grid-template-columns:repeat(3,1fr);gap:16px}
 .st .card:nth-child(3){grid-column:auto}
 }
@@ -219,12 +261,12 @@ nav button b{display:block;font-size:18px;font-weight:400;margin-bottom:2px}nav 
   <path d="M100 44 A18 18 0 1 0 114 68 A14 14 0 1 1 100 44 Z" fill="currentColor" opacity="0.4"/>
 </svg>
 <div class="w">
-<div class="top"><div class="logo"><b>✦</b> MESA DE ARCANOS</div><div><a class="btn ghost sm" href="#app">Entrar</a> <a class="btn sm" href="#app">Testar grátis</a></div></div>
+<div class="top"><div class="logo"><b>✦</b> MESA DE ARCANOS</div><div class="top-btns"><a class="btn ghost sm" href="#app">Entrar</a><a class="btn sm" href="#app">Testar grátis</a></div></div>
 <div class="hero"><div>
 <div class="eb">✦ Organização para quem lê cartas</div>
 <h1>Menos bagunça na agenda, mais tempo para <em>ler as cartas</em></h1>
 <p>Um espaço digital acolhedor feito para o seu atendimento: a ficha de cada consulente, link próprio para agendamento online, o que saiu em cada tiragem e o financeiro em dia.</p>
-<a class="btn" href="#app">Começar teste grátis de 7 dias</a> <a class="btn ghost" href="#recursos">Conhecer recursos</a></div>
+<div class="hero-cta"><a class="btn" href="#app">Começar teste grátis de 7 dias</a><a class="btn ghost" href="#recursos">Conhecer recursos</a></div></div>
 <div class="card mock"><div class="mute" style="text-align:right;letter-spacing:2px;font-size:11px;font-weight:700">✦ PRÓXIMA CONSULTA</div>
 <div class="row" style="margin:14px 0"><div><b style="font-size:17px">Helena Prado</b><div class="mute">Jogo de Búzios · 15h30</div></div><span class="tag">Presencial</span></div>
 <div class="card" style="background:var(--bg);padding:12px">Da última vez: <b>Caminhos Abertos</b> · 03/09</div>
@@ -243,12 +285,12 @@ nav button b{display:block;font-size:18px;font-weight:400;margin-bottom:2px}nav 
 <div class="card f"><div class="ic">✨</div><h3>WhatsApp e Pix em 1 toque</h3><p>Personalize suas mensagens prontas e envie confirmação, dados Pix ou felicitações de aniversário.</p></div></div></div>
 
 <div class="w sec" style="padding-top:10px"><div class="eb">✦ Na prática</div><h2>Sua rotina em quatro passos</h2>
-<div class="g4"><div><div class="n">1</div><b>Configure sua mesa</b><p class="mute">Cadastre seus métodos de jogo, horários, cores e ative seu link de agendamento.</p></div>
-<div><div class="n">2</div><b>Receba agendamentos</b><p class="mute">Marque manualmente ou deixe a consulente reservar pelo seu link.</p></div>
-<div><div class="n">3</div><b>Registre as cartas</b><p class="mute">Selecione as cartas que saíram e anote os conselhos na ficha.</p></div>
-<div><div class="n">4</div><b>Acompanhe o caixa</b><p class="mute">Controle entradas, valores a receber e despesas do mês.</p></div></div></div>
+<div class="g4"><div class="step-box"><div class="n">1</div><b>Configure sua mesa</b><p class="mute">Cadastre seus métodos de jogo, horários, cores e ative seu link.</p></div>
+<div class="step-box"><div class="n">2</div><b>Receba agendamentos</b><p class="mute">Marque manualmente ou deixe a consulente reservar pelo seu link.</p></div>
+<div class="step-box"><div class="n">3</div><b>Registre as cartas</b><p class="mute">Selecione as cartas que saíram e anote os conselhos na ficha.</p></div>
+<div class="step-box"><div class="n">4</div><b>Acompanhe o caixa</b><p class="mute">Controle entradas, valores a receber e despesas do mês.</p></div></div></div>
 
-<div class="band" style="padding:60px 0"><div class="w"><div class="eb" style="justify-content:center">✦ Assinatura</div><div class="card plan"><span class="tag">Acesso completo</span><div class="price">R$ 29<small class="mute" style="font-size:18px;font-family:var(--sans)">/mês</small></div>
+<div class="band" style="padding:52px 0"><div class="w"><div class="eb" style="justify-content:center">✦ Assinatura</div><div class="card plan"><span class="tag">Acesso completo</span><div class="price">R$ 29<small class="mute" style="font-size:18px;font-family:var(--sans)">/mês</small></div>
 <ul><li>Link público de agendamento online</li><li>Consulentes e tiragens sem limite</li><li>Catálogo visual de cartas por baralho</li><li>Agenda com controle de pausa e dias</li><li>Mensagens prontas editáveis e dados Pix</li><li>Tabela de métodos de jogo e controle de caixa</li></ul>
 <a class="btn" style="width:100%" href="#app">Testar 7 dias grátis</a></div></div></div>
 
@@ -444,8 +486,8 @@ function itemDetails(id){
    '<button class="btn sm ghost" onclick="wa(\''+i.id+'\')">💬 Enviar confirmação</button>'+
    (!i.paid?'<button class="btn sm ghost" onclick="waPix(\''+i.id+'\')">💠 Cobrar Pix</button>':'')+
  '</div>'+
- '<div class="row" style="padding-top:14px;border-top:1px solid var(--line)">'+
-   '<div style="display:flex;gap:8px"><button class="btn" onclick="closeS();formItem(\''+i.id+'\')">Editar atendimento</button><button class="btn del" onclick="delItem(\''+i.id+'\')">Excluir</button></div>'+
+ '<div class="row" style="padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap">'+
+   '<div style="display:flex;gap:8px"><button class="btn" onclick="closeS();formItem(\''+i.id+'\')">Editar</button><button class="btn del" onclick="delItem(\''+i.id+'\')">Excluir</button></div>'+
    '<button class="btn ghost" onclick="closeS()">Fechar</button>'+
  '</div>');
 }
@@ -501,9 +543,9 @@ function render(){
   h=mobTop()+
   '<div class="greet"><div><div class="eb" style="margin-bottom:4px">✦ Hoje · '+dt(td)+'</div><h2>'+(CF().nome?'Olá, <em>'+esc(CF().nome.split(' ')[0])+'</em>!':'Bem-vinda à sua mesa')+'</h2><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" onclick="sel=\''+td+'\';formItem()">+ Marcar atendimento</button>'+trialBanner+'</div></div>'+moonSvg+'</div>'+
   '<div class="grid"><div class="card"><div class="mute">Atendimentos hoje</div><div class="big">'+l.length+'</div></div><div class="card"><div class="mute">Recebido no mês</div><div class="big">'+money(mo)+'</div></div></div>'+
-  (pends.length?'<h3 style="margin:10px 0 2px;color:var(--warn)">⏳ Pedidos pelo link aguardando confirmação ('+pends.length+')</h3>'+pends.map(itemCard).join(''):'')+
-  (aniv.length?'<h3 style="margin:10px 0 2px">🎂 Aniversariantes (próximos 7 dias)</h3>'+aniv.map(function(a){return'<div class="card row"><div><b>'+esc(a.c.name)+'</b><div class="mute num">'+(a.diff===0?'Faz aniversário hoje! 🎉':'Dia '+a.dd+' (em '+a.diff+' '+(a.diff===1?'dia':'dias')+')')+'</div></div><button class="btn sm ghost" onclick="waBday(\''+a.c.id+'\')">Parabenizar</button></div>'}).join(''):'')+
-  '<h3 style="margin:10px 0 2px">Atendimentos de hoje</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.</div>')+'<h3 style="margin:10px 0 2px">Consultas de amanhã</h3>'+(lt.length?lt.map(itemCard).join(''):'<div class="empty">Nada marcado para amanhã.</div>');
+  (pends.length?'<h3 style="margin:10px 0 6px;color:var(--warn)">⏳ Pedidos pelo link aguardando confirmação ('+pends.length+')</h3>'+pends.map(itemCard).join(''):'')+
+  (aniv.length?'<h3 style="margin:10px 0 6px">🎂 Aniversariantes (próximos 7 dias)</h3>'+aniv.map(function(a){return'<div class="card row"><div><b>'+esc(a.c.name)+'</b><div class="mute num">'+(a.diff===0?'Faz aniversário hoje! 🎉':'Dia '+a.dd+' (em '+a.diff+' '+(a.diff===1?'dia':'dias')+')')+'</div></div><button class="btn sm ghost" onclick="waBday(\''+a.c.id+'\')">Parabenizar</button></div>'}).join(''):'')+
+  '<h3 style="margin:10px 0 6px">Atendimentos de hoje</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.</div>')+'<h3 style="margin:10px 0 6px">Consultas de amanhã</h3>'+(lt.length?lt.map(itemCard).join(''):'<div class="empty">Nada marcado para amanhã.</div>');
 
  }else if(tab==='agenda'){
   var l2=S.items.filter(function(i){return i.date===sel}).sort(byT);
@@ -514,14 +556,14 @@ function render(){
   h=head('Consulentes','<button class="btn sm" onclick="formClient()">+ Consulente</button>')+'<input placeholder="Buscar por nome ou telefone…" value="'+esc(q)+'" oninput="buscar(this.value)"><div id="cl">'+clist()+'</div>';
 
  }else if(tab==='metodos'){
-  h=head('Métodos de jogo','<button class="btn sm" onclick="formMetodo()">+ Novo método de jogo</button>')+
+  h=head('Métodos de jogo','<button class="btn sm" onclick="formMetodo()">+ Novo método</button>')+
   (S.methods.length?S.methods.map(function(m){var dc=(m.deck||[]).length;return'<div class="card"><div class="row"><div><b style="font-size:16px">'+esc(m.name)+'</b><div class="mute num" style="margin-top:3px">'+(m.dur||'?')+' min · '+money(m.price)+' · <span style="color:var(--acc);font-weight:500">'+modLabel(m.mod)+'</span></div></div><button class="btn sm ghost" onclick="formMetodo(\''+m.id+'\')">Editar / Cartas</button></div>'+(dc?'<div class="mini-cards" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)">'+m.deck.slice(0,6).map(function(c){return'<span class="mini-card">'+(c.img?'<img src="'+c.img+'" alt="">':'')+'<span>'+esc(c.name)+'</span></span>'}).join('')+(dc>6?'<span class="tag">+'+(dc-6)+' cartas</span>':'')+'</div>':'')+'</div>'}).join(''):'<div class="empty">Cadastre seus métodos de jogo (Tarot, Baralho Cigano…) com a duração, modalidade, preço e fotos das cartas.</div>');
 
  }else if(tab==='mensagens'){
   var c=CF();
-  h=head('Mensagens automáticas','<button class="btn sm" onclick="saveMsgs()">Salvar mensagens</button>')+
-  '<p class="mute" style="margin:-6px 0 12px">Personalize os textos enviados pelo WhatsApp e exibidos no agendamento. Clique nas variáveis para copiar ou digite-as no texto.</p>'+
-  '<div class="card"><h3 style="margin-bottom:6px">1 · Confirmação de consulta</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Enviar confirmação</b> nos detalhes do atendimento.</p><textarea id="m-conf" rows="3">'+esc(c.msg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{dia}</b>, <b>{hora}</b>, <b>{jogo}</b> (método), <b>{tarologa}</b>, <b>{pix}</b></div></div>'+
+  h=head('Mensagens automáticas','<button class="btn sm" onclick="saveMsgs()">Salvar</button>')+
+  '<p class="mute" style="margin:-6px 0 12px">Personalize os textos enviados pelo WhatsApp e exibidos no agendamento.</p>'+
+  '<div class="card"><h3 style="margin-bottom:6px">1 · Confirmação de consulta</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Enviar confirmação</b> nos detalhes do atendimento.</p><textarea id="m-conf" rows="3">'+esc(c.msg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{dia}</b>, <b>{hora}</b>, <b>{jogo}</b>, <b>{tarologa}</b>, <b>{pix}</b></div></div>'+
   '<div class="card"><h3 style="margin-bottom:6px">2 · Cobrança via Pix</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Cobrar Pix</b> nos detalhes do atendimento.</p><textarea id="m-pix" rows="5">'+esc(c.pixMsg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{jogo}</b>, <b>{dia}</b>, <b>{valor}</b>, <b>{pix}</b>, <b>{banco}</b>, <b>{titular}</b>, <b>{tarologa}</b></div></div>'+
   '<div class="card"><h3 style="margin-bottom:6px">3 · Mensagem após agendamento pelo link</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Texto que a consulente envia para o seu WhatsApp assim que reserva pelo link público.</p><textarea id="m-link" rows="4">'+esc(c.linkMsg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{tarologa}</b>, <b>{jogo}</b>, <b>{modalidade}</b>, <b>{dia}</b>, <b>{hora}</b>, <b>{valor}</b>, <b>{nome}</b></div></div>'+
   '<div class="card"><h3 style="margin-bottom:6px">4 · Feliz aniversário</h3><p class="mute" style="margin:0 0 8px;font-size:12.5px">Enviada ao clicar em <b>Parabenizar</b> na lista de aniversariantes da semana.</p><textarea id="m-bday" rows="3">'+esc(c.birthMsg)+'</textarea><div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b> e <b>{tarologa}</b></div></div>'+
@@ -529,7 +571,7 @@ function render(){
 
  }else if(tab==='conta'){
   var c=CF(),D=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],pubUrl=location.origin+location.pathname+'#agendar?t='+USER;
-  h=head('Minha conta','<button class="btn sm" onclick="saveCfg()">Salvar alterações</button>')+
+  h=head('Minha conta','<button class="btn sm" onclick="saveCfg()">Salvar</button>')+
   '<div class="conta-grid">'+
   '<div class="conta-col">'+
     '<div class="card"><div class="row" style="margin-bottom:14px"><div><h3 style="margin:0">Meu perfil</h3><div class="mute num">'+(SUB?(SUB.status==='trial'?'Teste grátis até ':'Assinatura ativa até ')+dt(SUB.ate.slice(0,10)):'')+'</div></div>'+(SUB&&SUB.status==='trial'?'<a class="btn sm" href="'+PAY+'" target="_blank">Assinar agora</a>':'')+'</div>'+
@@ -550,7 +592,7 @@ function render(){
       '<button type="button" class="swatch" style="background:#3A3153" title="Índigo Noturno" onclick="setColorPreset(\'#3A3153\',\'#D49B35\')"></button>'+
       '<button type="button" class="swatch" style="background:#7B4B2A" title="Terracota Solar" onclick="setColorPreset(\'#7B4B2A\',\'#B87A14\')"></button>'+
     '</div>'+
-    '<div class="grid"><div><label>Cor principal</label><input id="p-acc" type="color" value="'+esc(c.corAcc||'#56245B')+'" oninput="applyThemeColors(this.value,v(\'p-gold\'))"></div><div><label>Cor de destaque / detalhes</label><input id="p-gold" type="color" value="'+esc(c.corGold||'#A67422')+'" oninput="applyThemeColors(v(\'p-acc\'),this.value)"></div></div></div>'+
+    '<div class="grid"><div><label>Cor principal</label><input id="p-acc" type="color" value="'+esc(c.corAcc||'#56245B')+'" oninput="applyThemeColors(this.value,v(\'p-gold\'))"></div><div><label>Cor de destaque</label><input id="p-gold" type="color" value="'+esc(c.corGold||'#A67422')+'" oninput="applyThemeColors(v(\'p-acc\'),this.value)"></div></div></div>'+
   '</div>'+
   '<div class="conta-col">'+
     '<div class="card"><h3 style="margin-bottom:8px">Horário e dias de atendimento</h3>'+
@@ -576,7 +618,7 @@ function render(){
     '<div><h3 style="margin-bottom:10px">Métodos de jogo mais vendidos</h3>'+rows(grp(S.items.filter(function(i){return(i.paid||i.done)&&i.date.slice(0,7)===ym}),function(i){return mt(i.mid)},function(i){return+i.price||0}),1)+'</div>'+
     '<div><h3 style="margin-bottom:10px">Saídas por categoria</h3>'+rows(grp(ex,function(e){return e.cat},function(e){return e.value}),1)+'</div>'+
   '</div>'+
-  (ex.length?'<h3 style="margin:6px 0 0">Últimas saídas lançadas</h3>'+ex.map(function(e){return'<div class="card row"><div><b>'+esc(e.cat)+'</b><div class="mute num">'+dt(e.date)+(e.desc?' · '+esc(e.desc):'')+'</div></div><div><b class="num">'+money(e.value)+'</b> <button class="btn sm ghost" onclick="formExp(\''+e.id+'\')">Editar</button></div></div>'}).join(''):'');
+  (ex.length?'<h3 style="margin:6px 0 6px">Últimas saídas lançadas</h3>'+ex.map(function(e){return'<div class="card row"><div><b>'+esc(e.cat)+'</b><div class="mute num">'+dt(e.date)+(e.desc?' · '+esc(e.desc):'')+'</div></div><div><b class="num">'+money(e.value)+'</b> <button class="btn sm ghost" onclick="formExp(\''+e.id+'\')">Editar</button></div></div>'}).join(''):'');
  }
  document.getElementById('app').innerHTML=h}
 
@@ -644,7 +686,7 @@ function formMetodo(id){
  '<div style="display:flex;gap:6px"><input id="dc-new" placeholder="Ou adicione carta só pelo nome…" style="margin:0"><button type="button" class="btn sm ghost" onclick="addDeckCardManual()">+ Adicionar</button></div>'+
  '<div id="temp-deck-box" style="margin-top:10px"></div>'+
  '</div></div>'+
- '<div class="row" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><button class="btn" onclick="saveMethod(\''+(id||'')+'\')">Salvar método de jogo</button>'+(id?'<button class="btn del" onclick="delMethod(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>',true);
+ '<div class="row" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap"><button class="btn" onclick="saveMethod(\''+(id||'')+'\')">Salvar método</button>'+(id?'<button class="btn del" onclick="delMethod(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>',true);
  renderTempDeck();
 }
 function saveMethod(id){
@@ -656,7 +698,7 @@ function saveMethod(id){
  save();closeS();render();toast(id?'Método de jogo atualizado!':'Método de jogo cadastrado!');
 }
 
-/* === MODAL DE ATENDIMENTO (SEM MODAL/SUGESTÃO DE HORÁRIO LIVRE) === */
+/* === MODAL DE ATENDIMENTO === */
 var TEMP_PICKED=[];
 function tglPickCard(cid){
  var idx=TEMP_PICKED.indexOf(cid);
@@ -690,7 +732,7 @@ function formItem(id,cid){
  '<label>Anotação da tiragem / posições</label><div class="chips"><button type="button" class="chip" onclick="tplCards(\'Passado: | Presente: | Futuro: \')">+ Passado/Presente/Futuro</button><button type="button" class="chip" onclick="tplCards(\'Situação: | Obstáculo: | Conselho: \')">+ Situação/Obstáculo/Conselho</button></div><input id="g6" value="'+esc(i.cards)+'" placeholder="Ex: Cruz Celta, linha do tempo…">'+
  '<label>Conselhos e recados</label><textarea id="g7" rows="4" placeholder="O que foi orientado na leitura…">'+esc(i.notes)+'</textarea>'+
  '</div></div>'+
- '<div class="row" style="margin-top:12px;padding-top:14px;border-top:1px solid var(--line)"><button class="btn" onclick="saveItem(\''+(id||'')+'\')">Salvar atendimento</button>'+(id?'<button class="btn del" onclick="delItem(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>',true);
+ '<div class="row" style="margin-top:12px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap"><button class="btn" onclick="saveItem(\''+(id||'')+'\')">Salvar</button>'+(id?'<button class="btn del" onclick="delItem(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>',true);
  renderItemDeck();
 }
 function commitItem(id,d){
@@ -707,7 +749,7 @@ function saveItem(id){
  commitItem(id,d);
 }
 function profile(id){var c=cl(id),l=S.items.filter(function(i){return i.cid===id}).sort(function(a,b){return b.date.localeCompare(a.date)}),t=iso(new Date()),nx=l.filter(function(i){return!i.done&&i.date>=t&&ativo(i)}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)})[0];
- sheet('<div id="prof" data-c="'+id+'"></div><div class="sheet-hd"><h2 style="margin:0">'+esc(c.name)+'</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div><div class="mute num">'+esc(c.phone||'sem telefone')+(c.email?' · '+esc(c.email):'')+'<br>Aniversário: '+(c.birth?dt(c.birth).slice(0,5):'—')+' · Cadastro: '+dt(c.created)+'</div>'+(c.notes?'<p style="margin:10px 0">'+esc(c.notes)+'</p>':'')+'<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div><div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div><div class="row" style="margin:14px 0"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))}
+ sheet('<div id="prof" data-c="'+id+'"></div><div class="sheet-hd"><h2 style="margin:0">'+esc(c.name)+'</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div><div class="mute num">'+esc(c.phone||'sem telefone')+(c.email?' · '+esc(c.email):'')+'<br>Aniversário: '+(c.birth?dt(c.birth).slice(0,5):'—')+' · Cadastro: '+dt(c.created)+'</div>'+(c.notes?'<p style="margin:10px 0">'+esc(c.notes)+'</p>':'')+'<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div><div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div><div class="row" style="margin:14px 0;flex-wrap:wrap"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))}
 
 var SUB=null,VER=null;
 var DEFMSG='Olá, {nome}! Passando para confirmar o seu atendimento ({jogo}) no dia {dia} às {hora}. Te espero! 🔮';
@@ -809,7 +851,7 @@ function renderPublic(){
   (PUB_SEL.time?'<label>Seu nome completo *</label><input id="bn" placeholder="Como gosta de ser chamada"><label>WhatsApp com DDD *</label><input id="bt" type="tel" placeholder="(11) 99999-9999"><label>Data de nascimento (opcional)</label><input id="bb" type="date">'+
   (modAtual==='ambos'?'<label>Modalidade</label><select id="bo"><option value="1">Online (chamada / áudio)</option><option value="0">Presencial</option></select>':'<div class="mute" style="margin:4px 0 12px">Atendimento: <b>'+modLabel(modAtual)+'</b></div>')+
   '<button id="bsub" class="btn" style="width:100%;margin-top:auto" onclick="submitPublic()">Confirmar · '+dt(PUB_SEL.date).slice(0,5)+' às '+esc(PUB_SEL.time)+'</button>':
-  '<div class="empty" style="margin:auto 0;padding:36px 16px"><div style="font-size:26px;margin-bottom:8px">🔮</div>Escolha o método de jogo, o dia e um horário livre para preencher seus dados e concluir a reserva.</div>')+'</div>';
+  '<div class="empty" style="margin:auto 0;padding:32px 16px"><div style="font-size:26px;margin-bottom:8px">🔮</div>Escolha o método de jogo, o dia e um horário livre para preencher seus dados e concluir a reserva.</div>')+'</div>';
 
  box.innerHTML='<div class="pub-head"><div class="logo"><b>✦</b> MESA DE ARCANOS</div><h2>'+esc(tituloPrincipal)+'</h2><div class="mute" style="margin-top:2px">'+subLinha+'</div></div>'+
  '<div class="pub-grid">'+col1+col2+col3+'</div>';
@@ -845,7 +887,7 @@ async function submitPublic(){
   '</div><button type="button" class="btn sm ghost" onclick="copyPixPub()">Copiar Pix</button></div>';
  }
 
- $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" style="justify-content:center;margin-bottom:20px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="text-align:center;padding:30px 24px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
+ $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" style="justify-content:center;margin-bottom:20px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="text-align:center;padding:26px 20px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
  '<div class="card" style="background:var(--bg);text-align:left"><div class="row"><b>'+esc(res.jogo)+'</b><b class="num" style="color:var(--gold)">'+money(res.valor)+'</b></div><div class="mute num" style="margin-top:4px">'+dt(PUB_SEL.date)+' às '+esc(PUB_SEL.time)+' · '+(res.online?'Online':'Presencial')+'</div>'+pixInfoHtml+'</div>'+
  (waNum?'<a class="btn" style="width:100%;margin-top:8px" href="https://wa.me/'+waNum+'?text='+encodeURIComponent(waTxt)+'" target="_blank">'+(pixAuto?'Enviar comprovante do Pix no WhatsApp':'Enviar confirmação no WhatsApp')+'</a>':'')+
  '<p style="margin:16px 0 0"><a class="mute" href="#" onclick="loadPublic(\''+PUB_UID+'\');return false">Fazer outro agendamento</a></p></div></div>';
@@ -901,7 +943,7 @@ function legal(h){var b='<main style="max-width:720px;margin:0 auto;padding:24px
 <h3>Quem somos</h3><p>[SEU NOME OU EMPRESA], contato para assuntos de privacidade: [SEU E-MAIL].</p>
 <h3>Quais dados tratamos</h3><p>Dados da sua conta (e-mail) e o conteúdo que você cadastra: fichas de clientes (nome, telefone, e-mail, nascimento, observações), atendimentos marcados, anotações e lançamentos financeiros.</p>
 <h3>Papéis</h3><p>Sobre os dados de suas clientes, você decide o que cadastrar e por quê (controladora). Nós guardamos esses dados apenas para o aplicativo funcionar (operadores).</p>
-<h3>Onde ficam e quem recebe</h3><p>Os dados ficam em serviços de hospedagem e banco de dados (Netlify e Supabase), com servidores que podem estar fora do Brasil. Não vendemos dados. O meio de pagamento recebe apenas os dados necessários para a cobrança.</p>
+<h3>Onde ficam e quem recebe</h3><p>Os dados ficam em serviços de hospedagem e banco de dados (Cloudflare e Supabase), com servidores que podem estar fora do Brasil. Não vendemos dados. O meio de pagamento recebe apenas os dados necessários para a cobrança.</p>
 <h3>Seus direitos</h3><p>Você pode pedir acesso, correção, exclusão e cópia dos seus dados pelo e-mail acima. Você mesma pode baixar tudo em Conta → Meus dados.</p>
 <h3>Segurança e guarda</h3><p>Cada conta só acessa os próprios dados. Mantemos as informações enquanto a conta existir e apagamos quando você pedir a exclusão, salvo obrigação legal.</p></main>`}
 
