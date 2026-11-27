@@ -829,7 +829,6 @@ function render(){
     '<div class="card"><h3 style="margin-bottom:10px">Meus dados e backup</h3><div style="display:flex;gap:8px;flex-wrap:wrap">'+(ADMIN?'<a class="btn sm" href="#admin">✦ Painel admin</a>':'')+'<button class="btn ghost sm" onclick="exportCsv()">Baixar planilha (CSV)</button><button class="btn ghost sm" onclick="exportJson()">Backup completo</button></div><p class="mute" style="margin:12px 0 0"><a href="#termos" style="color:var(--acc)">Termos de uso</a> · <a href="#privacidade" style="color:var(--acc)">Privacidade</a></p><button class="btn" style="width:100%;margin-top:16px" onclick="saveCfg()">Salvar alterações</button></div>'+
   '</div></div>';
  }else{
- }else{
   if(!cxMes)cxMes=ym;
   var cParts=cxMes.split('-'),cY=+cParts[0],cM=+cParts[1]-1,cxLabel=MES[cM]+' de '+cY,isCurYm=(cxMes===ym);
   var df=(d.getDay()+6)%7,ws=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()-df)),we=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()-df+6)),yr=cxMes.slice(0,4);
