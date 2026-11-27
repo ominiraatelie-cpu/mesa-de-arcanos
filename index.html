@@ -81,8 +81,12 @@ footer a{color:var(--acc);text-decoration:none}
 }
 @media(min-width:1025px){
   .hero-wrap .top{padding:30px 0 10px}
-  .hero-wrap .top .logo{font-size:50px;letter-spacing:4px;gap:16px}
+  .hero-wrap .top .logo{font-size:clamp(40px,4.2vw,50px);letter-spacing:4px;gap:16px}
   .hero-wrap .top-btns{order:0;align-self:auto;position:absolute;right:0;top:50%;transform:translateY(-50%)}
+}
+
+@media(max-width:760px){
+  .hero-wrap .hero h1{font-size:29px;line-height:1.14}
 }
 
 /* RESPONSIVO PARA TABLET (761px a 1024px) */
