@@ -16,11 +16,11 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17101C;--card:#221829;--ink:#F3E9D4;--mute:#A796AD;--gold:#DDA84B;--acc:#C689CC;--acc-hover:#D59EDB;--line:#372940;--ok:#66C78E;--bad:#EB8671;--warn:#E5B14C;--on:#17101C;--soft:#2E2036;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#17101C;--card:#221829;--ink:#F3E9D4;--mute:#A796AD;--gold:#DDA84B;--acc:#C689CC;--acc-hover:#D59EDB;--line:#372940;--ok:#66C78E;--bad:#EB8671;--warn:#E5B14C;--on:#17101C;--soft:#2E2036;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;overflow-x:hidden;width:100%}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;width:100%;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .num{font-variant-numeric:tabular-nums}
-.w{max-width:1060px;margin:0 auto;padding:0 20px}
+.w{width:100%;max-width:1060px;margin:0 auto;padding:0 24px}
 h1,h2,.logo{font-family:var(--serif);font-weight:600;margin:0}
 h3{font-family:var(--sans);font-weight:600;font-size:16px;margin:0}
 h1{font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.3px}
@@ -40,7 +40,7 @@ button,input,select,textarea{font:inherit;color:var(--ink)}
 .btn.ok{background:var(--ok);color:#fff}
 .btn.del{background:transparent;color:var(--bad);border:1px solid var(--bad)}
 .btn.del:hover{background:rgba(179,63,43,.08)}
-.hero-wrap{position:relative;overflow:hidden}
+.hero-wrap{position:relative;overflow:hidden;width:100%}
 .mandala-bg{position:absolute;right:-90px;top:-40px;width:540px;height:540px;opacity:.08;pointer-events:none;color:var(--gold)}
 .hero{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center;padding:30px 0 60px;position:relative}
 .hero p{color:var(--mute);font-size:16px;margin:16px 0 26px;max-width:500px}
@@ -55,23 +55,24 @@ button,input,select,textarea{font:inherit;color:var(--ink)}
 .tag.ok{color:var(--ok);border-color:rgba(36,117,72,.35);background:rgba(36,117,72,.08)}
 .tag.bad{color:var(--bad);border-color:rgba(179,63,43,.35);background:rgba(179,63,43,.08)}
 .tag.pend{color:var(--warn);border-color:rgba(184,122,20,.4);background:rgba(184,122,20,.1)}
-.band{background:var(--soft);padding:48px 0;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band{background:var(--soft);padding:48px 0;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);width:100%}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.sec{padding:52px 0}
+.sec{padding:52px 0;width:100%}
+.faq-wrap{max-width:740px}
 .f h3{font-size:17px;margin:10px 0 6px}.f p{margin:0;color:var(--mute);font-size:14px}.f .ic{font-size:26px}
 .step-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
 .n{font-family:var(--serif);font-size:34px;color:var(--gold);font-style:italic;line-height:1;margin-bottom:6px}
 .plan{max-width:440px;margin:0 auto;text-align:center;border:1.5px solid var(--gold);padding:32px 26px}
 .plan ul{list-style:none;padding:0;text-align:left;margin:20px 0 26px;display:grid;gap:10px}.plan li:before{content:"✦ ";color:var(--gold);font-weight:700}
 .price{font-family:var(--serif);font-size:60px;font-weight:700;color:var(--acc);line-height:1;margin:10px 0}
-details{border-bottom:1px solid var(--line);padding:16px 0}summary{cursor:pointer;font-weight:600}details p{color:var(--mute);margin:8px 0 0;font-size:14.5px}
-footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 16px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line);padding:16px 0;text-align:left}summary{cursor:pointer;font-weight:600}details p{color:var(--mute);margin:8px 0 0;font-size:14.5px}
+footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 22px;border-top:1px solid var(--line)}
 footer a{color:var(--acc);text-decoration:none}
 
-/* RESPONSIVO LANDING PAGE (CELULAR) */
+/* RESPONSIVO GLOBAL PARA CELULAR (TODAS AS SEÇÕES E TELAS) */
 @media(max-width:760px){
-  .w{padding:0 16px}
+  .w{padding:0 22px}
   .top{padding:14px 0}
   .logo{font-size:16.5px;letter-spacing:1.4px;gap:5px}
   .logo b{font-size:15px}
@@ -85,22 +86,26 @@ footer a{color:var(--acc);text-decoration:none}
   .hero-cta .btn{width:100%;padding:13px 20px}
   .mock{text-align:left;padding:18px}
   .band{padding:38px 0}
-  .sec{padding:38px 0}
-  .g3{grid-template-columns:1fr;gap:12px}
-  .g4{grid-template-columns:1fr 1fr;gap:12px}
-  .step-box{padding:14px}
+  .sec{padding:40px 0;text-align:center}
+  .sec .eb{justify-content:center}
+  .sec h2{margin:0 auto 20px;max-width:330px}
+  .g3{grid-template-columns:1fr;gap:14px;text-align:left}
+  .g4{grid-template-columns:1fr 1fr;gap:12px;text-align:left}
+  .f{padding:20px}
+  .step-box{padding:16px}
   .step-box p{font-size:13px;margin:4px 0 0}
-  .plan{padding:26px 18px}
+  .plan{padding:26px 20px}
   .price{font-size:52px}
 }
 @media(max-width:380px){
+  .w{padding:0 18px}
   .logo{font-size:15px;letter-spacing:1px}
   .g4{grid-template-columns:1fr}
 }
 
 /* app */
-#ap{display:none;padding-bottom:82px}
-#ap main{max-width:720px;margin:0 auto;padding:14px 14px 20px}
+#ap{display:none;padding-bottom:84px;width:100%}
+#ap main{width:100%;max-width:720px;margin:0 auto;padding:14px 18px 24px}
 input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:5px 0 12px;font-size:14.5px;transition:.15s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc);background:var(--card)}
 input[type="color"]{padding:3px 6px;height:40px;cursor:pointer}
@@ -111,13 +116,13 @@ label{font-size:13px;font-weight:600;color:var(--mute);display:block}
 .chip:hover{border-color:var(--acc);color:var(--acc);background:var(--soft)}
 
 /* BARRA INFERIOR MOBILE OTIMIZADA PARA 7 ABAS */
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:4px 2px calc(4px + env(safe-area-inset-bottom,0px));z-index:5;box-shadow:0 -4px 16px rgba(0,0,0,.05)}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));z-index:5;box-shadow:0 -4px 16px rgba(0,0,0,.05)}
 nav button{flex:1;min-width:0;background:none;border:0;padding:5px 1px;font-size:9.5px;font-weight:500;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 nav button b{display:block;font-size:17px;font-weight:400;line-height:1.1}
 nav button.on{color:var(--acc);font-weight:700}
 
 /* modais e dialogos personalizados */
-.ov{position:fixed;inset:0;background:rgba(23,16,28,.62);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:12px;z-index:9}
+.ov{position:fixed;inset:0;background:rgba(23,16,28,.62);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:14px;z-index:9}
 .sheet{background:var(--card);width:100%;max-width:760px;max-height:92vh;overflow-y:auto;border-radius:20px;padding:24px 28px;box-shadow:0 24px 60px rgba(0,0,0,.35);position:relative;border:1px solid var(--line)}
 .sheet.wide{max-width:980px}
 .sheet-hd{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
@@ -125,15 +130,15 @@ nav button.on{color:var(--acc);font-weight:700}
 .sheet-x:hover{color:var(--acc);border-color:var(--acc)}
 .modal-2col{display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:start}
 @media(max-width:780px){
-  .ov{padding:6px;align-items:flex-end}
-  .sheet{max-width:100%;max-height:92vh;border-radius:18px 18px 14px 14px;padding:18px 15px}
+  .ov{padding:8px;align-items:flex-end}
+  .sheet{max-width:100%;max-height:92vh;border-radius:18px 18px 14px 14px;padding:18px 18px}
   .modal-2col{grid-template-columns:1fr;gap:12px}
   .mgrid{grid-template-columns:1fr}
   .grid{gap:10px}
 }
 
 /* dialogo de confirmacao e toast */
-.dlg-ov{position:fixed;inset:0;background:rgba(23,16,28,.65);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.dlg-ov{position:fixed;inset:0;background:rgba(23,16,28,.65);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}
 .dlg-box{background:var(--card);border:1.5px solid var(--gold);border-radius:20px;padding:26px 24px;max-width:410px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.4)}
 .dlg-ic{font-size:32px;margin-bottom:8px}
 .toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);border:1px solid var(--gold);padding:10px 18px;border-radius:99px;font-weight:600;font-size:13.5px;box-shadow:0 12px 30px rgba(0,0,0,.28);z-index:25;display:flex;align-items:center;gap:8px;animation:fadeIn .18s ease;max-width:92vw;text-align:center}
@@ -152,7 +157,7 @@ nav button.on{color:var(--acc);font-weight:700}
 .mini-card img{width:22px;height:32px;object-fit:cover;border-radius:5px}
 
 /* cards leves da agenda */
-.item-light{padding:14px 15px}
+.item-light{padding:15px 16px}
 .item-sub{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;margin-top:6px;color:var(--mute);font-size:13px}
 .item-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);flex-wrap:wrap}
 
@@ -179,7 +184,7 @@ nav button.on{color:var(--acc);font-weight:700}
 }
 
 /* agendamento publico em 3 colunas no PC e 1 no celular */
-#bk-box{max-width:1240px;margin:0 auto;padding:16px 16px 60px}
+#bk-box{width:100%;max-width:1240px;margin:0 auto;padding:18px 20px 60px}
 .pub-head{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:18px}
 .pub-head .logo{justify-content:center;font-size:20px;margin-bottom:4px}
 .pub-head h2{font-size:clamp(23px,3vw,32px);margin:2px 0}
@@ -294,15 +299,15 @@ nav button.on{color:var(--acc);font-weight:700}
 <ul><li>Link público de agendamento online</li><li>Consulentes e tiragens sem limite</li><li>Catálogo visual de cartas por baralho</li><li>Agenda com controle de pausa e dias</li><li>Mensagens prontas editáveis e dados Pix</li><li>Tabela de métodos de jogo e controle de caixa</li></ul>
 <a class="btn" style="width:100%" href="#app">Testar 7 dias grátis</a></div></div></div>
 
-<div class="w sec" style="max-width:740px"><div class="eb">✦ Dúvidas frequentes</div><h2>Respostas rápidas</h2>
+<div class="w sec faq-wrap"><div class="eb">✦ Dúvidas frequentes</div><h2>Respostas rápidas</h2>
 <details><summary>A consulente precisa criar conta para agendar pelo meu link?</summary><p>Não. Ela abre o seu link exclusivo, escolhe o método de jogo, o dia e um horário livre e preenche apenas nome e WhatsApp. O agendamento cai direto na sua agenda.</p></details>
 <details><summary>Posso usar pelo celular e pelo computador?</summary><p>Sim. Como os dados ficam salvos na nuvem da sua conta, você pode acessar do celular, tablet ou computador a qualquer momento.</p></details>
 <details><summary>Onde ficam guardadas as informações?</summary><p>Na nuvem, protegidas por senha na sua conta. Somente você tem acesso às suas fichas e ao seu caixa.</p></details>
 <details><summary>Ele avisa as consulentes automaticamente?</summary><p>Ele não dispara mensagens sozinho, mas cada consulta tem botões que abrem o WhatsApp já com o texto personalizado por você (confirmação, dados Pix ou aniversário). Você só confere e envia.</p></details></div>
 <footer>© Mesa de Arcanos · <a href="#termos">Termos de uso</a> · <a href="#privacidade">Privacidade</a> · <a href="#" data-sup target="_blank">Suporte no WhatsApp</a></footer></div>
 
-<div id="au" style="display:none"><main style="max-width:420px;margin:0 auto;padding:48px 16px"><div class="logo" style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="padding:24px"><h2>Entrar</h2><p class="mute" style="margin:4px 0 16px">Acesse sua mesa de atendimentos</p><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Senha</label><input id="apw" type="password" autocomplete="current-password"><label style="display:flex;align-items:center;font-weight:400;margin:6px 0 14px"><input id="aok" type="checkbox" style="width:auto;margin:0 8px 0 0">Li e aceito os <a href="#termos" style="margin:0 4px">Termos</a> e a <a href="#privacidade" style="margin-left:4px">Privacidade</a></label><p id="am" class="mute" style="color:var(--bad)"></p><div class="row"><button class="btn" onclick="login()">Entrar</button><button class="btn ghost" onclick="signup()">Criar conta</button></div><p style="margin:14px 0 0"><a class="mute" href="#" onclick="forgot();return false">Esqueci minha senha</a></p></div><p style="text-align:center"><a class="mute" href="#">← Voltar ao site</a></p></main></div>
-<div id="pw" style="display:none"><main style="max-width:460px;margin:0 auto;padding:56px 16px;text-align:center"><div class="logo" style="justify-content:center"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="margin-top:24px;padding:28px"><h2>Seu acesso terminou</h2><p class="mute" style="margin:10px 0 20px">O teste grátis ou a assinatura venceu. Assine para continuar editando. Use o <b>mesmo e-mail</b> do seu cadastro aqui — seus dados continuam salvos.</p><a class="btn" style="width:100%" href="#" data-pay>Assinar agora · R$ 29/mês</a><p style="margin:16px 0 8px"><a class="mute" href="#" data-sup target="_blank">Pagou com outro e-mail ou precisa de ajuda? Fale no WhatsApp</a></p><p><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha</button> <button class="btn ghost sm" onclick="exportJson()">Backup completo</button></p><a class="mute" href="#" onclick="logout();return false">Sair</a></div></main></div>
+<div id="au" style="display:none"><main style="max-width:420px;margin:0 auto;padding:48px 22px"><div class="logo" style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="padding:24px"><h2>Entrar</h2><p class="mute" style="margin:4px 0 16px">Acesse sua mesa de atendimentos</p><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Senha</label><input id="apw" type="password" autocomplete="current-password"><label style="display:flex;align-items:center;font-weight:400;margin:6px 0 14px"><input id="aok" type="checkbox" style="width:auto;margin:0 8px 0 0">Li e aceito os <a href="#termos" style="margin:0 4px">Termos</a> e a <a href="#privacidade" style="margin-left:4px">Privacidade</a></label><p id="am" class="mute" style="color:var(--bad)"></p><div class="row"><button class="btn" onclick="login()">Entrar</button><button class="btn ghost" onclick="signup()">Criar conta</button></div><p style="margin:14px 0 0"><a class="mute" href="#" onclick="forgot();return false">Esqueci minha senha</a></p></div><p style="text-align:center"><a class="mute" href="#">← Voltar ao site</a></p></main></div>
+<div id="pw" style="display:none"><main style="max-width:460px;margin:0 auto;padding:56px 22px;text-align:center"><div class="logo" style="justify-content:center"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="margin-top:24px;padding:28px"><h2>Seu acesso terminou</h2><p class="mute" style="margin:10px 0 20px">O teste grátis ou a assinatura venceu. Assine para continuar editando. Use o <b>mesmo e-mail</b> do seu cadastro aqui — seus dados continuam salvos.</p><a class="btn" style="width:100%" href="#" data-pay>Assinar agora · R$ 29/mês</a><p style="margin:16px 0 8px"><a class="mute" href="#" data-sup target="_blank">Pagou com outro e-mail ou precisa de ajuda? Fale no WhatsApp</a></p><p><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha</button> <button class="btn ghost sm" onclick="exportJson()">Backup completo</button></p><a class="mute" href="#" onclick="logout();return false">Sair</a></div></main></div>
 <div id="lg" style="display:none"></div>
 <div id="bk" style="display:none"><div id="bk-box"></div></div>
 <div id="adm" style="display:none"></div>
@@ -930,7 +935,7 @@ function exportCsv(){var q=function(x){return'"'+String(x==null?'':x).replace(/"
  S.items.slice().sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)}).forEach(function(i){var c=cl(i.cid)||{};L.push([dt(i.date),i.time,c.name,c.phone,mt(i.mid),i.dur,String(i.price||0).replace('.',','),i.st||'marcado',i.paid?'sim':'não',i.pay,i.cards,i.notes])});
  dl('atendimentos.csv',L.map(function(r){return r.map(q).join(';')}).join('\r\n'),'text/csv');toast('Planilha baixada!','📊')}
 function exportJson(){dl('backup-mesa-de-arcanos.json',JSON.stringify(S,null,1),'application/json');toast('Backup baixado!','💾')}
-function legal(h){var b='<main style="max-width:720px;margin:0 auto;padding:24px 18px"><p><a href="#">← Voltar</a></p>';
+function legal(h){var b='<main style="max-width:720px;margin:0 auto;padding:24px 22px"><p><a href="#">← Voltar</a></p>';
  if(h==='#termos')return b+`<h1 style="font-size:30px">Termos de uso</h1><p class="mute">Última atualização: [DATA]</p>
 <h3>1. O serviço</h3><p>A Mesa de Arcanos é um aplicativo para organizar atendimentos: cadastro de clientes, agenda, anotações dos jogos e controle financeiro. Ele é oferecido por [SEU NOME OU EMPRESA], contato: [SEU E-MAIL].</p>
 <h3>2. Conta</h3><p>Você é responsável pelo e-mail e pela senha da sua conta e por tudo o que acontece nela. Não compartilhe sua senha.</p>
