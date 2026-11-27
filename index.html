@@ -510,13 +510,13 @@ function cal(){var a=cur.split('-'),y=+a[0],m=+a[1]-1,f=new Date(y,m,1).getDay()
  for(var d=1;d<=n;d++){var ds=cur+'-'+pad(d),has=S.items.some(function(i){return i.date===ds&&ativo(i)});h+='<button class="'+(has?'has ':'')+(ds===sel?'sel':'')+'" onclick="pick(\''+ds+'\')">'+d+'</button>'}
  return h+'</div>'}
 function clist(){var l=S.clients.filter(function(c){var s=q.toLowerCase();return c.name.toLowerCase().indexOf(s)>-1||(c.phone||'').replace(/\D/g,'').indexOf(s.replace(/\D/g,'')||'§')>-1}).sort(function(a,b){return a.name.localeCompare(b.name)});
- return l.length?l.map(function(c){var n=S.items.filter(function(i){return i.cid===c.id}).length;return'<div class="card" onclick="profile(\''+c.id+'\')" style="cursor:pointer"><div class="row"><b style="font-size:16px">'+esc(c.name)+'</b><span class="tag num">'+n+' '+(n===1?'consulta':'consultas')+'</span></div><div class="mute num" style="margin-top:4px">'+esc(c.phone||'sem telefone')+'</div></div>'}).join(''):'<div class="empty">Nenhuma consulente encontrada.</div>'}
+ return l.length?l.map(function(c){var n=S.items.filter(function(i){return i.cid===c.id}).length;return'<div class="card" onclick="profile(\''+c.id+'\')" style="cursor:pointer"><div class="row"><b style="font-size:16px">'+esc(c.name)+'</b><span class="tag num">'+n+' '+(n===1?'consulta':'consultas')+'</span></div><div class="mute num" style="margin-top:4px">'+esc(maskPhone(c.phone)||'sem telefone')+'</div></div>'}).join(''):'<div class="empty">Nenhuma consulente encontrada.</div>'}
 function buscar(x){q=x;document.getElementById('cl').innerHTML=clist()}
 function sheet(html,wide){var o=document.createElement('div');o.className='ov';o.id='ov';o.onclick=function(e){if(e.target===o)closeS()};o.innerHTML='<div class="sheet'+(wide?' wide':'')+'">'+html+'</div>';document.body.appendChild(o)}
 function closeS(){var o=document.getElementById('ov');if(o)o.remove()}
 function formClient(id){var c=id?cl(id):{};
- sheet('<div class="sheet-hd"><h2 style="margin:0">'+(id?'Editar':'Nova')+' consulente</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div><label>Nome</label><input id="f1" value="'+esc(c.name)+'" onkeydown="if(event.key===\'Enter\')saveClient(\''+(id||'')+'\')"><div class="grid"><div><label>Nascimento</label><input id="f3" type="date" value="'+esc(c.birth)+'"></div><div><label>Telefone</label><input id="f2" type="tel" value="'+esc(c.phone)+'" placeholder="(11) 99999-9999" onkeydown="if(event.key===\'Enter\')saveClient(\''+(id||'')+'\')"></div></div><label>E-mail</label><input id="f5" type="email" value="'+esc(c.email)+'" onkeydown="if(event.key===\'Enter\')saveClient(\''+(id||'')+'\')"><label>Observações</label><textarea id="f4" rows="2">'+esc(c.notes)+'</textarea><div class="row" style="margin-top:6px"><button class="btn" onclick="saveClient(\''+(id||'')+'\')">Salvar</button>'+(id?'<button class="btn del" onclick="delClient(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>')}
-function saveClient(id){var n=v('f1').trim();if(!n){dlgAlert('Informe o nome da consulente.','Campo obrigatório');return}var d={name:n,phone:v('f2').trim(),birth:v('f3'),email:v('f5').trim(),notes:v('f4')};
+ sheet('<div class="sheet-hd"><h2 style="margin:0">'+(id?'Editar':'Nova')+' consulente</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div><label>Nome</label><input id="f1" value="'+esc(c.name)+'" onkeydown="if(event.key===\'Enter\')saveClient(\''+(id||'')+'\')"><div class="grid"><div><label>Nascimento</label><input id="f3" type="date" value="'+esc(c.birth)+'"></div><div><label>Telefone</label><input id="f2" type="tel" value="'+esc(maskPhone(c.phone))+'" placeholder="(11) 99999-9999" onkeydown="if(event.key===\'Enter\')saveClient(\''+(id||'')+'\')"></div></div><label>E-mail</label><input id="f5" type="email" value="'+esc(c.email)+'" onkeydown="if(event.key===\'Enter\')saveClient(\''+(id||'')+'\')"><label>Observações</label><textarea id="f4" rows="2">'+esc(c.notes)+'</textarea><div class="row" style="margin-top:6px"><button class="btn" onclick="saveClient(\''+(id||'')+'\')">Salvar</button>'+(id?'<button class="btn del" onclick="delClient(\''+id+'\')">Excluir</button>':'')+'<button class="btn ghost" onclick="closeS()">Cancelar</button></div>')}
+function saveClient(id){var n=v('f1').trim();if(!n){dlgAlert('Informe o nome da consulente.','Campo obrigatório');return}var d={name:n,phone:maskPhone(v('f2').trim()),birth:v('f3'),email:v('f5').trim(),notes:v('f4')};
  if(id)Object.assign(cl(id),d);else{d.id=uid();d.created=iso(new Date());S.clients.push(d)}save();closeS();render();toast(id?'Consulente atualizada!':'Consulente cadastrada!')}
 function delClient(id){dlgConfirm('Excluir esta consulente? As consultas dela continuam registradas.',function(){S.clients=S.clients.filter(function(c){return c.id!==id});save();closeS();render();toast('Consulente excluída')},{title:'Excluir consulente',yes:'Excluir',danger:true,ic:'🗑️'})}
 function delMethod(id){dlgConfirm('Excluir este método de jogo da sua tabela?',function(){S.methods=S.methods.filter(function(x){return x.id!==id});save();closeS();render();toast('Método de jogo excluído')},{title:'Excluir método de jogo',yes:'Excluir',danger:true,ic:'🗑️'})}
@@ -582,7 +582,7 @@ function itemDetails(id){
    '<div><span>Método de jogo</span><b>'+esc(mt(i.mid))+'</b>'+(i.dur?' ('+i.dur+' min)':'')+'</div>'+
    '<div><span>Modalidade</span>'+(i.online?'💻 Online':'🏠 Presencial')+'</div>'+
    '<div><span>Valor</span><b class="num" style="color:var(--gold)">'+money(i.price)+'</b></div>'+
-   '<div><span>WhatsApp da consulente</span><span class="num">'+esc(c.phone||'Não informado')+'</span></div>'+
+   '<div><span>WhatsApp da consulente</span><span class="num">'+esc(maskPhone(c.phone)||'Não informado')+'</span></div>'+
    '<div><span>Pagamento</span>'+(i.paid?'Pago'+(i.pay?' via '+esc(i.pay):''):'Pendente')+'</div>'+
  '</div>'+
  (pickedObjs.length?'<div class="msec">Cartas selecionadas ('+pickedObjs.length+')</div><div class="deck-grid" style="grid-template-columns:repeat(auto-fill,minmax(84px,1fr))">'+pickedObjs.map(function(card){return'<div class="deck-card" style="cursor:default">'+(card.img?'<img src="'+card.img+'" alt="">':'<div style="aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--card);border-radius:8px;margin-bottom:5px">🃏</div>')+'<span>'+esc(card.name)+'</span></div>'}).join('')+'</div>':'')+
@@ -701,7 +701,7 @@ function render(){
   '<div class="conta-col">'+
     '<div class="card"><div class="row" style="margin-bottom:14px"><div><h3 style="margin:0">Meu perfil</h3><div class="mute num">'+(SUB?(SUB.status==='trial'?'Teste grátis até ':'Assinatura ativa até ')+dt(SUB.ate.slice(0,10)):'')+'</div></div>'+(SUB&&SUB.status==='trial'?'<a class="btn sm" href="'+PAY+'" target="_blank">Assinar agora</a>':'')+'</div>'+
     '<div class="grid"><div><label>Seu nome (taróloga)</label><input id="p1" value="'+esc(c.nome)+'"></div><div><label>Nome do seu espaço</label><input id="p2" value="'+esc(c.espaco)+'" placeholder="Opcional"></div></div>'+
-    '<label>Telefone / WhatsApp</label><input id="p3" type="tel" value="'+esc(c.tel)+'" placeholder="(11) 99999-9999">'+
+    '<label>Telefone / WhatsApp</label><input id="p3" type="tel" value="'+esc(maskPhone(c.tel))+'" placeholder="(11) 99999-9999">'+
     '<label>E-mail de acesso</label><input value="'+esc(EMAIL)+'" disabled style="margin-bottom:0"></div>'+
 
     '<div class="card"><h3 style="margin-bottom:10px">💠 Dados para recebimento Pix</h3><p class="mute" style="margin:0 0 12px;font-size:13px">Essas informações aparecem nas cobranças e na tela final do agendamento online.</p>'+
@@ -726,7 +726,8 @@ function render(){
     '<div class="grid" style="grid-template-columns:1fr 1fr 1fr"><div><label>Início</label><input id="c1" type="time" value="'+c.ini+'" style="margin-bottom:0"></div><div><label>Fim</label><input id="c4" type="time" value="'+c.fim+'" style="margin-bottom:0"></div><div><label>Pausa (min)</label><input id="c2" type="number" value="'+c.pausa+'" style="margin-bottom:0"></div></div></div>'+
 
     '<div class="card" style="border-color:var(--gold)"><h3 style="margin-bottom:4px">🔗 Link de agendamento online</h3><p class="mute" style="margin:0 0 12px">Permita que consulentes reservem horários livres sozinhas</p>'+
-    '<label style="display:flex;align-items:center;font-weight:600;color:var(--ink);margin:4px 0 12px;cursor:pointer"><input id="lk1" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.linkAtivo?' checked':'')+'>Ativar agendamento pelo meu link</label>'+
+    '<label style="display:flex;align-items:center;font-weight:600;color:var(--ink);margin:4px 0 10px;cursor:pointer"><input id="lk1" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.linkAtivo?' checked':'')+'>Ativar agendamento pelo meu link</label>'+
+    '<label style="display:flex;align-items:center;font-weight:600;color:var(--ink);margin:4px 0 12px;cursor:pointer"><input id="lk-dur" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.showDur!==false?' checked':'')+'>Mostrar duração (ex.: 30 min) para a consulente no link</label>'+
     '<label>Regra de confirmação pelo link</label><select id="lk2"><option value="direto"'+(c.modoLink==='direto'?' selected':'')+'>Confirmar automaticamente (sem exigir Pix na hora)</option><option value="pix_auto"'+(c.modoLink==='pix_auto'?' selected':'')+'>Confirmar automaticamente após pagamento Pix (reserva por 15 min)</option><option value="pendente"'+(c.modoLink==='pendente'?' selected':'')+'>Pré-reserva manual (aguarda minha aprovação)</option></select>'+
     '<label>Seu link exclusivo</label><div style="display:flex;gap:8px"><input id="link-url" value="'+esc(pubUrl)+'" readonly style="margin:0"><button type="button" class="btn sm ghost" onclick="copyLink()">Copiar</button></div></div>'+
 
@@ -975,8 +976,23 @@ function saveItem(id){
  if(fr){dlgConfirm('Atenção: esse horário '+fr+'. Deseja salvar mesmo assim?',function(){commitItem(id,d)},{title:'Fora do expediente',yes:'Salvar mesmo assim',ic:'🌙'});return}
  commitItem(id,d);
 }
-function profile(id){var c=cl(id),l=S.items.filter(function(i){return i.cid===id}).sort(function(a,b){return b.date.localeCompare(a.date)}),t=iso(new Date()),nx=l.filter(function(i){return!i.done&&i.date>=t&&ativo(i)}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)})[0];
- sheet('<div id="prof" data-c="'+id+'"></div><div class="sheet-hd"><h2 style="margin:0">'+esc(c.name)+'</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div><div class="mute num">'+esc(c.phone||'sem telefone')+(c.email?' · '+esc(c.email):'')+'<br>Aniversário: '+(c.birth?dt(c.birth).slice(0,5):'—')+' · Cadastro: '+dt(c.created)+'</div>'+(c.notes?'<p style="margin:10px 0">'+esc(c.notes)+'</p>':'')+'<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div><div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div><div class="row" style="margin:14px 0;flex-wrap:wrap"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><button class="btn sm del" onclick="delClient(\''+id+'\')">Excluir</button></div><h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))}
+function profile(id){
+ var c=cl(id),l=S.items.filter(function(i){return i.cid===id}).sort(function(a,b){return b.date.localeCompare(a.date)}),t=iso(new Date()),nx=l.filter(function(i){return!i.done&&i.date>=t&&ativo(i)}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)})[0];
+ var cleanNote=(c.notes||'').trim(),showNote=cleanNote&&cleanNote!=='Cadastrada pelo link de agendamento.';
+ sheet('<div id="prof" data-c="'+id+'"></div>'+
+ '<div class="sheet-hd"><h2 style="margin:0">'+esc(c.name)+'</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
+ '<div class="mute num" style="display:flex;flex-direction:column;gap:4px">'+
+   '<div>📱 '+esc(maskPhone(c.phone)||'sem telefone')+'</div>'+
+   (c.email?'<div>✉️ '+esc(c.email)+'</div>':'')+
+   '<div>🎂 Aniversário: '+(c.birth?dt(c.birth).slice(0,5):'—')+'</div>'+
+   '<div>🗓️ Cadastro: '+dt(c.created)+'</div>'+
+ '</div>'+
+ (showNote?'<p style="margin:12px 0 0">'+esc(cleanNote)+'</p>':'')+
+ '<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div>'+
+ '<div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div>'+
+ '<div class="row" style="margin:14px 0;flex-wrap:wrap"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><button class="btn sm del" onclick="delClient(\''+id+'\')">Excluir</button></div>'+
+ '<h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'));
+}
 
 var SUB=null,VER=null;
 var DEFMSG='Olá, {nome}! Passando para confirmar o seu atendimento ({jogo}) no dia {dia} às {hora}. Te espero! 🔮';
@@ -1010,6 +1026,7 @@ async function save(){if(!sb||!USER)return;var c=await sb.from('app_data').selec
 
 /* === AGENDAMENTO PÚBLICO === */
 var PUB=null,PUB_UID='',PUB_CUR=iso(new Date()).slice(0,7),PUB_SEL={mid:'',date:'',time:'',online:true},PIX_TMR=null;
+function pubShowsDur(){return PUB&&PUB.showDur===false?false:true}
 async function loadPublic(uidParam){
  if(PIX_TMR){clearInterval(PIX_TMR);PIX_TMR=null}
  var box=$('bk-box');
@@ -1068,10 +1085,12 @@ function renderPublic(){
  var subLinha=PUB.nome?'Atendimento com <b>'+esc(PUB.nome)+'</b>':'Agendamento online';
  var mSel=PUB.methods.find(function(x){return x.id===PUB_SEL.mid})||PUB.methods[0];
  var modAtual=mSel.mod||'ambos';
+ var showDur=pubShowsDur();
+ var durSelTxt=showDur?((mSel.dur||30)+' min · '):'';
  var slots=PUB_SEL.date?pubSlots(PUB_SEL.date):[];
  var col1='<div class="card"><div class="eb">1 · Escolha o método de jogo</div>'+
-  PUB.methods.map(function(m){return'<button type="button" class="pub-opt '+(PUB_SEL.mid===m.id?'sel':'')+'" onclick="pubPickMid(\''+m.id+'\')"><div><b>'+esc(m.name)+'</b><div class="mute num" style="margin-top:3px">'+(m.dur||30)+' min · '+modLabel(m.mod)+'</div></div><b class="num" style="color:var(--gold);font-size:16px">'+money(m.price)+'</b></button>'}).join('')+
-  '<div class="pub-sum"><div class="eb" style="margin-bottom:4px">✦ Resumo da escolha</div><b>'+esc(mSel.name)+'</b><div class="mute num" style="margin-top:2px">'+(mSel.dur||30)+' min · '+money(mSel.price)+' · '+modLabel(modAtual)+'</div>'+(PUB_SEL.date?'<div class="mute num" style="margin-top:6px;color:var(--acc);font-weight:600">📅 '+dt(PUB_SEL.date)+(PUB_SEL.time?' às '+PUB_SEL.time:'')+'</div>':'')+'</div></div>';
+  PUB.methods.map(function(m){var dTxt=showDur?((m.dur||30)+' min · '):'';return'<button type="button" class="pub-opt '+(PUB_SEL.mid===m.id?'sel':'')+'" onclick="pubPickMid(\''+m.id+'\')"><div><b>'+esc(m.name)+'</b><div class="mute num" style="margin-top:3px">'+dTxt+modLabel(m.mod)+'</div></div><b class="num" style="color:var(--gold);font-size:16px">'+money(m.price)+'</b></button>'}).join('')+
+  '<div class="pub-sum"><div class="eb" style="margin-bottom:4px">✦ Resumo da escolha</div><b>'+esc(mSel.name)+'</b><div class="mute num" style="margin-top:2px">'+durSelTxt+money(mSel.price)+' · '+modLabel(modAtual)+'</div>'+(PUB_SEL.date?'<div class="mute num" style="margin-top:6px;color:var(--acc);font-weight:600">📅 '+dt(PUB_SEL.date)+(PUB_SEL.time?' às '+PUB_SEL.time:'')+'</div>':'')+'</div></div>';
  var col2='<div class="card"><div class="eb">2 · Escolha o dia e o horário</div>'+pubCal()+
   (PUB_SEL.date?'<label style="margin-top:10px">Horários livres em <b class="num">'+dt(PUB_SEL.date)+'</b></label>'+(slots.length?'<div class="slots">'+slots.map(function(s){return'<button type="button" class="slot '+(PUB_SEL.time===s?'sel':'')+'" onclick="pubPickTime(\''+s+'\')">'+s+'</button>'}).join('')+'</div>':'<div class="empty" style="margin-top:8px">Sem horários livres neste dia. Escolha outra data.</div>'):'<p class="mute" style="margin:10px 0 0">Selecione um dia disponível acima para ver os horários.</p>')+'</div>';
  var col3='<div class="card"><div class="eb">3 · Seus dados</div>'+
@@ -1094,11 +1113,13 @@ async function submitPublic(){
  var r=await sb.rpc('criar_agendamento_publico',{p_user_id:PUB_UID,p_nome:nome,p_tel:tel,p_birth:birth,p_mid:PUB_SEL.mid,p_date:PUB_SEL.date,p_time:PUB_SEL.time,p_online:online});
  if(r.error||!r.data||!r.data.ok){dlgAlert(r.data&&r.data.erro?r.data.erro:'Não foi possível concluir. Tente outro horário.','Horário indisponível');btn.disabled=false;btn.textContent='Confirmar agendamento';loadPublic(PUB_UID);return}
  var res=r.data,pend=res.modo==='pendente',pixAuto=res.modo==='pix_auto';
+ var showDur=res.showDur!=null?!!res.showDur:pubShowsDur();
+ var durExtra=showDur&&res.dur?(' ('+res.dur+' min)'):'';
  var waNum=(PUB.tel||'').replace(/\D/g,'');if(waNum&&waNum.length<=11)waNum='55'+waNum;
  var tpl=PUB.linkMsg||DEFLINKMSG;
  var waTxt=tpl
   .replace(/\{tarologa\}/g,PUB.nome?PUB.nome.split(' ')[0]:'')
-  .replace(/\{jogo\}/g,res.jogo)
+  .replace(/\{jogo\}/g,res.jogo+durExtra)
   .replace(/\{modalidade\}/g,res.online?'Online':'Presencial')
   .replace(/\{dia\}/g,dt(PUB_SEL.date))
   .replace(/\{hora\}/g,PUB_SEL.time)
@@ -1115,7 +1136,7 @@ async function submitPublic(){
  }
 
  $('bk-box').innerHTML='<div style="max-width:520px;margin:20px auto"><div class="logo" style="justify-content:center;margin-bottom:20px"><b>✦</b> MESA DE ARCANOS</div><div class="card" style="text-align:center;padding:26px 20px"><div style="font-size:40px;margin-bottom:8px">'+(pixAuto?'💠':pend?'⏳':'🔮')+'</div><h2>'+(pixAuto?'Falta só o Pix para confirmar!':pend?'Pré-reserva realizada!':'Horário reservado!')+'</h2><p class="mute" style="margin:8px 0 16px">'+(pixAuto?'Seu horário está reservado por <b class="num" id="pix-cd" style="color:var(--warn)">15:00</b>. Faça o Pix de <b>'+money(res.valor)+'</b> e envie o comprovante no WhatsApp para confirmar automaticamente.':pend?'Seu horário está pré-reservado. Envie a confirmação abaixo no WhatsApp'+(PUB.pix?' junto com o comprovante do Pix':'')+' para concluir.':'Tudo certo! Seu atendimento já está na agenda.')+'</p>'+
- '<div class="card" style="background:var(--bg);text-align:left"><div class="row"><b>'+esc(res.jogo)+'</b><b class="num" style="color:var(--gold)">'+money(res.valor)+'</b></div><div class="mute num" style="margin-top:4px">'+dt(PUB_SEL.date)+' às '+esc(PUB_SEL.time)+' · '+(res.online?'Online':'Presencial')+'</div>'+pixInfoHtml+'</div>'+
+ '<div class="card" style="background:var(--bg);text-align:left"><div class="row"><b>'+esc(res.jogo)+'</b><b class="num" style="color:var(--gold)">'+money(res.valor)+'</b></div><div class="mute num" style="margin-top:4px">'+dt(PUB_SEL.date)+' às '+esc(PUB_SEL.time)+durExtra+' · '+(res.online?'Online':'Presencial')+'</div>'+pixInfoHtml+'</div>'+
  (waNum?'<a class="btn" style="width:100%;margin-top:8px" href="https://wa.me/'+waNum+'?text='+encodeURIComponent(waTxt)+'" target="_blank">'+(pixAuto?'Enviar comprovante do Pix no WhatsApp':'Enviar confirmação no WhatsApp')+'</a>':'')+
  '<p style="margin:16px 0 0"><a class="mute" href="#" onclick="loadPublic(\''+PUB_UID+'\');return false">Fazer outro agendamento</a></p></div></div>';
  if(pixAuto&&res.pixExp){
@@ -1195,6 +1216,7 @@ function CF(){
   linkMsg:c.linkMsg||DEFLINKMSG,
   birthMsg:c.birthMsg||DEFBIRTH,
   linkAtivo:!!c.linkAtivo,
+  showDur:c.showDur===false?false:true,
   modoLink:c.modoLink||'direto'
  };
 }
@@ -1217,7 +1239,7 @@ function saveCfg(){
  var c=Object.assign({},old,{
   nome:v('p1').trim(),
   espaco:v('p2').trim(),
-  tel:v('p3').trim(),
+  tel:maskPhone(v('p3').trim()),
   pix:v('p5').trim(),
   banco:v('p6').trim(),
   titular:v('p7').trim(),
@@ -1228,6 +1250,7 @@ function saveCfg(){
   dias:d,
   pausa:isNaN(p)||p<0?15:p,
   linkAtivo:ck('lk1'),
+  showDur:ck('lk-dur'),
   modoLink:v('lk2')
  });
  if(toMin(c.fim)<=toMin(c.ini)){dlgAlert('O horário de fim precisa ser depois do início.','Horário inválido');return}
@@ -1287,7 +1310,7 @@ function admRender(){CONF=CONF||{};var L=ADM.map(function(x){x.s=admSt(x);return
   (avList.length?avList.map(function(x){
    var telClean=(x.tel||'').replace(/\D/g,'');if(telClean&&telClean.length<=11)telClean='55'+telClean;
    var txt=AV_MSG.replace(/\{nome\}/g,x.nome?x.nome.split(' ')[0]:'').replace(/\{ate\}/g,dia(x.ate)).replace(/\{dias\}/g,String(Math.max(0,x.s.d))).replace(/\{link\}/g,PAY);
-   return'<div class="card row"><div><b>'+esc(x.nome||x.email)+'</b> <span class="tag '+x.s.c+'">'+x.s.t+'</span><div class="mute num">'+esc(x.email)+(x.tel?' · '+esc(x.tel):'')+' · Até '+dia(x.ate)+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(telClean?'<a class="btn sm ok" href="https://wa.me/'+telClean+'?text='+encodeURIComponent(txt)+'" target="_blank">WhatsApp</a>':'')+'<a class="btn sm ghost" href="mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Aviso · Mesa de Arcanos')+'&body='+encodeURIComponent(txt)+'">E-mail</a></div></div>';
+   return'<div class="card row"><div><b>'+esc(x.nome||x.email)+'</b> <span class="tag '+x.s.c+'">'+x.s.t+'</span><div class="mute num">'+esc(x.email)+(x.tel?' · '+esc(maskPhone(x.tel)):'')+' · Até '+dia(x.ate)+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(telClean?'<a class="btn sm ok" href="https://wa.me/'+telClean+'?text='+encodeURIComponent(txt)+'" target="_blank">WhatsApp</a>':'')+'<a class="btn sm ghost" href="mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Aviso · Mesa de Arcanos')+'&body='+encodeURIComponent(txt)+'">E-mail</a></div></div>';
   }).join(''):'<div class="empty">Nenhuma cliente neste filtro.</div>');
  }else{
   bodyHtml='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">'+chips.map(function(c){return'<button class="admchip'+(ADF===c[0]?' on':'')+'" onclick="admFiltro(\''+c[0]+'\')">'+c[1]+' ('+c[2]+')</button>'}).join('')+'</div>'+
@@ -1316,13 +1339,13 @@ function admDet(id){var x=ADM.find(function(a){return a.user_id===id}),s=admSt(x
  '<div class="mgrid"><div><span>Cadastro</span>'+dia(x.criado)+'</div><div><span>Último acesso</span>'+dia(x.ultimo_acesso)+'</div><div><span>Consulentes · atendimentos</span>'+x.consulentes+' · '+x.jogos+'</div><div><span>Total pago</span>'+brl(x.total_pago)+'</div></div>'+
  '<div class="msec">Dados da cliente</div>'+
  '<div class="grid"><div><label>Nome</label><input id="ad-nm" value="'+esc(x.nome||'')+'"></div><div><label>Espaço</label><input id="ad-esp" value="'+esc(x.espaco||'')+'"></div></div>'+
- '<div class="row" style="align-items:flex-end"><div style="flex:1"><label>Telefone / WhatsApp</label><input id="ad-tel" type="tel" value="'+esc(x.tel||'')+'" placeholder="(11) 99999-9999" style="margin-bottom:0"></div><button class="btn sm ghost" onclick="admSalvarCliente(\''+id+'\')">Salvar dados</button></div>'+
+ '<div class="row" style="align-items:flex-end"><div style="flex:1"><label>Telefone / WhatsApp</label><input id="ad-tel" type="tel" value="'+esc(maskPhone(x.tel||''))+'" placeholder="(11) 99999-9999" style="margin-bottom:0"></div><button class="btn sm ghost" onclick="admSalvarCliente(\''+id+'\')">Salvar dados</button></div>'+
  '<div class="msec">Acesso</div><div class="grid"><div><label>Situação</label><select id="ad-st">'+[['trial','Teste'],['ativa','Ativa'],['cancelada','Bloqueada']].map(function(o){return'<option value="'+o[0]+'"'+(x.status===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div><div><label>Acesso até</label><input id="ad-dt" type="date" value="'+String(x.ate).slice(0,10)+'"></div></div>'+
  '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm" onclick="admData(\''+id+'\')">Salvar acesso</button>'+(waUrl?'<a class="btn sm ok" href="'+waUrl+'" target="_blank">Lembrar no WhatsApp</a>':'')+'<a class="btn sm ghost" href="'+admMail(x,s)+'">Lembrar por e-mail</a></div>'+
  '<div class="msec">Pagamentos</div>'+(ps.length?ps.map(function(p){return'<div class="row" style="padding:8px 0;border-bottom:1px solid var(--line)"><div><b>'+brl(p.valor)+'</b> <span class="tag '+(p.status==='approved'?'ok':'bad')+'">'+(p.status==='approved'?'Aprovado':esc(p.status||'?'))+'</span><div class="mute">'+esc(p.forma||'forma não informada')+'</div></div><div class="mute">'+dia(p.pago_em)+'</div></div>'}).join(''):'<div class="mute">Nenhum pagamento registrado pelo Mercado Pago.</div>')+
  '<div class="msec">Anotação interna</div><textarea id="ad-nt" rows="3" placeholder="Só você vê isto">'+esc(x.nota)+'</textarea><button class="btn sm ghost" onclick="admNota(\''+id+'\')">Salvar anotação</button>')}
 async function admSalvarCliente(id){
- var nmVal=v('ad-nm').trim(),espVal=v('ad-esp').trim(),telVal=v('ad-tel').trim();
+ var nmVal=v('ad-nm').trim(),espVal=v('ad-esp').trim(),telVal=maskPhone(v('ad-tel').trim());
  var r=await sb.rpc('admin_editar_cliente',{p_user:id,p_nome:nmVal,p_espaco:espVal,p_tel:telVal});
  if(r.error){
   var d=await sb.from('app_data').select('data').eq('user_id',id).maybeSingle();
