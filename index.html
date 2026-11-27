@@ -20,12 +20,12 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;over
 *{box-sizing:border-box}
 body{margin:0;width:100%;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .num{font-variant-numeric:tabular-nums}
-.w{width:100%;max-width:1060px;margin:0 auto;padding:0 24px}
+.w{width:100%;max-width:1060px;margin:0 auto;padding:0 28px}
 h1,h2,.logo{font-family:var(--serif);font-weight:600;margin:0}
 h3{font-family:var(--sans);font-weight:600;font-size:16px;margin:0}
-h1{font-size:clamp(34px,6vw,58px);line-height:1.08;letter-spacing:-.3px}
+h1{font-size:clamp(34px,5.5vw,58px);line-height:1.08;letter-spacing:-.3px}
 h1 em,h2 em{color:var(--acc);font-style:italic}
-h2{font-size:clamp(25px,4vw,36px);line-height:1.15;margin-bottom:12px}
+h2{font-size:clamp(25px,3.8vw,36px);line-height:1.15;margin-bottom:12px}
 .eb{font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0}
 .top-btns{display:flex;align-items:center;gap:8px;flex-shrink:0}
@@ -61,18 +61,28 @@ button,input,select,textarea{font:inherit;color:var(--ink)}
 .sec{padding:52px 0;width:100%}
 .faq-wrap{max-width:740px}
 .f h3{font-size:17px;margin:10px 0 6px}.f p{margin:0;color:var(--mute);font-size:14px}.f .ic{font-size:26px}
-.step-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.step-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
 .n{font-family:var(--serif);font-size:34px;color:var(--gold);font-style:italic;line-height:1;margin-bottom:6px}
 .plan{max-width:440px;margin:0 auto;text-align:center;border:1.5px solid var(--gold);padding:32px 26px}
-.plan ul{list-style:none;padding:0;text-align:left;margin:20px 0 26px;display:grid;gap:10px}.plan li:before{content:"✦ ";color:var(--gold);font-weight:700}
+.plan ul{list-style:none;padding:0 4px;text-align:left;margin:20px 0 26px;display:grid;gap:10px}.plan li{padding-left:18px;position:relative}.plan li:before{content:"✦";color:var(--gold);font-weight:700;position:absolute;left:0}
 .price{font-family:var(--serif);font-size:60px;font-weight:700;color:var(--acc);line-height:1;margin:10px 0}
-details{border-bottom:1px solid var(--line);padding:16px 0;text-align:left}summary{cursor:pointer;font-weight:600}details p{color:var(--mute);margin:8px 0 0;font-size:14.5px}
-footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 22px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line);padding:16px 6px;text-align:left}summary{cursor:pointer;font-weight:600;line-height:1.4}details p{color:var(--mute);margin:8px 0 0;font-size:14.5px;padding-left:16px}
+footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 24px;border-top:1px solid var(--line)}
 footer a{color:var(--acc);text-decoration:none}
 
-/* RESPONSIVO GLOBAL PARA CELULAR (TODAS AS SEÇÕES E TELAS) */
+/* RESPONSIVO PARA TABLET (761px a 960px) */
+@media(max-width:960px) and (min-width:761px){
+  .w{padding:0 32px}
+  .hero{grid-template-columns:1.1fr 1fr;gap:28px;padding:24px 0 48px}
+  .hero h1{font-size:38px}
+  .g3{grid-template-columns:1fr 1fr;gap:16px}
+  .g4{grid-template-columns:1fr 1fr;gap:16px}
+  .step-box{padding:20px}
+}
+
+/* RESPONSIVO GLOBAL PARA CELULAR (até 760px) */
 @media(max-width:760px){
-  .w{padding:0 22px}
+  .w{padding:0 24px}
   .top{padding:14px 0}
   .logo{font-size:16.5px;letter-spacing:1.4px;gap:5px}
   .logo b{font-size:15px}
@@ -96,9 +106,10 @@ footer a{color:var(--acc);text-decoration:none}
   .step-box p{font-size:13px;margin:4px 0 0}
   .plan{padding:26px 20px}
   .price{font-size:52px}
+  details{padding:16px 8px}
 }
 @media(max-width:380px){
-  .w{padding:0 18px}
+  .w{padding:0 20px}
   .logo{font-size:15px;letter-spacing:1px}
   .g4{grid-template-columns:1fr}
 }
@@ -184,7 +195,7 @@ nav button.on{color:var(--acc);font-weight:700}
 }
 
 /* agendamento publico em 3 colunas no PC e 1 no celular */
-#bk-box{width:100%;max-width:1240px;margin:0 auto;padding:18px 20px 60px}
+#bk-box{width:100%;max-width:1240px;margin:0 auto;padding:18px 22px 60px}
 .pub-head{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:18px}
 .pub-head .logo{justify-content:center;font-size:20px;margin-bottom:4px}
 .pub-head h2{font-size:clamp(23px,3vw,32px);margin:2px 0}
