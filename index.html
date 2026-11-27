@@ -421,7 +421,7 @@ window.addEventListener('hashchange',route);
 
 var TABS=[['hoje','🏠','Hoje'],['agenda','📅','Agenda'],['clientes','🔮','Consulentes'],['metodos','🃏','Métodos'],['mensagens','💬','Mensagens'],['ganhos','💰','Caixa'],['conta','⚙️','Conta']];
 function go(t){tab=t;q='';render()}
-function mobTop(){return'<div class="mob-hd"><div class="logo"><b>✦</b> MESA DE ARCANOS</div><a class="mute logout-lnk" href="#" onclick="logout();return false">Sair</a></div>'}
+function mobTop(){return'<div class="mob-hd">'+(ADMIN?'<a class="mute" href="#admin" style="position:absolute;left:0;top:5px;font-size:13px;color:var(--acc);font-weight:600">✦ Admin</a>':'')+'<div class="logo"><b>✦</b> MESA DE ARCANOS</div><a class="mute logout-lnk" href="#" onclick="logout();return false">Sair</a></div>'}
 function head(t,btn){return mobTop()+'<div class="row" style="margin:6px 0 14px"><h2 style="margin:0">'+t+'</h2>'+(btn||'')+'</div>'}
 function mv(d){var a=cur.split('-'),t=(+a[0])*12+(+a[1]-1)+d;cur=Math.floor(t/12)+'-'+pad(t%12+1);render()}
 function pick(d){sel=d;render()}
@@ -630,8 +630,7 @@ function render(){
     '<label>Regra de confirmação pelo link</label><select id="lk2"><option value="direto"'+(c.modoLink==='direto'?' selected':'')+'>Confirmar automaticamente (sem exigir Pix na hora)</option><option value="pix_auto"'+(c.modoLink==='pix_auto'?' selected':'')+'>Confirmar automaticamente após pagamento Pix (reserva por 15 min)</option><option value="pendente"'+(c.modoLink==='pendente'?' selected':'')+'>Pré-reserva manual (aguarda minha aprovação)</option></select>'+
     '<label>Seu link exclusivo</label><div style="display:flex;gap:8px"><input id="link-url" value="'+esc(pubUrl)+'" readonly style="margin:0"><button type="button" class="btn sm ghost" onclick="copyLink()">Copiar</button></div></div>'+
 
-    '<div class="card"><h3 style="margin-bottom:10px">Meus dados e backup</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha (CSV)</button><button class="btn ghost sm" onclick="exportJson()">Backup completo</button></div><p class="mute" style="margin:12px 0 0"><a href="#termos" style="color:var(--acc)">Termos de uso</a> · <a href="#privacidade" style="color:var(--acc)">Privacidade</a></p><button class="btn" style="width:100%;margin-top:16px" onclick="saveCfg()">Salvar alterações</button></div>'+
-  '</div></div>';
+    '<div class="card"><h3 style="margin-bottom:10px">Meus dados e backup</h3><div style="display:flex;gap:8px;flex-wrap:wrap">'+(ADMIN?'<a class="btn sm" href="#admin">✦ Painel admin</a>':'')+'<button class="btn ghost sm" onclick="exportCsv()">Baixar planilha (CSV)</button><button class="btn ghost sm" onclick="exportJson()">Backup completo</button></div><p class="mute" style="margin:12px 0 0"><a href="#termos" style="color:var(--acc)">Termos de uso</a> · <a href="#privacidade" style="color:var(--acc)">Privacidade</a></p><button class="btn" style="width:100%;margin-top:16px" onclick="saveCfg()">Salvar alterações</button></div>'+
 
  }else{
   var df=(d.getDay()+6)%7,ws=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()-df)),we=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()-df+6)),yr=ym.slice(0,4),paid=S.items.filter(function(i){return i.paid}),mp=paid.filter(function(i){return i.date.slice(0,7)===ym}),ex=(S.exps||[]).filter(function(e){return e.date.slice(0,7)===ym}).sort(function(a,b){return b.date.localeCompare(a.date)}),sa=ex.reduce(function(s,e){return s+e.value},0),en=tot(mp);
