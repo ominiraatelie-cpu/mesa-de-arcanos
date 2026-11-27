@@ -70,7 +70,6 @@ details{border-bottom:1px solid var(--line);padding:16px 6px;text-align:left}sum
 footer{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 24px;border-top:1px solid var(--line)}
 footer a{color:var(--acc);text-decoration:none}
 
-/* RESPONSIVO PARA TABLET (761px a 1024px) */
 @media(max-width:1024px) and (min-width:761px){
   .w{max-width:680px;margin:0 auto;padding:0 32px}
   .band{padding:48px 32px}
@@ -89,7 +88,6 @@ footer a{color:var(--acc);text-decoration:none}
   .faq-wrap{max-width:680px;margin:0 auto}
 }
   
-/* RESPONSIVO GLOBAL PARA CELULAR (até 760px) */
 @media(max-width:760px){
   .w{padding:0 24px}
   .top{padding:14px 0}
@@ -123,7 +121,6 @@ footer a{color:var(--acc);text-decoration:none}
   .g4{grid-template-columns:1fr}
 }
 
-/* app */
 #ap{display:none;padding-bottom:84px;width:100%}
 #ap main{width:100%;max-width:720px;margin:0 auto;padding:14px 18px 24px}
 input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:5px 0 12px;font-size:14.5px;transition:.15s}
@@ -136,7 +133,6 @@ label{font-size:13px;font-weight:600;color:var(--mute);display:block}
 .chip:hover{border-color:var(--acc);color:var(--acc);background:var(--soft)}
 .chip.on{background:var(--acc);color:var(--on);border-color:var(--acc);font-weight:600}
 
-/* barra de proporcao e controles do caixa */
 .cx-bar-wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
 .cx-month-ctrl{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
 .cx-month-sel{width:auto;margin:0;padding:6px 10px;font-size:13.5px;font-weight:600;border-radius:10px}
@@ -144,13 +140,11 @@ label{font-size:13px;font-weight:600;color:var(--mute);display:block}
 .cx-ratio-in{background:var(--ok);height:100%;transition:width .25s}
 .cx-ratio-out{background:var(--bad);height:100%;transition:width .25s}
 
-/* BARRA INFERIOR MOBILE OTIMIZADA PARA 7 ABAS */
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));z-index:5;box-shadow:0 -4px 16px rgba(0,0,0,.05)}
 nav button{flex:1;min-width:0;background:none;border:0;padding:5px 1px;font-size:9.5px;font-weight:500;color:var(--mute);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 nav button b{display:block;font-size:17px;font-weight:400;line-height:1.1}
 nav button.on{color:var(--acc);font-weight:700}
 
-/* modais e dialogos personalizados */
 .ov{position:fixed;inset:0;background:rgba(23,16,28,.62);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:14px;z-index:9}
 .sheet{background:var(--card);width:100%;max-width:760px;max-height:92vh;overflow-y:auto;border-radius:20px;padding:24px 28px;box-shadow:0 24px 60px rgba(0,0,0,.35);position:relative;border:1px solid var(--line)}
 .sheet.wide{max-width:980px}
@@ -166,14 +160,12 @@ nav button.on{color:var(--acc);font-weight:700}
   .grid{gap:10px}
 }
 
-/* dialogo de confirmacao e toast */
 .dlg-ov{position:fixed;inset:0;background:rgba(23,16,28,.65);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}
 .dlg-box{background:var(--card);border:1.5px solid var(--gold);border-radius:20px;padding:26px 24px;max-width:410px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.4)}
 .dlg-ic{font-size:32px;margin-bottom:8px}
 .toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);border:1px solid var(--gold);padding:10px 18px;border-radius:99px;font-weight:600;font-size:13.5px;box-shadow:0 12px 30px rgba(0,0,0,.28);z-index:25;display:flex;align-items:center;gap:8px;animation:fadeIn .18s ease;max-width:92vw;text-align:center}
 @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
 
-/* galeria de cartas por metodo de jogo */
 .deck-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin:10px 0 14px}
 .deck-card{position:relative;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);padding:6px;text-align:center;cursor:pointer;transition:.15s;user-select:none}
 .deck-card:hover{border-color:var(--acc)}
@@ -185,12 +177,10 @@ nav button.on{color:var(--acc);font-weight:700}
 .mini-card{display:inline-flex;align-items:center;gap:6px;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:3px 9px 3px 4px;font-size:12px;font-weight:600;color:var(--acc)}
 .mini-card img{width:22px;height:32px;object-fit:cover;border-radius:5px}
 
-/* cards leves da agenda */
 .item-light{padding:15px 16px}
 .item-sub{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;margin-top:6px;color:var(--mute);font-size:13px}
 .item-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);flex-wrap:wrap}
 
-/* banner saudacao */
 .greet{background:linear-gradient(135deg,var(--card) 0%,var(--soft) 100%);border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;overflow:hidden;margin-bottom:14px}
 .greet h2{font-size:clamp(22px,3.5vw,32px);margin:2px 0 4px}
 .greet-moon{color:var(--gold);opacity:.35;flex-shrink:0}
@@ -199,7 +189,6 @@ nav button.on{color:var(--acc);font-weight:700}
   .big{font-size:22px}
 }
 
-/* caixa e conta grids */
 .cx-cols{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
 @media(min-width:900px){
   .cx-cols{grid-template-columns:repeat(3,1fr);gap:18px}
@@ -212,7 +201,6 @@ nav button.on{color:var(--acc);font-weight:700}
   .conta-col .card:last-child{flex:1}
 }
 
-/* agendamento publico em 3 colunas no PC e 1 no celular */
 #bk-box{width:100%;max-width:1240px;margin:0 auto;padding:18px 22px 60px}
 .pub-head{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:18px}
 .pub-head .logo{justify-content:center;font-size:20px;margin-bottom:4px}
@@ -241,7 +229,6 @@ nav button.on{color:var(--acc);font-weight:700}
 .cal button.has:after{content:"";position:absolute;bottom:4px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--gold)}
 .cal button.sel{background:var(--acc);color:var(--on);border-color:var(--acc);font-weight:700}
 
-/* cabecalho centralizado desktop e mobile */
 .mob-hd{text-align:center;padding:4px 0 12px;border-bottom:1px solid var(--line);margin-bottom:12px;position:relative}
 .mob-hd .logo{justify-content:center;font-size:17px;letter-spacing:1.6px}
 .mob-hd .logout-lnk{position:absolute;right:0;top:5px;font-size:13px}
@@ -283,6 +270,9 @@ nav button.on{color:var(--acc);font-weight:700}
 .swatch{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0;transition:.15s}
 .swatch:hover{transform:scale(1.1)}
 .adm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.aviso-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:start}
+@media(max-width:860px){.aviso-grid{grid-template-columns:1fr}}
+.aviso-dest-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -393,7 +383,6 @@ function renderRecCards(cards){
   }).join('');
 }
 
-/* === CORES PERSONALIZADAS === */
 function hexToRgb(hex){
  var h=String(hex||'').replace('#','');
  if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
@@ -414,7 +403,6 @@ function applyThemeColors(accHex,goldHex){
  else r.removeProperty('--gold');
 }
 
-/* === MODAIS E AVISOS PERSONALIZADOS === */
 function toast(t,ic){
  document.querySelectorAll('.toast').forEach(function(x){x.remove()});
  var d=document.createElement('div');d.className='toast';
@@ -441,7 +429,7 @@ function dlgConfirm(txt,onYes,opts){
 
 function msg(t){document.getElementById('am').textContent=t}
 async function login(){var e=v('ae').trim(),p=v('apw');if(!e||!p)return msg('Preencha o e-mail e a senha.');var r=await sb.auth.signInWithPassword({email:e,password:p});if(r.error)return msg('E-mail ou senha incorretos.');route()}
-async function signup(){var e=v('ae').trim(),p=v('apw');if(!e||!p)return msg('Preencha o e-mail e a senha.');if(p.length<6)return msg('A senha precisa ter pelo menos 6 caracteres.');if(!ck('aok'))return msg('Aceite os Termos e a Privacidade para criar a conta.');var r=await sb.auth.signUp({email:e,password:p});if(r.error)return msg(r.error.message);if(!r.data.session)msg('Conta criada! Confirme pelo e-mail que enviamos e depois entre.');else route()}
+async function signup(){var e=v('ae').trim(),p=v('apw');if(!e||!p)return msg('Preencha o e-mail e a senha.');if(p.length<6)return msg('A senha precisa ter pelo menos 6 caracteres.');if(!ck('aok'))return msg('Aceite os Termos e a Privacidade para criar a conta.');var r=await sb.auth.signUp({email:e,password:p,options:{emailRedirectTo:location.origin+'/#app'}});if(r.error)return msg(r.error.message);if(!r.data.session)msg('Conta criada! Enviamos um e-mail de confirmação pela '+BRAND+' para '+e+'. Confira também a caixa de spam.');else route()}
 async function logout(){await sb.auth.signOut();S={clients:[],methods:[],items:[],exps:[]};loaded=false;USER=null;ADMIN=null;applyThemeColors('','');location.hash=''}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
 function pad(n){return(n<10?'0':'')+n}
@@ -452,7 +440,6 @@ var MES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto',
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function money(n){return(Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
 
-/* === MASCARAS DE DATA E TELEFONE === */
 function dt(d){
  if(!d)return'sem data';
  var s=String(d).trim().slice(0,10);
@@ -499,7 +486,6 @@ function modLabel(mod){return mod==='online'?'Online':mod==='presencial'?'Presen
 function v(id){var el=document.getElementById(id);return el?el.value:''}
 function ck(id){var el=document.getElementById(id);return el?el.checked:false}
 
-/* === CMS GLOBAL (SITE, PREÇOS, TERMOS E PRIVACIDADE) === */
 function applySup(){document.querySelectorAll('[data-sup]').forEach(function(a){a.href='https://wa.me/'+SUPORTE+'?text='+encodeURIComponent('Olá! Preciso de ajuda com o '+BRAND+'.')})}
 function applySiteCfg(c){
   if(!c)return;
@@ -616,7 +602,6 @@ function aprovar(id){
  }
 }
 
-/* === CARD LEVE NA AGENDA + MODAL DE DETALHES === */
 function itemCard(i){
  var pend=i.st==='pendente',waitPix=i.st==='aguardando_pix'&&!i.paid,exp=pixExpirado(i);
  var stTag=exp?'<span class="tag bad">Pix expirado</span>':waitPix?'<span class="tag pend">⏳ Aguardando Pix</span>':pend?'<span class="tag pend">⏳ Aguardando aprovação</span>':i.st==='cancelado'?'<span class="tag bad">Cancelado</span>':i.st==='faltou'?'<span class="tag bad">Faltou</span>':i.done?'<span class="tag ok">✓ Realizado</span>':'<span class="tag">Marcado</span>';
@@ -673,7 +658,6 @@ function tgl(id,k){
  var p=document.getElementById('prof');if(p){var c=p.dataset.c;closeS();profile(c)}
 }
 
-/* === FUNCOES AUXILIARES DO CAIXA === */
 function mvCx(d){
  var a=cxMes.split('-'),t=(+a[0])*12+(+a[1]-1)+d;
  cxMes=Math.floor(t/12)+'-'+pad(t%12+1);
@@ -848,7 +832,7 @@ function render(){
    '<div class="row mute num" style="font-size:12.5px"><span>Entradas: <b style="color:var(--ok)">'+money(en)+'</b></span><span>Saídas: <b style="color:var(--bad)">'+money(sa)+'</b></span></div>'+
   '</div>';
 
-  var cxHeadBtns='<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn sm ghost" onclick="openExpCatsModal(\'\')">Tipos de saída</button><button class="btn sm" onclick="formExp()">+ Nova saída</button></div>';
+  var cxHeadBtns='<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn sm ghost" onclick="openExpCatsModal(\'\')">Tipos de saída</button><button type="button" class="btn sm" onclick="formExp()">+ Nova saída</button></div>';
 
   h=head('Caixa · '+MES[cm]+' '+cy,cxHeadBtns)+
   monthBarHtml+
@@ -936,7 +920,6 @@ function delExpCat(idx,returnExpId){
  },{title:'Excluir categoria',yes:'Excluir',danger:true,ic:'🗑️'});
 }
 
-/* === CATÁLOGO DE CARTAS POR MÉTODO DE JOGO === */
 var TEMP_DECK=[];
 function compressImg(file,cb){
  var r=new FileReader();
@@ -1007,7 +990,6 @@ function saveMethod(id){
  save();closeS();render();toast(id?'Método de jogo atualizado!':'Método de jogo cadastrado!');
 }
 
-/* === MODAL DE ATENDIMENTO === */
 var TEMP_PICKED=[];
 function tglPickCard(cid){
  var idx=TEMP_PICKED.indexOf(cid);
@@ -1102,7 +1084,6 @@ async function save(){if(!sb||!USER)return;var c=await sb.from('app_data').selec
  if(c.data&&VER&&new Date(c.data.updated_at).getTime()!==new Date(VER).getTime()){dlgAlert('Seus dados foram alterados em outro aparelho. Vamos recarregar para não sobrescrever nada.','Sincronizando');loaded=false;return route()}
  var t=new Date().toISOString(),r=await sb.from('app_data').upsert({user_id:USER,data:S,updated_at:t});if(r.error)dlgAlert('Não foi possível salvar: '+r.error.message,'Erro ao salvar');else VER=t}
 
-/* === AGENDAMENTO PÚBLICO === */
 var PUB=null,PUB_UID='',PUB_CUR=iso(new Date()).slice(0,7),PUB_SEL={mid:'',date:'',time:'',online:true},PIX_TMR=null;
 async function loadPublic(uidParam){
  if(PIX_TMR){clearInterval(PIX_TMR);PIX_TMR=null}
@@ -1242,8 +1223,8 @@ async function route(){
  var as=await sb.from('assinaturas').select('status,ate').eq('user_id',USER).maybeSingle();SUB=as.data;
  if(!SUB||new Date(SUB.ate)<=new Date()||(SUB.status!=='trial'&&SUB.status!=='ativa')){P.style.display='block';return}
  A.style.display='block';render()}
-async function forgot(){var e=v('ae').trim();if(!e)return msg('Digite seu e-mail acima e clique de novo.');var r=await sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+'/'});msg(r.error?r.error.message:'Se esse e-mail tiver conta, enviamos um link para criar uma nova senha.')}
-function recov(){location.hash='#app';sheet('<div class="sheet-hd"><h2 style="margin:0">Nova senha</h2></div><label>Digite a nova senha</label><input id="npw" type="password" autocomplete="new-password"><p id="npe" class="mute" style="color:var(--bad)"></p><button class="btn" onclick="newPass()">Salvar senha</button>')}
+async function forgot(){var e=v('ae').trim();if(!e)return msg('Digite seu e-mail acima e clique de novo.');var r=await sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+'/#app'});msg(r.error?r.error.message:'Enviamos um link de redefinição da '+(BRAND||'Mesa de Arcanos')+' para '+e+'. Confira sua caixa de entrada e o spam.')}
+function recov(){location.hash='#app';sheet('<div class="sheet-hd"><h2 style="margin:0">Nova senha · '+esc(BRAND)+'</h2></div><p class="mute" style="margin:-6px 0 12px">Defina sua nova senha para acessar a '+esc(BRAND)+'.</p><label>Digite a nova senha</label><input id="npw" type="password" autocomplete="new-password"><p id="npe" class="mute" style="color:var(--bad)"></p><button class="btn" onclick="newPass()">Salvar senha</button>')}
 async function newPass(){var p=v('npw');if(p.length<6){$('npe').textContent='Mínimo de 6 caracteres.';return}var r=await sb.auth.updateUser({password:p});if(r.error){$('npe').textContent=r.error.message;return}closeS();toast('Senha alterada com sucesso!','✓');route()}
 if(sb)sb.auth.onAuthStateChange(function(ev){if(ev==='PASSWORD_RECOVERY')setTimeout(recov,300)});
 function dl(n,t,m){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+t],{type:m}));a.download=n;document.body.appendChild(a);a.click();a.remove()}
@@ -1370,9 +1351,31 @@ function saveCfg(){
  S.cfg=c;applyCfg();save();toast('Configurações salvas!','✓');render();
 }
 
+/* === PAINEL ADMIN, FICHA EDITÁVEL, CONTATO RÁPIDO E ABA AVISOS === */
 var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='';
+var AV_FILTRO='todas',AV_SEL={},AV_SENT={};
 function dia(x){return x?dt(String(x).slice(0,10)):'—'}
 function brl(x){return money(+x||0)}
+function waHref(tel,txt){
+ var dig=String(tel||'').replace(/\D/g,'');
+ if(!dig)return'';
+ if(dig.length<=11)dig='55'+dig;
+ return'https://wa.me/'+dig+(txt?'?text='+encodeURIComponent(txt):'');
+}
+function fillAvisoVars(tpl,x,extraAssunto){
+ var s=x.s||admSt(x);
+ var primeiro=(x.nome||x.email||'').split('@')[0].split(' ')[0]||'';
+ return String(tpl||'')
+  .replace(/\{nome\}/g,x.nome||primeiro)
+  .replace(/\{primeiro_nome\}/g,primeiro)
+  .replace(/\{email\}/g,x.email||'')
+  .replace(/\{status\}/g,s.t||'')
+  .replace(/\{ate\}/g,dia(x.ate))
+  .replace(/\{marca\}/g,BRAND||'Mesa de Arcanos')
+  .replace(/\{link\}/g,PAY||'')
+  .replace(/\{assunto\}/g,extraAssunto||'');
+}
+
 async function adminRoute(){var A=$('adm'),w='<div class="w" style="padding:40px 0">';
  if(!sb){A.innerHTML=w+'<p class="mute">Supabase não configurado.</p></div>';return}
  var r=await sb.auth.getSession();if(!r.data.session){location.hash='#app';return}
@@ -1381,6 +1384,7 @@ async function adminRoute(){var A=$('adm'),w='<div class="w" style="padding:40px
  var l=await sb.rpc('admin_listar'),p=await sb.rpc('admin_pagamentos',{p_user:null}),c=await sb.rpc('admin_config');
  if(l.error){A.innerHTML=w+'<p style="color:var(--bad)">Erro: '+esc(l.error.message)+'</p></div>';return}
  ADM=l.data||[];PAGS=p.data||[];CONF=(c.data&&c.data[0])||CONF||{};admRender()}
+
 function admSt(x){var now=Date.now(),ate=new Date(x.ate).getTime(),d=Math.ceil((ate-now)/864e5);
  if(x.eh_admin)return{k:'cortesia',t:'Administradora',c:'',d:d};
  if(x.status==='ativa'&&ate>now+400*864e5)return{k:'cortesia',t:'Cortesia (não conta na receita)',c:'',d:d};
@@ -1388,36 +1392,213 @@ function admSt(x){var now=Date.now(),ate=new Date(x.ate).getTime(),d=Math.ceil((
  if(ate<=now)return{k:'pendente',t:x.status==='ativa'?'Pagamento vencido':'Teste vencido',c:'bad',d:d};
  if(x.status==='ativa')return{k:'ativa',t:'Ativa',c:'ok',d:d};
  return{k:d<=3?'breve':'teste',t:d<=3?'Teste termina em breve':'Em teste',c:d<=3?'warn':'',d:d}}
+
 function admFiltro(f){ADF=f;admRender()}
 function admBusca(q){ADQ=q;admLista()}
-function admRender(){CONF=CONF||{};var L=ADM.map(function(x){x.s=admSt(x);return x}),n=function(k){return L.filter(function(x){return k.indexOf(x.s.k)>-1}).length},at=n(['ativa']),mes=new Date().toISOString().slice(0,7),
- rec=PAGS.filter(function(p){return p.status==='approved'&&String(p.pago_em).slice(0,7)===mes}).reduce(function(t,p){return t+(+p.valor||0)},0),preco=+CONF.preco||29;
- var chips=[['todas','Clientes',L.length],['ativa','Ativas',at],['teste','Em teste',n(['teste','breve'])],['pendente','Pendentes',n(['pendente','breve'])],['cancelada','Bloqueadas',n(['cancelada'])],['pagamentos','Pagamentos',PAGS.length]];
+
+function admRender(){
+ CONF=CONF||{};
+ var L=ADM.map(function(x){x.s=admSt(x);return x}),
+     n=function(k){return L.filter(function(x){return k.indexOf(x.s.k)>-1}).length},
+     at=n(['ativa']),
+     mes=new Date().toISOString().slice(0,7),
+     rec=PAGS.filter(function(p){return p.status==='approved'&&String(p.pago_em).slice(0,7)===mes}).reduce(function(t,p){return t+(+p.valor||0)},0),
+     preco=+CONF.preco||29;
+ var chips=[
+  ['todas','Clientes',L.length],
+  ['ativa','Ativas',at],
+  ['teste','Em teste',n(['teste','breve'])],
+  ['pendente','Pendentes',n(['pendente','breve'])],
+  ['cancelada','Bloqueadas',n(['cancelada'])],
+  ['pagamentos','Pagamentos',PAGS.length],
+  ['avisos','📢 Avisos',L.length]
+ ];
  $('adm').innerHTML='<div class="w"><div class="top"><div class="logo"><b>✦</b> PAINEL</div><div><button class="btn sm ghost" onclick="admConfig()">⚙ Editar site, preços e termos</button> &nbsp; <a class="mute" href="#app">← Voltar ao app</a> &nbsp;·&nbsp; <a class="mute" href="#" onclick="logout();return false">Sair</a></div></div>'+
  '<div class="admg"><div class="card"><div class="mute">Recebido no mês</div><div class="big num">'+brl(rec)+'</div><div class="mute" style="font-size:12px">confirmado pelo Mercado Pago</div></div><div class="card"><div class="mute">Receita mensal esperada</div><div class="big num">'+brl(at*preco)+'</div><div class="mute" style="font-size:12px">'+at+' ativas × '+brl(preco)+'</div></div><div class="card"><div class="mute">Em teste</div><div class="big num">'+n(['teste','breve'])+'</div></div><div class="card"><div class="mute">Pendentes</div><div class="big num" style="color:var(--bad)">'+n(['pendente'])+'</div></div></div>'+
  '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">'+chips.map(function(c){return'<button class="admchip'+(ADF===c[0]?' on':'')+'" onclick="admFiltro(\''+c[0]+'\')">'+c[1]+' ('+c[2]+')</button>'}).join('')+'</div>'+
- '<input placeholder="Buscar por nome ou e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)" style="max-width:420px"><div id="admL" style="margin-top:14px"></div></div>';admLista()}
-function admLista(){CONF=CONF||{};var q=ADQ.toLowerCase(),f=ADF;
- if(f==='pagamentos'){var ps=PAGS.filter(function(p){return(p.email||'').toLowerCase().indexOf(q)>-1});
-  $('admL').innerHTML=ps.length?ps.map(function(p){return'<div class="card row"><div><b>'+brl(p.valor)+'</b> <span class="tag '+(p.status==='approved'?'ok':'bad')+'">'+(p.status==='approved'?'Aprovado':esc(p.status||'?'))+'</span><div class="mute">'+esc(p.email||'')+' · '+esc(p.forma||'forma não informada')+'</div></div><div class="mute">'+dia(p.pago_em)+'</div></div>'}).join(''):'<div class="empty">Nenhum pagamento registrado ainda. Eles aparecem aqui quando o Mercado Pago avisar uma cobrança.</div>';return}
- var rows=ADM.filter(function(x){var k=x.s.k,ok=f==='todas'||(f==='ativa'&&k==='ativa')||(f==='teste'&&(k==='teste'||k==='breve'))||(f==='pendente'&&(k==='pendente'||k==='breve'))||(f==='cancelada'&&k==='cancelada');return ok&&((x.email||'')+' '+(x.nome||'')).toLowerCase().indexOf(q)>-1});
- $('admL').innerHTML=rows.length?rows.map(function(x){var s=x.s,quando=s.d>0?'em '+s.d+(s.d===1?' dia':' dias'):'venceu há '+Math.abs(s.d)+(Math.abs(s.d)===1?' dia':' dias');
+ (ADF==='avisos'?'':'<input placeholder="Buscar por nome ou e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)" style="max-width:420px">')+
+ '<div id="admL" style="margin-top:14px"></div></div>';
+ admLista();
+}
+
+function admLista(){
+ CONF=CONF||{};
+ var q=ADQ.toLowerCase(),f=ADF;
+ if(f==='avisos'){admRenderAvisos();return}
+ if(f==='pagamentos'){
+  var ps=PAGS.filter(function(p){return(p.email||'').toLowerCase().indexOf(q)>-1});
+  $('admL').innerHTML=ps.length?ps.map(function(p){return'<div class="card row"><div><b>'+brl(p.valor)+'</b> <span class="tag '+(p.status==='approved'?'ok':'bad')+'">'+(p.status==='approved'?'Aprovado':esc(p.status||'?'))+'</span><div class="mute">'+esc(p.email||'')+' · '+esc(p.forma||'forma não informada')+'</div></div><div class="mute">'+dia(p.pago_em)+'</div></div>'}).join(''):'<div class="empty">Nenhum pagamento registrado ainda. Eles aparecem aqui quando o Mercado Pago avisar uma cobrança.</div>';
+  return;
+ }
+ var rows=ADM.filter(function(x){
+  var k=x.s.k,ok=f==='todas'||(f==='ativa'&&k==='ativa')||(f==='teste'&&(k==='teste'||k==='breve'))||(f==='pendente'&&(k==='pendente'||k==='breve'))||(f==='cancelada'&&k==='cancelada');
+  return ok&&((x.email||'')+' '+(x.nome||'')+' '+(x.tel||'')).toLowerCase().indexOf(q)>-1;
+ });
+ $('admL').innerHTML=rows.length?rows.map(function(x){
+  var s=x.s,quando=s.d>0?'em '+s.d+(s.d===1?' dia':' dias'):'venceu há '+Math.abs(s.d)+(Math.abs(s.d)===1?' dia':' dias'),
+      waLink=waHref(x.tel,fillAvisoVars('Olá, {primeiro_nome}! Passando para falar sobre o seu acesso à {marca}.',x));
   return'<div class="card"><div class="row"><div><b>'+esc(x.nome||x.email)+'</b>'+(x.nome?'<div class="mute">'+esc(x.email)+'</div>':'')+'</div><span class="tag '+s.c+'">'+s.t+'</span></div>'+
-  '<div class="mute" style="margin:8px 0">Acesso até '+dia(x.ate)+' ('+quando+')'+(x.ultimo_pgto?' · Último pagamento '+dia(x.ultimo_pgto)+' · '+brl(x.ultimo_valor)+' · '+esc(x.ultima_forma||''):'')+'</div>'+
-  '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm" onclick="admDet(\''+x.user_id+'\')">Detalhes</button>'+(x.eh_admin?'':'<button class="btn sm ghost" onclick="admSet(\''+x.user_id+'\',\'ativa\','+(+CONF.dias_liberar||35)+')">Liberar '+(+CONF.dias_liberar||35)+' dias</button>')+'</div></div>'}).join(''):'<div class="empty">Nenhuma cliente neste filtro.</div>'}
-function admMail(x,s){var q=s.d>0?'termina '+(s.d===1?'em 1 dia':'em '+s.d+' dias'):'terminou',m='Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Seu acesso à '+BRAND+' '+q+'. Para continuar usando, assine aqui: '+PAY+' (use o mesmo e-mail do cadastro).';
- return'mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Seu acesso · '+BRAND)+'&body='+encodeURIComponent(m)}
-function admDet(id){var x=ADM.find(function(a){return a.user_id===id}),s=admSt(x),ps=PAGS.filter(function(p){return p.user_id===id});
- sheet('<div class="mh"><div><h2 style="margin:0">'+esc(x.nome||x.email)+'</h2>'+(x.nome?'<div class="mute">'+esc(x.email)+'</div>':'')+'<span class="tag '+s.c+'" style="display:inline-block;margin-top:6px">'+s.t+'</span></div><button class="mx" onclick="closeS()" aria-label="Fechar">×</button></div>'+
- '<div class="mgrid"><div><span>Telefone</span>'+esc(fmtPhone(x.tel)||'—')+'</div><div><span>Espaço</span>'+esc(x.espaco||'—')+'</div><div><span>Cadastro</span>'+dia(x.criado)+'</div><div><span>Último acesso</span>'+dia(x.ultimo_acesso)+'</div><div><span>Consulentes · atendimentos</span>'+x.consulentes+' · '+x.jogos+'</div><div><span>Total pago</span>'+brl(x.total_pago)+'</div></div>'+
+  '<div class="mute" style="margin:8px 0">Acesso até '+dia(x.ate)+' ('+quando+')'+(x.tel?' · '+esc(fmtPhone(x.tel)):'')+(x.ultimo_pgto?' · Último pagamento '+dia(x.ultimo_pgto)+' · '+brl(x.ultimo_valor):'')+'</div>'+
+  '<div style="display:flex;flex-wrap:wrap;gap:8px">'+
+    '<button class="btn sm" onclick="admDet(\''+x.user_id+'\')">Editar / Detalhes</button>'+
+    (waLink?'<a class="btn sm ghost" href="'+waLink+'" target="_blank">💬 WhatsApp</a>':'')+
+    '<button class="btn sm ghost" onclick="admAbrirAvisoIndividual(\''+x.user_id+'\')">✉️ Enviar aviso</button>'+
+    (x.eh_admin?'':'<button class="btn sm ghost" onclick="admSet(\''+x.user_id+'\',\'ativa\','+(+CONF.dias_liberar||35)+')">Liberar '+(+CONF.dias_liberar||35)+' dias</button>')+
+  '</div></div>';
+ }).join(''):'<div class="empty">Nenhuma cliente neste filtro.</div>';
+}
+
+function admMail(x,s,assuntoCustom,corpoCustom){
+ var q=s.d>0?'termina '+(s.d===1?'em 1 dia':'em '+s.d+' dias'):'terminou';
+ var sub=assuntoCustom||'Seu acesso · '+(BRAND||'Mesa de Arcanos');
+ var m=corpoCustom||('Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Seu acesso à '+(BRAND||'Mesa de Arcanos')+' '+q+'. Para continuar usando, assine aqui: '+PAY+' (use o mesmo e-mail do cadastro).');
+ return'mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(m);
+}
+
+function admDet(id){
+ var x=ADM.find(function(a){return a.user_id===id});if(!x)return;
+ var s=admSt(x),ps=PAGS.filter(function(p){return p.user_id===id});
+ var waUrl=waHref(x.tel,fillAvisoVars('Olá, {primeiro_nome}! Passando para falar sobre sua conta na {marca}.',x));
+ sheet('<div class="mh"><div><h2 style="margin:0">'+esc(x.nome||x.email)+'</h2><div class="mute">'+esc(x.email)+'</div><span class="tag '+s.c+'" style="display:inline-block;margin-top:6px">'+s.t+'</span></div><button class="mx" onclick="closeS()" aria-label="Fechar">×</button></div>'+
+ '<div class="mgrid">'+
+   '<div><span>Cadastro</span>'+dia(x.criado)+'</div>'+
+   '<div><span>Último acesso</span>'+dia(x.ultimo_acesso)+'</div>'+
+   '<div><span>Consulentes · atendimentos</span>'+x.consulentes+' · '+x.jogos+'</div>'+
+   '<div><span>Total pago</span>'+brl(x.total_pago)+'</div>'+
+ '</div>'+
+ '<div class="msec">Editar dados da cliente</div>'+
+ '<div class="grid"><div><label>Nome</label><input id="ad-nm" value="'+esc(x.nome||'')+'" placeholder="Nome da taróloga"></div><div><label>Telefone / WhatsApp</label><input id="ad-tl" type="tel" value="'+esc(fmtPhone(x.tel)||'')+'" oninput="maskPhoneInput(this)" placeholder="(11) 99999-9999"></div></div>'+
+ '<label>Espaço / Mesa</label><input id="ad-sp" value="'+esc(x.espaco||'')+'" placeholder="Nome do espaço (opcional)">'+
+ '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">'+
+   '<button class="btn sm" onclick="admSalvarCliente(\''+id+'\')">Salvar dados da cliente</button>'+
+   (waUrl?'<a class="btn sm ghost" href="'+waUrl+'" target="_blank">💬 WhatsApp</a>':'<button type="button" class="btn sm ghost" onclick="toast(\'Preencha um telefone válido acima para abrir o WhatsApp\',\'!\')">💬 WhatsApp</button>')+
+   '<a class="btn sm ghost" href="'+admMail(x,s)+'">✉️ Enviar e-mail</a>'+
+ '</div>'+
  '<div class="msec">Acesso</div><div class="grid"><div><label>Situação</label><select id="ad-st">'+[['trial','Teste'],['ativa','Ativa'],['cancelada','Bloqueada']].map(function(o){return'<option value="'+o[0]+'"'+(x.status===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div><div><label>Acesso até</label><input id="ad-dt" type="date" value="'+String(x.ate).slice(0,10)+'"></div></div>'+
  '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm" onclick="admData(\''+id+'\')">Salvar acesso</button><a class="btn sm ghost" href="'+admMail(x,s)+'">Lembrar por e-mail</a></div>'+
  '<div class="msec">Pagamentos</div>'+(ps.length?ps.map(function(p){return'<div class="row" style="padding:8px 0;border-bottom:1px solid var(--line)"><div><b>'+brl(p.valor)+'</b> <span class="tag '+(p.status==='approved'?'ok':'bad')+'">'+(p.status==='approved'?'Aprovado':esc(p.status||'?'))+'</span><div class="mute">'+esc(p.forma||'forma não informada')+'</div></div><div class="mute">'+dia(p.pago_em)+'</div></div>'}).join(''):'<div class="mute">Nenhum pagamento registrado pelo Mercado Pago.</div>')+
- '<div class="msec">Anotação interna</div><textarea id="ad-nt" rows="3" placeholder="Só você vê isto">'+esc(x.nota)+'</textarea><button class="btn sm ghost" onclick="admNota(\''+id+'\')">Salvar anotação</button>')}
+ '<div class="msec">Anotação interna</div><textarea id="ad-nt" rows="3" placeholder="Só você vê isto">'+esc(x.nota)+'</textarea><button class="btn sm ghost" onclick="admNota(\''+id+'\')">Salvar anotação</button>');
+}
+
+async function admSalvarCliente(id){
+ var x=ADM.find(function(a){return a.user_id===id});if(!x)return;
+ var novoNome=v('ad-nm').trim(),novoTel=fmtPhone(v('ad-tl').trim()),novoEsp=v('ad-sp').trim();
+ var r=await sb.rpc('admin_salvar_cliente',{p_user:id,p_nome:novoNome,p_tel:novoTel,p_espaco:novoEsp});
+ if(r.error){
+  // Se a função RPC ainda não foi criada no Supabase, atualiza localmente e avisa
+  x.nome=novoNome;x.tel=novoTel;x.espaco=novoEsp;
+  toast('Atualizado na sessão (rode admin_salvar_cliente no SQL para salvar no banco)','!');
+  admLista();closeS();admDet(id);
+  return;
+ }
+ toast('Dados da cliente salvos!','✓');
+ await adminRoute();
+ admDet(id);
+}
+
 async function admData(id){var r=await sb.rpc('admin_definir_acesso_ate',{p_user:id,p_status:v('ad-st'),p_ate:v('ad-dt')});if(r.error){toast('Erro: '+r.error.message,'!');return}closeS();toast('Acesso atualizado.','✓');adminRoute()}
 async function admNota(id){var r=await sb.rpc('admin_salvar_nota',{p_user:id,p_nota:v('ad-nt')});if(r.error){toast('Erro: '+r.error.message,'!');return}closeS();toast('Anotação salva.','✓');adminRoute()}
 function admSet(id,st,dias){var x=ADM.find(function(a){return a.user_id===id});
  dlgConfirm('Liberar '+dias+' dias de acesso para '+x.email+'?',async function(){var r=await sb.rpc('admin_definir_acesso',{p_user:id,p_status:st,p_dias:dias});if(r.error){toast('Erro: '+r.error.message,'!');return}toast('Acesso liberado.','✓');adminRoute()},{title:'Liberar acesso'})}
+
+/* === ABA AVISOS NO PAINEL ADMIN === */
+var AVISO_TEMPLATES=[
+ {t:'Fim do teste / renovação',sub:'Seu acesso · {marca}',msg:'Olá, {primeiro_nome}! Passando para avisar que o seu acesso à {marca} ({status}, válido até {ate}) está próximo do vencimento ou requer atenção. Para continuar sem interrupções, acesse: {link} (use o e-mail {email}).'},
+ {t:'Novidade na plataforma',sub:'Novidades na {marca}',msg:'Olá, {primeiro_nome}! Temos novidades na {marca} para deixar a sua rotina de atendimentos ainda mais prática. Qualquer dúvida, é só responder por aqui!'},
+ {t:'Boas-vindas / suporte',sub:'Boas-vindas à {marca}',msg:'Olá, {primeiro_nome}! Seja muito bem-vinda à {marca}. Se precisar de ajuda para configurar seus métodos de jogo, link de agendamento ou dados Pix, estou à disposição!'}
+];
+function admAplicarModeloAviso(idx){
+ var m=AVISO_TEMPLATES[idx];if(!m)return;
+ if($('av-sub'))$('av-sub').value=m.sub;
+ if($('av-msg'))$('av-msg').value=m.msg;
+}
+function admAbrirAvisoIndividual(userId){
+ AV_FILTRO='todas';
+ AV_SEL={};
+ AV_SEL[userId]=true;
+ ADF='avisos';
+ admRender();
+ setTimeout(function(){if($('av-msg'))$('av-msg').focus()},80);
+}
+function admSetAvisoFiltro(gf){
+ AV_FILTRO=gf;
+ AV_SEL={};
+ ADM.forEach(function(x){
+  var k=(x.s||admSt(x)).k;
+  if(gf==='todas'||(gf==='ativa'&&k==='ativa')||(gf==='teste'&&(k==='teste'||k==='breve'))||(gf==='pendente'&&(k==='pendente'||k==='breve'))||(gf==='cancelada'&&k==='cancelada'))AV_SEL[x.user_id]=true;
+ });
+ admRenderAvisos();
+}
+function admToggleAvisoUser(uid){
+ AV_SEL[uid]=!AV_SEL[uid];
+}
+function admGetDestinatarias(){
+ return ADM.filter(function(x){return!!AV_SEL[x.user_id]});
+}
+function admCopiarEmailsAviso(){
+ var list=admGetDestinatarias().map(function(x){return x.email}).filter(Boolean);
+ if(!list.length){dlgAlert('Selecione pelo menos uma cliente na lista ao lado.','Nenhuma selecionada');return}
+ navigator.clipboard.writeText(list.join(', '));
+ toast('E-mails copiados ('+list.length+')!','✉️');
+}
+function admAbrirMailLoteAviso(){
+ var dests=admGetDestinatarias();
+ if(!dests.length){dlgAlert('Selecione pelo menos uma cliente na lista ao lado.','Nenhuma selecionada');return}
+ var first=dests[0],bcc=dests.slice(1).map(function(x){return x.email}).filter(Boolean).join(',');
+ var sub=fillAvisoVars(v('av-sub').trim()||'Aviso · {marca}',first);
+ var body=fillAvisoVars(v('av-msg').trim(),first);
+ var href='mailto:'+encodeURIComponent(first.email)+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body)+(bcc?'&bcc='+encodeURIComponent(bcc):'');
+ window.location.href=href;
+}
+function admDispararWhatsappAviso(uid){
+ var x=ADM.find(function(a){return a.user_id===uid});if(!x)return;
+ if(!x.tel){dlgAlert('Esta cliente não tem telefone cadastrado. Abra "Editar / Detalhes" para adicionar.','Sem telefone');return}
+ var tpl=v('av-msg').trim();
+ if(!tpl){dlgAlert('Escreva a mensagem do aviso antes de enviar.','Mensagem vazia');return}
+ var txt=fillAvisoVars(tpl,x);
+ var url=waHref(x.tel,txt);
+ AV_SENT[uid]=(AV_SENT[uid]||0)+1;
+ window.open(url,'_blank');
+ admRenderAvisos();
+}
+function admRenderAvisos(){
+ if(!Object.keys(AV_SEL).length){
+  ADM.forEach(function(x){AV_SEL[x.user_id]=true});
+ }
+ var msgAtual=$('av-msg')?$('av-msg').value:AVISO_TEMPLATES[0].msg;
+ var subAtual=$('av-sub')?$('av-sub').value:AVISO_TEMPLATES[0].sub;
+ var grupos=[['todas','Todas'],['teste','Em teste'],['ativa','Ativas'],['pendente','Pendentes'],['cancelada','Bloqueadas']];
+ var selCount=admGetDestinatarias().length;
+
+ var leftHtml='<div class="card"><h3 style="margin-bottom:6px">Compor aviso (WhatsApp e E-mail)</h3>'+
+  '<p class="mute" style="margin:0 0 10px;font-size:12.5px">Variáveis disponíveis: <b>{nome}</b>, <b>{primeiro_nome}</b>, <b>{email}</b>, <b>{status}</b>, <b>{ate}</b>, <b>{marca}</b>, <b>{link}</b></p>'+
+  '<div class="chips" style="margin-bottom:10px">'+AVISO_TEMPLATES.map(function(m,idx){return'<button type="button" class="chip" onclick="admAplicarModeloAviso('+idx+')">Modelo: '+esc(m.t)+'</button>'}).join('')+'</div>'+
+  '<label>Assunto (para e-mail)</label><input id="av-sub" value="'+esc(subAtual)+'">'+
+  '<label>Mensagem do aviso</label><textarea id="av-msg" rows="5" placeholder="Digite o aviso para suas clientes…">'+esc(msgAtual)+'</textarea>'+
+  '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">'+
+    '<button type="button" class="btn sm" onclick="admAbrirMailLoteAviso()">✉️ Abrir no app de e-mail ('+selCount+')</button>'+
+    '<button type="button" class="btn sm ghost" onclick="admCopiarEmailsAviso()">📋 Copiar e-mails ('+selCount+')</button>'+
+  '</div>'+
+  '<p class="mute" style="margin:12px 0 0;font-size:12.5px">Para <b>WhatsApp</b>, clique no botão <b>Enviar WhatsApp</b> ao lado de cada cliente selecionada para abrir a conversa já preenchida.</p></div>';
+
+ var rightHtml='<div class="card"><div class="row" style="margin-bottom:8px;flex-wrap:wrap"><h3 style="margin:0">Destinatárias ('+selCount+' selecionadas)</h3><span class="tag num">'+ADM.length+' no total</span></div>'+
+  '<div class="chips" style="margin-bottom:12px">'+grupos.map(function(g){return'<button type="button" class="chip'+(AV_FILTRO===g[0]?' on':'')+'" onclick="admSetAvisoFiltro(\''+g[0]+'\')">'+g[1]+'</button>'}).join('')+'</div>'+
+  '<div>'+(ADM.length?ADM.map(function(x){
+   var s=x.s||admSt(x),checked=!!AV_SEL[x.user_id],sentN=AV_SENT[x.user_id]||0;
+   return'<div class="aviso-dest-item">'+
+    '<label style="display:flex;align-items:center;gap:8px;margin:0;cursor:pointer;flex:1;min-width:0;color:var(--ink)">'+
+      '<input type="checkbox" style="width:auto;margin:0;flex-shrink:0"'+(checked?' checked':'')+' onchange="admToggleAvisoUser(\''+x.user_id+'\');admRenderAvisos()">'+
+      '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><b>'+esc(x.nome||x.email)+'</b>'+(x.nome?' <span class="mute">('+esc(x.email)+')</span>':'')+' <span class="tag '+s.c+'" style="font-size:10.5px;padding:1px 7px">'+s.t+'</span></span>'+
+    '</label>'+
+    '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">'+
+      (sentN?'<span class="tag ok" style="font-size:11px">✓ '+sentN+'x</span>':'')+
+      '<button type="button" class="btn sm ghost" onclick="admDispararWhatsappAviso(\''+x.user_id+'\')">💬 WhatsApp</button>'+
+      '<a class="btn sm ghost" href="'+admMail(x,s,fillAvisoVars(v('av-sub')||subAtual,x),fillAvisoVars(v('av-msg')||msgAtual,x))+'">✉️</a>'+
+    '</div></div>';
+  }).join(''):'<div class="empty">Nenhuma cliente cadastrada.</div>')+'</div></div>';
+
+ $('admL').innerHTML='<div class="aviso-grid">'+leftHtml+rightHtml+'</div>';
+}
 
 function admTab(idx){
  [0,1,2].forEach(function(k){
