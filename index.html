@@ -862,8 +862,12 @@ function saveItem(id){
  if(fr){dlgConfirm('Atenção: esse horário '+fr+'. Deseja salvar mesmo assim?',function(){commitItem(id,d)},{title:'Fora do expediente',yes:'Salvar mesmo assim',ic:'🌙'});return}
  commitItem(id,d);
 }
-function profile(id){var c=cl(id),l=S.items.filter(function(i){return i.cid===id}).sort(function(a,b){return b.date.localeCompare(a.date)}),t=iso(new Date()),nx=l.filter(function(i){return!i.done&&i.date>=t&&ativo(i)}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)})[0];
- sheet('<div id="prof" data-c="'+id+'"></div><div class="sheet-hd"><h2 style="margin:0">'+esc(c.name)+'</h2><button type="button" class="sheet-x" onclick="closeS()">×</button></div><div class="mute num">'+esc(c.phone||'sem telefone')+(c.email?' · '+esc(c.email):'')+'<br>Aniversário: '+(c.birth?dt(c.birth).slice(0,5):'—')+' · Cadastro: '+dt(c.created)+'</div>'+(c.notes?'<p style="margin:10px 0">'+esc(c.notes)+'</p>':'')+'<div class="grid" style="margin:14px 0"><div class="card" style="margin:0"><div class="mute">Já pagou</div><b class="num" style="font-size:18px;color:var(--ok)">'+money(tot(l.filter(function(i){return i.paid})))+'</b></div><div class="card" style="margin:0"><div class="mute">A receber</div><b class="num" style="font-size:18px;color:var(--bad)">'+money(tot(l.filter(function(i){return!i.paid&&ativo(i)})))+'</b></div></div><div class="card" style="margin-bottom:14px">Próximo horário: <b class="num">'+(nx?dt(nx.date)+' às '+esc(nx.time):'nenhum marcado')+'</b></div><div class="row" style="margin:14px 0;flex-wrap:wrap"><button class="btn sm" onclick="closeS();formItem(null,\''+id+'\')">+ Marcar atendimento</button><button class="btn sm ghost" onclick="closeS();formClient(\''+id+'\')">Editar ficha</button></div><h3 style="margin-bottom:10px">Atendimentos anteriores</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Ainda sem atendimentos.</div>'))}
+'<div class="mute num" style="line-height:1.7;margin-top:4px">' +
+  '<div><b>WhatsApp:</b> ' + esc(c.phone || 'não informado') + '</div>' +
+  (c.email ? '<div><b>E-mail:</b> ' + esc(c.email) + '</div>' : '') +
+  '<div><b>Aniversário:</b> ' + (c.birth ? dt(c.birth).slice(0, 5) : 'não informado') + '</div>' +
+  '<div><b>Cadastro:</b> ' + dt(c.created) + '</div>' +
+'</div>' +
 
 var SUB=null,VER=null;
 var DEFMSG='Olá, {nome}! Passando para confirmar o seu atendimento ({jogo}) no dia {dia} às {hora}. Te espero! 🔮';
