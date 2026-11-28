@@ -1238,6 +1238,14 @@ async function loadPublic(uidParam){
  var r=await sb.rpc('get_agenda_publica',{p_user_id:uidParam});
  if(r.error||!r.data||!r.data.ok){box.innerHTML='<div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><div class="card" style="text-align:center;padding:28px;max-width:480px;margin:0 auto"><h2>Agenda indisponível</h2><p class="mute">'+(r.data&&r.data.erro?esc(r.data.erro):'Não foi possível carregar os horários no momento.')+'</p></div>';return}
  PUB=r.data;
+ try{
+  var ex=await sb.rpc('exibicao_publica',{p_user_id:uidParam});
+  if(ex&&ex.data){
+   if(ex.data.showDur===false)PUB.showDur=false;else if(ex.data.showDur===true)PUB.showDur=true;
+   var mmap=ex.data.metodos||{};
+   PUB.methods=(PUB.methods||[]).map(function(pm){var e=mmap[pm.id];return e?Object.assign({},pm,{showDur:e.showDur}):pm});
+  }
+ }catch(e){}
  if(USER&&USER===uidParam&&S&&S.cfg){
   var myC=CF();
   PUB.logo=myC.logo||PUB.logo||'';
@@ -1248,6 +1256,7 @@ async function loadPublic(uidParam){
   PUB.nome=myC.nome||PUB.nome||'';
   PUB.corAcc=myC.corAcc||PUB.corAcc||'';
   PUB.corGold=myC.corGold||PUB.corGold||'';
+  PUB.showDur=myC.showDur;
   if(S.methods&&S.methods.length){
    PUB.methods=PUB.methods.map(function(pm){
     var lm=S.methods.find(function(x){return x.id===pm.id});
@@ -1341,7 +1350,7 @@ async function submitPublic(){
  var r=await sb.rpc('criar_agendamento_publico',{p_user_id:PUB_UID,p_nome:nome,p_tel:tel,p_birth:birth,p_mid:PUB_SEL.mid,p_date:PUB_SEL.date,p_time:PUB_SEL.time,p_online:online});
  if(r.error||!r.data||!r.data.ok){dlgAlert(r.data&&r.data.erro?r.data.erro:'Não foi possível concluir. Tente outro horário.','Horário indisponível');btn.disabled=false;btn.textContent='Confirmar agendamento';loadPublic(PUB_UID);return}
  var res=r.data,pend=res.modo==='pendente',pixAuto=res.modo==='pix_auto';
- var showDur=res.showDur!=null?!!res.showDur:pubShowsDur();
+ var showDur=(mSel.showDur!==false)&&pubShowsDur();
  var durExtra=showDur&&res.dur?(' ('+res.dur+' min)'):'';
  var waNum=(PUB.tel||'').replace(/\D/g,'');if(waNum&&waNum.length<=11)waNum='55'+waNum;
  var tpl=PUB.linkMsg||DEFLINKMSG;
