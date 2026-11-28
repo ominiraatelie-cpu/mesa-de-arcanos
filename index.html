@@ -917,7 +917,6 @@ function render(){
 
     '<div class="card" style="border-color:var(--gold)"><h3 style="margin-bottom:4px">🔗 Administração da página de agendamento</h3><p class="mute" style="margin:0 0 12px">Personalize e controle como suas consulentes agendam pelo seu link.</p>'+
     '<label style="display:flex;align-items:center;font-weight:600;color:var(--ink);margin:4px 0 12px;cursor:pointer"><input id="lk1" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.linkAtivo?' checked':'')+'>Ativar agendamento pelo meu link</label>'+
-    '<label style="display:flex;align-items:center;font-weight:500;color:var(--ink);margin:0 0 12px;cursor:pointer"><input id="lk-dur" type="checkbox" style="width:auto;margin:0 8px 0 0"'+(c.showDur!==false?' checked':'')+'>Mostrar duração (ex.: 30 min) para a consulente no link</label>'+
     '<label>Regra de confirmação pelo link</label><select id="lk2"><option value="direto"'+(c.modoLink==='direto'?' selected':'')+'>Confirmar automaticamente (sem exigir Pix na hora)</option><option value="pix_auto"'+(c.modoLink==='pix_auto'?' selected':'')+'>Confirmar automaticamente após pagamento Pix (reserva por 15 min)</option><option value="pendente"'+(c.modoLink==='pendente'?' selected':'')+'>Pré-reserva manual (aguarda minha aprovação)</option></select>'+
     '<label>Título personalizado da página (opcional)</label><input id="lk3" value="'+esc(c.bkTitulo)+'" placeholder="Padrão: Nome do seu espaço ou seu nome">'+
     '<label>Aviso ou boas-vindas no topo do agendamento (opcional)</label><textarea id="lk4" rows="2" placeholder="Ex: Atendimento com hora marcada. Escolha seu método abaixo ✨">'+esc(c.bkAviso)+'</textarea>'+
@@ -1228,7 +1227,7 @@ async function save(){if(!sb||!USER)return;var c=await sb.from('app_data').selec
 
 /* === AGENDAMENTO PÚBLICO === */
 var PUB=null,PUB_UID='',PUB_CUR=iso(new Date()).slice(0,7),PUB_SEL={mid:'',date:'',time:'',online:true},PIX_TMR=null;
-function pubShowsDur(){return PUB&&PUB.showDur===false?false:true}
+function pubShowsDur(){return true} /* a duração agora é definida só em cada método */
 async function loadPublic(uidParam){
  if(PIX_TMR){clearInterval(PIX_TMR);PIX_TMR=null}
  var box=$('bk-box');
@@ -1241,7 +1240,6 @@ async function loadPublic(uidParam){
  try{
   var ex=await sb.rpc('exibicao_publica',{p_user_id:uidParam});
   if(ex&&ex.data){
-   if(ex.data.showDur===false)PUB.showDur=false;else if(ex.data.showDur===true)PUB.showDur=true;
    var mmap=ex.data.metodos||{};
    PUB.methods=(PUB.methods||[]).map(function(pm){var e=mmap[pm.id];return e?Object.assign({},pm,{showDur:e.showDur}):pm});
   }
@@ -1256,7 +1254,6 @@ async function loadPublic(uidParam){
   PUB.nome=myC.nome||PUB.nome||'';
   PUB.corAcc=myC.corAcc||PUB.corAcc||'';
   PUB.corGold=myC.corGold||PUB.corGold||'';
-  PUB.showDur=myC.showDur;
   if(S.methods&&S.methods.length){
    PUB.methods=PUB.methods.map(function(pm){
     var lm=S.methods.find(function(x){return x.id===pm.id});
@@ -1498,7 +1495,6 @@ function CF(){
   linkMsg:c.linkMsg||DEFLINKMSG,
   birthMsg:c.birthMsg||DEFBIRTH,
   linkAtivo:!!c.linkAtivo,
-  showDur:c.showDur===false?false:true,
   modoLink:c.modoLink||'direto',
   bkTitulo:c.bkTitulo||'',
   bkAviso:c.bkAviso||'',
@@ -1539,7 +1535,6 @@ function saveCfg(){
   dias:d,
   pausa:isNaN(p)||p<0?15:p,
   linkAtivo:ck('lk1'),
-  showDur:ck('lk-dur'),
   modoLink:v('lk2'),
   bkTitulo:v('lk3').trim(),
   bkAviso:v('lk4').trim(),
