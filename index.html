@@ -495,7 +495,7 @@ nav button.on{color:var(--acc);font-weight:700}
 <footer><span id="foot-brand">© Mesa de Arcanos</span> · <a href="#termos">Termos de uso</a> · <a href="#privacidade">Privacidade</a> · <a href="#" data-sup target="_blank">Suporte no WhatsApp</a></footer></div>
 
 <div id="au" style="display:none"><main style="max-width:420px;margin:0 auto;padding:48px 22px"><div class="logo" data-brand style="justify-content:center;margin-bottom:24px"><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="card" style="padding:24px"><h2 id="au-h">Entrar</h2><p id="au-p" class="mute" style="margin:4px 0 16px">Acesse sua mesa de atendimentos</p><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Senha</label><input id="apw" type="password" autocomplete="current-password"><label style="display:flex;align-items:center;font-weight:400;margin:6px 0 14px"><input id="aok" type="checkbox" style="width:auto;margin:0 8px 0 0">Li e aceito os <a href="#termos" style="margin:0 4px">Termos</a> e a <a href="#privacidade" style="margin-left:4px">Privacidade</a></label><p id="am" class="mute" style="color:var(--bad)"></p><div class="row"><button id="au-b1" class="btn" onclick="login()">Entrar</button><button id="au-b2" class="btn ghost" onclick="signup()">Criar conta</button></div><p style="margin:14px 0 0"><a class="mute" href="#" onclick="forgot();return false">Esqueci minha senha</a></p></div><p style="text-align:center"><a class="mute" href="#">← Voltar ao site</a></p></main></div>
-<div id="pw" style="display:none"><main style="max-width:460px;margin:0 auto;padding:56px 22px;text-align:center"><div class="logo" data-brand style="justify-content:center"><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="card" style="margin-top:24px;padding:28px"><h2>Seu acesso terminou</h2><p class="mute" style="margin:10px 0 20px">O teste grátis ou a assinatura venceu. Assine para continuar editando. Use o <b>mesmo e-mail</b> do seu cadastro aqui — seus dados continuam salvos.</p><a id="pw-pay" class="btn" style="width:100%" href="#" data-pay>Assinar agora · R$ 29/mês</a><p style="margin:16px 0 8px"><a class="mute" href="#" data-sup target="_blank">Pagou com outro e-mail ou precisa de ajuda? Fale no WhatsApp</a></p><p><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha</button> <button class="btn ghost sm" onclick="exportJson()">Backup completo</button></p><a class="mute" href="#" onclick="logout();return false">Sair</a></div></main></div>
+<div id="pw" style="display:none"><main style="max-width:460px;margin:0 auto;padding:56px 22px;text-align:center"><div class="logo" data-brand style="justify-content:center"><b>✦</b> MESA DE ARCANOS <b>✦</b></div><div class="card" style="margin-top:24px;padding:28px"><h2>Seu acesso terminou</h2><p class="mute" style="margin:10px 0 20px">O teste grátis ou a assinatura venceu. Assine para continuar editando. Use o <b>mesmo e-mail</b> do seu cadastro aqui — seus dados continuam salvos.</p><a id="pw-pay" class="btn" style="width:100%" href="#" onclick="assinar();return false">Assinar agora · R$ 29/mês</a><p style="margin:16px 0 8px"><a class="mute" href="#" data-sup target="_blank">Pagou com outro e-mail ou precisa de ajuda? Fale no WhatsApp</a></p><p><button class="btn ghost sm" onclick="exportCsv()">Baixar planilha</button> <button class="btn ghost sm" onclick="exportJson()">Backup completo</button></p><a class="mute" href="#" onclick="logout();return false">Sair</a></div></main></div>
 <div id="lg" style="display:none"></div>
 <div id="bk" style="display:none"><div id="bk-box"></div></div>
 <div id="adm" style="display:none"></div>
@@ -935,7 +935,7 @@ function render(){
   h=head('Minha conta','<button class="btn sm" onclick="saveCfg()">Salvar</button>')+
   '<div class="conta-grid">'+
   '<div class="conta-col">'+
-    '<div class="card"><div class="row" style="margin-bottom:14px"><div><h3 style="margin:0">Meu perfil e foto do espaço</h3><div class="mute num">'+(SUB?(SUB.status==='trial'?'Teste grátis até ':'Assinatura ativa até ')+dt(SUB.ate.slice(0,10)):'')+'</div></div>'+(SUB&&SUB.status==='trial'?'<a class="btn sm" href="'+PAY+'" target="_blank">Assinar agora</a>':'')+'</div>'+
+    '<div class="card"><div class="row" style="margin-bottom:14px"><div><h3 style="margin:0">Meu perfil e foto do espaço</h3><div class="mute num">'+(SUB?(SUB.status==='trial'?'Teste grátis até ':'Assinatura ativa até ')+dt(SUB.ate.slice(0,10)):'')+'</div></div>'+(SUB&&SUB.status==='trial'?'<button class="btn sm" onclick="assinar()">Assinar agora</button>':'')+'</div>'+
     '<div class="logo-prev-wrap"><div id="p-logo-prev">'+(TEMP_LOGO?'<img src="'+TEMP_LOGO+'" class="logo-prev-img" alt="Logo">':'<div class="logo-prev-img">✦</div>')+'</div><div style="flex:1;min-width:0"><label style="margin-bottom:4px">Logo ou foto do seu espaço (opcional)</label><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><label class="btn sm ghost" style="margin:0;cursor:pointer">Escolher imagem<input type="file" accept="image/*" onchange="handleLogoUpload(this)" style="display:none"></label><button type="button" id="p-logo-rm" class="btn sm del" style="display:'+(TEMP_LOGO?'inline-flex':'none')+'" onclick="removeLogoImg()">Remover</button></div><div class="mute" style="font-size:12px;margin-top:4px">Aparece no topo da sua página de agendamento.</div></div></div>'+
     '<div class="grid"><div><label>Seu nome (taróloga)</label><input id="p1" value="'+esc(c.nome)+'"></div><div><label>Nome do seu espaço</label><input id="p2" value="'+esc(c.espaco)+'" placeholder="Ex: Ateliê Ominirá"></div></div>'+
     '<label>Telefone / WhatsApp</label><input id="p3" type="tel" value="'+esc(fmtPhone(c.tel))+'" oninput="maskPhoneInput(this)" placeholder="(11) 99999-9999">'+
@@ -1600,7 +1600,7 @@ function saveCfg(){
  S.cfg=c;applyCfg();save();toast('Configurações salvas!','✓');render();
 }
 
-var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='',ADTAB='clientes',AV_FILTRO='todas',ADS='ate',AV_HIDE=true,MET={},AV_MSG='Olá, {nome}! Passando para lembrar que seu acesso vai até {ate}. Para continuar sem interrupções, acesse: {link}';
+var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='',ADTAB='clientes',AV_FILTRO='todas',ADS='ate',AV_HIDE=true,MET={},AV_MSG='Olá, {nome}! Passando para lembrar que seu acesso vai até {ate}. Para continuar sem interrupções, entre em {link} e toque em Assinar';
 function brl(n){return money(n)}
 function dia(d){return d?dt(String(d).slice(0,10)):'—'}
 async function adminRoute(){var A=$('adm'),w='<div class="w" style="padding:40px 0">';
@@ -1792,8 +1792,8 @@ function admBodyMetricas(L,base,pag){
 }
 
 /* ---- avisos (fila, sem repetir) ---- */
-var AV_MODELOS=[['Lembrete de vencimento','Olá, {nome}! Passando para lembrar que seu acesso à '+'{marca}'+' vai até {ate}. Para continuar sem interrupções, acesse: {link}'],['Fim do teste grátis','Olá, {nome}! Seu teste grátis da {marca} está acabando ({ate}). Garanta sua assinatura aqui: {link}'],['Ajuda para configurar','Olá, {nome}! Vi que você criou sua conta na {marca}. Posso te ajudar a configurar sua mesa (métodos de jogo, horários e link de agendamento)? 😊'],['Novidade no sistema','Olá, {nome}! Temos novidades na {marca} para facilitar seus atendimentos. Acesse sua conta para conferir!']];
-function admAvisoTxt(x){return AV_MSG.replace(/\{marca\}/g,BRAND).replace(/\{nome\}/g,x.nome?x.nome.split(' ')[0]:'').replace(/\{ate\}/g,dia(x.ate)).replace(/\{dias\}/g,String(Math.max(0,x.s.d))).replace(/\{link\}/g,PAY)}
+var AV_MODELOS=[['Lembrete de vencimento','Olá, {nome}! Passando para lembrar que seu acesso à '+'{marca}'+' vai até {ate}. Para continuar sem interrupções, entre em {link} e toque em Assinar'],['Fim do teste grátis','Olá, {nome}! Seu teste grátis da {marca} está acabando ({ate}). Entre em {link} e toque em Assinar'],['Ajuda para configurar','Olá, {nome}! Vi que você criou sua conta na {marca}. Posso te ajudar a configurar sua mesa (métodos de jogo, horários e link de agendamento)? 😊'],['Novidade no sistema','Olá, {nome}! Temos novidades na {marca} para facilitar seus atendimentos. Acesse sua conta para conferir!']];
+function admAvisoTxt(x){return AV_MSG.replace(/\{marca\}/g,BRAND).replace(/\{nome\}/g,x.nome?x.nome.split(' ')[0]:'').replace(/\{ate\}/g,dia(x.ate)).replace(/\{dias\}/g,String(Math.max(0,x.s.d))).replace(/\{link\}/g,APP_URL())}
 function admBodyAvisos(L){
  var grupos=[['todas','Todas as clientes'],['vence3','Vencem em até 3 dias'],['breve','Teste terminando (≤ 3 dias)'],['parados','Parados no teste (sem uso)'],['pendente','Vencidas / Pendentes'],['teste','Em período de teste'],['ativa','Assinaturas ativas'],['cancelada','Bloqueadas']];
  var base=L.filter(function(x){return!x.eh_admin&&(AV_FILTRO==='breve'?x.s.k==='breve':admFiltraCli(x,AV_FILTRO))});
@@ -1829,7 +1829,7 @@ function admExportPagamentos(){
  PAGS.forEach(function(p){var d=ADM.find(function(x){return x.user_id===p.user_id});L.push([dia(p.pago_em),p.email,String(+p.valor||0).replace('.',','),p.status,p.forma,d?(d.nome||d.email):''])});
  admCsv('pagamentos.csv',L);
 }
-function admMsgTexto(x,s){var q=s.d>0?'termina '+(s.d===1?'em 1 dia':'em '+s.d+' dias'):'terminou';return'Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Seu acesso à '+BRAND+' '+q+'. Para continuar usando, assine aqui: '+PAY+' (use o mesmo e-mail do cadastro).'}
+function admMsgTexto(x,s){var q=s.d>0?'termina '+(s.d===1?'em 1 dia':'em '+s.d+' dias'):'terminou';return'Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Seu acesso à '+BRAND+' '+q+'. Para continuar, entre na sua conta e toque em Assinar: '+APP_URL()}
 function admMail(x,s){var m=admMsgTexto(x,s);return'mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Seu acesso · '+BRAND)+'&body='+encodeURIComponent(m)}
 function admWaLink(x,s){var n=(x.tel||'').replace(/\D/g,'');if(!n)return'';if(n.length<=11)n='55'+n;return'https://wa.me/'+n+'?text='+encodeURIComponent(admMsgTexto(x,s))}
 function admDet(id){
@@ -1919,7 +1919,7 @@ function admConfig(){
  '<div id="atp-0">'+
    '<div class="grid"><div><label>Nome da plataforma (marca)</label><input id="cf-brand" value="'+esc(s.brand||BRAND)+'"></div><div><label>WhatsApp de suporte (DDI+DDD+Nº)</label><input id="cf-sup" placeholder="5511999999999" value="'+esc(s.sup||SUPORTE)+'"></div></div>'+
    '<div class="grid"><div><label>Dias de teste grátis</label><input id="cf-trial" type="number" min="0" value="'+n(c.trial_dias,7)+'"></div><div><label>Tolerância após vencer (dias)</label><input id="cf-tol" type="number" min="0" value="'+n(c.tolerancia_dias,3)+'"></div><div><label>Preço mensal (R$)</label><input id="cf-preco" type="number" step="0.01" value="'+n(c.preco,29)+'"></div><div><label>Botão “Liberar” (dias)</label><input id="cf-dias" type="number" min="1" value="'+n(c.dias_liberar,35)+'"></div></div>'+
-   '<label>Link de pagamento (Mercado Pago)</label><input id="cf-link" value="'+esc(c.link_pagamento||PAY)+'">'+
+   '<label>Link de pagamento antigo (só reserva, caso a assinatura automática falhe)</label><input id="cf-link" value="'+esc(c.link_pagamento||PAY)+'">'+
  '</div>'+
 
  '<div id="atp-1" style="display:none">'+
@@ -1997,74 +1997,93 @@ async function admSalvarConfig(){
 }
 
 
-/* === HOJE (VISÃO DO DIA) === */
-function addDaysStr(s,n){var a=s.split('-'),d=new Date(+a[0],+a[1]-1,+a[2]+n);return iso(d)}
+/* === PAGINA HOJE === */
+var DIAS_SEM=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+function irDia(ds){sel=ds;cur=ds.slice(0,7);go('agenda')}
+function copyMyLink(){
+ var url=location.origin+location.pathname+'#agendar?t='+USER;
+ var ok=function(){toast('Link copiado!','🔗')};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(ok,function(){dlgAlert(url,'Seu link de agendamento')});
+ else dlgAlert(url,'Seu link de agendamento');
+}
+function shareMyLink(){
+ var url=location.origin+location.pathname+'#agendar?t='+USER;
+ window.open('https://wa.me/?text='+encodeURIComponent('Agende seu atendimento comigo por aqui: '+url),'_blank');
+}
+function marcarFaltou(id){
+ var i=S.items.find(function(x){return x.id===id});if(!i)return;
+ dlgConfirm('Marcar que '+nm(i.cid)+' faltou? A consulta deixa de contar na agenda.',function(){i.st='faltou';save();render();toast('Marcada como falta')},{title:'Registrar falta',yes:'Registrar',ic:'🙈'});
+}
 function hojeHtml(){
- var d=new Date(),td=iso(d),ym=td.slice(0,7),nowMin=d.getHours()*60+d.getMinutes(),c=CF(),nome=c.nome?c.nome.split(' ')[0]:'';
- var ativos=S.items.filter(ativo);
- var hoje=ativos.filter(function(i){return i.date===td}).sort(function(a,b){return(a.time||'').localeCompare(b.time||'')});
- var pends=S.items.filter(function(i){return i.st==='pendente'});
- var esperaPix=S.items.filter(function(i){return i.st==='aguardando_pix'&&!i.paid&&!pixExpirado(i)});
- var proxHoje=hoje.find(function(i){return!i.done&&(endMin(i)==null||endMin(i)>=nowMin-10)});
- var proxFut=proxHoje||ativos.filter(function(i){return!i.done&&i.date>td}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)})[0];
- var df=(d.getDay()+6)%7,ws=addDaysStr(td,-df),we=addDaysStr(td,6-df);
- var sem=[],cntSem=0;
- for(var k=0;k<7;k++){var ds=addDaysStr(ws,k),n=ativos.filter(function(i){return i.date===ds}).length;cntSem+=n;sem.push({ds:ds,n:n,dow:['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'][k],day:ds.slice(8)})}
- var paidMes=S.items.filter(function(i){return i.paid&&i.date.slice(0,7)===ym});
- var aRec=ativos.filter(function(i){return!i.paid});
- var nivers=bdays(d);
- var semFicha=ativos.filter(function(i){return i.done&&i.date<=td&&!i.notes&&!i.cards&&!(i.pickedCards&&i.pickedCards.length)}).slice(0,4);
- var h=d.getHours(),saud=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
- var sub=hoje.length?'Você tem <b>'+hoje.length+' '+(hoje.length===1?'atendimento':'atendimentos')+'</b> hoje · '+MES[d.getMonth()]+' de '+d.getFullYear():'Nenhum atendimento marcado para hoje · '+MES[d.getMonth()]+' de '+d.getFullYear();
- var greet='<div class="greet"><div><div class="eb" style="margin-bottom:2px">✦ '+saud+(nome?', '+esc(nome):'')+'</div><h2>Sua mesa hoje</h2><div class="mute">'+sub+'</div></div>'+
-  '<svg class="greet-moon" width="58" height="58" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M36 10 A22 22 0 1 0 54 44 A17 17 0 1 1 36 10 Z" fill="currentColor" opacity="0.22"/><path d="M36 10 A22 22 0 1 0 54 44 A17 17 0 1 1 36 10 Z"/><path d="M47 14 L48.5 18 L52.5 19.5 L48.5 21 L47 25 L45.5 21 L41.5 19.5 L45.5 18 Z" fill="currentColor" stroke="none"/></svg></div>';
+ var d=new Date(),td=iso(d),nowMin=d.getHours()*60+d.getMinutes(),ym=td.slice(0,7);
+ var byT=function(a,b){return(a.time||'').localeCompare(b.time||'')},cf=CF();
+ var tom=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1));
+ var hojeL=S.items.filter(function(i){return i.date===td&&ativo(i)}).sort(byT);
+ var amanhaL=S.items.filter(function(i){return i.date===tom&&ativo(i)}).sort(byT);
+ var pends=S.items.filter(function(i){return i.st==='pendente'||(i.st==='aguardando_pix'&&!i.paid&&!pixExpirado(i))}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)});
+ var feitas=hojeL.filter(function(i){return i.done}).length;
+ var proxima=hojeL.filter(function(i){var e=endMin(i);return!i.done&&i.st!=='pendente'&&i.st!=='aguardando_pix'&&e!=null&&e>=nowMin})[0];
+ var atrasadas=hojeL.filter(function(i){var e=endMin(i);return!i.done&&i.st!=='pendente'&&i.st!=='aguardando_pix'&&e!=null&&e<nowMin});
+ var devendo=S.items.filter(function(i){return ativo(i)&&!i.paid&&(+i.price||0)>0&&i.st!=='pendente'&&i.st!=='aguardando_pix'&&(i.done||i.date<td)}).sort(function(a,b){return b.date.localeCompare(a.date)});
+ var totDev=tot(devendo);
+ var mo=tot(S.items.filter(function(i){return i.paid&&i.date.slice(0,7)===ym}));
+ var aniv=bdays(d);
+ var hr=d.getHours(),saud=hr<12?'Bom dia':hr<18?'Boa tarde':'Boa noite';
+ var nome1=cf.nome?cf.nome.split(' ')[0]:'';
+ var resumo=hojeL.length?(hojeL.length+(hojeL.length===1?' atendimento':' atendimentos')+' hoje'+(proxima&&proxima.time?' · próximo às '+proxima.time:(feitas===hojeL.length?' · tudo concluído ✨':''))):'Dia livre por enquanto ✨';
+ var trial='';
+ if(SUB&&SUB.status==='trial'){var dr=Math.ceil((new Date(SUB.ate)-d)/864e5);
+  trial=dr<=2?'<div class="card warn" style="margin:12px 0 0"><div class="row"><div><b>Seu teste grátis termina em '+(dr<=1?'menos de 1 dia':dr+' dias')+'</b><div class="mute">Assine agora para não perder o acesso.</div></div><button class="btn sm" onclick="assinar()">Assinar</button></div></div>':'<span class="tag num">✦ Teste grátis até '+dt(SUB.ate.slice(0,10))+'</span>'}
+ var moon='<svg class="greet-moon" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M36 10 A22 22 0 1 0 54 42 A17 17 0 1 1 36 10 Z"/><path d="M46 14 L47.5 18.5 L52 20 L47.5 21.5 L46 26 L44.5 21.5 L40 20 L44.5 18.5 Z" fill="currentColor" stroke="none"/></svg>';
+ var greet='<div class="greet"><div style="min-width:0"><div class="eb" style="margin-bottom:4px">✦ '+DIAS_SEM[d.getDay()]+' · '+dt(td)+'</div><h2>'+saud+(nome1?', <em>'+esc(nome1)+'</em>':'')+'!</h2><div class="mute" style="margin-bottom:10px">'+resumo+'</div>'+
+  '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="sel=\''+td+'\';formItem()">+ Marcar atendimento</button>'+(cf.linkAtivo?'<button class="btn sm ghost" onclick="copyMyLink()">🔗 Copiar meu link</button>':'')+(trial&&trial.indexOf('<div')!==0?trial:'')+'</div>'+(trial&&trial.indexOf('<div')===0?trial:'')+'</div>'+moon+'</div>';
  var kpis='<div class="hj-kpis">'+
-  '<div class="card hj-kpi"><div class="l">🔮 Hoje</div><div class="v">'+hoje.length+'</div><div class="s">'+hoje.filter(function(i){return i.done}).length+' realizados</div></div>'+
-  '<div class="card hj-kpi"><div class="l">📅 Na semana</div><div class="v">'+cntSem+'</div><div class="s">seg a dom</div></div>'+
-  '<div class="card hj-kpi"><div class="l">💰 No mês</div><div class="v" style="color:var(--gold)">'+money(tot(paidMes))+'</div><div class="s">'+paidMes.length+' pagos</div></div>'+
-  '<div class="card hj-kpi"><div class="l">⏳ A receber</div><div class="v" style="color:'+(aRec.length?'var(--bad)':'var(--mute)')+'">'+money(tot(aRec))+'</div><div class="s">'+aRec.length+' em aberto</div></div></div>';
- var destaque='';
- if(proxFut){
-  var isHoje=proxFut.date===td,sm=toMin(proxFut.time),em=endMin(proxFut),agora=isHoje&&sm!=null&&nowMin>=sm-10&&nowMin<=(em!=null?em:sm+60);
-  var quando=agora?'AGORA':isHoje?(sm!=null&&sm>nowMin?'em '+(sm-nowMin<60?(sm-nowMin)+' min':Math.floor((sm-nowMin)/60)+'h'+pad((sm-nowMin)%60)):'hoje'):dt(proxFut.date);
-  var ult=ativos.filter(function(i){return i.cid===proxFut.cid&&i.id!==proxFut.id&&(i.done||i.date<proxFut.date)}).sort(function(a,b){return b.date.localeCompare(a.date)})[0];
-  destaque='<div class="card hj-next"><div class="row" style="margin-bottom:8px"><span class="hj-when'+(agora?' now':'')+'">✦ '+(agora?'Em atendimento · ':'Próximo · ')+esc(quando)+'</span><b class="num" style="color:var(--gold);font-size:17px">'+money(proxFut.price)+'</b></div>'+
-  '<div class="row" style="align-items:flex-start"><div><b style="font-size:19px">'+esc(nm(proxFut.cid))+'</b><div class="mute num" style="margin-top:2px">🕒 '+dt(proxFut.date).slice(0,5)+(proxFut.time?' · '+esc(proxFut.time):'')+' · 🃏 '+esc(mt(proxFut.mid))+' · '+(proxFut.online?'💻 Online':'🏠 Presencial')+'</div></div>'+
-  '<span class="tag '+(proxFut.paid?'ok':'bad')+'">'+(proxFut.paid?'✓ Pago':'A receber')+'</span></div>'+
-  (ult?'<div class="card" style="background:var(--card);padding:10px 12px;margin:10px 0 0;font-size:13px">Da última vez ('+dt(ult.date).slice(0,5)+'): <b>'+esc(mt(ult.mid))+'</b>'+(ult.cards?' — '+esc(ult.cards):'')+'</div>':'')+
-  '<div class="hj-acts">'+
-   '<button class="btn sm" onclick="formItem(\''+proxFut.id+'\')">🃏 Registrar tiragem</button>'+
-   '<button class="btn sm ghost" onclick="profile(\''+proxFut.cid+'\')">Ficha</button>'+
-   '<button class="btn sm ghost" onclick="wa(\''+proxFut.id+'\')">💬 Confirmar</button>'+
-   (!proxFut.paid?'<button class="btn sm ghost" onclick="pixModal(\''+proxFut.id+'\')">💠 Pix</button>':'')+
-   (!proxFut.done?'<button class="btn sm ok" onclick="tgl(\''+proxFut.id+'\',\'done\')">✓ Realizado</button>':'')+
-  '</div></div>';
- }else{
-  destaque='<div class="card hj-next" style="text-align:center;padding:22px"><div style="font-size:28px;margin-bottom:4px">🌙</div><b>Mesa livre nos próximos dias</b><p class="mute" style="margin:6px 0 14px">Nenhum atendimento marcado a partir de hoje.</p><button class="btn sm" onclick="formItem()">+ Marcar atendimento</button></div>';
+  '<div class="card hj-kpi"><div class="l">📅 Hoje</div><div class="v">'+feitas+'<span class="mute" style="font-size:14px;font-weight:500"> / '+hojeL.length+'</span></div><div class="s">realizados</div></div>'+
+  '<div class="card hj-kpi"><div class="l">🕒 Próxima</div><div class="v">'+(proxima&&proxima.time?esc(proxima.time):'—')+'</div><div class="s">'+(proxima?esc(nm(proxima.cid)):'nada pendente hoje')+'</div></div>'+
+  '<div class="card hj-kpi"><div class="l">⏳ A receber</div><div class="v" style="color:'+(totDev>0?'var(--bad)':'var(--mute)')+'">'+money(totDev)+'</div><div class="s">'+devendo.length+(devendo.length===1?' consulta':' consultas')+'</div></div>'+
+  '<div class="card hj-kpi"><div class="l">💰 Recebido no mês</div><div class="v" style="color:var(--gold)">'+money(mo)+'</div><div class="s">'+MES[d.getMonth()]+'</div></div></div>';
+ var alerts='';
+ if(pends.length)alerts+='<div class="hj-h"><h3 style="color:var(--warn)">⏳ Pedidos pelo link aguardando ('+pends.length+')</h3></div>'+pends.map(itemCard).join('');
+ if(atrasadas.length)alerts+='<div class="card hj-alert" style="margin-top:14px"><b>⏰ Já passaram do horário</b><div class="mute" style="margin-bottom:4px">Confirme se aconteceram para o caixa ficar certo.</div>'+atrasadas.map(function(i){return'<div class="hj-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">'+esc(i.time)+' · '+esc(mt(i.mid))+'</div></div><div style="display:flex;gap:6px"><button class="btn sm ok" onclick="tgl(\''+i.id+'\',\'done\')">✓ Realizada</button><button class="btn sm ghost" onclick="marcarFaltou(\''+i.id+'\')">Faltou</button></div></div>'}).join('')+'</div>';
+ if(devendo.length)alerts+='<div class="card hj-alert bad" style="margin-top:14px"><div class="row"><b>💰 Cobranças em aberto</b><span class="tag bad num">'+money(totDev)+'</span></div>'+devendo.slice(0,4).map(function(i){return'<div class="hj-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">'+esc(dt(i.date).slice(0,5))+' · '+esc(mt(i.mid))+' · '+money(i.price)+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm ghost" onclick="waPix(\''+i.id+'\')">💬 Cobrar</button><button class="btn sm ghost" onclick="pixModal(\''+i.id+'\')">📋 Pix</button><button class="btn sm ok" onclick="tgl(\''+i.id+'\',\'paid\')">✓ Pago</button></div></div>'}).join('')+(devendo.length>4?'<div class="mute" style="margin-top:8px;font-size:13px">+ '+(devendo.length-4)+' em aberto · <a href="#" style="color:var(--acc)" onclick="go(\'ganhos\');return false">ver no Caixa</a></div>':'')+'</div>';
+ var nextCard='';
+ if(proxima){
+  var diff=toMin(proxima.time)-nowMin,andamento=diff<=0;
+  var quando=andamento?'Em andamento':'Em '+(diff>=60?Math.floor(diff/60)+'h'+(diff%60?pad(diff%60):''):diff+' min');
+  nextCard='<div class="card hj-next"><div class="row" style="align-items:flex-start"><div style="min-width:0"><div class="eb" style="margin-bottom:4px">✦ Próxima consulta</div><b style="font-size:20px">'+esc(nm(proxima.cid))+'</b><div class="mute num" style="margin-top:3px">🕒 '+esc(proxima.time)+(proxima.dur?' às '+hm(endMin(proxima)):'')+' · 🃏 '+esc(mt(proxima.mid))+' · '+(proxima.online?'💻 Online':'🏠 Presencial')+'</div></div><span class="hj-when'+(andamento?' now':'')+'">'+quando+'</span></div>'+
+  '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"><span class="tag '+(proxima.paid?'ok':'bad')+'">'+(proxima.paid?'✓ Pago':'A receber '+money(proxima.price))+'</span></div>'+
+  '<div class="hj-acts"><button class="btn sm" onclick="wa(\''+proxima.id+'\')">💬 Confirmar</button>'+(!proxima.paid?'<button class="btn sm ghost" onclick="pixModal(\''+proxima.id+'\')">📋 Pix</button>':'')+'<button class="btn sm ghost" onclick="itemDetails(\''+proxima.id+'\')">Detalhes</button><button class="btn sm ok" onclick="tgl(\''+proxima.id+'\',\'done\')">✓ Realizada</button></div></div>';
  }
- var alertas='';
- if(pends.length)alertas+='<div class="card hj-alert"><div class="row"><b>⏳ '+pends.length+' '+(pends.length===1?'reserva aguardando':'reservas aguardando')+' sua aprovação</b><button class="btn sm ghost" onclick="go(\'agenda\')">Ver agenda</button></div>'+pends.slice(0,3).map(function(i){return'<div class="hj-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">'+dt(i.date).slice(0,5)+(i.time?' · '+i.time:'')+' · '+esc(mt(i.mid))+'</div></div><button class="btn sm ok" onclick="aprovar(\''+i.id+'\')">✓ Aprovar</button></div>'}).join('')+'</div>';
- if(esperaPix.length)alertas+='<div class="card hj-alert"><div class="row"><b>💠 '+esperaPix.length+' '+(esperaPix.length===1?'aguardando Pix':'aguardando Pix')+' pelo link</b><span class="mute">15 min de reserva</span></div>'+esperaPix.slice(0,3).map(function(i){return'<div class="hj-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">'+dt(i.date).slice(0,5)+(i.time?' · '+i.time:'')+' · '+money(i.price)+'</div></div><button class="btn sm ok" onclick="tgl(\''+i.id+'\',\'paid\')">✓ Confirmar Pix</button></div>'}).join('')+'</div>';
- if(semFicha.length)alertas+='<div class="card"><div class="row"><b>📝 Tiragens sem anotação</b><span class="mute">Falta registrar cartas ou recados</span></div>'+semFicha.map(function(i){return'<div class="hj-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">'+dt(i.date).slice(0,5)+' · '+esc(mt(i.mid))+'</div></div><button class="btn sm ghost" onclick="formItem(\''+i.id+'\')">Anotar</button></div>'}).join('')+'</div>';
+ var lista='<div class="hj-h"><h3>Atendimentos de hoje</h3><span class="tag num">'+hojeL.length+'</span></div>'+(hojeL.length?hojeL.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.<br><button class="btn sm" style="margin-top:10px" onclick="sel=\''+td+'\';formItem()">+ Marcar atendimento</button></div>');
+ var amanha='<div class="hj-h"><h3>Consultas de amanhã</h3>'+(amanhaL.length?'<button class="btn sm ghost" onclick="lembrarModal()">💬 Lembrar todas</button>':'')+'</div>'+(amanhaL.length?amanhaL.map(itemCard).join(''):'<div class="empty">Nada marcado para amanhã.</div>');
+ var anivH=aniv.length?'<div class="hj-h"><h3>🎂 Aniversariantes</h3></div>'+aniv.map(function(a){return'<div class="card row" style="margin-bottom:10px"><div><b>'+esc(a.c.name)+'</b><div class="mute num">'+(a.diff===0?'Faz aniversário hoje! 🎉':'Dia '+a.dd+' (em '+a.diff+' '+(a.diff===1?'dia':'dias')+')')+'</div></div><button class="btn sm ghost" onclick="waBday(\''+a.c.id+'\')">Parabenizar</button></div>'}).join(''):'';
+ var wk='';
+ for(var k=0;k<7;k++){var dd=new Date(d.getFullYear(),d.getMonth(),d.getDate()+k),ds=iso(dd),n=S.items.filter(function(i){return i.date===ds&&ativo(i)}).length;
+  wk+='<div class="wd'+(k===0?' today':'')+'" onclick="irDia(\''+ds+'\')">'+['D','S','T','Q','Q','S','S'][dd.getDay()]+'<b>'+dd.getDate()+'</b><i>'+(n?n+(n===1?' atend.':' atend.'):'')+'</i></div>';}
+ var semana='<div class="hj-h"><h3>📆 Próximos 7 dias</h3></div><div class="week">'+wk+'</div>';
+ var url=location.origin+location.pathname+'#agendar?t='+USER;
+ var linkC=cf.linkAtivo?'<div class="hj-h"><h3>🔗 Seu link de agendamento</h3></div><div class="card"><div class="mute" style="word-break:break-all;font-size:12.5px;margin-bottom:10px">'+esc(url)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="copyMyLink()">Copiar</button><button class="btn sm ghost" onclick="shareMyLink()">Enviar no WhatsApp</button><a class="btn sm ghost" href="#agendar?t='+USER+'" target="_blank">Abrir</a></div></div>':
+  '<div class="hj-h"><h3>🔗 Agendamento online</h3></div><div class="card"><div class="mute" style="margin-bottom:10px">Ative seu link e deixe as consulentes escolherem o horário sozinhas.</div><button class="btn sm" onclick="go(\'conta\')">Ativar em Conta</button></div>';
+ return mobTop()+'<div class="hj">'+greet+kpis+alerts+'<div class="hj-cols"><div>'+nextCard+lista+amanha+'</div><div>'+anivH+semana+linkC+'</div></div></div>';
+}
 
- var colEsq=destaque+
-  '<div class="hj-h"><h3>Agenda de hoje ('+dt(td).slice(0,5)+')</h3><div style="display:flex;gap:6px"><button class="btn sm ghost" onclick="sel=\''+td+'\';cur=\''+ym+'\';go(\'agenda\')">Calendário</button><button class="btn sm" onclick="sel=\''+td+'\';formItem()">+ Marcar</button></div></div>'+
-  (hoje.length?hoje.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.</div>')+
-  alertas;
-
- var colDir='<div class="hj-h" style="margin-top:0"><h3>Esta semana</h3><span class="mute num">'+dt(ws).slice(0,5)+' a '+dt(we).slice(0,5)+'</span></div>'+
-  '<div class="week">'+sem.map(function(s){return'<button type="button" class="wd'+(s.ds===td?' today':'')+'" onclick="sel=\''+s.ds+'\';cur=\''+s.ds.slice(0,7)+'\';go(\'agenda\')">'+s.dow+'<b>'+s.day+'</b><i>'+(s.n?'•'.repeat(Math.min(s.n,4)):'')+'</i></button>'}).join('')+'</div>'+
-  '<div class="hj-h"><h3>🎂 Aniversariantes (7 dias)</h3></div>'+
-  (nivers.length?'<div class="card">'+nivers.map(function(x){return'<div class="hj-row"><div><b>'+esc(x.c.name)+'</b><div class="mute num">'+(x.diff===0?'Hoje! 🎉':'Em '+x.diff+(x.diff===1?' dia':' dias')+' ('+x.dd+')')+'</div></div><button class="btn sm ghost" onclick="waBday(\''+x.c.id+'\')">Parabenizar</button></div>'}).join('')+'</div>':'<div class="empty" style="padding:16px">Nenhuma consulente faz aniversário nos próximos 7 dias.</div>')+
-  '<div class="hj-h"><h3>Atalhos rápidos</h3></div>'+
-  '<div class="card" style="display:flex;flex-wrap:wrap;gap:8px">'+
-   '<button class="btn sm" onclick="formItem()">+ Atendimento</button>'+
-   '<button class="btn sm ghost" onclick="formClient()">+ Consulente</button>'+
-   '<button class="btn sm ghost" onclick="go(\'ganhos\');formExp()">+ Saída</button>'+
-   (c.linkAtivo?'<button class="btn sm ghost" onclick="navigator.clipboard.writeText(location.origin+location.pathname+\'#agendar?t=\'+USER);toast(\'Link copiado!\',\'🔗\')">🔗 Copiar link</button>':'<button class="btn sm ghost" onclick="go(\'conta\')">🔗 Ativar link</button>')+
-  '</div>';
-
- return mobTop()+greet+kpis+'<div class="hj-cols"><div>'+colEsq+'</div><div>'+colDir+'</div></div>';
+/* === ASSINATURA VINCULADA A CONTA === */
+function APP_URL(){return location.origin+location.pathname+'#app'}
+var ASSINANDO=false;
+async function assinar(){
+ if(ASSINANDO)return;
+ if(!sb||!USER){location.hash='#app';return}
+ ASSINANDO=true;toast('Abrindo o pagamento…','💳');
+ try{
+  var r=await sb.functions.invoke('criar-assinatura');
+  if(r&&r.data&&r.data.url){window.location.href=r.data.url;return}
+  var msgE=(r&&r.data&&r.data.erro)||'';
+  if(msgE){dlgAlert(msgE,'Não foi possível assinar');return}
+  throw new Error('sem resposta');
+ }catch(e){
+  /* reserva: função ainda não publicada no Supabase */
+  dlgConfirm('Não consegui abrir a assinatura automática agora. Quer abrir o pagamento pelo link comum? Use o MESMO e-mail da sua conta ('+(EMAIL||'')+') e, se precisar, fale com o suporte.',function(){window.open(PAY,'_blank')},{title:'Assinatura',yes:'Abrir pagamento',ic:'💳'});
+ }finally{ASSINANDO=false}
 }
 
 /* === PIX COPIA E COLA (BR CODE) + QR CODE === */
@@ -2174,6 +2193,27 @@ async function migrarFotos(){
  toast(rest?'Algumas fotos não puderam ser movidas (confira o bucket "imagens" no Supabase).':'Todas as fotos foram movidas!','✓');
 }
 
+/* === LEMBRETES DE AMANHA === */
+function waTextFor(i,c){return CF().msg.replace(/\{nome\}/g,c.name.split(' ')[0]).replace(/\{dia\}/g,dt(i.date).slice(0,5)).replace(/\{hora\}/g,i.time||'').replace(/\{jogo\}/g,mt(i.mid)).replace(/\{tarologa\}/g,CF().nome).replace(/\{pix\}/g,CF().pix)}
+function lembrarModal(){
+ var d=new Date(),am=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1));
+ var l=S.items.filter(function(i){return i.date===am&&ativo(i)}).sort(function(a,b){return(a.time||'').localeCompare(b.time||'')});
+ var falta=l.filter(function(i){return!i.lembrado}).length;
+ closeS();
+ sheet('<div class="sheet-hd"><div><div class="eb" style="margin-bottom:2px">✦ Lembretes · '+esc(dt(am).slice(0,5))+'</div><h2 style="margin:0">💬 Consultas de amanhã</h2></div><button type="button" class="sheet-x" onclick="closeS()">×</button></div>'+
+ '<p class="mute" style="margin:0 0 6px">'+(l.length?(falta?falta+(falta===1?' lembrete falta':' lembretes faltam')+' enviar. Toque em cada um para abrir o WhatsApp já com a mensagem pronta.':'Todos os lembretes foram enviados. ✨'):'Nada marcado para amanhã.')+'</p>'+
+ l.map(function(i){var c=cl(i.cid)||{};return'<div class="rem-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">🕒 '+esc(i.time||'--:--')+' · '+esc(mt(i.mid))+(i.lembrado?' · <span style="color:var(--ok);font-weight:600">✓ lembrada</span>':'')+'</div></div><button class="btn sm'+(i.lembrado?' ghost':'')+'" onclick="lembrarUm(\''+i.id+'\')">'+(i.lembrado?'Enviar de novo':'💬 Lembrar')+'</button></div>'}).join('')+
+ '<div class="row" style="margin-top:16px"><span></span><button class="btn ghost" onclick="closeS()">Fechar</button></div>');
+}
+function lembrarUm(id){
+ var i=S.items.find(function(x){return x.id===id});if(!i)return;
+ var c=cl(i.cid);
+ if(!c||!c.phone){dlgAlert('Cadastre o telefone da consulente na ficha primeiro.','Telefone ausente');return}
+ var n=c.phone.replace(/\D/g,'');if(n.length<=11)n='55'+n;
+ window.open('https://wa.me/'+n+'?text='+encodeURIComponent(waTextFor(i,c)),'_blank');
+ i.lembrado=true;save();lembrarModal();
+}
+
 /* === CANCELAR / REMARCAR PELO LINK PÚBLICO === */
 var MG_TEL='',MG_LIST=[];
 function pubManage(){
@@ -2228,6 +2268,25 @@ function instalarApp(){
 }
 if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){
  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+
+/* === ASSINATURA VINCULADA A CONTA === */
+function APP_URL(){return location.origin+location.pathname+'#app'}
+var ASSINANDO=false;
+async function assinar(){
+ if(ASSINANDO)return;
+ if(!sb||!USER){location.hash='#app';return}
+ ASSINANDO=true;toast('Abrindo o pagamento…','💳');
+ try{
+  var r=await sb.functions.invoke('criar-assinatura');
+  if(r&&r.data&&r.data.url){window.location.href=r.data.url;return}
+  var msgE=(r&&r.data&&r.data.erro)||'';
+  if(msgE){dlgAlert(msgE,'Não foi possível assinar');return}
+  throw new Error('sem resposta');
+ }catch(e){
+  /* reserva: função ainda não publicada no Supabase */
+  dlgConfirm('Não consegui abrir a assinatura automática agora. Quer abrir o pagamento pelo link comum? Use o MESMO e-mail da sua conta ('+(EMAIL||'')+') e, se precisar, fale com o suporte.',function(){window.open(PAY,'_blank')},{title:'Assinatura',yes:'Abrir pagamento',ic:'💳'});
+ }finally{ASSINANDO=false}
 }
 
 route();
