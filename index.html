@@ -1737,8 +1737,10 @@ function admVincularOk(idx){
  dlgConfirm('Liberar '+dias+' dias para '+(x.nome||x.email)+' referentes ao pagamento de '+brl(p.valor)+' ('+(p.email||'sem e-mail')+')?',async function(){
   var r=await sb.rpc('admin_definir_acesso',{p_user:uid,p_status:'ativa',p_dias:dias});
   if(r.error){toast('Erro: '+r.error.message,'!');return}
+  var vr=await sb.rpc('admin_vincular_pagamento',{p_user:uid,p_email:p.email||'',p_valor:+p.valor||null,p_pago_em:p.pago_em||null});
+  var vinc=!vr.error&&vr.data&&vr.data.ok;
   await admLog(x,'Pagamento vinculado de '+brl(p.valor)+' ('+(p.email||'sem e-mail')+') · +'+dias+' dias [pgto:'+pagKey(p)+']');
-  closeS();toast('Pagamento vinculado e acesso liberado.','✓');adminRoute();
+  closeS();toast(vinc?'Pagamento vinculado e acesso liberado.':'Acesso liberado. O vínculo da assinatura não foi gravado (rode a parte 5 do SQL).',vinc?'✓':'!');adminRoute();
  },{title:'Vincular pagamento',yes:'Vincular',ic:'💳'});
 }
 
