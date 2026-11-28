@@ -142,6 +142,57 @@ a.pf-chip:hover{border-color:var(--acc);color:var(--acc)}
 .consent input{width:auto;margin:3px 0 0}
 .consent a{color:var(--acc)}
 
+/* === HOJE === */
+.hj-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.hj-kpi{padding:12px 14px !important;margin:0 !important}
+.hj-kpi .l{font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hj-kpi .v{font-size:22px;font-weight:700;line-height:1.15;margin-top:3px;font-variant-numeric:tabular-nums}
+.hj-kpi .s{font-size:11.5px;color:var(--mute);margin-top:2px}
+.hj-cols{display:grid;grid-template-columns:1fr;gap:0}
+.hj-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:18px 0 8px}
+.hj-h h3{margin:0;font-size:16px}
+.hj-next{border:1.5px solid var(--gold);background:linear-gradient(135deg,var(--card) 0%,var(--soft) 100%)}
+.hj-when{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.4px;color:var(--acc);background:var(--soft);border:1px solid var(--acc);border-radius:99px;padding:3px 11px}
+.hj-when.now{background:var(--acc);color:var(--on)}
+.hj-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hj-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.hj-row:last-child{border-bottom:0}
+.hj-alert{border-color:var(--warn);background:rgba(184,122,20,.07)}
+.hj-alert.bad{border-color:var(--bad);background:rgba(179,63,43,.06)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.wd{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:7px 2px;text-align:center;cursor:pointer;font-size:11px;color:var(--mute);font-weight:600}
+.wd b{display:block;font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+.wd i{display:block;font-style:normal;font-size:10.5px;min-height:14px;color:var(--gold);font-weight:700}
+.wd.today{background:var(--soft);border-color:var(--acc)}
+.wd:hover{border-color:var(--acc)}
+@media(min-width:900px){.hj-cols{grid-template-columns:1.6fr 1fr;gap:24px;align-items:start}}
+@media(max-width:760px){.hj-kpis{grid-template-columns:1fr 1fr}.hj-kpi .v{font-size:19px}}
+
+/* === ADMIN (extra) === */
+.bars{display:flex;align-items:flex-end;gap:8px;height:130px;margin:12px 0 4px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.bar i{display:block;width:100%;max-width:40px;background:var(--acc);border-radius:6px 6px 0 0;min-height:3px}
+.bar b{font-size:10.5px;color:var(--mute);font-weight:600;margin-top:4px;white-space:nowrap}
+.bar em{font-style:normal;font-size:10.5px;font-weight:700;margin-bottom:2px;white-space:nowrap}
+.adm-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.adm-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+.adm-tools input{max-width:360px;margin:0;flex:1;min-width:180px}
+.adm-tools select{width:auto;margin:0}
+.hist{font-size:12.5px;color:var(--mute);line-height:1.55;max-height:150px;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--bg);border:1px solid var(--line);color:var(--mute)}
+.badge.warn{color:var(--warn);border-color:var(--warn)}
+@media(max-width:760px){
+ #adm .w{padding:0 14px}
+ #adm .top{flex-direction:column;align-items:stretch;gap:10px;padding:12px 0}
+ #adm .top>div:last-child{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+ #adm .top .logo{justify-content:center}
+ .adm-chips,.adm-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+ .adm-chips .admchip,.adm-tabs .admchip{white-space:nowrap;flex-shrink:0}
+ .adm-tools{position:sticky;top:0;z-index:4;background:var(--bg);padding:8px 0}
+ .admg{grid-template-columns:1fr 1fr}
+ .admg .big{font-size:21px}
+}
+
 /* RESPONSIVO PARA TABLET (761px a 1024px) */
 @media(max-width:1024px) and (min-width:761px){
   .w{max-width:680px;margin:0 auto;padding:0 32px}
@@ -846,20 +897,7 @@ function render(){
  var h='',byT=function(a,b){return(a.time||'').localeCompare(b.time||'')},d=new Date(),td=iso(d),ym=td.slice(0,7);
 
  if(tab==='hoje'){
-  var l=S.items.filter(function(i){return i.date===td&&ativo(i)}).sort(byT),
-      lt=S.items.filter(function(i){return i.date===iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1))&&ativo(i)}).sort(byT),
-      pends=S.items.filter(function(i){return i.st==='pendente'||(i.st==='aguardando_pix'&&!i.paid&&!pixExpirado(i))}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)}),
-      mo=tot(S.items.filter(function(i){return i.paid&&i.date.slice(0,7)===ym})),
-      aniv=bdays(d),trialBanner='';
-  if(SUB&&SUB.status==='trial'){var diasRest=Math.ceil((new Date(SUB.ate)-d)/864e5);if(diasRest<=2)trialBanner='<div class="card warn"><div class="row"><div><b>Seu teste grátis termina em '+(diasRest<=1?'menos de 1 dia':diasRest+' dias')+'</b><div class="mute">Assine agora para não perder o acesso à agenda e às fichas.</div></div><a class="btn sm" href="'+PAY+'" target="_blank">Assinar</a></div></div>';else trialBanner='<span class="tag num">✦ Teste grátis até '+dt(SUB.ate.slice(0,10))+'</span>';}
-  var moonSvg='<svg class="greet-moon" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M36 10 A22 22 0 1 0 54 42 A17 17 0 1 1 36 10 Z"/><path d="M46 14 L47.5 18.5 L52 20 L47.5 21.5 L46 26 L44.5 21.5 L40 20 L44.5 18.5 Z" fill="currentColor" stroke="none"/></svg>';
-  h=mobTop()+
-  '<div class="greet"><div><div class="eb" style="margin-bottom:4px">✦ Hoje · '+dt(td)+'</div><h2>'+(CF().nome?'Olá, <em>'+esc(CF().nome.split(' ')[0])+'</em>!':'Bem-vinda à sua mesa')+'</h2><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" onclick="sel=\''+td+'\';formItem()">+ Marcar atendimento</button>'+trialBanner+'</div></div>'+moonSvg+'</div>'+
-  '<div class="grid"><div class="card"><div class="mute">Atendimentos hoje</div><div class="big">'+l.length+'</div></div><div class="card"><div class="mute">Recebido no mês</div><div class="big">'+money(mo)+'</div></div></div>'+
-  (pends.length?'<h3 style="margin:10px 0 6px;color:var(--warn)">⏳ Pedidos pelo link aguardando confirmação ('+pends.length+')</h3>'+pends.map(itemCard).join(''):'')+
-  (aniv.length?'<h3 style="margin:10px 0 6px">🎂 Aniversariantes (próximos 7 dias)</h3>'+aniv.map(function(a){return'<div class="card row"><div><b>'+esc(a.c.name)+'</b><div class="mute num">'+(a.diff===0?'Faz aniversário hoje! 🎉':'Dia '+a.dd+' (em '+a.diff+' '+(a.diff===1?'dia':'dias')+')')+'</div></div><button class="btn sm ghost" onclick="waBday(\''+a.c.id+'\')">Parabenizar</button></div>'}).join(''):'')+
-  '<h3 style="margin:10px 0 6px">Atendimentos de hoje</h3>'+(l.length?l.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.</div>')+'<div class="row" style="margin:10px 0 6px"><h3 style="margin:0">Consultas de amanhã</h3>'+(lt.length?'<button class="btn sm ghost" onclick="lembrarModal()">💬 Lembrar todas</button>':'')+'</div>'+(lt.length?lt.map(itemCard).join(''):'<div class="empty">Nada marcado para amanhã.</div>');
-
+  h=hojeHtml();
  }else if(tab==='agenda'){
   var l2=S.items.filter(function(i){return i.date===sel}).sort(byT);
   h=head('Minha agenda','<button class="btn sm" onclick="formItem()">+ Marcar atendimento</button>')+
@@ -1545,7 +1583,7 @@ function saveCfg(){
  S.cfg=c;applyCfg();save();toast('Configurações salvas!','✓');render();
 }
 
-var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='',ADTAB='clientes',AV_FILTRO='todas',AV_MSG='Olá, {nome}! Passando para lembrar que seu acesso vai até {ate}. Para continuar sem interrupções, acesse: {link}';
+var ADMIN=null,CONF=null,ADM=[],PAGS=[],ADF='todas',ADQ='',ADTAB='clientes',AV_FILTRO='todas',ADS='ate',AV_HIDE=true,MET={},AV_MSG='Olá, {nome}! Passando para lembrar que seu acesso vai até {ate}. Para continuar sem interrupções, acesse: {link}';
 function brl(n){return money(n)}
 function dia(d){return d?dt(String(d).slice(0,10)):'—'}
 async function adminRoute(){var A=$('adm'),w='<div class="w" style="padding:40px 0">';
@@ -1555,7 +1593,9 @@ async function adminRoute(){var A=$('adm'),w='<div class="w" style="padding:40px
  A.innerHTML=w+'<p class="mute">Carregando…</p></div>';
  var l=await sb.rpc('admin_listar'),p=await sb.rpc('admin_pagamentos',{p_user:null}),c=await sb.rpc('admin_config');
  if(l.error){A.innerHTML=w+'<p style="color:var(--bad)">Erro: '+esc(l.error.message)+'</p></div>';return}
- ADM=l.data||[];PAGS=p.data||[];CONF=(c.data&&c.data[0])||CONF||{};admRender()}
+ ADM=l.data||[];PAGS=p.data||[];CONF=(c.data&&c.data[0])||CONF||{};
+ MET={};try{var mt=await sb.rpc('admin_metricas');if(mt&&mt.data)(mt.data||[]).forEach(function(m){MET[m.user_id]=m})}catch(e){}
+ admRender()}
 function admSt(x){var now=Date.now(),ate=new Date(x.ate).getTime(),d=Math.ceil((ate-now)/864e5);
  if(x.eh_admin)return{k:'cortesia',t:'Administradora',c:'',d:d};
  if(x.status==='ativa'&&ate>now+400*864e5)return{k:'cortesia',t:'Cortesia (não conta na receita)',c:'',d:d};
@@ -1564,99 +1604,274 @@ function admSt(x){var now=Date.now(),ate=new Date(x.ate).getTime(),d=Math.ceil((
  if(x.status==='ativa')return{k:'ativa',t:'Ativa',c:'ok',d:d};
  return{k:d<=3?'breve':'teste',t:d<=3?'Teste termina em breve':'Em teste',c:d<=3?'warn':'',d:d}}
 
+/* ================= PAINEL ADMIN ================= */
+function nowStr(){var d=new Date();return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' '+pad(d.getHours())+':'+pad(d.getMinutes())}
+function notaSplit(n){var livre=[],log=[];String(n||'').split('\n').forEach(function(l){if(l.indexOf('§ ')===0)log.push(l);else livre.push(l)});return{livre:livre.join('\n').replace(/\s+$/,''),log:log}}
+function notaJoin(livre,log){return(livre||'')+(log.length?(livre?'\n':'')+log.join('\n'):'')}
+async function admLog(x,txt){
+ var sp=notaSplit(x.nota);sp.log.push('§ '+nowStr()+' · '+txt+(EMAIL?' (por '+EMAIL+')':''));
+ if(sp.log.length>80)sp.log=sp.log.slice(-80);
+ x.nota=notaJoin(sp.livre,sp.log);
+ var r=await sb.rpc('admin_salvar_nota',{p_user:x.user_id,p_nota:x.nota});
+ return!r.error;
+}
+function avisoDate(x){var last=null;notaSplit(x.nota).log.forEach(function(l){if(l.indexOf('Aviso enviado')>-1){var m=l.match(/§ (\d\d)\/(\d\d)\/(\d{4}) (\d\d):(\d\d)/);if(m)last=new Date(+m[3],+m[2]-1,+m[1],+m[4],+m[5])}});return last}
+function avisadaRecente(x,dias){var d=avisoDate(x);return!!d&&(Date.now()-d.getTime())<dias*864e5}
+function tms(v){return v?new Date(v).getTime():0}
+function vence3(x){return!x.eh_admin&&x.s.k!=='cancelada'&&x.s.k!=='cortesia'&&x.s.d>=0&&x.s.d<=3}
+function parado(x){return!x.eh_admin&&(x.s.k==='teste'||x.s.k==='breve')&&!(+x.consulentes)&&!(+x.jogos)}
+function fmtBytes(b){b=+b||0;return b>=1048576?(b/1048576).toFixed(1).replace('.',',')+' MB':Math.max(1,Math.round(b/1024))+' KB'}
+function pagKey(p){return(p.email||'')+'|'+String(p.pago_em||'').slice(0,19)+'|'+(+p.valor||0)}
+function pagVinculado(p){var k='[pgto:'+pagKey(p)+']';return ADM.some(function(x){return(x.nota||'').indexOf(k)>-1})}
+function pagSemDono(p){return p.status==='approved'&&(!p.user_id||!ADM.some(function(x){return x.user_id===p.user_id}))&&!pagVinculado(p)}
+function tel55(t){var n=String(t||'').replace(/\D/g,'');return n&&n.length<=11?'55'+n:n}
+
 function admFiltro(f){ADF=f;admRender()}
-function admBusca(q){ADQ=q;admLista()}
+function admBusca(q){ADQ=q;if(ADTAB==='pagamentos')admPagLista();else admLista()}
+function admSort(v){ADS=v;admLista()}
 function admTab(t){
- if(t==='clientes'||t==='avisos'){ADTAB=t;admRender();return}
+ if(typeof t==='string'){ADTAB=t;admRender();return}
  [0,1,2].forEach(function(k){
-  var b=$('atb-'+k),p=$('atp-'+k);
+  var b=$('atb-'+k),pp=$('atp-'+k);
   if(b)b.className='admchip'+(k===t?' on':'');
-  if(p)p.style.display=k===t?'block':'none';
+  if(pp)pp.style.display=k===t?'block':'none';
  });
 }
-function admRender(){CONF=CONF||{};var L=ADM.map(function(x){x.s=admSt(x);return x}),n=function(k){return L.filter(function(x){return k.indexOf(x.s.k)>-1}).length},at=n(['ativa']),mes=new Date().toISOString().slice(0,7),
- rec=PAGS.filter(function(p){return p.status==='approved'&&String(p.pago_em).slice(0,7)===mes}).reduce(function(t,p){return t+(+p.valor||0)},0),preco=+CONF.preco||29;
- var chips=[['todas','Clientes',L.length],['ativa','Ativas',at],['teste','Em teste',n(['teste','breve'])],['pendente','Pendentes',n(['pendente','breve'])],['cancelada','Bloqueadas',n(['cancelada'])],['pagamentos','Pagamentos',PAGS.length]];
- var bodyHtml='';
- if(ADTAB==='avisos'){
-  var avList=L.filter(function(x){
-   if(x.eh_admin)return false;
-   if(AV_FILTRO==='todas')return true;
-   if(AV_FILTRO==='ativa')return x.s.k==='ativa';
-   if(AV_FILTRO==='teste')return x.s.k==='teste'||x.s.k==='breve';
-   if(AV_FILTRO==='breve')return x.s.k==='breve';
-   if(AV_FILTRO==='pendente')return x.s.k==='pendente';
-   if(AV_FILTRO==='cancelada')return x.s.k==='cancelada';
-   return true;
-  });
-  bodyHtml='<div class="card"><h3 style="margin-bottom:6px">📣 Disparo rápido de avisos</h3><p class="mute" style="margin:0 0 12px">Filtre o grupo de clientes, personalize a mensagem e envie pelo WhatsApp ou e-mail com um toque.</p>'+
-  '<div class="grid"><div><label>Público-alvo</label><select id="av-f" onchange="AV_FILTRO=this.value;admRender()">'+
-    [['todas','Todas as clientes'],['breve','Teste terminando em breve (≤ 3 dias)'],['pendente','Vencidas / Pendentes'],['teste','Em período de teste'],['ativa','Assinaturas ativas'],['cancelada','Bloqueadas']].map(function(o){return'<option value="'+o[0]+'"'+(AV_FILTRO===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+
-  '</select></div><div><label>Modelos rápidos</label><select onchange="if(this.value){AV_MSG=this.value;$(\'av-txt\').value=this.value}">'+
-    '<option value="">— Escolha um modelo —</option>'+
-    '<option value="Olá, {nome}! Passando para lembrar que seu acesso à '+BRAND+' vai até {ate}. Para continuar sem interrupções, acesse: {link}">Lembrete de vencimento</option>'+
-    '<option value="Olá, {nome}! Seu teste grátis da '+BRAND+' está acabando ({ate}). Garanta sua assinatura aqui: {link}">Fim do teste grátis</option>'+
-    '<option value="Olá, {nome}! Temos novidades na '+BRAND+' para facilitar seus atendimentos. Acesse sua conta para conferir!">Novidade no sistema</option>'+
-  '</select></div></div>'+
-  '<label>Mensagem</label><textarea id="av-txt" rows="3" oninput="AV_MSG=this.value">'+esc(AV_MSG)+'</textarea>'+
-  '<div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{ate}</b> (data), <b>{dias}</b> (restantes) e <b>{link}</b> (pagamento)</div></div>'+
-  '<h3 style="margin:12px 0 8px">Destinatárias ('+avList.length+')</h3>'+
-  (avList.length?avList.map(function(x){
-   var telClean=(x.tel||'').replace(/\D/g,'');if(telClean&&telClean.length<=11)telClean='55'+telClean;
-   var txt=AV_MSG.replace(/\{nome\}/g,x.nome?x.nome.split(' ')[0]:'').replace(/\{ate\}/g,dia(x.ate)).replace(/\{dias\}/g,String(Math.max(0,x.s.d))).replace(/\{link\}/g,PAY);
-   return'<div class="card row"><div><b>'+esc(x.nome||x.email)+'</b> <span class="tag '+x.s.c+'">'+x.s.t+'</span><div class="mute num">'+esc(x.email)+(x.tel?' · '+esc(fmtPhone(x.tel)):'')+' · Até '+dia(x.ate)+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(telClean?'<a class="btn sm ok" href="https://wa.me/'+telClean+'?text='+encodeURIComponent(txt)+'" target="_blank">WhatsApp</a>':'')+'<a class="btn sm ghost" href="mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Aviso · '+BRAND)+'&body='+encodeURIComponent(txt)+'">E-mail</a></div></div>';
-  }).join(''):'<div class="empty">Nenhuma cliente neste filtro.</div>');
- }else{
-  bodyHtml='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">'+chips.map(function(c){return'<button class="admchip'+(ADF===c[0]?' on':'')+'" onclick="admFiltro(\''+c[0]+'\')">'+c[1]+' ('+c[2]+')</button>'}).join('')+'</div>'+
-  '<input placeholder="Buscar por nome ou e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)" style="max-width:420px"><div id="admL" style="margin-top:14px"></div>';
- }
- $('adm').innerHTML='<div class="w"><div class="top"><div class="logo" data-brand><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><div><button class="btn sm ghost" onclick="admConfig()">⚙ Editar site, preços e termos</button> &nbsp; <a class="mute" href="#app">← Voltar ao app</a> &nbsp;·&nbsp; <a class="mute" href="#" onclick="logout();return false">Sair</a></div></div>'+
- '<div class="admg"><div class="card"><div class="mute">Recebido no mês</div><div class="big num">'+brl(rec)+'</div><div class="mute" style="font-size:12px">confirmado pelo Mercado Pago</div></div><div class="card"><div class="mute">Receita mensal esperada</div><div class="big num">'+brl(at*preco)+'</div><div class="mute" style="font-size:12px">'+at+' ativas × '+brl(preco)+'</div></div><div class="card"><div class="mute">Em teste</div><div class="big num">'+n(['teste','breve'])+'</div></div><div class="card"><div class="mute">Pendentes</div><div class="big num" style="color:var(--bad)">'+n(['pendente'])+'</div></div></div>'+
- '<div class="adm-tabs"><button class="admchip'+(ADTAB==='clientes'?' on':'')+'" onclick="admTab(\'clientes\')">👥 Clientes & Pagamentos</button><button class="admchip'+(ADTAB==='avisos'?' on':'')+'" onclick="admTab(\'avisos\')">📣 Avisos</button></div>'+
- bodyHtml+'</div>';
- if(ADTAB==='clientes')admLista();
+function admStat(L){
+ var n=function(k){return L.filter(function(x){return k.indexOf(x.s.k)>-1}).length};
+ return{n:n,at:n(['ativa']),teste:n(['teste','breve']),pend:n(['pendente']),canc:n(['cancelada'])};
 }
-function admLista(){CONF=CONF||{};var q=ADQ.toLowerCase(),f=ADF;
- if(f==='pagamentos'){var ps=PAGS.filter(function(p){return(p.email||'').toLowerCase().indexOf(q)>-1});
-  $('admL').innerHTML=ps.length?ps.map(function(p){return'<div class="card row"><div><b>'+brl(p.valor)+'</b> <span class="tag '+(p.status==='approved'?'ok':'bad')+'">'+(p.status==='approved'?'Aprovado':esc(p.status||'?'))+'</span><div class="mute">'+esc(p.email||'')+' · '+esc(p.forma||'forma não informada')+'</div></div><div class="mute">'+dia(p.pago_em)+'</div></div>'}).join(''):'<div class="empty">Nenhum pagamento registrado ainda. Eles aparecem aqui quando o Mercado Pago avisar uma cobrança.</div>';return}
- var listaFiltrada=ADM.filter(function(x){var k=x.s.k,ok=f==='todas'||(f==='ativa'&&k==='ativa')||(f==='teste'&&(k==='teste'||k==='breve'))||(f==='pendente'&&(k==='pendente'||k==='breve'))||(f==='cancelada'&&k==='cancelada');return ok&&((x.email||'')+' '+(x.nome||'')).toLowerCase().indexOf(q)>-1});
- $('admL').innerHTML=listaFiltrada.length?listaFiltrada.map(function(x){var s=x.s,quando=s.d>0?'em '+s.d+(s.d===1?' dia':' dias'):'venceu há '+Math.abs(s.d)+(Math.abs(s.d)===1?' dia':' dias');
-  return'<div class="card"><div class="row"><div><b>'+esc(x.nome||x.email)+'</b>'+(x.nome?'<div class="mute">'+esc(x.email)+'</div>':'')+'</div><span class="tag '+s.c+'">'+s.t+'</span></div>'+
-  '<div class="mute" style="margin:8px 0">Acesso até '+dia(x.ate)+' ('+quando+')'+(x.ultimo_pgto?' · Último pagamento '+dia(x.ultimo_pgto)+' · '+brl(x.ultimo_valor)+' · '+esc(x.ultima_forma||''):'')+'</div>'+
-  '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm" onclick="admDet(\''+x.user_id+'\')">Detalhes</button>'+(x.eh_admin?'':'<button class="btn sm ghost" onclick="admSet(\''+x.user_id+'\',\'ativa\','+(+CONF.dias_liberar||35)+')">Liberar '+(+CONF.dias_liberar||35)+' dias</button>')+'</div></div>'}).join(''):'<div class="empty">Nenhuma cliente neste filtro.</div>'}
+function admRender(){
+ CONF=CONF||{};
+ var L=ADM.map(function(x){x.s=admSt(x);return x}),st=admStat(L),n=st.n;
+ var mes=new Date().toISOString().slice(0,7),preco=+CONF.preco||29;
+ var rec=PAGS.filter(function(p){return p.status==='approved'&&String(p.pago_em).slice(0,7)===mes}).reduce(function(t,p){return t+(+p.valor||0)},0);
+ var mrr=L.filter(function(x){return x.s.k==='ativa'}).reduce(function(t,x){return t+(+x.ultimo_valor||preco)},0);
+ var base=L.filter(function(x){return!x.eh_admin&&x.s.k!=='cortesia'}),pag=base.filter(function(x){return(+x.total_pago||0)>0||x.ultimo_pgto}).length;
+ var conv=base.length?Math.round(pag/base.length*100):0,par=L.filter(parado).length,v3=L.filter(vence3).length,sd=PAGS.filter(pagSemDono).length;
+ var tabs=[['clientes','👥 Clientes'],['pagamentos','💳 Pagamentos'+(sd?' ('+sd+' sem conta)':'')],['metricas','📊 Métricas'],['avisos','📣 Avisos']];
+ var body='';
+ if(ADTAB==='avisos')body=admBodyAvisos(L);
+ else if(ADTAB==='metricas')body=admBodyMetricas(L,base,pag);
+ else if(ADTAB==='pagamentos')body=admBodyPagamentos();
+ else{
+  var chips=[['todas','Todas',L.length],['ativa','Ativas',st.at],['teste','Em teste',st.teste],['vence3','Vencem ≤ 3 dias',v3],['parados','Parados no teste',par],['pendente','Pendentes',st.pend],['cancelada','Bloqueadas',st.canc]];
+  body='<div class="adm-chips">'+chips.map(function(c){return'<button class="admchip'+(ADF===c[0]?' on':'')+'" onclick="admFiltro(\''+c[0]+'\')">'+c[1]+' ('+c[2]+')</button>'}).join('')+'</div>'+
+  '<div class="adm-tools"><input placeholder="Buscar por nome ou e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)"><select onchange="admSort(this.value)">'+
+   [['ate','Ordenar: vencimento'],['acesso','Ordenar: acesso recente'],['sumido','Ordenar: sem acessar há mais tempo'],['criado','Ordenar: cadastro mais novo'],['nome','Ordenar: nome A–Z']].map(function(o){return'<option value="'+o[0]+'"'+(ADS===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div><div id="admL" style="margin-top:12px"></div>';
+ }
+ var faixa=(v3&&ADTAB==='clientes'&&ADF!=='vence3')?'<div class="card warn" style="margin:0 0 14px"><div class="row" style="flex-wrap:wrap"><div><b>⏰ '+v3+(v3===1?' cliente vence':' clientes vencem')+' em até 3 dias</b><div class="mute">Um aviso agora evita acesso bloqueado.</div></div><div style="display:flex;gap:8px"><button class="btn sm ghost" onclick="admFiltro(\'vence3\')">Ver</button><button class="btn sm" onclick="AV_FILTRO=\'vence3\';admTab(\'avisos\')">Avisar</button></div></div></div>':'';
+ $('adm').innerHTML='<div class="w"><div class="top"><div class="logo" data-brand><b>✦</b> '+esc(BRAND)+' <b>✦</b></div><div><button class="btn sm ghost" onclick="admConfig()">⚙ Site, preços e termos</button><button class="btn sm ghost" onclick="admExportClientes()">⬇ Clientes</button><button class="btn sm ghost" onclick="admExportPagamentos()">⬇ Pagamentos</button><a class="mute" href="#app">← App</a><a class="mute" href="#" onclick="logout();return false">Sair</a></div></div>'+
+ '<div class="admg">'+
+  '<div class="card"><div class="mute">Recebido no mês</div><div class="big num">'+brl(rec)+'</div><div class="mute" style="font-size:12px">confirmado pelo Mercado Pago</div></div>'+
+  '<div class="card"><div class="mute">Receita recorrente</div><div class="big num">'+brl(mrr)+'</div><div class="mute" style="font-size:12px">'+st.at+' ativas · esperada '+brl(st.at*preco)+'</div></div>'+
+  '<div class="card"><div class="mute">Em teste</div><div class="big num">'+st.teste+'</div><div class="mute" style="font-size:12px">'+par+' parados</div></div>'+
+  '<div class="card"><div class="mute">Pendentes</div><div class="big num" style="color:var(--bad)">'+st.pend+'</div></div>'+
+  '<div class="card"><div class="mute">Conversão</div><div class="big num">'+conv+'%</div><div class="mute" style="font-size:12px">'+pag+' de '+base.length+' já pagaram</div></div></div>'+
+ '<div class="adm-tabs">'+tabs.map(function(t){return'<button class="admchip'+(ADTAB===t[0]?' on':'')+'" onclick="admTab(\''+t[0]+'\')">'+t[1]+'</button>'}).join('')+'</div>'+faixa+body+'</div>';
+ if(ADTAB==='clientes')admLista();
+ else if(ADTAB==='pagamentos')admPagLista();
+}
+function admFiltraCli(x,f){
+ var k=x.s.k;
+ return f==='todas'||(f==='ativa'&&k==='ativa')||(f==='teste'&&(k==='teste'||k==='breve'))||(f==='pendente'&&(k==='pendente'||k==='breve'))||(f==='cancelada'&&k==='cancelada')||(f==='vence3'&&vence3(x))||(f==='parados'&&parado(x));
+}
+function admLista(){
+ CONF=CONF||{};var q=ADQ.toLowerCase(),f=ADF;
+ ADM.forEach(function(x){x.s=admSt(x)});
+ var l=ADM.filter(function(x){return admFiltraCli(x,f)&&((x.email||'')+' '+(x.nome||'')+' '+(x.espaco||'')).toLowerCase().indexOf(q)>-1});
+ l.sort(function(a,b){
+  if(ADS==='acesso')return tms(b.ultimo_acesso)-tms(a.ultimo_acesso);
+  if(ADS==='sumido')return(tms(a.ultimo_acesso)||1)-(tms(b.ultimo_acesso)||1);
+  if(ADS==='criado')return tms(b.criado)-tms(a.criado);
+  if(ADS==='nome')return(a.nome||a.email||'').localeCompare(b.nome||b.email||'');
+  return tms(a.ate)-tms(b.ate);
+ });
+ var el=$('admL');if(!el)return;
+ el.innerHTML=l.length?l.map(function(x){
+  var s=x.s,m=MET[x.user_id]||{},quando=s.d>0?'em '+s.d+(s.d===1?' dia':' dias'):'venceu há '+Math.abs(s.d)+(Math.abs(s.d)===1?' dia':' dias');
+  var badges=(m.link_ativo?'<span class="badge">🔗 link ativo</span>':'')+(parado(x)?'<span class="badge warn">😴 sem uso</span>':'')+(m.fotos_antigas>0?'<span class="badge">📦 '+m.fotos_antigas+' fotos antigas</span>':'')+(avisadaRecente(x,7)?'<span class="badge">✉️ avisada</span>':'');
+  var n=tel55(x.tel);
+  return'<div class="card"><div class="row" style="align-items:flex-start"><div style="min-width:0"><b>'+esc(x.nome||x.email)+'</b>'+(x.nome?'<div class="mute" style="overflow-wrap:anywhere">'+esc(x.email)+'</div>':'')+'</div><span class="tag '+s.c+'">'+s.t+'</span></div>'+
+  '<div class="mute" style="margin:8px 0 6px">Acesso até '+dia(x.ate)+' ('+quando+')'+(x.ultimo_pgto?' · Último pagamento '+dia(x.ultimo_pgto)+' · '+brl(x.ultimo_valor)+' · '+esc(x.ultima_forma||''):'')+'</div>'+
+  '<div class="mute" style="font-size:12.5px;margin-bottom:6px">Último acesso: '+(x.ultimo_acesso?dia(x.ultimo_acesso):'nunca')+' · '+(+x.consulentes||0)+' consulentes · '+(+x.jogos||0)+' atendimentos</div>'+
+  (badges?'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">'+badges+'</div>':'')+
+  '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm" onclick="admDet(\''+x.user_id+'\')">Detalhes</button>'+(x.eh_admin?'':'<button class="btn sm ghost" onclick="admSet(\''+x.user_id+'\',\'ativa\','+(+CONF.dias_liberar||35)+')">Liberar '+(+CONF.dias_liberar||35)+' dias</button>')+
+  (parado(x)&&n?'<a class="btn sm ok" target="_blank" href="https://wa.me/'+n+'?text='+encodeURIComponent('Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Vi que você criou sua conta na '+BRAND+'. Posso te ajudar a configurar sua mesa (métodos de jogo, horários e seu link)? É rapidinho 😊')+'">💬 Ajudar a configurar</a>':'')+'</div></div>';
+ }).join(''):'<div class="empty">Nenhuma cliente neste filtro.</div>';
+}
+
+/* ---- pagamentos ---- */
+function admBodyPagamentos(){
+ var sd=PAGS.filter(pagSemDono);
+ return(sd.length?'<div class="card hj-alert" style="margin-bottom:14px"><b>💳 '+sd.length+(sd.length===1?' pagamento sem conta vinculada':' pagamentos sem conta vinculada')+'</b><div class="mute" style="margin-bottom:4px">Costuma acontecer quando a cliente paga com outro e-mail. Vincule para liberar o acesso.</div>'+
+  sd.map(function(p){return'<div class="hj-row"><div><b>'+brl(p.valor)+'</b> <span class="mute">'+esc(p.email||'e-mail não informado')+' · '+esc(p.forma||'')+' · '+dia(p.pago_em)+'</span></div><button class="btn sm" onclick="admVincular('+PAGS.indexOf(p)+')">Vincular a uma cliente</button></div>'}).join('')+'</div>':'')+
+ '<div class="adm-tools"><input placeholder="Buscar por e-mail…" value="'+esc(ADQ)+'" oninput="admBusca(this.value)"></div><div id="admP" style="margin-top:12px"></div>';
+}
+function admPagLista(){
+ var q=ADQ.toLowerCase(),el=$('admP');if(!el)return;
+ var ps=PAGS.filter(function(p){return(p.email||'').toLowerCase().indexOf(q)>-1});
+ el.innerHTML=ps.length?ps.map(function(p){
+  var dono=ADM.find(function(x){return x.user_id===p.user_id}),vinc=pagVinculado(p);
+  return'<div class="card row"><div><b>'+brl(p.valor)+'</b> <span class="tag '+(p.status==='approved'?'ok':'bad')+'">'+(p.status==='approved'?'Aprovado':esc(p.status||'?'))+'</span>'+(vinc?' <span class="tag">vinculado</span>':'')+'<div class="mute">'+esc(p.email||'')+' · '+esc(p.forma||'forma não informada')+(dono?' · conta: '+esc(dono.nome||dono.email):'')+'</div></div><div class="mute">'+dia(p.pago_em)+'</div></div>';
+ }).join(''):'<div class="empty">Nenhum pagamento registrado ainda. Eles aparecem aqui quando o Mercado Pago avisar uma cobrança.</div>';
+}
+function vcFiltra(){
+ var q=(v('vc-q')||'').toLowerCase(),sel=$('vc-u');if(!sel)return;
+ sel.innerHTML=ADM.filter(function(x){return!x.eh_admin&&((x.email||'')+' '+(x.nome||'')+' '+(x.espaco||'')).toLowerCase().indexOf(q)>-1}).sort(function(a,b){return(a.email||'').localeCompare(b.email||'')}).slice(0,60).map(function(x){return'<option value="'+x.user_id+'">'+esc((x.nome?x.nome+' — ':'')+x.email)+'</option>'}).join('');
+ if(sel.options.length)sel.selectedIndex=0;
+}
+function admVincular(idx){
+ var p=PAGS[idx];if(!p)return;
+ sheet('<div class="mh"><div><h2 style="margin:0">Vincular pagamento</h2><div class="mute">'+brl(p.valor)+' · '+esc(p.email||'sem e-mail')+' · '+dia(p.pago_em)+'</div></div><button class="mx" onclick="closeS()" aria-label="Fechar">×</button></div>'+
+ '<label>Buscar cliente (nome, espaço ou e-mail)</label><input id="vc-q" oninput="vcFiltra()" placeholder="Digite para filtrar…">'+
+ '<label>Cliente</label><select id="vc-u" size="6" style="height:auto"></select>'+
+ '<label>Dias de acesso a liberar</label><input id="vc-d" type="number" min="1" value="'+(+CONF.dias_liberar||35)+'">'+
+ '<div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn ghost" onclick="closeS()">Cancelar</button><button class="btn" onclick="admVincularOk('+idx+')">Vincular e liberar</button></div>');
+ vcFiltra();
+}
+function admVincularOk(idx){
+ var p=PAGS[idx],uid=v('vc-u'),dias=parseInt(v('vc-d'))||0,x=ADM.find(function(a){return a.user_id===uid});
+ if(!x){dlgAlert('Escolha a cliente que vai receber o acesso.','Escolha uma cliente');return}
+ if(dias<1){dlgAlert('Informe quantos dias liberar.','Dias inválidos');return}
+ dlgConfirm('Liberar '+dias+' dias para '+(x.nome||x.email)+' referentes ao pagamento de '+brl(p.valor)+' ('+(p.email||'sem e-mail')+')?',async function(){
+  var r=await sb.rpc('admin_definir_acesso',{p_user:uid,p_status:'ativa',p_dias:dias});
+  if(r.error){toast('Erro: '+r.error.message,'!');return}
+  await admLog(x,'Pagamento vinculado de '+brl(p.valor)+' ('+(p.email||'sem e-mail')+') · +'+dias+' dias [pgto:'+pagKey(p)+']');
+  closeS();toast('Pagamento vinculado e acesso liberado.','✓');adminRoute();
+ },{title:'Vincular pagamento',yes:'Vincular',ic:'💳'});
+}
+
+/* ---- metricas ---- */
+function barras(items,fmt){
+ var mx=Math.max.apply(null,items.map(function(i){return i.v}).concat([1]));
+ return'<div class="bars">'+items.map(function(i){return'<div class="bar"><em>'+(fmt?fmt(i.v):i.v)+'</em><i style="height:'+Math.max(3,Math.round(i.v/mx*88))+'%"></i><b>'+esc(i.l)+'</b></div>'}).join('')+'</div>';
+}
+function admBodyMetricas(L,base,pag){
+ var now=Date.now(),sem=[],i;
+ for(i=7;i>=0;i--)sem.push({l:i===0?'esta':'-'+i+'s',v:0});
+ base.forEach(function(x){var t=tms(x.criado);if(!t)return;var idx=Math.floor((now-t)/(7*864e5));if(idx>=0&&idx<8)sem[7-idx].v++});
+ var dt0=new Date(),meses=[];
+ for(i=5;i>=0;i--){var d1=new Date(dt0.getFullYear(),dt0.getMonth()-i,1);meses.push({k:d1.getFullYear()+'-'+pad(d1.getMonth()+1),l:MES[d1.getMonth()].slice(0,3),v:0})}
+ PAGS.filter(function(p){return p.status==='approved'}).forEach(function(p){var k=String(p.pago_em).slice(0,7);meses.forEach(function(m){if(m.k===k)m.v+=(+p.valor||0)})});
+ var cad30=base.filter(function(x){return now-tms(x.criado)<30*864e5}).length;
+ var venc30=L.filter(function(x){return x.s.k==='pendente'&&x.status==='ativa'&&now-tms(x.ate)<30*864e5}).length;
+ var mets=ADM.map(function(x){return{x:x,m:MET[x.user_id]}}).filter(function(o){return o.m});
+ var temMet=mets.length>0;
+ var linkN=mets.filter(function(o){return o.m.link_ativo}).length,viaMes=mets.reduce(function(t,o){return t+(+o.m.via_link_mes||0)},0),atMes=mets.reduce(function(t,o){return t+(+o.m.atend_mes||0)},0);
+ var topUso=mets.slice().sort(function(a,b){return(+b.m.atend_mes||0)-(+a.m.atend_mes||0)}).slice(0,5).filter(function(o){return+o.m.atend_mes>0});
+ var peso=mets.slice().sort(function(a,b){return(+b.m.bytes||0)-(+a.m.bytes||0)}).slice(0,8);
+ var totBytes=mets.reduce(function(t,o){return t+(+o.m.bytes||0)},0),fotosTot=mets.reduce(function(t,o){return t+(+o.m.fotos_antigas||0)},0);
+ return'<div class="grid"><div class="card"><div class="mute">Conversão teste → pago</div><div class="big num">'+(base.length?Math.round(pag/base.length*100):0)+'%</div><div class="mute" style="font-size:12px">'+pag+' de '+base.length+' contas</div></div>'+
+ '<div class="card"><div class="mute">Cadastros (30 dias)</div><div class="big num">'+cad30+'</div><div class="mute" style="font-size:12px">'+venc30+' pagamentos venceram nos últimos 30 dias</div></div></div>'+
+ '<div class="card"><h3>📈 Cadastros por semana</h3>'+barras(sem)+'</div>'+
+ '<div class="card"><h3>💰 Receita nos últimos 6 meses</h3>'+barras(meses,function(v){return v?brl(v).replace(',00',''):'0'})+'</div>'+
+ (temMet?'<div class="card"><h3>🔗 Uso do sistema</h3><div class="grid" style="margin-top:8px"><div><div class="mute">Contas com link ativo</div><div class="big num">'+linkN+'<span class="mute" style="font-size:14px;font-weight:500"> / '+mets.length+'</span></div></div><div><div class="mute">Agendamentos pelo link (mês)</div><div class="big num">'+viaMes+'</div></div></div><div class="mute" style="margin:10px 0 4px">Atendimentos no mês (todas as contas): <b>'+atMes+'</b></div>'+
+  (topUso.length?'<div class="mute" style="font-size:13px;margin-top:8px"><b>Contas mais ativas</b></div>'+topUso.map(function(o){return'<div class="hj-row"><span>'+esc(o.x.nome||o.x.email)+'</span><b class="num">'+o.m.atend_mes+'</b></div>'}).join(''):'')+'</div>'+
+  '<div class="card"><h3>📦 Peso dos dados</h3><div class="mute" style="margin-bottom:6px">Total: <b>'+fmtBytes(totBytes)+'</b> · '+fotosTot+' fotos ainda no formato antigo</div>'+peso.map(function(o){return'<div class="hj-row"><span>'+esc(o.x.nome||o.x.email)+(+o.m.fotos_antigas>0?' <span class="badge warn">'+o.m.fotos_antigas+' fotos antigas</span>':'')+'</span><b class="num">'+fmtBytes(o.m.bytes)+'</b></div>'}).join('')+'</div>':
+  '<div class="card"><h3>🔗 Uso e peso dos dados</h3><p class="mute" style="margin:6px 0 0">Para ver uso do link e tamanho das contas, rode o arquivo <b>supabase_setup.sql</b> (parte 4) no Supabase.</p></div>');
+}
+
+/* ---- avisos (fila, sem repetir) ---- */
+var AV_MODELOS=[['Lembrete de vencimento','Olá, {nome}! Passando para lembrar que seu acesso à '+'{marca}'+' vai até {ate}. Para continuar sem interrupções, acesse: {link}'],['Fim do teste grátis','Olá, {nome}! Seu teste grátis da {marca} está acabando ({ate}). Garanta sua assinatura aqui: {link}'],['Ajuda para configurar','Olá, {nome}! Vi que você criou sua conta na {marca}. Posso te ajudar a configurar sua mesa (métodos de jogo, horários e link de agendamento)? 😊'],['Novidade no sistema','Olá, {nome}! Temos novidades na {marca} para facilitar seus atendimentos. Acesse sua conta para conferir!']];
+function admAvisoTxt(x){return AV_MSG.replace(/\{marca\}/g,BRAND).replace(/\{nome\}/g,x.nome?x.nome.split(' ')[0]:'').replace(/\{ate\}/g,dia(x.ate)).replace(/\{dias\}/g,String(Math.max(0,x.s.d))).replace(/\{link\}/g,PAY)}
+function admBodyAvisos(L){
+ var grupos=[['todas','Todas as clientes'],['vence3','Vencem em até 3 dias'],['breve','Teste terminando (≤ 3 dias)'],['parados','Parados no teste (sem uso)'],['pendente','Vencidas / Pendentes'],['teste','Em período de teste'],['ativa','Assinaturas ativas'],['cancelada','Bloqueadas']];
+ var base=L.filter(function(x){return!x.eh_admin&&(AV_FILTRO==='breve'?x.s.k==='breve':admFiltraCli(x,AV_FILTRO))});
+ var fila=AV_HIDE?base.filter(function(x){return!avisadaRecente(x,7)}):base;
+ var prox=fila[0];
+ return'<div class="card"><h3 style="margin-bottom:6px">📣 Avisos em fila</h3><p class="mute" style="margin:0 0 12px">Cada envio fica registrado no histórico da cliente, assim você não manda o mesmo aviso duas vezes.</p>'+
+ '<div class="grid"><div><label>Público-alvo</label><select onchange="AV_FILTRO=this.value;admRender()">'+grupos.map(function(o){return'<option value="'+o[0]+'"'+(AV_FILTRO===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div>'+
+ '<div><label>Modelos rápidos</label><select onchange="if(this.value!==\'\'){AV_MSG=AV_MODELOS[+this.value][1];$(\'av-txt\').value=AV_MSG}"><option value="">— Escolha um modelo —</option>'+AV_MODELOS.map(function(m,i){return'<option value="'+i+'">'+m[0]+'</option>'}).join('')+'</select></div></div>'+
+ '<label>Mensagem</label><textarea id="av-txt" rows="3" oninput="AV_MSG=this.value">'+esc(AV_MSG)+'</textarea>'+
+ '<div class="mute" style="font-size:12px">Variáveis: <b>{nome}</b>, <b>{ate}</b>, <b>{dias}</b>, <b>{link}</b>, <b>{marca}</b></div>'+
+ '<label style="display:flex;align-items:center;font-weight:500;color:var(--ink);margin-top:10px;cursor:pointer"><input type="checkbox" style="width:auto;margin:0 8px 0 0"'+(AV_HIDE?' checked':'')+' onchange="AV_HIDE=this.checked;admRender()">Ocultar quem já recebeu aviso nos últimos 7 dias</label></div>'+
+ (prox?'<div class="card hj-next"><div class="eb" style="margin-bottom:4px">✦ Próxima da fila · '+fila.length+' restante'+(fila.length===1?'':'s')+'</div><b style="font-size:18px">'+esc(prox.nome||prox.email)+'</b> <span class="tag '+prox.s.c+'">'+prox.s.t+'</span><div class="mute" style="margin:4px 0 10px">'+esc(prox.email)+' · Até '+dia(prox.ate)+'</div><div class="hj-acts" style="margin-top:0">'+(tel55(prox.tel)?'<button class="btn sm ok" onclick="admAvisar(\''+prox.user_id+'\',\'wa\')">💬 Enviar no WhatsApp</button>':'')+'<button class="btn sm ghost" onclick="admAvisar(\''+prox.user_id+'\',\'mail\')">✉️ E-mail</button></div></div>':'<div class="empty">Ninguém na fila para este público. ✨</div>')+
+ (fila.length>1?'<h3 style="margin:14px 0 8px">Demais da fila</h3>'+fila.slice(1).map(function(x){return'<div class="card row"><div style="min-width:0"><b>'+esc(x.nome||x.email)+'</b> <span class="tag '+x.s.c+'">'+x.s.t+'</span><div class="mute num" style="overflow-wrap:anywhere">'+esc(x.email)+' · Até '+dia(x.ate)+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(tel55(x.tel)?'<button class="btn sm ok" onclick="admAvisar(\''+x.user_id+'\',\'wa\')">WhatsApp</button>':'')+'<button class="btn sm ghost" onclick="admAvisar(\''+x.user_id+'\',\'mail\')">E-mail</button></div></div>'}).join(''):'');
+}
+async function admAvisar(id,canal){
+ var x=ADM.find(function(a){return a.user_id===id});if(!x)return;
+ var txt=admAvisoTxt(x),n=tel55(x.tel);
+ if(canal==='wa'){if(!n){toast('Sem telefone cadastrado','!');return}window.open('https://wa.me/'+n+'?text='+encodeURIComponent(txt),'_blank')}
+ else window.open('mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Aviso · '+BRAND)+'&body='+encodeURIComponent(txt),'_blank');
+ await admLog(x,'Aviso enviado por '+(canal==='wa'?'WhatsApp':'e-mail')+': '+txt.slice(0,48)+(txt.length>48?'…':''));
+ admRender();
+}
+
+/* ---- exportar ---- */
+function admCsv(nome,linhas){var q=function(v){return'"'+String(v==null?'':v).replace(/"/g,'""')+'"'};dl(nome,linhas.map(function(r){return r.map(q).join(';')}).join('\r\n'),'text/csv');toast('Planilha baixada!','📊')}
+function admExportClientes(){
+ var L=[['Nome','E-mail','Telefone','Espaço','Situação','Acesso até','Cadastro','Último acesso','Consulentes','Atendimentos','Total pago','Último pagamento']];
+ ADM.forEach(function(x){var s=admSt(x);L.push([x.nome,x.email,fmtPhone(x.tel),x.espaco,s.t,dia(x.ate),dia(x.criado),x.ultimo_acesso?dia(x.ultimo_acesso):'',x.consulentes,x.jogos,String(+x.total_pago||0).replace('.',','),x.ultimo_pgto?dia(x.ultimo_pgto):''])});
+ admCsv('clientes.csv',L);
+}
+function admExportPagamentos(){
+ var L=[['Data','E-mail','Valor','Status','Forma','Conta vinculada']];
+ PAGS.forEach(function(p){var d=ADM.find(function(x){return x.user_id===p.user_id});L.push([dia(p.pago_em),p.email,String(+p.valor||0).replace('.',','),p.status,p.forma,d?(d.nome||d.email):''])});
+ admCsv('pagamentos.csv',L);
+}
 function admMsgTexto(x,s){var q=s.d>0?'termina '+(s.d===1?'em 1 dia':'em '+s.d+' dias'):'terminou';return'Olá'+(x.nome?', '+x.nome.split(' ')[0]:'')+'! Seu acesso à '+BRAND+' '+q+'. Para continuar usando, assine aqui: '+PAY+' (use o mesmo e-mail do cadastro).'}
 function admMail(x,s){var m=admMsgTexto(x,s);return'mailto:'+encodeURIComponent(x.email)+'?subject='+encodeURIComponent('Seu acesso · '+BRAND)+'&body='+encodeURIComponent(m)}
 function admWaLink(x,s){var n=(x.tel||'').replace(/\D/g,'');if(!n)return'';if(n.length<=11)n='55'+n;return'https://wa.me/'+n+'?text='+encodeURIComponent(admMsgTexto(x,s))}
-function admDet(id){var x=ADM.find(function(a){return a.user_id===id}),s=admSt(x),ps=PAGS.filter(function(p){return p.user_id===id}),waUrl=admWaLink(x,s);
+function admDet(id){
+ var x=ADM.find(function(a){return a.user_id===id}),s=admSt(x),ps=PAGS.filter(function(p){return p.user_id===id}),waUrl=admWaLink(x,s),m=MET[id]||null,sp=notaSplit(x.nota);
  sheet('<div class="mh"><div><h2 style="margin:0">'+esc(x.nome||x.email)+'</h2>'+(x.nome?'<div class="mute">'+esc(x.email)+'</div>':'')+'<span class="tag '+s.c+'" style="display:inline-block;margin-top:6px">'+s.t+'</span></div><button class="mx" onclick="closeS()" aria-label="Fechar">×</button></div>'+
- '<div class="mgrid"><div><span>Cadastro</span>'+dia(x.criado)+'</div><div><span>Último acesso</span>'+dia(x.ultimo_acesso)+'</div><div><span>Consulentes · atendimentos</span>'+x.consulentes+' · '+x.jogos+'</div><div><span>Total pago</span>'+brl(x.total_pago)+'</div></div>'+
+ '<div class="mgrid"><div><span>Cadastro</span>'+dia(x.criado)+'</div><div><span>Último acesso</span>'+(x.ultimo_acesso?dia(x.ultimo_acesso):'nunca')+'</div><div><span>Consulentes · atendimentos</span>'+x.consulentes+' · '+x.jogos+'</div><div><span>Total pago</span>'+brl(x.total_pago)+'</div>'+
+ (m?'<div><span>Link de agendamento</span>'+(m.link_ativo?'ativo · '+m.via_link_mes+' no mês':'desativado')+'</div><div><span>Tamanho dos dados</span>'+fmtBytes(m.bytes)+(m.fotos_antigas>0?' · '+m.fotos_antigas+' fotos antigas':'')+'</div>':'')+'</div>'+
  '<div class="msec">Dados da cliente</div>'+
  '<div class="grid"><div><label>Nome</label><input id="ad-nm" value="'+esc(x.nome||'')+'"></div><div><label>Espaço</label><input id="ad-esp" value="'+esc(x.espaco||'')+'"></div></div>'+
  '<div class="row" style="align-items:flex-end"><div style="flex:1"><label>Telefone / WhatsApp</label><input id="ad-tel" type="tel" value="'+esc(fmtPhone(x.tel||''))+'" oninput="maskPhoneInput(this)" placeholder="(11) 99999-9999" style="margin-bottom:0"></div><button class="btn sm ghost" onclick="admSalvarCliente(\''+id+'\')">Salvar dados</button></div>'+
  '<div class="msec">Acesso</div><div class="grid"><div><label>Situação</label><select id="ad-st">'+[['trial','Teste'],['ativa','Ativa'],['cancelada','Bloqueada']].map(function(o){return'<option value="'+o[0]+'"'+(x.status===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div><div><label>Acesso até</label><input id="ad-dt" type="date" value="'+String(x.ate).slice(0,10)+'"></div></div>'+
  '<div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm" onclick="admData(\''+id+'\')">Salvar acesso</button>'+(waUrl?'<a class="btn sm ok" href="'+waUrl+'" target="_blank">Lembrar no WhatsApp</a>':'')+'<a class="btn sm ghost" href="'+admMail(x,s)+'">Lembrar por e-mail</a></div>'+
+ (x.eh_admin?'':'<div class="mute" style="font-size:12px;margin:12px 0 6px">Atalhos</div><div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn sm ghost" onclick="admAtalho(\''+id+'\',\'d7\')">+7 dias</button><button class="btn sm ghost" onclick="admAtalho(\''+id+'\',\'d30\')">+30 dias</button><button class="btn sm ghost" onclick="admAtalho(\''+id+'\',\'cortesia\')">🎁 Cortesia</button><button class="btn sm del" onclick="admAtalho(\''+id+'\',\'bloquear\')">Bloquear</button></div>')+
  '<div class="msec">Pagamentos</div>'+(ps.length?ps.map(function(p){return'<div class="row" style="padding:8px 0;border-bottom:1px solid var(--line)"><div><b>'+brl(p.valor)+'</b> <span class="tag '+(p.status==='approved'?'ok':'bad')+'">'+(p.status==='approved'?'Aprovado':esc(p.status||'?'))+'</span><div class="mute">'+esc(p.forma||'forma não informada')+'</div></div><div class="mute">'+dia(p.pago_em)+'</div></div>'}).join(''):'<div class="mute">Nenhum pagamento registrado pelo Mercado Pago.</div>')+
- '<div class="msec">Anotação interna</div><textarea id="ad-nt" rows="3" placeholder="Só você vê isto">'+esc(x.nota)+'</textarea><button class="btn sm ghost" onclick="admNota(\''+id+'\')">Salvar anotação</button>')}
+ '<div class="msec">Histórico de ações</div>'+(sp.log.length?'<div class="hist">'+sp.log.slice().reverse().slice(0,12).map(function(l){return'<div>'+esc(l.replace(/^§ /,'').replace(/ \[pgto:[^\]]*\]/,''))+'</div>'}).join('')+'</div>':'<div class="mute">Nenhuma ação registrada ainda.</div>')+
+ '<div class="msec">Anotação interna</div><textarea id="ad-nt" rows="3" placeholder="Só você vê isto">'+esc(sp.livre)+'</textarea><button class="btn sm ghost" onclick="admNota(\''+id+'\')">Salvar anotação</button>')}
 async function admSalvarCliente(id){
  var nmVal=v('ad-nm').trim(),espVal=v('ad-esp').trim(),telVal=fmtPhone(v('ad-tel').trim());
  var r=await sb.rpc('admin_editar_cliente',{p_user:id,p_nome:nmVal,p_espaco:espVal,p_tel:telVal});
  if(r.error){
-  var d=await sb.from('app_data').select('data').eq('user_id',id).maybeSingle();
-  if(d.data&&d.data.data){
-   var obj=d.data.data;obj.cfg=Object.assign({},obj.cfg,{nome:nmVal,espaco:espVal,tel:telVal});
-   var u=await sb.from('app_data').update({data:obj}).eq('user_id',id);
-   if(u.error){toast('Erro ao salvar dados: '+u.error.message,'!');return}
-  }else{toast('Erro: '+r.error.message,'!');return}
+  r=await sb.rpc('admin_atualizar_cfg_cliente',{p_user:id,p_patch:{nome:nmVal,espaco:espVal,tel:telVal}});
+  if(r.error){dlgAlert('Não foi possível salvar os dados da cliente. Rode o arquivo supabase_setup.sql (parte 4) no Supabase e tente de novo.','Erro ao salvar');return}
  }
  var item=ADM.find(function(a){return a.user_id===id});
- if(item){item.nome=nmVal;item.espaco=espVal;item.tel=telVal}
+ if(item){item.nome=nmVal;item.espaco=espVal;item.tel=telVal;admLog(item,'Dados da cliente editados')}
  toast('Dados da cliente atualizados!','✓');
  admLista();
 }
-async function admData(id){var r=await sb.rpc('admin_definir_acesso_ate',{p_user:id,p_status:v('ad-st'),p_ate:v('ad-dt')});if(r.error){toast('Erro: '+r.error.message,'!');return}closeS();toast('Acesso atualizado.','✓');adminRoute()}
-async function admNota(id){var r=await sb.rpc('admin_salvar_nota',{p_user:id,p_nota:v('ad-nt')});if(r.error){toast('Erro: '+r.error.message,'!');return}closeS();toast('Anotação salva.','✓');adminRoute()}
+async function admData(id){
+ var x=ADM.find(function(a){return a.user_id===id}),stN=v('ad-st'),dtN=v('ad-dt');
+ var go2=async function(){
+  var r=await sb.rpc('admin_definir_acesso_ate',{p_user:id,p_status:stN,p_ate:dtN});
+  if(r.error){toast('Erro: '+r.error.message,'!');return}
+  if(x)await admLog(x,'Acesso alterado: '+({trial:'Teste',ativa:'Ativa',cancelada:'Bloqueada'}[stN]||stN)+' até '+dt(dtN));
+  closeS();toast('Acesso atualizado.','✓');adminRoute();
+ };
+ if(stN==='cancelada'&&x&&x.status!=='cancelada')dlgConfirm('Bloquear o acesso de '+(x.nome||x.email)+'? Ela não conseguirá mais editar até você liberar de novo.',go2,{title:'Bloquear acesso',yes:'Bloquear',danger:true,ic:'⛔'});
+ else go2();
+}
+function admAtalho(id,tipo){
+ var x=ADM.find(function(a){return a.user_id===id});if(!x)return;
+ var hoje=Date.now(),ateAtual=tms(x.ate),baseT=Math.max(hoje,ateAtual),stN=x.status==='cancelada'?'trial':x.status,ate,txt,conf,yes='Confirmar',danger=false,ic='✦';
+ if(tipo==='d7'||tipo==='d30'){var dd=tipo==='d7'?7:30;ate=new Date(baseT+dd*864e5);txt='+'+dd+' dias de acesso';conf='Somar '+dd+' dias ao acesso de '+(x.nome||x.email)+'?'}
+ else if(tipo==='cortesia'){stN='ativa';ate=new Date(hoje+730*864e5);txt='Cortesia concedida (2 anos, não conta na receita)';conf='Conceder cortesia de 2 anos para '+(x.nome||x.email)+'? Ela não entra na receita.';ic='🎁'}
+ else{stN='cancelada';ate=new Date(ateAtual||hoje);txt='Acesso bloqueado';conf='Bloquear o acesso de '+(x.nome||x.email)+'?';yes='Bloquear';danger=true;ic='⛔'}
+ var ateS=ate.toISOString().slice(0,10);
+ dlgConfirm(conf,async function(){
+  var r=await sb.rpc('admin_definir_acesso_ate',{p_user:id,p_status:stN,p_ate:ateS});
+  if(r.error){toast('Erro: '+r.error.message,'!');return}
+  await admLog(x,txt+' (até '+dt(ateS)+')');
+  closeS();toast('Acesso atualizado.','✓');adminRoute();
+ },{title:'Atalho de acesso',yes:yes,danger:danger,ic:ic});
+}
+async function admNota(id){
+ var x=ADM.find(function(a){return a.user_id===id}),sp=notaSplit(x?x.nota:'');
+ var nova=notaJoin(v('ad-nt').replace(/^§ /gm,'').trim(),sp.log);
+ var r=await sb.rpc('admin_salvar_nota',{p_user:id,p_nota:nova});if(r.error){toast('Erro: '+r.error.message,'!');return}
+ if(x)x.nota=nova;closeS();toast('Anotação salva.','✓');adminRoute();
+}
 function admSet(id,st,dias){var x=ADM.find(function(a){return a.user_id===id});
- dlgConfirm('Liberar '+dias+' dias de acesso para '+x.email+'?',async function(){var r=await sb.rpc('admin_definir_acesso',{p_user:id,p_status:st,p_dias:dias});if(r.error){toast('Erro: '+r.error.message,'!');return}toast('Acesso liberado.','✓');adminRoute()},{title:'Liberar acesso'})}
+ dlgConfirm('Liberar '+dias+' dias de acesso para '+x.email+'?',async function(){var r=await sb.rpc('admin_definir_acesso',{p_user:id,p_status:st,p_dias:dias});if(r.error){toast('Erro: '+r.error.message,'!');return}await admLog(x,'Acesso liberado: +'+dias+' dias');toast('Acesso liberado.','✓');adminRoute()},{title:'Liberar acesso'})}
 
 function admConfig(){
  var c=CONF||{},n=function(val,def){return val==null?def:val},s=c.site_cfg||{};
@@ -1706,7 +1921,23 @@ function admConfig(){
    '<label>Texto completo da Política de Privacidade (1ª linha de cada bloco vira subtítulo)</label><textarea id="cf-priv" rows="8">'+esc(privAtual)+'</textarea>'+
  '</div>'+
 
- '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><button class="btn ghost" onclick="closeS()">Cancelar</button><button class="btn" onclick="admSalvarConfig()">Salvar tudo</button></div>',true);
+ '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)"><button class="btn ghost" onclick="closeS()">Cancelar</button><button class="btn ghost" onclick="admPreview()">👁️ Pré-visualizar</button><button class="btn" onclick="admSalvarConfig()">Salvar tudo</button></div>',true);
+}
+
+function admPreview(){
+ var em=function(t){return esc(t).replace(/&lt;(\/?)em&gt;/g,'<$1em>')};
+ var preco=parseFloat(v('cf-preco'))||0,pf=preco%1===0?String(preco):preco.toFixed(2).replace('.',','),trial=parseInt(v('cf-trial'))||0;
+ var itens=v('cf-plitens').split('\n').map(function(x){return x.trim()}).filter(Boolean);
+ var faq=v('cf-faq').split(/\n\s*\n/).map(function(b){return b.trim()}).filter(Boolean);
+ var cards=parseRecCardsText(v('cf-reccards'));
+ var o=document.createElement('div');o.className='ov';o.id='ov-prev';o.style.zIndex=30;o.onclick=function(e){if(e.target===o)o.remove()};
+ o.innerHTML='<div class="sheet wide" style="max-width:900px"><div class="sheet-hd"><div><div class="eb" style="margin-bottom:2px">✦ Pré-visualização</div><h2 style="margin:0;font-size:24px">Como a página vai ficar</h2><div class="mute" style="font-size:12.5px">Nada foi salvo ainda. Feche e clique em “Salvar tudo” para publicar.</div></div><button type="button" class="sheet-x" onclick="document.getElementById(\'ov-prev\').remove()">×</button></div>'+
+ '<div style="text-align:center;padding:6px 0 18px"><div class="logo" style="justify-content:center;font-size:26px;margin-bottom:14px"><b>✦</b> '+esc(v('cf-brand')||BRAND)+' <b>✦</b></div><div class="eb" style="justify-content:center">✦ '+esc(v('cf-eb'))+'</div><h1 style="font-size:36px;margin:6px 0">'+em(v('cf-h1'))+'</h1><p class="mute" style="max-width:520px;margin:10px auto 14px">'+esc(v('cf-sub'))+'</p><span class="btn">Começar teste grátis de '+trial+' dias</span></div>'+
+ '<div class="band" style="border-radius:14px;padding:26px 18px"><h2 style="font-size:24px">'+em(v('cf-bt'))+'</h2><p class="mute" style="margin:6px auto 0;max-width:520px">'+esc(v('cf-bs'))+'</p></div>'+
+ '<h2 style="text-align:center;font-size:26px;margin:22px 0 12px">'+em(v('cf-rech2'))+'</h2><div class="g3">'+cards.map(function(c){return'<div class="card f"><div class="ic">'+esc(c.ic)+'</div><h3>'+esc(c.t)+'</h3><p>'+esc(c.d)+'</p></div>'}).join('')+'</div>'+
+ '<div class="card plan" style="margin-top:18px"><span class="tag">'+esc(v('cf-ptag'))+'</span><div class="price">R$ '+pf+'<small class="mute" style="font-size:18px;font-family:var(--sans)">/mês</small></div><ul>'+itens.map(function(i){return'<li>'+esc(i)+'</li>'}).join('')+'</ul></div>'+
+ '<div style="margin-top:14px">'+faq.map(function(b){var l=b.split('\n');return'<details><summary>'+esc(l[0])+'</summary><p>'+esc(l.slice(1).join(' '))+'</p></details>'}).join('')+'</div></div>';
+ document.body.appendChild(o);
 }
 
 async function admSalvarConfig(){
@@ -1772,6 +2003,76 @@ document.addEventListener('keydown',function(e){
  var btn=box.querySelector('.btn:not(.ghost):not(.del)');
  if(btn&&!btn.disabled){e.preventDefault();btn.click()}
 });
+
+/* === PAGINA HOJE === */
+var DIAS_SEM=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+function irDia(ds){sel=ds;cur=ds.slice(0,7);go('agenda')}
+function copyMyLink(){
+ var url=location.origin+location.pathname+'#agendar?t='+USER;
+ var ok=function(){toast('Link copiado!','🔗')};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(ok,function(){dlgAlert(url,'Seu link de agendamento')});
+ else dlgAlert(url,'Seu link de agendamento');
+}
+function shareMyLink(){
+ var url=location.origin+location.pathname+'#agendar?t='+USER;
+ window.open('https://wa.me/?text='+encodeURIComponent('Agende seu atendimento comigo por aqui: '+url),'_blank');
+}
+function marcarFaltou(id){
+ var i=S.items.find(function(x){return x.id===id});if(!i)return;
+ dlgConfirm('Marcar que '+nm(i.cid)+' faltou? A consulta deixa de contar na agenda.',function(){i.st='faltou';save();render();toast('Marcada como falta')},{title:'Registrar falta',yes:'Registrar',ic:'🙈'});
+}
+function hojeHtml(){
+ var d=new Date(),td=iso(d),nowMin=d.getHours()*60+d.getMinutes(),ym=td.slice(0,7);
+ var byT=function(a,b){return(a.time||'').localeCompare(b.time||'')},cf=CF();
+ var tom=iso(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1));
+ var hojeL=S.items.filter(function(i){return i.date===td&&ativo(i)}).sort(byT);
+ var amanhaL=S.items.filter(function(i){return i.date===tom&&ativo(i)}).sort(byT);
+ var pends=S.items.filter(function(i){return i.st==='pendente'||(i.st==='aguardando_pix'&&!i.paid&&!pixExpirado(i))}).sort(function(a,b){return(a.date+a.time).localeCompare(b.date+b.time)});
+ var feitas=hojeL.filter(function(i){return i.done}).length;
+ var proxima=hojeL.filter(function(i){var e=endMin(i);return!i.done&&i.st!=='pendente'&&i.st!=='aguardando_pix'&&e!=null&&e>=nowMin})[0];
+ var atrasadas=hojeL.filter(function(i){var e=endMin(i);return!i.done&&i.st!=='pendente'&&i.st!=='aguardando_pix'&&e!=null&&e<nowMin});
+ var devendo=S.items.filter(function(i){return ativo(i)&&!i.paid&&(+i.price||0)>0&&i.st!=='pendente'&&i.st!=='aguardando_pix'&&(i.done||i.date<td)}).sort(function(a,b){return b.date.localeCompare(a.date)});
+ var totDev=tot(devendo);
+ var mo=tot(S.items.filter(function(i){return i.paid&&i.date.slice(0,7)===ym}));
+ var aniv=bdays(d);
+ var hr=d.getHours(),saud=hr<12?'Bom dia':hr<18?'Boa tarde':'Boa noite';
+ var nome1=cf.nome?cf.nome.split(' ')[0]:'';
+ var resumo=hojeL.length?(hojeL.length+(hojeL.length===1?' atendimento':' atendimentos')+' hoje'+(proxima&&proxima.time?' · próximo às '+proxima.time:(feitas===hojeL.length?' · tudo concluído ✨':''))):'Dia livre por enquanto ✨';
+ var trial='';
+ if(SUB&&SUB.status==='trial'){var dr=Math.ceil((new Date(SUB.ate)-d)/864e5);
+  trial=dr<=2?'<div class="card warn" style="margin:12px 0 0"><div class="row"><div><b>Seu teste grátis termina em '+(dr<=1?'menos de 1 dia':dr+' dias')+'</b><div class="mute">Assine agora para não perder o acesso.</div></div><a class="btn sm" href="'+PAY+'" target="_blank">Assinar</a></div></div>':'<span class="tag num">✦ Teste grátis até '+dt(SUB.ate.slice(0,10))+'</span>'}
+ var moon='<svg class="greet-moon" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M36 10 A22 22 0 1 0 54 42 A17 17 0 1 1 36 10 Z"/><path d="M46 14 L47.5 18.5 L52 20 L47.5 21.5 L46 26 L44.5 21.5 L40 20 L44.5 18.5 Z" fill="currentColor" stroke="none"/></svg>';
+ var greet='<div class="greet"><div style="min-width:0"><div class="eb" style="margin-bottom:4px">✦ '+DIAS_SEM[d.getDay()]+' · '+dt(td)+'</div><h2>'+saud+(nome1?', <em>'+esc(nome1)+'</em>':'')+'!</h2><div class="mute" style="margin-bottom:10px">'+resumo+'</div>'+
+  '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="sel=\''+td+'\';formItem()">+ Marcar atendimento</button>'+(cf.linkAtivo?'<button class="btn sm ghost" onclick="copyMyLink()">🔗 Copiar meu link</button>':'')+(trial&&trial.indexOf('<div')!==0?trial:'')+'</div>'+(trial&&trial.indexOf('<div')===0?trial:'')+'</div>'+moon+'</div>';
+ var kpis='<div class="hj-kpis">'+
+  '<div class="card hj-kpi"><div class="l">📅 Hoje</div><div class="v">'+feitas+'<span class="mute" style="font-size:14px;font-weight:500"> / '+hojeL.length+'</span></div><div class="s">realizados</div></div>'+
+  '<div class="card hj-kpi"><div class="l">🕒 Próxima</div><div class="v">'+(proxima&&proxima.time?esc(proxima.time):'—')+'</div><div class="s">'+(proxima?esc(nm(proxima.cid)):'nada pendente hoje')+'</div></div>'+
+  '<div class="card hj-kpi"><div class="l">⏳ A receber</div><div class="v" style="color:'+(totDev>0?'var(--bad)':'var(--mute)')+'">'+money(totDev)+'</div><div class="s">'+devendo.length+(devendo.length===1?' consulta':' consultas')+'</div></div>'+
+  '<div class="card hj-kpi"><div class="l">💰 Recebido no mês</div><div class="v" style="color:var(--gold)">'+money(mo)+'</div><div class="s">'+MES[d.getMonth()]+'</div></div></div>';
+ var alerts='';
+ if(pends.length)alerts+='<div class="hj-h"><h3 style="color:var(--warn)">⏳ Pedidos pelo link aguardando ('+pends.length+')</h3></div>'+pends.map(itemCard).join('');
+ if(atrasadas.length)alerts+='<div class="card hj-alert" style="margin-top:14px"><b>⏰ Já passaram do horário</b><div class="mute" style="margin-bottom:4px">Confirme se aconteceram para o caixa ficar certo.</div>'+atrasadas.map(function(i){return'<div class="hj-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">'+esc(i.time)+' · '+esc(mt(i.mid))+'</div></div><div style="display:flex;gap:6px"><button class="btn sm ok" onclick="tgl(\''+i.id+'\',\'done\')">✓ Realizada</button><button class="btn sm ghost" onclick="marcarFaltou(\''+i.id+'\')">Faltou</button></div></div>'}).join('')+'</div>';
+ if(devendo.length)alerts+='<div class="card hj-alert bad" style="margin-top:14px"><div class="row"><b>💰 Cobranças em aberto</b><span class="tag bad num">'+money(totDev)+'</span></div>'+devendo.slice(0,4).map(function(i){return'<div class="hj-row"><div><b>'+esc(nm(i.cid))+'</b><div class="mute num">'+esc(dt(i.date).slice(0,5))+' · '+esc(mt(i.mid))+' · '+money(i.price)+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm ghost" onclick="waPix(\''+i.id+'\')">💬 Cobrar</button><button class="btn sm ghost" onclick="pixModal(\''+i.id+'\')">📋 Pix</button><button class="btn sm ok" onclick="tgl(\''+i.id+'\',\'paid\')">✓ Pago</button></div></div>'}).join('')+(devendo.length>4?'<div class="mute" style="margin-top:8px;font-size:13px">+ '+(devendo.length-4)+' em aberto · <a href="#" style="color:var(--acc)" onclick="go(\'ganhos\');return false">ver no Caixa</a></div>':'')+'</div>';
+ var nextCard='';
+ if(proxima){
+  var diff=toMin(proxima.time)-nowMin,andamento=diff<=0;
+  var quando=andamento?'Em andamento':'Em '+(diff>=60?Math.floor(diff/60)+'h'+(diff%60?pad(diff%60):''):diff+' min');
+  nextCard='<div class="card hj-next"><div class="row" style="align-items:flex-start"><div style="min-width:0"><div class="eb" style="margin-bottom:4px">✦ Próxima consulta</div><b style="font-size:20px">'+esc(nm(proxima.cid))+'</b><div class="mute num" style="margin-top:3px">🕒 '+esc(proxima.time)+(proxima.dur?' às '+hm(endMin(proxima)):'')+' · 🃏 '+esc(mt(proxima.mid))+' · '+(proxima.online?'💻 Online':'🏠 Presencial')+'</div></div><span class="hj-when'+(andamento?' now':'')+'">'+quando+'</span></div>'+
+  '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"><span class="tag '+(proxima.paid?'ok':'bad')+'">'+(proxima.paid?'✓ Pago':'A receber '+money(proxima.price))+'</span></div>'+
+  '<div class="hj-acts"><button class="btn sm" onclick="wa(\''+proxima.id+'\')">💬 Confirmar</button>'+(!proxima.paid?'<button class="btn sm ghost" onclick="pixModal(\''+proxima.id+'\')">📋 Pix</button>':'')+'<button class="btn sm ghost" onclick="itemDetails(\''+proxima.id+'\')">Detalhes</button><button class="btn sm ok" onclick="tgl(\''+proxima.id+'\',\'done\')">✓ Realizada</button></div></div>';
+ }
+ var lista='<div class="hj-h"><h3>Atendimentos de hoje</h3><span class="tag num">'+hojeL.length+'</span></div>'+(hojeL.length?hojeL.map(itemCard).join(''):'<div class="empty">Nenhum atendimento marcado para hoje.<br><button class="btn sm" style="margin-top:10px" onclick="sel=\''+td+'\';formItem()">+ Marcar atendimento</button></div>');
+ var amanha='<div class="hj-h"><h3>Consultas de amanhã</h3>'+(amanhaL.length?'<button class="btn sm ghost" onclick="lembrarModal()">💬 Lembrar todas</button>':'')+'</div>'+(amanhaL.length?amanhaL.map(itemCard).join(''):'<div class="empty">Nada marcado para amanhã.</div>');
+ var anivH=aniv.length?'<div class="hj-h"><h3>🎂 Aniversariantes</h3></div>'+aniv.map(function(a){return'<div class="card row" style="margin-bottom:10px"><div><b>'+esc(a.c.name)+'</b><div class="mute num">'+(a.diff===0?'Faz aniversário hoje! 🎉':'Dia '+a.dd+' (em '+a.diff+' '+(a.diff===1?'dia':'dias')+')')+'</div></div><button class="btn sm ghost" onclick="waBday(\''+a.c.id+'\')">Parabenizar</button></div>'}).join(''):'';
+ var wk='';
+ for(var k=0;k<7;k++){var dd=new Date(d.getFullYear(),d.getMonth(),d.getDate()+k),ds=iso(dd),n=S.items.filter(function(i){return i.date===ds&&ativo(i)}).length;
+  wk+='<div class="wd'+(k===0?' today':'')+'" onclick="irDia(\''+ds+'\')">'+['D','S','T','Q','Q','S','S'][dd.getDay()]+'<b>'+dd.getDate()+'</b><i>'+(n?n+(n===1?' atend.':' atend.'):'')+'</i></div>';}
+ var semana='<div class="hj-h"><h3>📆 Próximos 7 dias</h3></div><div class="week">'+wk+'</div>';
+ var url=location.origin+location.pathname+'#agendar?t='+USER;
+ var linkC=cf.linkAtivo?'<div class="hj-h"><h3>🔗 Seu link de agendamento</h3></div><div class="card"><div class="mute" style="word-break:break-all;font-size:12.5px;margin-bottom:10px">'+esc(url)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" onclick="copyMyLink()">Copiar</button><button class="btn sm ghost" onclick="shareMyLink()">Enviar no WhatsApp</button><a class="btn sm ghost" href="#agendar?t='+USER+'" target="_blank">Abrir</a></div></div>':
+  '<div class="hj-h"><h3>🔗 Agendamento online</h3></div><div class="card"><div class="mute" style="margin-bottom:10px">Ative seu link e deixe as consulentes escolherem o horário sozinhas.</div><button class="btn sm" onclick="go(\'conta\')">Ativar em Conta</button></div>';
+ return mobTop()+'<div class="hj">'+greet+kpis+alerts+'<div class="hj-cols"><div>'+nextCard+lista+amanha+'</div><div>'+anivH+semana+linkC+'</div></div></div>';
+}
 
 /* === FOTOS NO STORAGE (com fallback para o modo antigo) === */
 var STORAGE_WARNED=false;
